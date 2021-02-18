@@ -3,9 +3,6 @@
   <head>
     <title>编辑：{{ item.title }}</title>
     <link rel="stylesheet" href="/public/css/news.css" />
-    <script>
-      console.log('===test$===', $);
-    </script>
   </head>
   <body>
     <form method="post" action="/article/update?id={{ item.id }}">

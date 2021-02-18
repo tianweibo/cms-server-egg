@@ -2,18 +2,21 @@
 const Service = require('egg').Service;
 
 class ArticleService extends Service {
+  
+  constructor () {
+    this.tableName = 'article';
+  }
 
-  #tableName = 'article';
 
   async list() {
-    const results = await this.app.mysql.select(this.#tableName);
+    const results = await this.app.mysql.select(this.tableName);
 
     console.log(result);
     return result;
   }
 
   async create() {
-    const result = await this.app.mysql.insert(this.#tableName, { title: '测试标题' });
+    const result = await this.app.mysql.insert(this.tableName, { title: '测试标题' });
 
     console.log(result);
 
@@ -23,12 +26,12 @@ class ArticleService extends Service {
   }
 
   async read(id) {
-    const result = await this.app.mysql.get(this.#tableName, { id: id });
+    const result = await this.app.mysql.get(this.tableName, { id: id });
     return result;
   }
 
   async update(id) {
-    const result = await this.app.mysql.update(this.#tableName, { id: id });
+    const result = await this.app.mysql.update(this.tableName, { id: id });
 
     console.log(result);
 
@@ -38,7 +41,7 @@ class ArticleService extends Service {
   }
 
   async delete(id) {
-    const result = await this.app.mysql.delete(this.#tableName, { id: id });
+    const result = await this.app.mysql.delete(this.tableName, { id: id });
 
     console.log(result);
 

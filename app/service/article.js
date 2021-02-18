@@ -3,20 +3,33 @@ const Service = require('egg').Service;
 
 class ArticleService extends Service {
   
-  constructor () {
-    this.tableName = 'article';
+  static tableName() {
+    return 'article';
   }
 
+  async count() {
+    const result = await this.app.mysql.select(ArticleService.tableName());
+    return result.length;
+  }
 
   async list() {
-    const results = await this.app.mysql.select(this.tableName);
+    const result = await this.app.mysql.select(ArticleService.tableName(), {
+      orders: [['created_at','desc'], ['id','desc']], // 排序方式
+      limit: 10, // 返回数据量
+      offset: 0, // 数据偏移量
+    });
 
     console.log(result);
     return result;
   }
 
+  async find(id) {
+    const result = await this.app.mysql.get(ArticleService.tableName(), { id: id });
+    return result;
+  }
+
   async create() {
-    const result = await this.app.mysql.insert(this.tableName, { title: '测试标题' });
+    const result = await this.app.mysql.insert(ArticleService.tableName(), { title: '测试标题' });
 
     console.log(result);
 
@@ -25,23 +38,17 @@ class ArticleService extends Service {
     return res;
   }
 
-  async read(id) {
-    const result = await this.app.mysql.get(this.tableName, { id: id });
-    return result;
-  }
-
-  async update(id) {
-    const result = await this.app.mysql.update(this.tableName, { id: id });
-
-    console.log(result);
-
+  async update(row, where) {
+    const result = await this.app.mysql.update(ArticleService.tableName(), row, {
+      where: where
+    });
     // 判断更新成功
-    const res = result.affectedRows === 1;
-    return res;
+    const updateSuccess = result.affectedRows === 1;
+    return updateSuccess;
   }
 
   async delete(id) {
-    const result = await this.app.mysql.delete(this.tableName, { id: id });
+    const result = await this.app.mysql.delete(ArticleService.tableName(), { id: id });
 
     console.log(result);
 

@@ -8,9 +8,10 @@ class ArticleController extends Controller {
   async list() {
     const ctx = this.ctx;
     const page = ctx.query.page || 1;
-    const res = await ctx.service.article.list(page);
+    const list = await ctx.service.article.list(page);
+    const total = await ctx.service.article.count();
 
-    await ctx.render('article/list.tpl', { ...res });
+    await ctx.render('article/list.tpl', { list, total });
   }
 
   async create() {
@@ -18,32 +19,45 @@ class ArticleController extends Controller {
     await ctx.render('article/edit.tpl');
   }
 
-  async read() {
+  async detail() {
     const ctx = this.ctx;
     const id = ctx.query.id;
-    const articleInfo = await ctx.service.article.read(id);
+    const articleInfo = await ctx.service.article.find(id);
 
     await ctx.render('article/detail.tpl', { item: articleInfo });
+  }
+
+  async edit() {
+    const ctx = this.ctx;
+    const id = ctx.query.id;
+    const articleInfo = await ctx.service.article.find(id);
+
+    await ctx.render('article/edit.tpl', { item: articleInfo });
   }
 
   async update() {
     const ctx = this.ctx;
     const id = ctx.query.id;
-    const articleInfo = await ctx.service.article.read(id);
+    const body = this.ctx.request.body;
 
-    await ctx.render('article/edit.tpl', { item: articleInfo });
+    const row = {
+      title: body.title,
+      description: body.description,
+    };
+
+    const res = await ctx.service.article.update(row, {
+      id: id
+    });
+
+    ctx.redirect('/article/list');
   }
 
   async delete() {
     const ctx = this.ctx;
     const id = ctx.query.id;
     const res = await ctx.service.article.delete(id);
-    if (res) {
-      console.log('success');
-    } else {
-      console.log('fail');
-    }
 
+    ctx.redirect('/article/list');
   }
 
 }

@@ -11,8 +11,10 @@ module.exports = app => {
   router.get('/activity/detail', controller.activity.detail);
 
   router.get('/article/list', controller.article.list);
-  router.get('/article/create', controller.article.create);
-  router.get('/article/read', controller.article.read);
-  router.get('/article/update', controller.article.update);
+  router.get('/article/detail', controller.article.detail);
+  router.get('/article/edit', controller.article.edit);
+
+  router.post('/article/create', controller.article.create);
+  router.post('/article/update', controller.article.update);
   router.get('/article/delete', controller.article.delete);
 };

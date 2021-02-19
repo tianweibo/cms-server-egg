@@ -14,9 +14,21 @@ class ArticleController extends Controller {
     await ctx.render('article/list.tpl', { list, total });
   }
 
+  async createView() {
+    const ctx = this.ctx;
+    await ctx.render('article/create.tpl');
+  }
+
   async create() {
     const ctx = this.ctx;
-    await ctx.render('article/edit.tpl');
+    const body = this.ctx.request.body;
+
+    const row = {
+      title: body.title,
+      description: body.description,
+    };
+    const res = await ctx.service.article.create(row)
+    await ctx.redirect('/article/list.tpl');
   }
 
   async detail() {

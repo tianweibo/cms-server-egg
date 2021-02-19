@@ -28,10 +28,8 @@ class ArticleService extends Service {
     return result;
   }
 
-  async create() {
-    const result = await this.app.mysql.insert(ArticleService.tableName(), { title: '测试标题' });
-
-    console.log(result);
+  async create(row) {
+    const result = await this.app.mysql.insert(ArticleService.tableName(), { ...row });
 
     // 判断插入成功
     const res = result.affectedRows === 1;

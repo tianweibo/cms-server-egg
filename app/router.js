@@ -11,6 +11,7 @@ module.exports = app => {
   router.get('/activity/detail', controller.activity.detail);
 
   router.get('/article/list', controller.article.list);
+  router.get('/article/createView', controller.article.createView);
   router.get('/article/detail', controller.article.detail);
   router.get('/article/edit', controller.article.edit);
 

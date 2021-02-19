@@ -6,6 +6,7 @@
   </head>
   <body>
     共：{{ total }} 条数据
+    <a href="/article/createView">[新建]</a>
     <ul class="news-view view">
       {% for item in list %}
         <li class="item">

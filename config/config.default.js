@@ -2,6 +2,19 @@
 
 'use strict';
 
+const clientInfo = {
+  // host
+  host: '180.97.69.171',
+  // 端口号
+  port: '3306',
+  // 用户名
+  user: 'prod',
+  // 密码
+  password: 'ENbrands+aKp+qy1b0_@1@',
+  // 数据库名
+  database: 'buried_points_server',
+}
+
 /**
  * @param {Egg.EggAppInfo} appInfo app info
  */
@@ -26,6 +39,7 @@ module.exports = appInfo => {
       // 数据库名
       database: 'buried_points_server',
     },
+    // client: clientInfo,
     // 是否加载到 app 上，默认开启
     app: true,
     // 是否加载到 agent 上，默认关闭

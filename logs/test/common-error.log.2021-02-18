@@ -1,0 +1,16 @@
+2021-02-18 22:11:04,611 ERROR 564 nodejs.ClusterClientNoResponseError: client no response in 10807980ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
+    at Timeout._onTimeout (D:\WorkSpace\buried-points-server\node_modules\cluster-client\lib\leader.js:77:23)
+    at listOnTimeout (internal/timers.js:549:17)
+    at processTimers (internal/timers.js:492:7)
+name: "ClusterClientNoResponseError"
+pid: 564
+hostname: DESKTOP-UITSHJ8
+
+2021-02-19 08:54:10,452 ERROR 564 nodejs.ClusterClientNoResponseError: client no response in 38580712ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
+    at Timeout._onTimeout (D:\WorkSpace\buried-points-server\node_modules\cluster-client\lib\leader.js:77:23)
+    at listOnTimeout (internal/timers.js:549:17)
+    at processTimers (internal/timers.js:492:7)
+name: "ClusterClientNoResponseError"
+pid: 564
+hostname: DESKTOP-UITSHJ8
+

@@ -1,0 +1,17 @@
+2021-02-20 09:13:39,627 INFO 564 [egg-logrotator] agent logger reload: got log-reload message
+2021-02-20 22:50:25,423 ERROR 564 nodejs.ClusterClientNoResponseError: client no response in 10818499ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
+    at Timeout._onTimeout (D:\WorkSpace\buried-points-server\node_modules\cluster-client\lib\leader.js:77:23)
+    at listOnTimeout (internal/timers.js:549:17)
+    at processTimers (internal/timers.js:492:7)
+name: "ClusterClientNoResponseError"
+pid: 564
+hostname: DESKTOP-UITSHJ8
+
+2021-02-22 08:54:08,209 ERROR 564 nodejs.ClusterClientNoResponseError: client no response in 122606287ms exceeding maxIdleTime 60000ms, maybe the connection is close on other side.
+    at Timeout._onTimeout (D:\WorkSpace\buried-points-server\node_modules\cluster-client\lib\leader.js:77:23)
+    at listOnTimeout (internal/timers.js:549:17)
+    at processTimers (internal/timers.js:492:7)
+name: "ClusterClientNoResponseError"
+pid: 564
+hostname: DESKTOP-UITSHJ8
+

@@ -1,0 +1,1241 @@
+2021-02-19 08:54:10,492 INFO 14484 [egg-logrotator] app logger reload: got log-reload message
+2021-02-19 09:24:42,675 INFO 20620 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:24:43,310 INFO 20620 [egg-multipart] stream mode enable
+2021-02-19 09:24:43,314 INFO 20620 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:24:44,766 INFO 20620 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:24:44,867 INFO 20620 [egg-security] use csrf middleware
+2021-02-19 09:24:44,870 INFO 20620 [egg-security] use methodnoallow middleware
+2021-02-19 09:24:44,872 INFO 20620 [egg-security] use noopen middleware
+2021-02-19 09:24:44,875 INFO 20620 [egg-security] use nosniff middleware
+2021-02-19 09:24:44,879 INFO 20620 [egg-security] use xssProtection middleware
+2021-02-19 09:24:44,881 INFO 20620 [egg-security] use xframe middleware
+2021-02-19 09:24:44,882 INFO 20620 [egg-security] use dta middleware
+2021-02-19 09:24:44,883 INFO 20620 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:24:44,966 INFO 20620 [egg:core] dump config after load, 68ms
+2021-02-19 09:24:45,053 INFO 20620 [egg-watcher:application] watcher start success
+2021-02-19 09:24:45,201 INFO 20620 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:24:45 GMT+0800 (GMT+08:00)
+2021-02-19 09:24:45,220 INFO 20620 [egg:core] dump config after ready, 15ms
+2021-02-19 09:24:51,815 INFO 21864 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:24:51,875 INFO 21864 [egg-multipart] stream mode enable
+2021-02-19 09:24:51,878 INFO 21864 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:24:52,259 INFO 21864 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:24:52,264 INFO 21864 [egg-security] use csrf middleware
+2021-02-19 09:24:52,266 INFO 21864 [egg-security] use methodnoallow middleware
+2021-02-19 09:24:52,266 INFO 21864 [egg-security] use noopen middleware
+2021-02-19 09:24:52,268 INFO 21864 [egg-security] use nosniff middleware
+2021-02-19 09:24:52,269 INFO 21864 [egg-security] use xssProtection middleware
+2021-02-19 09:24:52,270 INFO 21864 [egg-security] use xframe middleware
+2021-02-19 09:24:52,271 INFO 21864 [egg-security] use dta middleware
+2021-02-19 09:24:52,271 INFO 21864 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:24:52,294 INFO 21864 [egg:core] dump config after load, 8ms
+2021-02-19 09:24:52,341 INFO 21864 [egg-watcher:application] watcher start success
+2021-02-19 09:24:52,344 INFO 21864 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:24:52 GMT+0800 (GMT+08:00)
+2021-02-19 09:24:52,370 INFO 21864 [egg:core] dump config after ready, 23ms
+2021-02-19 09:27:02,445 INFO 21864 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 09:32:49,381 INFO 22324 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:32:49,562 INFO 22324 [egg-multipart] stream mode enable
+2021-02-19 09:32:49,567 INFO 22324 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:32:50,062 INFO 22324 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:32:50,072 INFO 22324 [egg-security] use csrf middleware
+2021-02-19 09:32:50,075 INFO 22324 [egg-security] use methodnoallow middleware
+2021-02-19 09:32:50,076 INFO 22324 [egg-security] use noopen middleware
+2021-02-19 09:32:50,078 INFO 22324 [egg-security] use nosniff middleware
+2021-02-19 09:32:50,080 INFO 22324 [egg-security] use xssProtection middleware
+2021-02-19 09:32:50,083 INFO 22324 [egg-security] use xframe middleware
+2021-02-19 09:32:50,084 INFO 22324 [egg-security] use dta middleware
+2021-02-19 09:32:50,084 INFO 22324 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:32:50,123 INFO 22324 [egg:core] dump config after load, 15ms
+2021-02-19 09:32:50,168 INFO 22324 [egg-watcher:application] watcher start success
+2021-02-19 09:32:50,172 INFO 22324 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:32:50 GMT+0800 (GMT+08:00)
+2021-02-19 09:32:50,194 INFO 22324 [egg:core] dump config after ready, 19ms
+2021-02-19 09:32:53,125 INFO 19564 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:32:53,173 INFO 19564 [egg-multipart] stream mode enable
+2021-02-19 09:32:53,175 INFO 19564 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:32:53,431 INFO 19564 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:32:53,435 INFO 19564 [egg-security] use csrf middleware
+2021-02-19 09:32:53,436 INFO 19564 [egg-security] use methodnoallow middleware
+2021-02-19 09:32:53,437 INFO 19564 [egg-security] use noopen middleware
+2021-02-19 09:32:53,438 INFO 19564 [egg-security] use nosniff middleware
+2021-02-19 09:32:53,439 INFO 19564 [egg-security] use xssProtection middleware
+2021-02-19 09:32:53,440 INFO 19564 [egg-security] use xframe middleware
+2021-02-19 09:32:53,441 INFO 19564 [egg-security] use dta middleware
+2021-02-19 09:32:53,441 INFO 19564 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:32:53,458 INFO 19564 [egg:core] dump config after load, 6ms
+2021-02-19 09:32:53,482 INFO 19564 [egg-watcher:application] watcher start success
+2021-02-19 09:32:53,484 INFO 19564 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:32:53 GMT+0800 (GMT+08:00)
+2021-02-19 09:32:53,498 INFO 19564 [egg:core] dump config after ready, 11ms
+2021-02-19 09:33:57,829 INFO 23192 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:33:58,234 INFO 23192 [egg-multipart] stream mode enable
+2021-02-19 09:33:58,237 INFO 23192 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:33:59,283 INFO 23192 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:33:59,325 INFO 23192 [egg-security] use csrf middleware
+2021-02-19 09:33:59,327 INFO 23192 [egg-security] use methodnoallow middleware
+2021-02-19 09:33:59,328 INFO 23192 [egg-security] use noopen middleware
+2021-02-19 09:33:59,331 INFO 23192 [egg-security] use nosniff middleware
+2021-02-19 09:33:59,332 INFO 23192 [egg-security] use xssProtection middleware
+2021-02-19 09:33:59,333 INFO 23192 [egg-security] use xframe middleware
+2021-02-19 09:33:59,335 INFO 23192 [egg-security] use dta middleware
+2021-02-19 09:33:59,335 INFO 23192 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:33:59,383 INFO 23192 [egg:core] dump config after load, 16ms
+2021-02-19 09:33:59,448 INFO 23192 [egg-watcher:application] watcher start success
+2021-02-19 09:33:59,452 INFO 23192 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:33:59 GMT+0800 (GMT+08:00)
+2021-02-19 09:33:59,491 INFO 23192 [egg:core] dump config after ready, 35ms
+2021-02-19 09:34:02,408 INFO 16376 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:34:02,454 INFO 16376 [egg-multipart] stream mode enable
+2021-02-19 09:34:02,456 INFO 16376 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:34:02,739 INFO 16376 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:34:02,743 INFO 16376 [egg-security] use csrf middleware
+2021-02-19 09:34:02,746 INFO 16376 [egg-security] use methodnoallow middleware
+2021-02-19 09:34:02,747 INFO 16376 [egg-security] use noopen middleware
+2021-02-19 09:34:02,748 INFO 16376 [egg-security] use nosniff middleware
+2021-02-19 09:34:02,749 INFO 16376 [egg-security] use xssProtection middleware
+2021-02-19 09:34:02,750 INFO 16376 [egg-security] use xframe middleware
+2021-02-19 09:34:02,751 INFO 16376 [egg-security] use dta middleware
+2021-02-19 09:34:02,751 INFO 16376 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:34:02,773 INFO 16376 [egg:core] dump config after load, 12ms
+2021-02-19 09:34:02,802 INFO 16376 [egg-watcher:application] watcher start success
+2021-02-19 09:34:02,805 INFO 16376 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:34:02 GMT+0800 (GMT+08:00)
+2021-02-19 09:34:02,822 INFO 16376 [egg:core] dump config after ready, 15ms
+2021-02-19 09:35:01,626 INFO 16376 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 09:38:56,506 INFO 5344 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:38:56,737 INFO 5344 [egg-multipart] stream mode enable
+2021-02-19 09:38:56,740 INFO 5344 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:38:57,269 INFO 5344 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:38:57,283 INFO 5344 [egg-security] use csrf middleware
+2021-02-19 09:38:57,285 INFO 5344 [egg-security] use methodnoallow middleware
+2021-02-19 09:38:57,286 INFO 5344 [egg-security] use noopen middleware
+2021-02-19 09:38:57,288 INFO 5344 [egg-security] use nosniff middleware
+2021-02-19 09:38:57,289 INFO 5344 [egg-security] use xssProtection middleware
+2021-02-19 09:38:57,291 INFO 5344 [egg-security] use xframe middleware
+2021-02-19 09:38:57,292 INFO 5344 [egg-security] use dta middleware
+2021-02-19 09:38:57,292 INFO 5344 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:38:57,327 INFO 5344 [egg:core] dump config after load, 15ms
+2021-02-19 09:38:57,370 INFO 5344 [egg-watcher:application] watcher start success
+2021-02-19 09:38:57,373 INFO 5344 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:38:57 GMT+0800 (GMT+08:00)
+2021-02-19 09:38:57,392 INFO 5344 [egg:core] dump config after ready, 15ms
+2021-02-19 09:38:58,553 INFO 5344 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 09:38:59,731 INFO 19724 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:38:59,778 INFO 19724 [egg-multipart] stream mode enable
+2021-02-19 09:38:59,781 INFO 19724 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:39:00,078 INFO 19724 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:39:00,083 INFO 19724 [egg-security] use csrf middleware
+2021-02-19 09:39:00,085 INFO 19724 [egg-security] use methodnoallow middleware
+2021-02-19 09:39:00,086 INFO 19724 [egg-security] use noopen middleware
+2021-02-19 09:39:00,087 INFO 19724 [egg-security] use nosniff middleware
+2021-02-19 09:39:00,088 INFO 19724 [egg-security] use xssProtection middleware
+2021-02-19 09:39:00,089 INFO 19724 [egg-security] use xframe middleware
+2021-02-19 09:39:00,090 INFO 19724 [egg-security] use dta middleware
+2021-02-19 09:39:00,090 INFO 19724 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:39:00,108 INFO 19724 [egg:core] dump config after load, 7ms
+2021-02-19 09:39:00,140 INFO 19724 [egg-watcher:application] watcher start success
+2021-02-19 09:39:00,142 INFO 19724 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:39:00 GMT+0800 (GMT+08:00)
+2021-02-19 09:39:00,160 INFO 19724 [egg:core] dump config after ready, 14ms
+2021-02-19 09:39:01,075 INFO 19724 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 09:42:44,860 INFO 21100 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:42:45,033 INFO 21100 [egg-multipart] stream mode enable
+2021-02-19 09:42:45,038 INFO 21100 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:42:45,700 INFO 21100 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:42:45,708 INFO 21100 [egg-security] use csrf middleware
+2021-02-19 09:42:45,713 INFO 21100 [egg-security] use methodnoallow middleware
+2021-02-19 09:42:45,715 INFO 21100 [egg-security] use noopen middleware
+2021-02-19 09:42:45,717 INFO 21100 [egg-security] use nosniff middleware
+2021-02-19 09:42:45,719 INFO 21100 [egg-security] use xssProtection middleware
+2021-02-19 09:42:45,720 INFO 21100 [egg-security] use xframe middleware
+2021-02-19 09:42:45,723 INFO 21100 [egg-security] use dta middleware
+2021-02-19 09:42:45,723 INFO 21100 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:42:45,755 INFO 21100 [egg:core] dump config after load, 14ms
+2021-02-19 09:42:45,805 INFO 21100 [egg-watcher:application] watcher start success
+2021-02-19 09:42:45,810 INFO 21100 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:42:45 GMT+0800 (GMT+08:00)
+2021-02-19 09:42:45,833 INFO 21100 [egg:core] dump config after ready, 20ms
+2021-02-19 09:42:48,152 INFO 17216 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:42:48,205 INFO 17216 [egg-multipart] stream mode enable
+2021-02-19 09:42:48,207 INFO 17216 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:42:48,614 INFO 17216 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:42:48,622 INFO 17216 [egg-security] use csrf middleware
+2021-02-19 09:42:48,624 INFO 17216 [egg-security] use methodnoallow middleware
+2021-02-19 09:42:48,625 INFO 17216 [egg-security] use noopen middleware
+2021-02-19 09:42:48,627 INFO 17216 [egg-security] use nosniff middleware
+2021-02-19 09:42:48,628 INFO 17216 [egg-security] use xssProtection middleware
+2021-02-19 09:42:48,628 INFO 17216 [egg-security] use xframe middleware
+2021-02-19 09:42:48,629 INFO 17216 [egg-security] use dta middleware
+2021-02-19 09:42:48,629 INFO 17216 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:42:48,654 INFO 17216 [egg:core] dump config after load, 12ms
+2021-02-19 09:42:48,691 INFO 17216 [egg-watcher:application] watcher start success
+2021-02-19 09:42:48,693 INFO 17216 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:42:48 GMT+0800 (GMT+08:00)
+2021-02-19 09:42:48,714 INFO 17216 [egg:core] dump config after ready, 18ms
+2021-02-19 09:51:22,451 INFO 17216 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 09:52:50,424 INFO 5012 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:52:50,494 INFO 5012 [egg-multipart] stream mode enable
+2021-02-19 09:52:50,497 INFO 5012 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:52:51,010 INFO 5012 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:52:51,042 INFO 5012 [egg-security] use csrf middleware
+2021-02-19 09:52:51,044 INFO 5012 [egg-security] use methodnoallow middleware
+2021-02-19 09:52:51,044 INFO 5012 [egg-security] use noopen middleware
+2021-02-19 09:52:51,046 INFO 5012 [egg-security] use nosniff middleware
+2021-02-19 09:52:51,047 INFO 5012 [egg-security] use xssProtection middleware
+2021-02-19 09:52:51,048 INFO 5012 [egg-security] use xframe middleware
+2021-02-19 09:52:51,051 INFO 5012 [egg-security] use dta middleware
+2021-02-19 09:52:51,051 INFO 5012 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:52:51,090 INFO 5012 [egg:core] dump config after load, 13ms
+2021-02-19 09:52:51,132 INFO 5012 [egg-watcher:application] watcher start success
+2021-02-19 09:52:51,135 INFO 5012 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:52:51 GMT+0800 (GMT+08:00)
+2021-02-19 09:52:51,158 INFO 5012 [egg:core] dump config after ready, 20ms
+2021-02-19 09:52:53,395 INFO 20124 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:52:53,441 INFO 20124 [egg-multipart] stream mode enable
+2021-02-19 09:52:53,443 INFO 20124 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:52:53,713 INFO 20124 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:52:53,718 INFO 20124 [egg-security] use csrf middleware
+2021-02-19 09:52:53,719 INFO 20124 [egg-security] use methodnoallow middleware
+2021-02-19 09:52:53,720 INFO 20124 [egg-security] use noopen middleware
+2021-02-19 09:52:53,721 INFO 20124 [egg-security] use nosniff middleware
+2021-02-19 09:52:53,722 INFO 20124 [egg-security] use xssProtection middleware
+2021-02-19 09:52:53,723 INFO 20124 [egg-security] use xframe middleware
+2021-02-19 09:52:53,725 INFO 20124 [egg-security] use dta middleware
+2021-02-19 09:52:53,725 INFO 20124 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:52:53,744 INFO 20124 [egg:core] dump config after load, 8ms
+2021-02-19 09:52:53,773 INFO 20124 [egg-watcher:application] watcher start success
+2021-02-19 09:52:53,775 INFO 20124 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:52:53 GMT+0800 (GMT+08:00)
+2021-02-19 09:52:53,792 INFO 20124 [egg:core] dump config after ready, 14ms
+2021-02-19 09:54:08,917 INFO 17852 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:54:09,040 INFO 17852 [egg-multipart] stream mode enable
+2021-02-19 09:54:09,052 INFO 17852 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:54:09,589 INFO 17852 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:54:09,595 INFO 17852 [egg-security] use csrf middleware
+2021-02-19 09:54:09,597 INFO 17852 [egg-security] use methodnoallow middleware
+2021-02-19 09:54:09,599 INFO 17852 [egg-security] use noopen middleware
+2021-02-19 09:54:09,601 INFO 17852 [egg-security] use nosniff middleware
+2021-02-19 09:54:09,603 INFO 17852 [egg-security] use xssProtection middleware
+2021-02-19 09:54:09,604 INFO 17852 [egg-security] use xframe middleware
+2021-02-19 09:54:09,606 INFO 17852 [egg-security] use dta middleware
+2021-02-19 09:54:09,606 INFO 17852 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:54:09,639 INFO 17852 [egg:core] dump config after load, 15ms
+2021-02-19 09:54:09,680 INFO 17852 [egg-watcher:application] watcher start success
+2021-02-19 09:54:09,683 INFO 17852 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:54:09 GMT+0800 (GMT+08:00)
+2021-02-19 09:54:09,706 INFO 17852 [egg:core] dump config after ready, 17ms
+2021-02-19 09:54:11,880 INFO 19972 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:54:11,936 INFO 19972 [egg-multipart] stream mode enable
+2021-02-19 09:54:11,939 INFO 19972 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:54:12,290 INFO 19972 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:54:12,295 INFO 19972 [egg-security] use csrf middleware
+2021-02-19 09:54:12,297 INFO 19972 [egg-security] use methodnoallow middleware
+2021-02-19 09:54:12,298 INFO 19972 [egg-security] use noopen middleware
+2021-02-19 09:54:12,302 INFO 19972 [egg-security] use nosniff middleware
+2021-02-19 09:54:12,304 INFO 19972 [egg-security] use xssProtection middleware
+2021-02-19 09:54:12,305 INFO 19972 [egg-security] use xframe middleware
+2021-02-19 09:54:12,306 INFO 19972 [egg-security] use dta middleware
+2021-02-19 09:54:12,306 INFO 19972 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:54:12,330 INFO 19972 [egg:core] dump config after load, 10ms
+2021-02-19 09:54:12,371 INFO 19972 [egg-watcher:application] watcher start success
+2021-02-19 09:54:12,373 INFO 19972 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:54:12 GMT+0800 (GMT+08:00)
+2021-02-19 09:54:12,391 INFO 19972 [egg:core] dump config after ready, 16ms
+2021-02-19 09:54:36,930 INFO 11984 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:54:37,165 INFO 11984 [egg-multipart] stream mode enable
+2021-02-19 09:54:37,168 INFO 11984 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:54:37,672 INFO 11984 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:54:37,677 INFO 11984 [egg-security] use csrf middleware
+2021-02-19 09:54:37,681 INFO 11984 [egg-security] use methodnoallow middleware
+2021-02-19 09:54:37,683 INFO 11984 [egg-security] use noopen middleware
+2021-02-19 09:54:37,684 INFO 11984 [egg-security] use nosniff middleware
+2021-02-19 09:54:37,685 INFO 11984 [egg-security] use xssProtection middleware
+2021-02-19 09:54:37,686 INFO 11984 [egg-security] use xframe middleware
+2021-02-19 09:54:37,688 INFO 11984 [egg-security] use dta middleware
+2021-02-19 09:54:37,688 INFO 11984 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:54:37,716 INFO 11984 [egg:core] dump config after load, 14ms
+2021-02-19 09:54:37,747 INFO 11984 [egg-watcher:application] watcher start success
+2021-02-19 09:54:37,749 INFO 11984 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:54:37 GMT+0800 (GMT+08:00)
+2021-02-19 09:54:37,768 INFO 11984 [egg:core] dump config after ready, 15ms
+2021-02-19 09:54:39,931 INFO 13656 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:54:39,979 INFO 13656 [egg-multipart] stream mode enable
+2021-02-19 09:54:39,981 INFO 13656 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:54:40,272 INFO 13656 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:54:40,277 INFO 13656 [egg-security] use csrf middleware
+2021-02-19 09:54:40,279 INFO 13656 [egg-security] use methodnoallow middleware
+2021-02-19 09:54:40,280 INFO 13656 [egg-security] use noopen middleware
+2021-02-19 09:54:40,282 INFO 13656 [egg-security] use nosniff middleware
+2021-02-19 09:54:40,283 INFO 13656 [egg-security] use xssProtection middleware
+2021-02-19 09:54:40,283 INFO 13656 [egg-security] use xframe middleware
+2021-02-19 09:54:40,284 INFO 13656 [egg-security] use dta middleware
+2021-02-19 09:54:40,284 INFO 13656 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:54:40,306 INFO 13656 [egg:core] dump config after load, 10ms
+2021-02-19 09:54:40,333 INFO 13656 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:54:40 GMT+0800 (GMT+08:00)
+2021-02-19 09:54:40,335 INFO 13656 [egg-watcher:application] watcher start success
+2021-02-19 09:54:40,352 INFO 13656 [egg:core] dump config after ready, 14ms
+2021-02-19 09:55:23,780 INFO 7440 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:55:23,867 INFO 7440 [egg-multipart] stream mode enable
+2021-02-19 09:55:23,871 INFO 7440 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:55:24,258 INFO 7440 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:55:24,263 INFO 7440 [egg-security] use csrf middleware
+2021-02-19 09:55:24,264 INFO 7440 [egg-security] use methodnoallow middleware
+2021-02-19 09:55:24,265 INFO 7440 [egg-security] use noopen middleware
+2021-02-19 09:55:24,266 INFO 7440 [egg-security] use nosniff middleware
+2021-02-19 09:55:24,267 INFO 7440 [egg-security] use xssProtection middleware
+2021-02-19 09:55:24,268 INFO 7440 [egg-security] use xframe middleware
+2021-02-19 09:55:24,268 INFO 7440 [egg-security] use dta middleware
+2021-02-19 09:55:24,268 INFO 7440 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:55:24,289 INFO 7440 [egg:core] dump config after load, 9ms
+2021-02-19 09:55:24,316 INFO 7440 [egg-watcher:application] watcher start success
+2021-02-19 09:55:24,319 INFO 7440 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:55:24 GMT+0800 (GMT+08:00)
+2021-02-19 09:55:24,336 INFO 7440 [egg:core] dump config after ready, 13ms
+2021-02-19 09:55:26,608 INFO 17648 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:55:26,661 INFO 17648 [egg-multipart] stream mode enable
+2021-02-19 09:55:26,663 INFO 17648 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:55:27,012 INFO 17648 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:55:27,017 INFO 17648 [egg-security] use csrf middleware
+2021-02-19 09:55:27,019 INFO 17648 [egg-security] use methodnoallow middleware
+2021-02-19 09:55:27,020 INFO 17648 [egg-security] use noopen middleware
+2021-02-19 09:55:27,022 INFO 17648 [egg-security] use nosniff middleware
+2021-02-19 09:55:27,023 INFO 17648 [egg-security] use xssProtection middleware
+2021-02-19 09:55:27,024 INFO 17648 [egg-security] use xframe middleware
+2021-02-19 09:55:27,025 INFO 17648 [egg-security] use dta middleware
+2021-02-19 09:55:27,025 INFO 17648 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:55:27,046 INFO 17648 [egg:core] dump config after load, 10ms
+2021-02-19 09:55:27,082 INFO 17648 [egg-watcher:application] watcher start success
+2021-02-19 09:55:27,086 INFO 17648 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:55:27 GMT+0800 (GMT+08:00)
+2021-02-19 09:55:27,106 INFO 17648 [egg:core] dump config after ready, 17ms
+2021-02-19 09:57:37,141 INFO 19612 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:57:37,340 INFO 19612 [egg-multipart] stream mode enable
+2021-02-19 09:57:37,344 INFO 19612 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:57:37,764 INFO 19612 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:57:37,770 INFO 19612 [egg-security] use csrf middleware
+2021-02-19 09:57:37,773 INFO 19612 [egg-security] use methodnoallow middleware
+2021-02-19 09:57:37,774 INFO 19612 [egg-security] use noopen middleware
+2021-02-19 09:57:37,776 INFO 19612 [egg-security] use nosniff middleware
+2021-02-19 09:57:37,777 INFO 19612 [egg-security] use xssProtection middleware
+2021-02-19 09:57:37,778 INFO 19612 [egg-security] use xframe middleware
+2021-02-19 09:57:37,779 INFO 19612 [egg-security] use dta middleware
+2021-02-19 09:57:37,780 INFO 19612 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:57:37,808 INFO 19612 [egg:core] dump config after load, 14ms
+2021-02-19 09:57:37,842 INFO 19612 [egg-watcher:application] watcher start success
+2021-02-19 09:57:37,848 INFO 19612 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:57:37 GMT+0800 (GMT+08:00)
+2021-02-19 09:57:37,866 INFO 19612 [egg:core] dump config after ready, 14ms
+2021-02-19 09:57:40,133 INFO 18696 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:57:40,185 INFO 18696 [egg-multipart] stream mode enable
+2021-02-19 09:57:40,187 INFO 18696 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:57:40,475 INFO 18696 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:57:40,480 INFO 18696 [egg-security] use csrf middleware
+2021-02-19 09:57:40,481 INFO 18696 [egg-security] use methodnoallow middleware
+2021-02-19 09:57:40,482 INFO 18696 [egg-security] use noopen middleware
+2021-02-19 09:57:40,483 INFO 18696 [egg-security] use nosniff middleware
+2021-02-19 09:57:40,484 INFO 18696 [egg-security] use xssProtection middleware
+2021-02-19 09:57:40,485 INFO 18696 [egg-security] use xframe middleware
+2021-02-19 09:57:40,486 INFO 18696 [egg-security] use dta middleware
+2021-02-19 09:57:40,486 INFO 18696 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:57:40,506 INFO 18696 [egg:core] dump config after load, 10ms
+2021-02-19 09:57:40,534 INFO 18696 [egg-watcher:application] watcher start success
+2021-02-19 09:57:40,535 INFO 18696 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:57:40 GMT+0800 (GMT+08:00)
+2021-02-19 09:57:40,549 INFO 18696 [egg:core] dump config after ready, 11ms
+2021-02-19 09:57:42,840 INFO 18696 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 09:58:32,097 INFO 22360 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:58:32,328 INFO 22360 [egg-multipart] stream mode enable
+2021-02-19 09:58:32,331 INFO 22360 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:58:32,846 INFO 22360 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:58:32,854 INFO 22360 [egg-security] use csrf middleware
+2021-02-19 09:58:32,856 INFO 22360 [egg-security] use methodnoallow middleware
+2021-02-19 09:58:32,857 INFO 22360 [egg-security] use noopen middleware
+2021-02-19 09:58:32,859 INFO 22360 [egg-security] use nosniff middleware
+2021-02-19 09:58:32,860 INFO 22360 [egg-security] use xssProtection middleware
+2021-02-19 09:58:32,862 INFO 22360 [egg-security] use xframe middleware
+2021-02-19 09:58:32,863 INFO 22360 [egg-security] use dta middleware
+2021-02-19 09:58:32,863 INFO 22360 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:58:32,900 INFO 22360 [egg:core] dump config after load, 14ms
+2021-02-19 09:58:32,940 INFO 22360 [egg-watcher:application] watcher start success
+2021-02-19 09:58:32,944 INFO 22360 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:58:32 GMT+0800 (GMT+08:00)
+2021-02-19 09:58:32,967 INFO 22360 [egg:core] dump config after ready, 16ms
+2021-02-19 09:58:35,133 INFO 18772 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 09:58:35,179 INFO 18772 [egg-multipart] stream mode enable
+2021-02-19 09:58:35,181 INFO 18772 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 09:58:35,478 INFO 18772 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 09:58:35,482 INFO 18772 [egg-security] use csrf middleware
+2021-02-19 09:58:35,483 INFO 18772 [egg-security] use methodnoallow middleware
+2021-02-19 09:58:35,484 INFO 18772 [egg-security] use noopen middleware
+2021-02-19 09:58:35,486 INFO 18772 [egg-security] use nosniff middleware
+2021-02-19 09:58:35,487 INFO 18772 [egg-security] use xssProtection middleware
+2021-02-19 09:58:35,488 INFO 18772 [egg-security] use xframe middleware
+2021-02-19 09:58:35,489 INFO 18772 [egg-security] use dta middleware
+2021-02-19 09:58:35,489 INFO 18772 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 09:58:35,509 INFO 18772 [egg:core] dump config after load, 9ms
+2021-02-19 09:58:35,542 INFO 18772 [egg-watcher:application] watcher start success
+2021-02-19 09:58:35,544 INFO 18772 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 09:58:35 GMT+0800 (GMT+08:00)
+2021-02-19 09:58:35,562 INFO 18772 [egg:core] dump config after ready, 16ms
+2021-02-19 10:00:49,735 INFO 18772 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 10:01:45,142 INFO 22916 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:01:45,204 INFO 22916 [egg-multipart] stream mode enable
+2021-02-19 10:01:45,206 INFO 22916 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:01:45,553 INFO 22916 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:01:45,559 INFO 22916 [egg-security] use csrf middleware
+2021-02-19 10:01:45,561 INFO 22916 [egg-security] use methodnoallow middleware
+2021-02-19 10:01:45,563 INFO 22916 [egg-security] use noopen middleware
+2021-02-19 10:01:45,565 INFO 22916 [egg-security] use nosniff middleware
+2021-02-19 10:01:45,566 INFO 22916 [egg-security] use xssProtection middleware
+2021-02-19 10:01:45,567 INFO 22916 [egg-security] use xframe middleware
+2021-02-19 10:01:45,569 INFO 22916 [egg-security] use dta middleware
+2021-02-19 10:01:45,569 INFO 22916 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:01:45,595 INFO 22916 [egg:core] dump config after load, 12ms
+2021-02-19 10:01:45,632 INFO 22916 [egg-watcher:application] watcher start success
+2021-02-19 10:01:45,635 INFO 22916 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:01:45 GMT+0800 (GMT+08:00)
+2021-02-19 10:01:45,652 INFO 22916 [egg:core] dump config after ready, 13ms
+2021-02-19 10:02:04,733 INFO 22916 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 10:03:30,433 INFO 11536 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:03:30,667 INFO 11536 [egg-multipart] stream mode enable
+2021-02-19 10:03:30,670 INFO 11536 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:03:31,135 INFO 11536 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:03:31,143 INFO 11536 [egg-security] use csrf middleware
+2021-02-19 10:03:31,145 INFO 11536 [egg-security] use methodnoallow middleware
+2021-02-19 10:03:31,146 INFO 11536 [egg-security] use noopen middleware
+2021-02-19 10:03:31,149 INFO 11536 [egg-security] use nosniff middleware
+2021-02-19 10:03:31,151 INFO 11536 [egg-security] use xssProtection middleware
+2021-02-19 10:03:31,152 INFO 11536 [egg-security] use xframe middleware
+2021-02-19 10:03:31,153 INFO 11536 [egg-security] use dta middleware
+2021-02-19 10:03:31,153 INFO 11536 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:03:31,183 INFO 11536 [egg:core] dump config after load, 16ms
+2021-02-19 10:03:31,218 INFO 11536 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:03:31 GMT+0800 (GMT+08:00)
+2021-02-19 10:03:31,222 INFO 11536 [egg-watcher:application] watcher start success
+2021-02-19 10:03:31,242 INFO 11536 [egg:core] dump config after ready, 14ms
+2021-02-19 10:03:33,357 INFO 22652 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:03:33,406 INFO 22652 [egg-multipart] stream mode enable
+2021-02-19 10:03:33,409 INFO 22652 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:03:33,691 INFO 22652 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:03:33,695 INFO 22652 [egg-security] use csrf middleware
+2021-02-19 10:03:33,697 INFO 22652 [egg-security] use methodnoallow middleware
+2021-02-19 10:03:33,698 INFO 22652 [egg-security] use noopen middleware
+2021-02-19 10:03:33,699 INFO 22652 [egg-security] use nosniff middleware
+2021-02-19 10:03:33,701 INFO 22652 [egg-security] use xssProtection middleware
+2021-02-19 10:03:33,702 INFO 22652 [egg-security] use xframe middleware
+2021-02-19 10:03:33,702 INFO 22652 [egg-security] use dta middleware
+2021-02-19 10:03:33,702 INFO 22652 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:03:33,722 INFO 22652 [egg:core] dump config after load, 9ms
+2021-02-19 10:03:33,750 INFO 22652 [egg-watcher:application] watcher start success
+2021-02-19 10:03:33,752 INFO 22652 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:03:33 GMT+0800 (GMT+08:00)
+2021-02-19 10:03:33,764 INFO 22652 [egg:core] dump config after ready, 10ms
+2021-02-19 10:06:26,262 INFO 21828 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:06:26,469 INFO 21828 [egg-multipart] stream mode enable
+2021-02-19 10:06:26,471 INFO 21828 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:06:27,006 INFO 21828 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:06:27,012 INFO 21828 [egg-security] use csrf middleware
+2021-02-19 10:06:27,014 INFO 21828 [egg-security] use methodnoallow middleware
+2021-02-19 10:06:27,015 INFO 21828 [egg-security] use noopen middleware
+2021-02-19 10:06:27,017 INFO 21828 [egg-security] use nosniff middleware
+2021-02-19 10:06:27,018 INFO 21828 [egg-security] use xssProtection middleware
+2021-02-19 10:06:27,019 INFO 21828 [egg-security] use xframe middleware
+2021-02-19 10:06:27,020 INFO 21828 [egg-security] use dta middleware
+2021-02-19 10:06:27,020 INFO 21828 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:06:27,048 INFO 21828 [egg:core] dump config after load, 14ms
+2021-02-19 10:06:27,096 INFO 21828 [egg-watcher:application] watcher start success
+2021-02-19 10:06:27,098 INFO 21828 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:06:27 GMT+0800 (GMT+08:00)
+2021-02-19 10:06:27,117 INFO 21828 [egg:core] dump config after ready, 15ms
+2021-02-19 10:06:29,234 INFO 21300 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:06:29,279 INFO 21300 [egg-multipart] stream mode enable
+2021-02-19 10:06:29,282 INFO 21300 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:06:29,561 INFO 21300 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:06:29,565 INFO 21300 [egg-security] use csrf middleware
+2021-02-19 10:06:29,566 INFO 21300 [egg-security] use methodnoallow middleware
+2021-02-19 10:06:29,567 INFO 21300 [egg-security] use noopen middleware
+2021-02-19 10:06:29,568 INFO 21300 [egg-security] use nosniff middleware
+2021-02-19 10:06:29,569 INFO 21300 [egg-security] use xssProtection middleware
+2021-02-19 10:06:29,570 INFO 21300 [egg-security] use xframe middleware
+2021-02-19 10:06:29,570 INFO 21300 [egg-security] use dta middleware
+2021-02-19 10:06:29,570 INFO 21300 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:06:29,590 INFO 21300 [egg:core] dump config after load, 10ms
+2021-02-19 10:06:29,619 INFO 21300 [egg-watcher:application] watcher start success
+2021-02-19 10:06:29,621 INFO 21300 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:06:29 GMT+0800 (GMT+08:00)
+2021-02-19 10:06:29,631 INFO 21300 [egg:core] dump config after ready, 8ms
+2021-02-19 10:11:23,350 INFO 14672 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:11:23,444 INFO 14672 [egg-multipart] stream mode enable
+2021-02-19 10:11:23,447 INFO 14672 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:11:23,884 INFO 14672 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:11:23,890 INFO 14672 [egg-security] use csrf middleware
+2021-02-19 10:11:23,892 INFO 14672 [egg-security] use methodnoallow middleware
+2021-02-19 10:11:23,893 INFO 14672 [egg-security] use noopen middleware
+2021-02-19 10:11:23,895 INFO 14672 [egg-security] use nosniff middleware
+2021-02-19 10:11:23,896 INFO 14672 [egg-security] use xssProtection middleware
+2021-02-19 10:11:23,897 INFO 14672 [egg-security] use xframe middleware
+2021-02-19 10:11:23,900 INFO 14672 [egg-security] use dta middleware
+2021-02-19 10:11:23,900 INFO 14672 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:11:23,923 INFO 14672 [egg:core] dump config after load, 9ms
+2021-02-19 10:11:23,950 INFO 14672 [egg-watcher:application] watcher start success
+2021-02-19 10:11:23,953 INFO 14672 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:11:23 GMT+0800 (GMT+08:00)
+2021-02-19 10:11:23,966 INFO 14672 [egg:core] dump config after ready, 11ms
+2021-02-19 10:11:25,959 INFO 7612 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:11:26,001 INFO 7612 [egg-multipart] stream mode enable
+2021-02-19 10:11:26,003 INFO 7612 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:11:26,292 INFO 7612 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:11:26,296 INFO 7612 [egg-security] use csrf middleware
+2021-02-19 10:11:26,297 INFO 7612 [egg-security] use methodnoallow middleware
+2021-02-19 10:11:26,299 INFO 7612 [egg-security] use noopen middleware
+2021-02-19 10:11:26,300 INFO 7612 [egg-security] use nosniff middleware
+2021-02-19 10:11:26,301 INFO 7612 [egg-security] use xssProtection middleware
+2021-02-19 10:11:26,302 INFO 7612 [egg-security] use xframe middleware
+2021-02-19 10:11:26,303 INFO 7612 [egg-security] use dta middleware
+2021-02-19 10:11:26,303 INFO 7612 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:11:26,325 INFO 7612 [egg:core] dump config after load, 10ms
+2021-02-19 10:11:26,359 INFO 7612 [egg-watcher:application] watcher start success
+2021-02-19 10:11:26,362 INFO 7612 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:11:26 GMT+0800 (GMT+08:00)
+2021-02-19 10:11:26,383 INFO 7612 [egg:core] dump config after ready, 17ms
+2021-02-19 10:12:35,210 INFO 11396 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:12:35,363 INFO 11396 [egg-multipart] stream mode enable
+2021-02-19 10:12:35,372 INFO 11396 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:12:36,204 INFO 11396 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:12:36,226 INFO 11396 [egg-security] use csrf middleware
+2021-02-19 10:12:36,228 INFO 11396 [egg-security] use methodnoallow middleware
+2021-02-19 10:12:36,229 INFO 11396 [egg-security] use noopen middleware
+2021-02-19 10:12:36,230 INFO 11396 [egg-security] use nosniff middleware
+2021-02-19 10:12:36,232 INFO 11396 [egg-security] use xssProtection middleware
+2021-02-19 10:12:36,233 INFO 11396 [egg-security] use xframe middleware
+2021-02-19 10:12:36,235 INFO 11396 [egg-security] use dta middleware
+2021-02-19 10:12:36,235 INFO 11396 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:12:36,275 INFO 11396 [egg:core] dump config after load, 15ms
+2021-02-19 10:12:36,328 INFO 11396 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:12:36 GMT+0800 (GMT+08:00)
+2021-02-19 10:12:36,332 INFO 11396 [egg-watcher:application] watcher start success
+2021-02-19 10:12:36,368 INFO 11396 [egg:core] dump config after ready, 30ms
+2021-02-19 10:12:38,833 INFO 21220 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:12:38,880 INFO 21220 [egg-multipart] stream mode enable
+2021-02-19 10:12:38,882 INFO 21220 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:12:39,122 INFO 21220 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:12:39,125 INFO 21220 [egg-security] use csrf middleware
+2021-02-19 10:12:39,126 INFO 21220 [egg-security] use methodnoallow middleware
+2021-02-19 10:12:39,127 INFO 21220 [egg-security] use noopen middleware
+2021-02-19 10:12:39,128 INFO 21220 [egg-security] use nosniff middleware
+2021-02-19 10:12:39,129 INFO 21220 [egg-security] use xssProtection middleware
+2021-02-19 10:12:39,130 INFO 21220 [egg-security] use xframe middleware
+2021-02-19 10:12:39,131 INFO 21220 [egg-security] use dta middleware
+2021-02-19 10:12:39,131 INFO 21220 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:12:39,146 INFO 21220 [egg:core] dump config after load, 6ms
+2021-02-19 10:12:39,170 INFO 21220 [egg-watcher:application] watcher start success
+2021-02-19 10:12:39,172 INFO 21220 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:12:39 GMT+0800 (GMT+08:00)
+2021-02-19 10:12:39,190 INFO 21220 [egg:core] dump config after ready, 16ms
+2021-02-19 10:13:59,642 INFO 21220 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 10:14:02,164 INFO 21220 [-/127.0.0.1/-/1ms GET /article/createView] ---createView---
+2021-02-19 10:14:49,296 INFO 21220 [-/127.0.0.1/-/1ms GET /article/createView] ---createView---
+2021-02-19 10:14:49,387 INFO 21220 [-/127.0.0.1/-/0ms GET /article/createView] ---createView---
+2021-02-19 10:14:49,660 INFO 21220 [-/127.0.0.1/-/1ms GET /article/createView] ---createView---
+2021-02-19 10:14:49,726 INFO 21220 [-/127.0.0.1/-/0ms GET /article/createView] ---createView---
+2021-02-19 10:14:50,567 INFO 20616 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:14:50,776 INFO 20616 [egg-multipart] stream mode enable
+2021-02-19 10:14:50,782 INFO 20616 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:14:51,292 INFO 20616 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:14:51,300 INFO 20616 [egg-security] use csrf middleware
+2021-02-19 10:14:51,301 INFO 20616 [egg-security] use methodnoallow middleware
+2021-02-19 10:14:51,303 INFO 20616 [egg-security] use noopen middleware
+2021-02-19 10:14:51,304 INFO 20616 [egg-security] use nosniff middleware
+2021-02-19 10:14:51,306 INFO 20616 [egg-security] use xssProtection middleware
+2021-02-19 10:14:51,307 INFO 20616 [egg-security] use xframe middleware
+2021-02-19 10:14:51,309 INFO 20616 [egg-security] use dta middleware
+2021-02-19 10:14:51,309 INFO 20616 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:14:51,342 INFO 20616 [egg:core] dump config after load, 18ms
+2021-02-19 10:14:51,385 INFO 20616 [egg-watcher:application] watcher start success
+2021-02-19 10:14:51,388 INFO 20616 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:14:51 GMT+0800 (GMT+08:00)
+2021-02-19 10:14:51,412 INFO 20616 [egg:core] dump config after ready, 20ms
+2021-02-19 10:14:53,644 INFO 18856 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:14:53,690 INFO 18856 [egg-multipart] stream mode enable
+2021-02-19 10:14:53,692 INFO 18856 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:14:53,983 INFO 18856 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:14:53,987 INFO 18856 [egg-security] use csrf middleware
+2021-02-19 10:14:53,988 INFO 18856 [egg-security] use methodnoallow middleware
+2021-02-19 10:14:53,989 INFO 18856 [egg-security] use noopen middleware
+2021-02-19 10:14:53,990 INFO 18856 [egg-security] use nosniff middleware
+2021-02-19 10:14:53,991 INFO 18856 [egg-security] use xssProtection middleware
+2021-02-19 10:14:53,992 INFO 18856 [egg-security] use xframe middleware
+2021-02-19 10:14:53,993 INFO 18856 [egg-security] use dta middleware
+2021-02-19 10:14:53,993 INFO 18856 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:14:54,012 INFO 18856 [egg:core] dump config after load, 7ms
+2021-02-19 10:14:54,038 INFO 18856 [egg-watcher:application] watcher start success
+2021-02-19 10:14:54,039 INFO 18856 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:14:54 GMT+0800 (GMT+08:00)
+2021-02-19 10:14:54,051 INFO 18856 [egg:core] dump config after ready, 9ms
+2021-02-19 10:16:37,832 INFO 18856 [-/127.0.0.1/-/3ms GET /article/createView] ---createView---
+2021-02-19 10:16:37,834 INFO 18856 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 10:16:38,091 INFO 18856 [-/127.0.0.1/-/1ms GET /article/createView] ---createView---
+2021-02-19 10:16:38,253 INFO 18856 [-/127.0.0.1/-/1ms GET /article/createView] ---createView---
+2021-02-19 10:16:38,558 INFO 18856 [-/127.0.0.1/-/1ms GET /article/createView] ---createView---
+2021-02-19 10:16:38,868 INFO 18856 [-/127.0.0.1/-/0ms GET /article/createView] ---createView---
+2021-02-19 10:16:39,084 INFO 18856 [-/127.0.0.1/-/0ms GET /article/createView] ---createView---
+2021-02-19 10:16:42,016 INFO 10876 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:16:42,227 INFO 10876 [egg-multipart] stream mode enable
+2021-02-19 10:16:42,230 INFO 10876 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:16:42,904 INFO 10876 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:16:42,922 INFO 10876 [egg-security] use csrf middleware
+2021-02-19 10:16:42,925 INFO 10876 [egg-security] use methodnoallow middleware
+2021-02-19 10:16:42,928 INFO 10876 [egg-security] use noopen middleware
+2021-02-19 10:16:42,935 INFO 10876 [egg-security] use nosniff middleware
+2021-02-19 10:16:42,941 INFO 10876 [egg-security] use xssProtection middleware
+2021-02-19 10:16:42,943 INFO 10876 [egg-security] use xframe middleware
+2021-02-19 10:16:42,945 INFO 10876 [egg-security] use dta middleware
+2021-02-19 10:16:42,945 INFO 10876 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:16:42,983 INFO 10876 [egg:core] dump config after load, 21ms
+2021-02-19 10:16:43,026 INFO 10876 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:16:43 GMT+0800 (GMT+08:00)
+2021-02-19 10:16:43,031 INFO 10876 [egg-watcher:application] watcher start success
+2021-02-19 10:16:43,068 INFO 10876 [egg:core] dump config after ready, 33ms
+2021-02-19 10:16:45,500 INFO 20800 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:16:45,548 INFO 20800 [egg-multipart] stream mode enable
+2021-02-19 10:16:45,550 INFO 20800 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:16:45,830 INFO 20800 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:16:45,835 INFO 20800 [egg-security] use csrf middleware
+2021-02-19 10:16:45,836 INFO 20800 [egg-security] use methodnoallow middleware
+2021-02-19 10:16:45,837 INFO 20800 [egg-security] use noopen middleware
+2021-02-19 10:16:45,838 INFO 20800 [egg-security] use nosniff middleware
+2021-02-19 10:16:45,839 INFO 20800 [egg-security] use xssProtection middleware
+2021-02-19 10:16:45,840 INFO 20800 [egg-security] use xframe middleware
+2021-02-19 10:16:45,840 INFO 20800 [egg-security] use dta middleware
+2021-02-19 10:16:45,841 INFO 20800 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:16:45,860 INFO 20800 [egg:core] dump config after load, 8ms
+2021-02-19 10:16:45,890 INFO 20800 [egg-watcher:application] watcher start success
+2021-02-19 10:16:45,892 INFO 20800 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:16:45 GMT+0800 (GMT+08:00)
+2021-02-19 10:16:45,907 INFO 20800 [egg:core] dump config after ready, 13ms
+2021-02-19 10:17:33,184 INFO 20800 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 10:17:39,116 INFO 20800 [-/127.0.0.1/-/1ms GET /article/createView] ---createView---
+2021-02-19 10:19:48,607 INFO 17356 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:19:48,833 INFO 17356 [egg-multipart] stream mode enable
+2021-02-19 10:19:48,836 INFO 17356 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:19:49,316 INFO 17356 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:19:49,323 INFO 17356 [egg-security] use csrf middleware
+2021-02-19 10:19:49,326 INFO 17356 [egg-security] use methodnoallow middleware
+2021-02-19 10:19:49,328 INFO 17356 [egg-security] use noopen middleware
+2021-02-19 10:19:49,330 INFO 17356 [egg-security] use nosniff middleware
+2021-02-19 10:19:49,331 INFO 17356 [egg-security] use xssProtection middleware
+2021-02-19 10:19:49,333 INFO 17356 [egg-security] use xframe middleware
+2021-02-19 10:19:49,336 INFO 17356 [egg-security] use dta middleware
+2021-02-19 10:19:49,336 INFO 17356 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:19:49,365 INFO 17356 [egg:core] dump config after load, 16ms
+2021-02-19 10:19:49,395 INFO 17356 [egg-watcher:application] watcher start success
+2021-02-19 10:19:49,397 INFO 17356 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:19:49 GMT+0800 (GMT+08:00)
+2021-02-19 10:19:49,415 INFO 17356 [egg:core] dump config after ready, 13ms
+2021-02-19 10:19:51,666 INFO 22216 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:19:51,713 INFO 22216 [egg-multipart] stream mode enable
+2021-02-19 10:19:51,715 INFO 22216 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:19:51,982 INFO 22216 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:19:51,986 INFO 22216 [egg-security] use csrf middleware
+2021-02-19 10:19:51,988 INFO 22216 [egg-security] use methodnoallow middleware
+2021-02-19 10:19:51,988 INFO 22216 [egg-security] use noopen middleware
+2021-02-19 10:19:51,990 INFO 22216 [egg-security] use nosniff middleware
+2021-02-19 10:19:51,990 INFO 22216 [egg-security] use xssProtection middleware
+2021-02-19 10:19:51,991 INFO 22216 [egg-security] use xframe middleware
+2021-02-19 10:19:51,992 INFO 22216 [egg-security] use dta middleware
+2021-02-19 10:19:51,992 INFO 22216 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:19:52,010 INFO 22216 [egg:core] dump config after load, 7ms
+2021-02-19 10:19:52,039 INFO 22216 [egg-watcher:application] watcher start success
+2021-02-19 10:19:52,040 INFO 22216 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:19:52 GMT+0800 (GMT+08:00)
+2021-02-19 10:19:52,055 INFO 22216 [egg:core] dump config after ready, 12ms
+2021-02-19 10:19:53,538 INFO 22216 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 10:19:55,693 INFO 22216 [-/127.0.0.1/-/1ms GET /article/createView] ---createView---
+2021-02-19 10:19:57,122 INFO 22216 [-/127.0.0.1/-/26ms POST /article/create] {
+  request: {
+    method: 'POST',
+    url: '/article/create',
+    header: {
+      host: '127.0.0.1:7001',
+      connection: 'keep-alive',
+      'content-length': '55',
+      'cache-control': 'max-age=0',
+      'sec-ch-ua': '"Chromium";v="88", "Google Chrome";v="88", ";Not A Brand";v="99"',
+      'sec-ch-ua-mobile': '?0',
+      'upgrade-insecure-requests': '1',
+      origin: 'http://127.0.0.1:7001',
+      'content-type': 'application/x-www-form-urlencoded',
+      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
+      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+      'sec-fetch-site': 'same-origin',
+      'sec-fetch-mode': 'navigate',
+      'sec-fetch-user': '?1',
+      'sec-fetch-dest': 'document',
+      referer: 'http://127.0.0.1:7001/article/createView',
+      'accept-encoding': 'gzip, deflate, br',
+      'accept-language': 'zh-CN,zh;q=0.9',
+      cookie: 'csrfToken=UZYOmXtsrcWEPHX6DYaBmD4N'
+    }
+  },
+  response: {
+    status: 404,
+    message: 'Not Found',
+    header: [Object: null prototype] {}
+  },
+  app: {
+    env: 'local',
+    name: 'test',
+    baseDir: 'D:\\WorkSpace\\buried-points-server',
+    subdomainOffset: 2,
+    config: '<egg config>',
+    controller: '<egg controller>',
+    httpclient: '<egg httpclient>',
+    loggers: '<egg loggers>',
+    middlewares: '<egg middlewares>',
+    router: '<egg router>',
+    serviceClasses: '<egg serviceClasses>'
+  },
+  originalUrl: '/article/create',
+  req: '<original node req>',
+  res: '<original node res>',
+  socket: '<original node socket>'
+}
+2021-02-19 10:19:57,122 INFO 22216 [-/127.0.0.1/-/30ms POST /article/create] { title: undefined, description: '' }
+2021-02-19 10:20:45,257 INFO 22216 [-/127.0.0.1/-/2ms POST /article/create] {
+  request: {
+    method: 'POST',
+    url: '/article/create',
+    header: {
+      host: '127.0.0.1:7001',
+      connection: 'keep-alive',
+      'content-length': '55',
+      'cache-control': 'max-age=0',
+      'sec-ch-ua': '"Chromium";v="88", "Google Chrome";v="88", ";Not A Brand";v="99"',
+      'sec-ch-ua-mobile': '?0',
+      'upgrade-insecure-requests': '1',
+      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
+      origin: 'http://127.0.0.1:7001',
+      'content-type': 'application/x-www-form-urlencoded',
+      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+      'sec-fetch-site': 'same-origin',
+      'sec-fetch-mode': 'navigate',
+      'sec-fetch-user': '?1',
+      'sec-fetch-dest': 'document',
+      referer: 'http://127.0.0.1:7001/article/createView',
+      'accept-encoding': 'gzip, deflate, br',
+      'accept-language': 'zh-CN,zh;q=0.9',
+      cookie: 'csrfToken=UZYOmXtsrcWEPHX6DYaBmD4N'
+    }
+  },
+  response: {
+    status: 404,
+    message: 'Not Found',
+    header: [Object: null prototype] {}
+  },
+  app: {
+    env: 'local',
+    name: 'test',
+    baseDir: 'D:\\WorkSpace\\buried-points-server',
+    subdomainOffset: 2,
+    config: '<egg config>',
+    controller: '<egg controller>',
+    httpclient: '<egg httpclient>',
+    loggers: '<egg loggers>',
+    middlewares: '<egg middlewares>',
+    router: '<egg router>',
+    serviceClasses: '<egg serviceClasses>'
+  },
+  originalUrl: '/article/create',
+  req: '<original node req>',
+  res: '<original node res>',
+  socket: '<original node socket>'
+}
+2021-02-19 10:20:45,257 INFO 22216 [-/127.0.0.1/-/3ms POST /article/create] { title: undefined, description: '' }
+2021-02-19 10:20:56,842 INFO 22216 [-/127.0.0.1/-/1ms POST /article/create] {
+  request: {
+    method: 'POST',
+    url: '/article/create',
+    header: {
+      host: '127.0.0.1:7001',
+      connection: 'keep-alive',
+      'content-length': '62',
+      'cache-control': 'max-age=0',
+      'sec-ch-ua': '"Chromium";v="88", "Google Chrome";v="88", ";Not A Brand";v="99"',
+      'sec-ch-ua-mobile': '?0',
+      'upgrade-insecure-requests': '1',
+      origin: 'http://127.0.0.1:7001',
+      'content-type': 'application/x-www-form-urlencoded',
+      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
+      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+      'sec-fetch-site': 'same-origin',
+      'sec-fetch-mode': 'navigate',
+      'sec-fetch-user': '?1',
+      'sec-fetch-dest': 'document',
+      referer: 'http://127.0.0.1:7001/article/createView',
+      'accept-encoding': 'gzip, deflate, br',
+      'accept-language': 'zh-CN,zh;q=0.9',
+      cookie: 'csrfToken=UZYOmXtsrcWEPHX6DYaBmD4N'
+    }
+  },
+  response: {
+    status: 404,
+    message: 'Not Found',
+    header: [Object: null prototype] {}
+  },
+  app: {
+    env: 'local',
+    name: 'test',
+    baseDir: 'D:\\WorkSpace\\buried-points-server',
+    subdomainOffset: 2,
+    config: '<egg config>',
+    controller: '<egg controller>',
+    httpclient: '<egg httpclient>',
+    loggers: '<egg loggers>',
+    middlewares: '<egg middlewares>',
+    router: '<egg router>',
+    serviceClasses: '<egg serviceClasses>'
+  },
+  originalUrl: '/article/create',
+  req: '<original node req>',
+  res: '<original node res>',
+  socket: '<original node socket>'
+}
+2021-02-19 10:20:56,842 INFO 22216 [-/127.0.0.1/-/2ms POST /article/create] { title: undefined, description: '1111111' }
+2021-02-19 10:29:27,810 INFO 9164 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:29:28,015 INFO 9164 [egg-multipart] stream mode enable
+2021-02-19 10:29:28,017 INFO 9164 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:29:28,580 INFO 9164 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:29:28,589 INFO 9164 [egg-security] use csrf middleware
+2021-02-19 10:29:28,591 INFO 9164 [egg-security] use methodnoallow middleware
+2021-02-19 10:29:28,593 INFO 9164 [egg-security] use noopen middleware
+2021-02-19 10:29:28,596 INFO 9164 [egg-security] use nosniff middleware
+2021-02-19 10:29:28,597 INFO 9164 [egg-security] use xssProtection middleware
+2021-02-19 10:29:28,600 INFO 9164 [egg-security] use xframe middleware
+2021-02-19 10:29:28,602 INFO 9164 [egg-security] use dta middleware
+2021-02-19 10:29:28,602 INFO 9164 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:29:28,639 INFO 9164 [egg:core] dump config after load, 19ms
+2021-02-19 10:29:28,673 INFO 9164 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:29:28 GMT+0800 (GMT+08:00)
+2021-02-19 10:29:28,676 INFO 9164 [egg-watcher:application] watcher start success
+2021-02-19 10:29:28,694 INFO 9164 [egg:core] dump config after ready, 14ms
+2021-02-19 10:29:30,823 INFO 18852 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:29:30,874 INFO 18852 [egg-multipart] stream mode enable
+2021-02-19 10:29:30,877 INFO 18852 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:29:31,186 INFO 18852 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:29:31,190 INFO 18852 [egg-security] use csrf middleware
+2021-02-19 10:29:31,191 INFO 18852 [egg-security] use methodnoallow middleware
+2021-02-19 10:29:31,192 INFO 18852 [egg-security] use noopen middleware
+2021-02-19 10:29:31,193 INFO 18852 [egg-security] use nosniff middleware
+2021-02-19 10:29:31,194 INFO 18852 [egg-security] use xssProtection middleware
+2021-02-19 10:29:31,194 INFO 18852 [egg-security] use xframe middleware
+2021-02-19 10:29:31,196 INFO 18852 [egg-security] use dta middleware
+2021-02-19 10:29:31,196 INFO 18852 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:29:31,216 INFO 18852 [egg:core] dump config after load, 10ms
+2021-02-19 10:29:31,244 INFO 18852 [egg-watcher:application] watcher start success
+2021-02-19 10:29:31,247 INFO 18852 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:29:31 GMT+0800 (GMT+08:00)
+2021-02-19 10:29:31,263 INFO 18852 [egg:core] dump config after ready, 13ms
+2021-02-19 10:29:43,175 INFO 18852 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 10:29:45,322 INFO 18852 [-/127.0.0.1/-/1ms GET /article/createView] ---createView---
+2021-02-19 10:29:51,297 INFO 18852 [-/127.0.0.1/-/32ms POST /article/create] {
+  request: {
+    method: 'POST',
+    url: '/article/create',
+    header: {
+      host: '127.0.0.1:7001',
+      connection: 'keep-alive',
+      'content-length': '63',
+      'cache-control': 'max-age=0',
+      'sec-ch-ua': '"Chromium";v="88", "Google Chrome";v="88", ";Not A Brand";v="99"',
+      'sec-ch-ua-mobile': '?0',
+      'upgrade-insecure-requests': '1',
+      origin: 'http://127.0.0.1:7001',
+      'content-type': 'application/x-www-form-urlencoded',
+      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
+      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+      'sec-fetch-site': 'same-origin',
+      'sec-fetch-mode': 'navigate',
+      'sec-fetch-user': '?1',
+      'sec-fetch-dest': 'document',
+      referer: 'http://127.0.0.1:7001/article/createView',
+      'accept-encoding': 'gzip, deflate, br',
+      'accept-language': 'zh-CN,zh;q=0.9',
+      cookie: 'csrfToken=UZYOmXtsrcWEPHX6DYaBmD4N'
+    }
+  },
+  response: {
+    status: 404,
+    message: 'Not Found',
+    header: [Object: null prototype] {}
+  },
+  app: {
+    env: 'local',
+    name: 'test',
+    baseDir: 'D:\\WorkSpace\\buried-points-server',
+    subdomainOffset: 2,
+    config: '<egg config>',
+    controller: '<egg controller>',
+    httpclient: '<egg httpclient>',
+    loggers: '<egg loggers>',
+    middlewares: '<egg middlewares>',
+    router: '<egg router>',
+    serviceClasses: '<egg serviceClasses>'
+  },
+  originalUrl: '/article/create',
+  req: '<original node req>',
+  res: '<original node res>',
+  socket: '<original node socket>'
+}
+2021-02-19 10:29:51,297 INFO 18852 [-/127.0.0.1/-/36ms POST /article/create] { title: undefined, description: '11111111' }
+2021-02-19 10:30:40,483 INFO 23024 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:30:40,696 INFO 23024 [egg-multipart] stream mode enable
+2021-02-19 10:30:40,699 INFO 23024 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:30:41,252 INFO 23024 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:30:41,260 INFO 23024 [egg-security] use csrf middleware
+2021-02-19 10:30:41,262 INFO 23024 [egg-security] use methodnoallow middleware
+2021-02-19 10:30:41,263 INFO 23024 [egg-security] use noopen middleware
+2021-02-19 10:30:41,265 INFO 23024 [egg-security] use nosniff middleware
+2021-02-19 10:30:41,266 INFO 23024 [egg-security] use xssProtection middleware
+2021-02-19 10:30:41,267 INFO 23024 [egg-security] use xframe middleware
+2021-02-19 10:30:41,269 INFO 23024 [egg-security] use dta middleware
+2021-02-19 10:30:41,269 INFO 23024 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:30:41,298 INFO 23024 [egg:core] dump config after load, 13ms
+2021-02-19 10:30:41,334 INFO 23024 [egg-watcher:application] watcher start success
+2021-02-19 10:30:41,337 INFO 23024 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:30:41 GMT+0800 (GMT+08:00)
+2021-02-19 10:30:41,401 INFO 23024 [egg:core] dump config after ready, 59ms
+2021-02-19 10:30:41,662 INFO 23024 [-/127.0.0.1/-/75ms POST /article/create] {
+  request: {
+    method: 'POST',
+    url: '/article/create',
+    header: {
+      host: '127.0.0.1:7001',
+      connection: 'keep-alive',
+      'content-length': '63',
+      'cache-control': 'max-age=0',
+      'sec-ch-ua': '"Chromium";v="88", "Google Chrome";v="88", ";Not A Brand";v="99"',
+      'sec-ch-ua-mobile': '?0',
+      'upgrade-insecure-requests': '1',
+      origin: 'http://127.0.0.1:7001',
+      'content-type': 'application/x-www-form-urlencoded',
+      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
+      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+      'sec-fetch-site': 'same-origin',
+      'sec-fetch-mode': 'navigate',
+      'sec-fetch-user': '?1',
+      'sec-fetch-dest': 'document',
+      referer: 'http://127.0.0.1:7001/article/createView',
+      'accept-encoding': 'gzip, deflate, br',
+      'accept-language': 'zh-CN,zh;q=0.9',
+      cookie: 'csrfToken=UZYOmXtsrcWEPHX6DYaBmD4N'
+    }
+  },
+  response: {
+    status: 404,
+    message: 'Not Found',
+    header: [Object: null prototype] {}
+  },
+  app: {
+    env: 'local',
+    name: 'test',
+    baseDir: 'D:\\WorkSpace\\buried-points-server',
+    subdomainOffset: 2,
+    config: '<egg config>',
+    controller: '<egg controller>',
+    httpclient: '<egg httpclient>',
+    loggers: '<egg loggers>',
+    middlewares: '<egg middlewares>',
+    router: '<egg router>',
+    serviceClasses: '<egg serviceClasses>'
+  },
+  originalUrl: '/article/create',
+  req: '<original node req>',
+  res: '<original node res>',
+  socket: '<original node socket>'
+}
+2021-02-19 10:30:41,662 INFO 23024 [-/127.0.0.1/-/81ms POST /article/create] { title: undefined, description: '11111111' }
+2021-02-19 10:30:44,726 INFO 21276 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:30:44,776 INFO 21276 [egg-multipart] stream mode enable
+2021-02-19 10:30:44,779 INFO 21276 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:30:45,039 INFO 21276 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:30:45,045 INFO 21276 [egg-security] use csrf middleware
+2021-02-19 10:30:45,047 INFO 21276 [egg-security] use methodnoallow middleware
+2021-02-19 10:30:45,048 INFO 21276 [egg-security] use noopen middleware
+2021-02-19 10:30:45,049 INFO 21276 [egg-security] use nosniff middleware
+2021-02-19 10:30:45,050 INFO 21276 [egg-security] use xssProtection middleware
+2021-02-19 10:30:45,051 INFO 21276 [egg-security] use xframe middleware
+2021-02-19 10:30:45,053 INFO 21276 [egg-security] use dta middleware
+2021-02-19 10:30:45,053 INFO 21276 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:30:45,078 INFO 21276 [egg:core] dump config after load, 13ms
+2021-02-19 10:30:45,113 INFO 21276 [egg-watcher:application] watcher start success
+2021-02-19 10:30:45,116 INFO 21276 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:30:45 GMT+0800 (GMT+08:00)
+2021-02-19 10:30:45,131 INFO 21276 [egg:core] dump config after ready, 13ms
+2021-02-19 10:31:07,179 INFO 21276 [-/127.0.0.1/-/38ms POST /article/create] {
+  request: {
+    method: 'POST',
+    url: '/article/create',
+    header: {
+      host: '127.0.0.1:7001',
+      connection: 'keep-alive',
+      'content-length': '63',
+      'cache-control': 'max-age=0',
+      'sec-ch-ua': '"Chromium";v="88", "Google Chrome";v="88", ";Not A Brand";v="99"',
+      'sec-ch-ua-mobile': '?0',
+      'upgrade-insecure-requests': '1',
+      origin: 'http://127.0.0.1:7001',
+      'content-type': 'application/x-www-form-urlencoded',
+      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
+      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+      'sec-fetch-site': 'same-origin',
+      'sec-fetch-mode': 'navigate',
+      'sec-fetch-user': '?1',
+      'sec-fetch-dest': 'document',
+      referer: 'http://127.0.0.1:7001/article/createView',
+      'accept-encoding': 'gzip, deflate, br',
+      'accept-language': 'zh-CN,zh;q=0.9',
+      cookie: 'csrfToken=UZYOmXtsrcWEPHX6DYaBmD4N'
+    }
+  },
+  response: {
+    status: 404,
+    message: 'Not Found',
+    header: [Object: null prototype] {}
+  },
+  app: {
+    env: 'local',
+    name: 'test',
+    baseDir: 'D:\\WorkSpace\\buried-points-server',
+    subdomainOffset: 2,
+    config: '<egg config>',
+    controller: '<egg controller>',
+    httpclient: '<egg httpclient>',
+    loggers: '<egg loggers>',
+    middlewares: '<egg middlewares>',
+    router: '<egg router>',
+    serviceClasses: '<egg serviceClasses>'
+  },
+  originalUrl: '/article/create',
+  req: '<original node req>',
+  res: '<original node res>',
+  socket: '<original node socket>'
+}
+2021-02-19 10:31:07,180 INFO 21276 [-/127.0.0.1/-/44ms POST /article/create] { title: undefined, description: '11111111' }
+2021-02-19 10:31:11,933 INFO 19048 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:31:11,979 INFO 19048 [egg-multipart] stream mode enable
+2021-02-19 10:31:11,981 INFO 19048 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:31:12,252 INFO 19048 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:31:12,255 INFO 19048 [egg-security] use csrf middleware
+2021-02-19 10:31:12,257 INFO 19048 [egg-security] use methodnoallow middleware
+2021-02-19 10:31:12,259 INFO 19048 [egg-security] use noopen middleware
+2021-02-19 10:31:12,261 INFO 19048 [egg-security] use nosniff middleware
+2021-02-19 10:31:12,262 INFO 19048 [egg-security] use xssProtection middleware
+2021-02-19 10:31:12,262 INFO 19048 [egg-security] use xframe middleware
+2021-02-19 10:31:12,263 INFO 19048 [egg-security] use dta middleware
+2021-02-19 10:31:12,263 INFO 19048 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:31:12,286 INFO 19048 [egg:core] dump config after load, 10ms
+2021-02-19 10:31:12,321 INFO 19048 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:31:12 GMT+0800 (GMT+08:00)
+2021-02-19 10:31:12,324 INFO 19048 [egg-watcher:application] watcher start success
+2021-02-19 10:31:12,340 INFO 19048 [egg:core] dump config after ready, 13ms
+2021-02-19 10:31:14,432 INFO 21164 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:31:14,486 INFO 21164 [egg-multipart] stream mode enable
+2021-02-19 10:31:14,488 INFO 21164 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:31:14,807 INFO 21164 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:31:14,812 INFO 21164 [egg-security] use csrf middleware
+2021-02-19 10:31:14,813 INFO 21164 [egg-security] use methodnoallow middleware
+2021-02-19 10:31:14,815 INFO 21164 [egg-security] use noopen middleware
+2021-02-19 10:31:14,817 INFO 21164 [egg-security] use nosniff middleware
+2021-02-19 10:31:14,818 INFO 21164 [egg-security] use xssProtection middleware
+2021-02-19 10:31:14,819 INFO 21164 [egg-security] use xframe middleware
+2021-02-19 10:31:14,820 INFO 21164 [egg-security] use dta middleware
+2021-02-19 10:31:14,820 INFO 21164 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:31:14,840 INFO 21164 [egg:core] dump config after load, 8ms
+2021-02-19 10:31:14,870 INFO 21164 [egg-watcher:application] watcher start success
+2021-02-19 10:31:14,873 INFO 21164 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:31:14 GMT+0800 (GMT+08:00)
+2021-02-19 10:31:14,888 INFO 21164 [egg:core] dump config after ready, 13ms
+2021-02-19 10:31:16,227 INFO 21164 [-/127.0.0.1/-/36ms POST /article/create] {
+  request: {
+    method: 'POST',
+    url: '/article/create',
+    header: {
+      host: '127.0.0.1:7001',
+      connection: 'keep-alive',
+      'content-length': '63',
+      pragma: 'no-cache',
+      'cache-control': 'no-cache',
+      'sec-ch-ua': '"Chromium";v="88", "Google Chrome";v="88", ";Not A Brand";v="99"',
+      'sec-ch-ua-mobile': '?0',
+      'upgrade-insecure-requests': '1',
+      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
+      origin: 'http://127.0.0.1:7001',
+      'content-type': 'application/x-www-form-urlencoded',
+      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+      'sec-fetch-site': 'same-origin',
+      'sec-fetch-mode': 'navigate',
+      'sec-fetch-user': '?1',
+      'sec-fetch-dest': 'document',
+      referer: 'http://127.0.0.1:7001/article/createView',
+      'accept-encoding': 'gzip, deflate, br',
+      'accept-language': 'zh-CN,zh;q=0.9',
+      cookie: 'csrfToken=UZYOmXtsrcWEPHX6DYaBmD4N'
+    }
+  },
+  response: {
+    status: 404,
+    message: 'Not Found',
+    header: [Object: null prototype] {}
+  },
+  app: {
+    env: 'local',
+    name: 'test',
+    baseDir: 'D:\\WorkSpace\\buried-points-server',
+    subdomainOffset: 2,
+    config: '<egg config>',
+    controller: '<egg controller>',
+    httpclient: '<egg httpclient>',
+    loggers: '<egg loggers>',
+    middlewares: '<egg middlewares>',
+    router: '<egg router>',
+    serviceClasses: '<egg serviceClasses>'
+  },
+  originalUrl: '/article/create',
+  req: '<original node req>',
+  res: '<original node res>',
+  socket: '<original node socket>'
+}
+2021-02-19 10:31:16,227 INFO 21164 [-/127.0.0.1/-/41ms POST /article/create] { title: 'hello world', description: '11111111' }
+2021-02-19 10:31:38,998 INFO 21164 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 10:31:43,519 INFO 21164 [-/127.0.0.1/-/1ms GET /article/createView] ---createView---
+2021-02-19 10:31:55,193 INFO 21164 [-/127.0.0.1/-/5ms POST /article/create] {
+  request: {
+    method: 'POST',
+    url: '/article/create',
+    header: {
+      host: '127.0.0.1:7001',
+      connection: 'keep-alive',
+      'content-length': '63',
+      'cache-control': 'max-age=0',
+      'sec-ch-ua': '"Chromium";v="88", "Google Chrome";v="88", ";Not A Brand";v="99"',
+      'sec-ch-ua-mobile': '?0',
+      'upgrade-insecure-requests': '1',
+      origin: 'http://127.0.0.1:7001',
+      'content-type': 'application/x-www-form-urlencoded',
+      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36',
+      accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+      'sec-fetch-site': 'same-origin',
+      'sec-fetch-mode': 'navigate',
+      'sec-fetch-user': '?1',
+      'sec-fetch-dest': 'document',
+      referer: 'http://127.0.0.1:7001/article/createView',
+      'accept-encoding': 'gzip, deflate, br',
+      'accept-language': 'zh-CN,zh;q=0.9',
+      cookie: 'csrfToken=UZYOmXtsrcWEPHX6DYaBmD4N'
+    }
+  },
+  response: {
+    status: 404,
+    message: 'Not Found',
+    header: [Object: null prototype] {}
+  },
+  app: {
+    env: 'local',
+    name: 'test',
+    baseDir: 'D:\\WorkSpace\\buried-points-server',
+    subdomainOffset: 2,
+    config: '<egg config>',
+    controller: '<egg controller>',
+    httpclient: '<egg httpclient>',
+    loggers: '<egg loggers>',
+    middlewares: '<egg middlewares>',
+    router: '<egg router>',
+    serviceClasses: '<egg serviceClasses>'
+  },
+  originalUrl: '/article/create',
+  req: '<original node req>',
+  res: '<original node res>',
+  socket: '<original node socket>'
+}
+2021-02-19 10:31:55,193 INFO 21164 [-/127.0.0.1/-/6ms POST /article/create] { title: 'hello world', description: '22222222' }
+2021-02-19 10:33:28,074 INFO 21164 [-/127.0.0.1/-/3ms GET /article/createView] ---createView---
+2021-02-19 10:33:30,829 INFO 22312 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:33:31,372 INFO 22312 [egg-multipart] stream mode enable
+2021-02-19 10:33:31,375 INFO 22312 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:33:32,705 INFO 22312 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:33:32,841 INFO 22312 [egg-security] use csrf middleware
+2021-02-19 10:33:32,843 INFO 22312 [egg-security] use methodnoallow middleware
+2021-02-19 10:33:32,844 INFO 22312 [egg-security] use noopen middleware
+2021-02-19 10:33:32,846 INFO 22312 [egg-security] use nosniff middleware
+2021-02-19 10:33:32,847 INFO 22312 [egg-security] use xssProtection middleware
+2021-02-19 10:33:32,848 INFO 22312 [egg-security] use xframe middleware
+2021-02-19 10:33:32,850 INFO 22312 [egg-security] use dta middleware
+2021-02-19 10:33:32,851 INFO 22312 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:33:32,942 INFO 22312 [egg:core] dump config after load, 72ms
+2021-02-19 10:33:33,088 INFO 22312 [egg-watcher:application] watcher start success
+2021-02-19 10:33:33,091 INFO 22312 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:33:33 GMT+0800 (GMT+08:00)
+2021-02-19 10:33:33,132 INFO 22312 [egg:core] dump config after ready, 38ms
+2021-02-19 10:33:39,860 INFO 15700 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:33:39,907 INFO 15700 [egg-multipart] stream mode enable
+2021-02-19 10:33:39,909 INFO 15700 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:33:40,195 INFO 15700 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:33:40,199 INFO 15700 [egg-security] use csrf middleware
+2021-02-19 10:33:40,202 INFO 15700 [egg-security] use methodnoallow middleware
+2021-02-19 10:33:40,204 INFO 15700 [egg-security] use noopen middleware
+2021-02-19 10:33:40,205 INFO 15700 [egg-security] use nosniff middleware
+2021-02-19 10:33:40,206 INFO 15700 [egg-security] use xssProtection middleware
+2021-02-19 10:33:40,207 INFO 15700 [egg-security] use xframe middleware
+2021-02-19 10:33:40,208 INFO 15700 [egg-security] use dta middleware
+2021-02-19 10:33:40,208 INFO 15700 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:33:40,232 INFO 15700 [egg:core] dump config after load, 14ms
+2021-02-19 10:33:40,268 INFO 15700 [egg-watcher:application] watcher start success
+2021-02-19 10:33:40,272 INFO 15700 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:33:40 GMT+0800 (GMT+08:00)
+2021-02-19 10:33:40,290 INFO 15700 [egg:core] dump config after ready, 15ms
+2021-02-19 10:34:07,839 INFO 15700 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 10:34:11,067 INFO 5364 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:34:11,191 INFO 5364 [egg-multipart] stream mode enable
+2021-02-19 10:34:11,196 INFO 5364 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:34:11,590 INFO 5364 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:34:11,594 INFO 5364 [egg-security] use csrf middleware
+2021-02-19 10:34:11,595 INFO 5364 [egg-security] use methodnoallow middleware
+2021-02-19 10:34:11,597 INFO 5364 [egg-security] use noopen middleware
+2021-02-19 10:34:11,598 INFO 5364 [egg-security] use nosniff middleware
+2021-02-19 10:34:11,600 INFO 5364 [egg-security] use xssProtection middleware
+2021-02-19 10:34:11,601 INFO 5364 [egg-security] use xframe middleware
+2021-02-19 10:34:11,602 INFO 5364 [egg-security] use dta middleware
+2021-02-19 10:34:11,602 INFO 5364 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:34:11,624 INFO 5364 [egg:core] dump config after load, 10ms
+2021-02-19 10:34:11,655 INFO 5364 [egg-watcher:application] watcher start success
+2021-02-19 10:34:11,657 INFO 5364 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:34:11 GMT+0800 (GMT+08:00)
+2021-02-19 10:34:11,672 INFO 5364 [egg:core] dump config after ready, 12ms
+2021-02-19 10:34:13,896 INFO 21764 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 10:34:13,944 INFO 21764 [egg-multipart] stream mode enable
+2021-02-19 10:34:13,946 INFO 21764 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 10:34:14,214 INFO 21764 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 10:34:14,219 INFO 21764 [egg-security] use csrf middleware
+2021-02-19 10:34:14,221 INFO 21764 [egg-security] use methodnoallow middleware
+2021-02-19 10:34:14,222 INFO 21764 [egg-security] use noopen middleware
+2021-02-19 10:34:14,223 INFO 21764 [egg-security] use nosniff middleware
+2021-02-19 10:34:14,224 INFO 21764 [egg-security] use xssProtection middleware
+2021-02-19 10:34:14,225 INFO 21764 [egg-security] use xframe middleware
+2021-02-19 10:34:14,225 INFO 21764 [egg-security] use dta middleware
+2021-02-19 10:34:14,225 INFO 21764 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 10:34:14,245 INFO 21764 [egg:core] dump config after load, 9ms
+2021-02-19 10:34:14,273 INFO 21764 [egg-watcher:application] watcher start success
+2021-02-19 10:34:14,276 INFO 21764 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 10:34:14 GMT+0800 (GMT+08:00)
+2021-02-19 10:34:14,293 INFO 21764 [egg:core] dump config after ready, 15ms
+2021-02-19 10:40:42,210 INFO 21764 [egg-view-nunjucks] loading templates from ["D:\\WorkSpace\\buried-points-server\\app\\view"]
+2021-02-19 14:13:52,751 INFO 21048 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 14:13:52,840 INFO 21048 [egg-multipart] stream mode enable
+2021-02-19 14:13:52,843 INFO 21048 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 14:13:53,313 INFO 21048 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 14:13:53,319 INFO 21048 [egg-security] use csrf middleware
+2021-02-19 14:13:53,320 INFO 21048 [egg-security] use methodnoallow middleware
+2021-02-19 14:13:53,322 INFO 21048 [egg-security] use noopen middleware
+2021-02-19 14:13:53,324 INFO 21048 [egg-security] use nosniff middleware
+2021-02-19 14:13:53,326 INFO 21048 [egg-security] use xssProtection middleware
+2021-02-19 14:13:53,327 INFO 21048 [egg-security] use xframe middleware
+2021-02-19 14:13:53,328 INFO 21048 [egg-security] use dta middleware
+2021-02-19 14:13:53,329 INFO 21048 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 14:13:53,355 INFO 21048 [egg:core] dump config after load, 11ms
+2021-02-19 14:13:53,391 INFO 21048 [egg-watcher:application] watcher start success
+2021-02-19 14:13:53,404 INFO 21048 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 14:13:53 GMT+0800 (GMT+08:00)
+2021-02-19 14:13:53,421 INFO 21048 [egg:core] dump config after ready, 14ms
+2021-02-19 14:14:13,133 INFO 23048 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 14:14:13,195 INFO 23048 [egg-multipart] stream mode enable
+2021-02-19 14:14:13,198 INFO 23048 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 14:14:13,579 INFO 23048 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 14:14:13,585 INFO 23048 [egg-security] use csrf middleware
+2021-02-19 14:14:13,587 INFO 23048 [egg-security] use methodnoallow middleware
+2021-02-19 14:14:13,589 INFO 23048 [egg-security] use noopen middleware
+2021-02-19 14:14:13,591 INFO 23048 [egg-security] use nosniff middleware
+2021-02-19 14:14:13,592 INFO 23048 [egg-security] use xssProtection middleware
+2021-02-19 14:14:13,594 INFO 23048 [egg-security] use xframe middleware
+2021-02-19 14:14:13,595 INFO 23048 [egg-security] use dta middleware
+2021-02-19 14:14:13,595 INFO 23048 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 14:14:13,628 INFO 23048 [egg:core] dump config after load, 19ms
+2021-02-19 14:14:13,666 INFO 23048 [egg-watcher:application] watcher start success
+2021-02-19 14:14:13,669 INFO 23048 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 14:14:13 GMT+0800 (GMT+08:00)
+2021-02-19 14:14:13,688 INFO 23048 [egg:core] dump config after ready, 15ms
+2021-02-19 14:15:17,111 INFO 21020 [egg:logger] init all loggers with options: {"dir":"D:\\WorkSpace\\buried-points-server\\logs\\test","encoding":"utf8","env":"local","level":"INFO","consoleLevel":"INFO","disableConsoleAfterReady":false,"outputJSON":false,"buffer":true,"appLogName":"test-web.log","coreLogName":"egg-web.log","agentLogName":"egg-agent.log","errorLogName":"common-error.log","coreLogger":{"consoleLevel":"WARN"},"allowDebugAtProd":false,"type":"application"}
+2021-02-19 14:15:17,157 INFO 21020 [egg-multipart] stream mode enable
+2021-02-19 14:15:17,159 INFO 21020 [egg-mysql] connecting root@127.0.0.1:3306/buried_points_server
+2021-02-19 14:15:17,510 INFO 21020 [egg-static] starting static serve /public/ -> D:\WorkSpace\buried-points-server\app\public
+2021-02-19 14:15:17,515 INFO 21020 [egg-security] use csrf middleware
+2021-02-19 14:15:17,516 INFO 21020 [egg-security] use methodnoallow middleware
+2021-02-19 14:15:17,517 INFO 21020 [egg-security] use noopen middleware
+2021-02-19 14:15:17,519 INFO 21020 [egg-security] use nosniff middleware
+2021-02-19 14:15:17,521 INFO 21020 [egg-security] use xssProtection middleware
+2021-02-19 14:15:17,522 INFO 21020 [egg-security] use xframe middleware
+2021-02-19 14:15:17,523 INFO 21020 [egg-security] use dta middleware
+2021-02-19 14:15:17,523 INFO 21020 [egg-security] compose 7 middlewares into one security middleware
+2021-02-19 14:15:17,544 INFO 21020 [egg:core] dump config after load, 11ms
+2021-02-19 14:15:17,571 INFO 21020 [egg-watcher:application] watcher start success
+2021-02-19 14:15:17,574 INFO 21020 [egg-mysql] instance[0] status OK, rds currentTime: Fri Feb 19 2021 14:15:17 GMT+0800 (GMT+08:00)
+2021-02-19 14:15:17,590 INFO 21020 [egg:core] dump config after ready, 14ms
+2021-02-19 22:11:50,877 WARN 21020 [ClusterClient:Watcher] follower closed, and try to init it again
+2021-02-20 09:13:28,469 WARN 21020 [ClusterClient:Watcher] follower closed, and try to init it again
+2021-02-20 09:13:39,569 INFO 21020 [-/127.0.0.1/-/4ms SCHEDULE /__schedule?path=D:\WorkSpace\buried-points-server\node_modules\egg-multipart\app\schedule\clean_tmpdir.js&type=worker&cron=0%2030%204%20*%20*%20*&immediate=false] [egg-multipart:CleanTmpdir] start clean tmpdir: "C:\\Users\\YJF\\AppData\\Local\\Temp\\egg-multipart-tmp\\test"
+2021-02-20 09:13:39,596 INFO 21020 [egg-logrotator] clean all log before 31 days
+2021-02-20 09:13:39,611 INFO 21020 [-/127.0.0.1/-/48ms SCHEDULE /__schedule?path=D:\WorkSpace\buried-points-server\node_modules\egg-multipart\app\schedule\clean_tmpdir.js&type=worker&cron=0%2030%204%20*%20*%20*&immediate=false] [egg-multipart:CleanTmpdir] end
+2021-02-20 09:13:39,619 INFO 21020 [egg-logrotator] broadcast log-reload
+2021-02-20 09:13:39,619 INFO 21020 [egg-logrotator] rotate files success by DayRotator, files ["D:\\WorkSpace\\buried-points-server\\logs\\test\\common-error.log -> D:\\WorkSpace\\buried-points-server\\logs\\test\\common-error.log.2021-02-19","D:\\WorkSpace\\buried-points-server\\logs\\test\\test-web.log -> D:\\WorkSpace\\buried-points-server\\logs\\test\\test-web.log.2021-02-19","D:\\WorkSpace\\buried-points-server\\logs\\test\\egg-web.log -> D:\\WorkSpace\\buried-points-server\\logs\\test\\egg-web.log.2021-02-19","D:\\WorkSpace\\buried-points-server\\logs\\test\\egg-schedule.log -> D:\\WorkSpace\\buried-points-server\\logs\\test\\egg-schedule.log.2021-02-19","D:\\WorkSpace\\buried-points-server\\logs\\test\\egg-agent.log -> D:\\WorkSpace\\buried-points-server\\logs\\test\\egg-agent.log.2021-02-19"]

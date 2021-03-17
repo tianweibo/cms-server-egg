@@ -3,10 +3,6 @@ const Service = require('egg').Service;
 
 class BaseService extends Service {
 
-  tableName() {
-    return 'activity';
-  }
-
   //统计条数
   async totalCount() {
     const result = await this.app.mysql.select(this.tableName());

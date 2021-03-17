@@ -1,11 +1,9 @@
 'use strict';
-const Service = require('egg').Service;
-
 const BaseService = require('./baseService');
 
 class ActivityService extends BaseService {
   
-  static tableName() {
+  tableName() {
     return 'activity';
   }
 

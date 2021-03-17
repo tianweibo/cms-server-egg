@@ -8,15 +8,17 @@ class ActivityController extends Controller {
   async list() {
     const ctx = this.ctx;
     const page = ctx.query.page || 1;
-    const list = await ctx.service.activity.list(page);
+    const page_size = 2;
+
+    let options = {
+      orders: [['created_at','desc'], ['activity_id','desc']], // 排序方式
+      limit: page_size, // 返回数据量
+      offset: (page - 1) * page_size, // 数据偏移量  
+    };
+    const list = await ctx.service.activity.list(options);
     const total = await ctx.service.activity.count();
 
-    await ctx.render('article/list.tpl', { list, total });
-  }
-
-  async createView() {
-    const ctx = this.ctx;
-    await ctx.render('article/create.tpl');
+    ctx.body = ctx.helper.apiResponse({ page, page_size, total, list });
   }
 
   async create() {

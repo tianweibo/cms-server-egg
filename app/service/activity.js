@@ -12,13 +12,8 @@ class ActivityService extends BaseService {
     return result;
   }
 
-  async list() {
-    let options = {
-      limit: 10, // 返回数据量
-      offset: 0, // 数据偏移量
-    };
+  async list(options) {
     const result = await super.fetchAll(options);
-
     console.log(result);
     return result;
   }

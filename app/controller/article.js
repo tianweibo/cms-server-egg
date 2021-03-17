@@ -10,7 +10,7 @@ class ArticleController extends Controller {
     const page = ctx.query.page || 1;
     const list = await ctx.service.article.list(page);
     const total = await ctx.service.article.count();
-
+    
     await ctx.render('article/list.tpl', { list, total });
   }
 

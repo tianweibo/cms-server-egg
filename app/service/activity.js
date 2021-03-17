@@ -1,35 +1,53 @@
 'use strict';
-const Service = require('egg').Service;
+const BaseService = require('./baseService');
 
-class ActivityService extends Service {
-  async list(page = 1) {
-    // read config
-    const { serverUrl, pageSize } = this.config.api;
-
-    // this.ctx.headers['Content-Type'] = 'application/jsoncharset=UTF-8';
-    const { data: { data } } = await this.ctx.curl(`${serverUrl}/api/activity-info/lists`, {
-      data: {
-        page,
-        pageSize,
-      },
-      dataType: 'json',
-    });
-
-    return data;
+class ActivityService extends BaseService {
+  
+  tableName() {
+    return 'activity';
   }
 
-  async detail(id) {
-    // read config
-    const { serverUrl } = this.config.api;
-    // this.ctx.headers['Content-Type'] = 'application/jsoncharset=UTF-8';
-    const { data } = await this.ctx.curl(`${serverUrl}/api/activity-info/detail`, {
-      data: {
-        activity_id: id,
-      },
-      dataType: 'json',
-    });
+  async count() {
+    const result = await super.totalCount();
+    return result;
+  }
 
-    return data;
+  async list(options) {
+    const result = await super.fetchAll(options);
+    console.log(result);
+    return result;
+  }
+
+  async find(id) {
+    const result = await super.findOne({ id: id });
+    return result;
+  }
+
+  async create(row) {
+    const result = await super.insert({ ...row });
+
+    // 判断插入成功
+    const res = result.affectedRows === 1;
+    return res;
+  }
+
+  async update(row, where) {
+    const result = await super.update(row, {
+      where: where
+    });
+    // 判断更新成功
+    const updateSuccess = result.affectedRows === 1;
+    return updateSuccess;
+  }
+
+  async delete(id) {
+    const result = await super.delete({ id: id });
+
+    console.log(result);
+
+    // 判断删除成功
+    const res = result.affectedRows === 1;
+    return res;
   }
 
 }

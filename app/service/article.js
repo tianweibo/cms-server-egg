@@ -4,7 +4,7 @@ const Service = require('egg').Service;
 class ArticleService extends Service {
   
   static tableName() {
-    return 'article';
+    return 'activity';
   }
 
   async count() {

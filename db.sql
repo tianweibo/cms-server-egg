@@ -1,10 +1,163 @@
-CREATE DATABASE IF NOT EXISTS buried_points_server DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
+# ************************************************************
+# Sequel Pro SQL dump
+# Version 4541
+#
+# http://www.sequelpro.com/
+# https://github.com/sequelpro/sequelpro
+#
+# Host: 127.0.0.1 (MySQL 5.7.30)
+# Database: buried_points_server
+# Generation Time: 2021-03-17 07:40:27 +0000
+# ************************************************************
 
-CREATE TABLE `article` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Dump of table activity
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `activity`;
+
+CREATE TABLE `activity` (
+  `activity_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `project_id` int(11) unsigned NOT NULL,
   `title` varchar(64) NOT NULL,
+  `start_date` int(10) unsigned NOT NULL DEFAULT '0',
+  `end_date` int(10) unsigned NOT NULL DEFAULT '0',
+  `tag_conf` text NOT NULL,
   `description` text NOT NULL,
+  `status` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `created_at` int(11) NOT NULL DEFAULT '0',
   `updated_at` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`activity_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `activity` WRITE;
+/*!40000 ALTER TABLE `activity` DISABLE KEYS */;
+
+INSERT INTO `activity` (`activity_id`, `project_id`, `title`, `start_date`, `end_date`, `tag_conf`, `description`, `status`, `created_at`, `updated_at`)
+VALUES
+	(3,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(4,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(5,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(6,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(7,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(8,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(9,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(10,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(11,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(12,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(13,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(14,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(15,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(16,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(17,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(18,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(19,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(20,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(21,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(22,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(23,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
+	(24,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0);
+
+/*!40000 ALTER TABLE `activity` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table project
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `project`;
+
+CREATE TABLE `project` (
+  `project_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL DEFAULT '',
+  `tag_conf` text NOT NULL,
+  `description` text NOT NULL,
+  `status` tinyint(2) unsigned NOT NULL DEFAULT '0',
+  `created_at` int(11) NOT NULL DEFAULT '0',
+  `updated_at` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`project_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `project` WRITE;
+/*!40000 ALTER TABLE `project` DISABLE KEYS */;
+
+INSERT INTO `project` (`project_id`, `name`, `tag_conf`, `description`, `status`, `created_at`, `updated_at`)
+VALUES
+	(1,'欧莱雅','[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','',0,0,0);
+
+/*!40000 ALTER TABLE `project` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table report
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `report`;
+
+CREATE TABLE `report` (
+  `report_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL DEFAULT '',
+  `tag_conf` text NOT NULL,
+  `description` text NOT NULL,
+  `status` tinyint(2) unsigned NOT NULL DEFAULT '0',
+  `created_at` int(11) NOT NULL DEFAULT '0',
+  `updated_at` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`report_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `report` WRITE;
+/*!40000 ALTER TABLE `report` DISABLE KEYS */;
+
+INSERT INTO `report` (`report_id`, `name`, `tag_conf`, `description`, `status`, `created_at`, `updated_at`)
+VALUES
+	(1,'','','',0,0,0);
+
+/*!40000 ALTER TABLE `report` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table sys_tag
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `sys_tag`;
+
+CREATE TABLE `sys_tag` (
+  `tag_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tag_name` varchar(64) NOT NULL DEFAULT '',
+  `tag_key` varchar(64) NOT NULL DEFAULT '',
+  `description` text NOT NULL,
+  `status` tinyint(2) unsigned NOT NULL DEFAULT '0',
+  `created_at` int(11) NOT NULL DEFAULT '0',
+  `updated_at` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`tag_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `sys_tag` WRITE;
+/*!40000 ALTER TABLE `sys_tag` DISABLE KEYS */;
+
+INSERT INTO `sys_tag` (`tag_id`, `tag_name`, `tag_key`, `description`, `status`, `created_at`, `updated_at`)
+VALUES
+	(1,'用户PV','field_pv','',0,0,0),
+	(2,'用户UV','field_uv','',0,0,0),
+	(3,'加购','field_join','',0,0,0);
+
+/*!40000 ALTER TABLE `sys_tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

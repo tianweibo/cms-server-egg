@@ -57,6 +57,12 @@ module.exports = appInfo => {
     // myAppName: 'egg',
   };
 
+  config.security= {
+    csrf : {
+      headerName: 'x-csrf-token',// 自定义请求头
+    }
+ }
+
   // 添加 view 配置
   config.view = {
     defaultViewEngine: 'nunjucks',

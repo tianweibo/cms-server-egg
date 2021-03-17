@@ -28,7 +28,7 @@ class ArticleController extends Controller {
       description: body.description,
     };
     const res = await ctx.service.article.create(row)
-    await ctx.redirect('/article/list.tpl');
+    await ctx.redirect('/article/list');
   }
 
   async detail() {

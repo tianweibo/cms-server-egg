@@ -18,4 +18,8 @@ module.exports = app => {
   router.post('/article/create', controller.article.create);
   router.post('/article/update', controller.article.update);
   router.get('/article/delete', controller.article.delete);
+
+  router.get('/chart/chart', controller.chart.chart), 
+  router.post('/chart/add', controller.chart.add)
+  router.post('/chart/query', controller.chart.query)
 };

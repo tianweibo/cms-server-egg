@@ -9,11 +9,15 @@ type AutoInstanceType<T, U = T extends CanExportFunc ? T : T extends AnyFunc ? R
 import ExportActivity = require('../../../app/service/activity');
 import ExportArticle = require('../../../app/service/article');
 import ExportBaseService = require('../../../app/service/baseService');
+import ExportChart = require('../../../app/service/chart');
+import ExportProject = require('../../../app/service/project');
 
 declare module 'egg' {
   interface IService {
     activity: AutoInstanceType<typeof ExportActivity>;
     article: AutoInstanceType<typeof ExportArticle>;
     baseService: AutoInstanceType<typeof ExportBaseService>;
+    chart: AutoInstanceType<typeof ExportChart>;
+    project: AutoInstanceType<typeof ExportProject>;
   }
 }

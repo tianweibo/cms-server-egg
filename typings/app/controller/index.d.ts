@@ -7,6 +7,7 @@ import ExportArticle = require('../../../app/controller/article');
 import ExportChart = require('../../../app/controller/chart');
 import ExportHome = require('../../../app/controller/home');
 import ExportNews = require('../../../app/controller/news');
+import ExportProject = require('../../../app/controller/project');
 
 declare module 'egg' {
   interface IController {
@@ -15,5 +16,6 @@ declare module 'egg' {
     chart: ExportChart;
     home: ExportHome;
     news: ExportNews;
+    project: ExportProject;
   }
 }

@@ -17,14 +17,11 @@ class ProjectController extends Controller {
     const list = await ctx.service.project.list(options);
     const total = await ctx.service.project.count();
 
-    const tag_list = await ctx.service.sysTag.getTagList();
-
     ctx.body = ctx.helper.apiResponse(200, 'success', { 
       page,
       page_size,
       total,
       list,
-      tag_list: tag_list
     });
   }
 
@@ -49,7 +46,11 @@ class ProjectController extends Controller {
       project_id: project_id,
     });
 
-    ctx.body = ctx.helper.apiResponse(200, 'sucess', articleInfo);
+    const tag_list = await ctx.service.sysTag.getTagList();
+    ctx.body = ctx.helper.apiResponse(200, 'sucess', {
+      ...articleInfo,
+      tag_list,
+    });
   }
 
   async update() {

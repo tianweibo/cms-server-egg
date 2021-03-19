@@ -17,7 +17,15 @@ class ProjectController extends Controller {
     const list = await ctx.service.project.list(options);
     const total = await ctx.service.project.count();
 
-    ctx.body = ctx.helper.apiResponse(200, 'success', { page, page_size, total, list });
+    const tag_list = await ctx.service.sysTag.getTagList();
+
+    ctx.body = ctx.helper.apiResponse(200, 'success', { 
+      page,
+      page_size,
+      total,
+      list,
+      tag_list: tag_list
+    });
   }
 
   async create() {

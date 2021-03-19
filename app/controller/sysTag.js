@@ -1,9 +1,9 @@
 'use strict';
 
-// app/controller/project.js
+// app/controller/sysTag.js
 const Controller = require('egg').Controller;
 
-class ProjectController extends Controller {
+class SysTagController extends Controller {
 
   async list() {
     const ctx = this.ctx;
@@ -14,8 +14,8 @@ class ProjectController extends Controller {
       limit: page_size, // 返回数据量
       offset: (page - 1) * page_size, // 数据偏移量  
     };
-    const list = await ctx.service.project.list(options);
-    const total = await ctx.service.project.count();
+    const list = await ctx.service.sysTag.list(options);
+    const total = await ctx.service.sysTag.count();
 
     ctx.body = ctx.helper.apiResponse(200, 'success', { page, page_size, total, list });
   }
@@ -28,17 +28,17 @@ class ProjectController extends Controller {
       title: body.title,
       description: body.description,
     };
-    const res = await ctx.service.project.create(data);
+    const res = await ctx.service.sysTag.create(data);
 
     ctx.body = ctx.helper.apiResponse(200, 'sucess');
   }
 
   async detail() {
     const ctx = this.ctx;
-    const project_id = ctx.query.project_id;
+    const sysTag_id = ctx.query.sysTag_id;
     console.log('===ctx.query===', ctx.query);
-    const articleInfo = await ctx.service.project.findOne({
-      project_id: project_id,
+    const articleInfo = await ctx.service.sysTag.findOne({
+      sysTag_id: sysTag_id,
     });
 
     ctx.body = ctx.helper.apiResponse(200, 'sucess', articleInfo);
@@ -54,7 +54,7 @@ class ProjectController extends Controller {
       description: body.description,
     };
 
-    const res = await ctx.service.project.update(data, {
+    const res = await ctx.service.sysTag.update(data, {
       id: id
     });
 
@@ -64,11 +64,11 @@ class ProjectController extends Controller {
   async delete() {
     const ctx = this.ctx;
     const id = ctx.query.id;
-    const res = await ctx.service.project.delete(id);
+    const res = await ctx.service.sysTag.delete(id);
 
     ctx.body = ctx.helper.apiResponse(200, 'sucess');
   }
 
 }
 
-module.exports = ProjectController;
+module.exports = SysTagController;

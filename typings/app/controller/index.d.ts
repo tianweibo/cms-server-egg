@@ -8,6 +8,8 @@ import ExportChart = require('../../../app/controller/chart');
 import ExportHome = require('../../../app/controller/home');
 import ExportNews = require('../../../app/controller/news');
 import ExportProject = require('../../../app/controller/project');
+import ExportReport = require('../../../app/controller/report');
+import ExportSysTag = require('../../../app/controller/sysTag');
 
 declare module 'egg' {
   interface IController {
@@ -17,5 +19,7 @@ declare module 'egg' {
     home: ExportHome;
     news: ExportNews;
     project: ExportProject;
+    report: ExportReport;
+    sysTag: ExportSysTag;
   }
 }

@@ -11,6 +11,8 @@ import ExportArticle = require('../../../app/service/article');
 import ExportBaseService = require('../../../app/service/baseService');
 import ExportChart = require('../../../app/service/chart');
 import ExportProject = require('../../../app/service/project');
+import ExportReport = require('../../../app/service/report');
+import ExportSysTag = require('../../../app/service/sysTag');
 
 declare module 'egg' {
   interface IService {
@@ -19,5 +21,7 @@ declare module 'egg' {
     baseService: AutoInstanceType<typeof ExportBaseService>;
     chart: AutoInstanceType<typeof ExportChart>;
     project: AutoInstanceType<typeof ExportProject>;
+    report: AutoInstanceType<typeof ExportReport>;
+    sysTag: AutoInstanceType<typeof ExportSysTag>;
   }
 }

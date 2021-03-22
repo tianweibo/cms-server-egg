@@ -1,10 +1,10 @@
 'use strict';
 const BaseService = require('./baseService');
 
-class ProjectService extends BaseService {
+class ReportService extends BaseService {
   
   tableName() {
-    return 'project';
+    return 'report';
   }
 
   async count() {
@@ -51,4 +51,4 @@ class ProjectService extends BaseService {
 
 }
 
-module.exports = ProjectService;
+module.exports = ReportService;

@@ -1,10 +1,19 @@
 'use strict';
 const BaseService = require('./baseService');
 
-class ProjectService extends BaseService {
+class SysTagService extends BaseService {
   
   tableName() {
-    return 'project';
+    return 'sys_tag';
+  }
+
+  async getTagList() {
+    let options = {
+      columns: ['tag_name', 'tag_key', 'description'], // 要查询的表字段
+      orders: [['created_at','desc'], ['tag_id','desc']], // 排序方式
+    };
+    const list = await super.fetchAll(options);
+    return list;
   }
 
   async count() {
@@ -51,4 +60,4 @@ class ProjectService extends BaseService {
 
 }
 
-module.exports = ProjectService;
+module.exports = SysTagService;

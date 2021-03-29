@@ -8,11 +8,11 @@
 </head>
 <body>
   <ul>
-    <li><a href="/project/list">project</a></li>
-    <li><a href="/activity/list">activity</a></li>
-    <li><a href="/article/list">article</a></li>
-    <li><a href="/news">news</a></li>
-    <li><a href="/chart/chart">chart</a></li>
+    <li><a href="project/list">project</a></li>
+    <li><a href="activity/list">activity</a></li>
+    <li><a href="article/list">article</a></li>
+    <li><a href="news">news</a></li>
+    <li><a href="chart/chart">chart</a></li>
   </ul>
 </body>
 </html>

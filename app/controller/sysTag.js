@@ -5,6 +5,21 @@ const Controller = require('egg').Controller;
 
 class SysTagController extends Controller {
 
+  async tagList() {
+    const ctx = this.ctx;
+    const page = ctx.query.page || 1;
+    const page_size = 100;
+
+    let options = {
+      columns: ['tag_name', 'tag_key', 'description'], // 要查询的表字段
+      limit: page_size, // 返回数据量
+      offset: (page - 1) * page_size, // 数据偏移量  
+    };
+    const list = await ctx.service.sysTag.list(options);
+
+    ctx.body = ctx.helper.apiResponse(200, 'success', { list });
+  }
+
   async list() {
     const ctx = this.ctx;
     const page = ctx.query.page || 1;

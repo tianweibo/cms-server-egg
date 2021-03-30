@@ -15,6 +15,7 @@ module.exports = app => {
   router.get('/sys-tag/create', controller.sysTag.create);
   router.get('/sys-tag/update', controller.sysTag.update);
   router.get('/sys-tag/delete', controller.sysTag.delete);
+  router.get('/sys-tag/tagList', controller.sysTag.tagList);
 
   router.get('/project/list', controller.project.list);
   router.get('/project/detail', controller.project.detail);

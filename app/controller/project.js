@@ -30,8 +30,8 @@ class ProjectController extends Controller {
     const body = this.ctx.request.body;
 
     const data = {
-      title: body.title,
-      description: body.description,
+      ...body, 
+      tag_conf: JSON.stringify(body.tag_conf)
     };
     const res = await ctx.service.project.create(data);
 

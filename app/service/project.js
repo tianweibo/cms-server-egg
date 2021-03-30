@@ -23,7 +23,7 @@ class ProjectService extends BaseService {
   }
 
   async create(row) {
-    const result = await super.insert({ ...row });
+    const result = await super.create({ ...row });
 
     // 判断插入成功
     const res = result.affectedRows === 1;

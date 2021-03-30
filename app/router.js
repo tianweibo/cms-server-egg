@@ -12,16 +12,16 @@ module.exports = app => {
 
   router.get('/sys-tag/list', controller.sysTag.list);
   router.get('/sys-tag/detail', controller.sysTag.detail);
-  router.get('/sys-tag/create', controller.sysTag.create);
-  router.get('/sys-tag/update', controller.sysTag.update);
-  router.get('/sys-tag/delete', controller.sysTag.delete);
+  router.post('/sys-tag/create', controller.sysTag.create);
+  router.post('/sys-tag/update', controller.sysTag.update);
+  router.post('/sys-tag/delete', controller.sysTag.delete);
   router.get('/sys-tag/tagList', controller.sysTag.tagList);
 
   router.get('/project/list', controller.project.list);
   router.get('/project/detail', controller.project.detail);
-  router.get('/project/create', controller.project.create);
-  router.get('/project/update', controller.project.update);
-  router.get('/project/delete', controller.project.delete);
+  router.post('/project/create', controller.project.create);
+  router.post('/project/update', controller.project.update);
+  router.post('/project/delete', controller.project.delete);
 
   router.get('/activity/list', controller.activity.list);
   router.get('/activity/detail', controller.activity.detail);

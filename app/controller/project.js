@@ -8,7 +8,7 @@ class ProjectController extends Controller {
   async list() {
     const ctx = this.ctx;
     const page = ctx.query.page || 1;
-    const page_size = 2;
+    const page_size = 10;
 
     let options = {
       limit: page_size, // 返回数据量
@@ -46,26 +46,26 @@ class ProjectController extends Controller {
       project_id: project_id,
     });
 
-    const tag_list = await ctx.service.sysTag.getTagList();
     ctx.body = ctx.helper.apiResponse(200, 'sucess', {
       ...articleInfo,
-      tag_list,
+      tag_conf: JSON.parse(articleInfo.tag_conf),
     });
   }
 
   async update() {
     const ctx = this.ctx;
-    const id = ctx.query.id;
-    const body = this.ctx.request.body;
-
+    const { project_id } = ctx.query;
+    const { title, tag_conf, start_date, end_date, description } = this.ctx.request.body;
+console.log('===tag_conf===', tag_conf);
     const data = {
-      title: body.title,
-      description: body.description,
+      title, 
+      start_date, 
+      end_date, 
+      description,
+      tag_conf:JSON.stringify(tag_conf), 
     };
 
-    const res = await ctx.service.project.update(data, {
-      id: id
-    });
+    const res = await ctx.service.project.update(data, { project_id });
 
     ctx.body = ctx.helper.apiResponse(200, 'sucess');
   }

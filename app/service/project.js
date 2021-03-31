@@ -30,10 +30,8 @@ class ProjectService extends BaseService {
     return res;
   }
 
-  async update(row, where) {
-    const result = await super.update(row, {
-      where: where
-    });
+  async update(row, where = {}) {
+    const result = await super.update(row, where);
     // 判断更新成功
     const updateSuccess = result.affectedRows === 1;
     return updateSuccess;

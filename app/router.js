@@ -10,12 +10,13 @@ module.exports = app => {
   // router.get('/news/list', controller.news.list);
 
 
-  // router.get('/sys-tag/list', controller.sysTag.list);
-  // router.get('/sys-tag/detail', controller.sysTag.detail);
-  // router.post('/sys-tag/create', controller.sysTag.create);
-  // router.post('/sys-tag/update', controller.sysTag.update);
-  // router.post('/sys-tag/delete', controller.sysTag.delete);
-  // router.get('/sys-tag/tagList', controller.sysTag.tagList);
+  router.get('/sys-tag/index', controller.sysTag.index);
+  router.get('/sys-tag/list', controller.sysTag.list);
+  router.get('/sys-tag/detail', controller.sysTag.detail);
+  router.post('/sys-tag/create', controller.sysTag.create);
+  router.post('/sys-tag/update', controller.sysTag.update);
+  router.post('/sys-tag/delete', controller.sysTag.delete);
+  router.get('/sys-tag/tagList', controller.sysTag.tagList);
 
   router.get('/project/index', controller.project.index);
   router.get('/project/list', controller.project.list);

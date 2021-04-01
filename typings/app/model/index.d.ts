@@ -3,9 +3,11 @@
 
 import 'egg';
 import ExportProject = require('../../../app/model/project');
+import ExportSysTag = require('../../../app/model/sysTag');
 
 declare module 'egg' {
   interface IModel {
     Project: ReturnType<typeof ExportProject>;
+    SysTag: ReturnType<typeof ExportSysTag>;
   }
 }

@@ -1,23 +1,21 @@
-// app/model/project.js
+// app/model/sysTag.js
   module.exports = app => {
     const { STRING, INTEGER, DATE } = app.Sequelize;
   
-    const Project = app.model.define('project', {
-      project_id: { 
+    const SysTag = app.model.define('sys_tag', {
+      tag_id: { 
         type: INTEGER, 
         primaryKey: true, 
         autoIncrement: true 
       },
-      title: STRING(64),
-      tag_conf: STRING,
+      tag_name: STRING(64),
+      tag_key: STRING(64),
       description: STRING,
-      start_date: INTEGER,
-      end_date: INTEGER,
       status: INTEGER,
       created_at: INTEGER,
       updated_at: INTEGER,
     });
   
-    return Project;
+    return SysTag;
   };
   

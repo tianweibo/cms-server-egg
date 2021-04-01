@@ -107,7 +107,7 @@ class ProjectController extends Controller {
 
     const project = await ctx.model.Project.findByPk(project_id);
     await project.update(data);
-    ctx.body = ctx.helper.apiResponse(200, 'success');
+    ctx.body = ctx.helper.apiResponse(200, 'success', data);
   }
 
   async delete() {

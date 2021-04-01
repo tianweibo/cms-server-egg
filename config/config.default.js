@@ -25,7 +25,7 @@ module.exports = appInfo => {
       // raw: true,
       underscored: true,
       freezeTableName: true, //直接查找设置的表名，默认是表名加s或者es
-      // timestamps: false,   
+      timestamps: false,   
     },
   };
 

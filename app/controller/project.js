@@ -9,54 +9,15 @@ const Op = Sequelize.Op;
 
 // app/controller/project.js
 class ProjectController extends Controller {
-  
   async index() {
-
-    const page = this.ctx.query.page || 1;
-    const page_size = 2;
-
-    const keywords = '雅';
-
-    let options = {
-      order:[["project_id","desc"]],
-      limit: page_size, // 返回数据量
-      offset: (page - 1) * page_size, // 数据偏移量
-      where: { 
-        // title: { 
-        //   [Op.like]:'%' +keywords + '%'
-        // }
-      }
-    };
-
-    const { filters } = this.ctx.query;
-
-    //处理查询
-    filters && Object.keys(filters).forEach(field => {
-      switch(field){
-        case 'title':
-          options.where[field] = { 
-            [Op.like]:'%' +filters[field] + '%'
-          };
-          break;
-        case 'project_id':
-          options.where[field] = filters[field];
-          break;
-      }
-    })
-
-    const res = await this.ctx.model.Project.findAndCountAll(options);
-    const { rows, count } = res;
-
-    this.ctx.body = {
-      options: options,
-      list: rows,
-      total: count,
-    };
+    const ctx = this.ctx;    
+    ctx.body = {};
   }
 
   async list() {
-
-    const page = this.ctx.query.page || 1;
+    const ctx = this.ctx;    
+    
+    const page = ctx.query.page || 1;
     const page_size = 2;
 
     let options = {
@@ -66,7 +27,7 @@ class ProjectController extends Controller {
       where: {}
     };
 
-    let { filters } = this.ctx.query;
+    let { filters } = ctx.query;
 
     if (filters){
       filters = JSON.parse(filters);
@@ -86,16 +47,48 @@ class ProjectController extends Controller {
       }
     })
 
-    const res = await this.ctx.model.Project.findAndCountAll(options);
+    const res = await ctx.model.Project.findAndCountAll(options);
     const { rows, count } = res;
 
-    this.ctx.body = this.ctx.helper.apiResponse(200, 'success', { 
+    ctx.body = ctx.helper.apiResponse(200, 'success', { 
       page,
       page_size,
       total: count,
       list: rows,
     });
+  }
 
+  async findOne() {
+    const ctx = this.ctx;    
+    const project_id = ctx.query.project_id;
+
+    let res = await ctx.model.Project.findByPk(project_id);
+    ctx.body = ctx.helper.apiResponse(200, 'success', {
+      ...res
+    });
+  }
+
+  async create() {
+    const ctx = this.ctx;
+    const res = await ctx.model.Project.create({ name:"张三", age:20 });
+    ctx.body = ctx.helper.apiResponse(200, 'success');
+  }
+
+  async update() {
+    const ctx = this.ctx;
+    const project_id = ctx.query.project_id;
+    const data = ctx.query.data;
+    const project = await ctx.model.Project.findByPk(project_id);
+    await project.update(data);
+    ctx.body = ctx.helper.apiResponse(200, 'success');
+  }
+
+  async delete() {
+    const ctx = this.ctx;
+    const project_id = ctx.query.project_id;
+    const project = await ctx.model.Project.findByPk(project_id);
+    await project.destroy();
+    ctx.body = ctx.helper.apiResponse(200, 'success');
   }
 
 }

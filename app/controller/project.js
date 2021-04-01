@@ -3,79 +3,119 @@
 // app/controller/project.js
 const Controller = require('egg').Controller;
 
+const Sequelize = require('sequelize');
+
+const Op = Sequelize.Op;
+
+// app/controller/project.js
 class ProjectController extends Controller {
+  async index() {
+    const ctx = this.ctx;    
+    ctx.body = {
+      list: {
+        page: 1,
+        page_size: 10,
+        filters: {},
+      },
+      detail: {
+        project_id: 0,
+      },
+      create: {
+        project_id: 0,
+      },
+      update: '更新数据',
+      delete: '删除数据',
+    };
+  }
 
   async list() {
-    const ctx = this.ctx;
+    const ctx = this.ctx;    
+    
     const page = ctx.query.page || 1;
     const page_size = 10;
 
     let options = {
+      order:[["project_id","desc"]],
       limit: page_size, // 返回数据量
-      offset: (page - 1) * page_size, // 数据偏移量  
+      offset: (page - 1) * page_size, // 数据偏移量
+      where: {}
     };
-    const list = await ctx.service.project.list(options);
-    const total = await ctx.service.project.count();
+
+    let { filters } = ctx.query;
+
+    if (filters){
+      filters = JSON.parse(filters);
+    }
+
+    //处理查询
+    filters && Object.keys(filters).forEach(field => {
+      switch(field){
+        case 'title':
+          options.where[field] = { 
+            [Op.like]:'%' +filters[field] + '%'
+          };
+          break;
+        case 'project_id':
+          options.where[field] = filters[field];
+          break;
+      }
+    })
+
+    const projects = await ctx.model.Project.findAndCountAll(options);
+    const { rows, count } = projects;
 
     ctx.body = ctx.helper.apiResponse(200, 'success', { 
       page,
       page_size,
-      total,
-      list,
+      total: count,
+      list: rows,
     });
+  }
+
+  async detail() {
+    const ctx = this.ctx;    
+    const project_id = ctx.query.project_id;
+
+    let project = await ctx.model.Project.findByPk(project_id);
+        project.tag_conf = JSON.parse(project.tag_conf);
+        
+    ctx.body = ctx.helper.apiResponse(200, 'success', project);
   }
 
   async create() {
     const ctx = this.ctx;
-    const body = this.ctx.request.body;
+    const body = ctx.request.body;
 
     const data = {
       ...body, 
       tag_conf: JSON.stringify(body.tag_conf)
     };
-    const res = await ctx.service.project.create(data);
 
-    ctx.body = ctx.helper.apiResponse(200, 'sucess');
-  }
-
-  async detail() {
-    const ctx = this.ctx;
-    const project_id = ctx.query.project_id;
-    console.log('===ctx.query===', ctx.query);
-    const articleInfo = await ctx.service.project.findOne({
-      project_id: project_id,
-    });
-
-    ctx.body = ctx.helper.apiResponse(200, 'sucess', {
-      ...articleInfo,
-      tag_conf: JSON.parse(articleInfo.tag_conf),
-    });
+    const res = await ctx.model.Project.create(data);
+    ctx.body = ctx.helper.apiResponse(200, 'success');
   }
 
   async update() {
     const ctx = this.ctx;
-    const { project_id } = ctx.query;
-    const { title, tag_conf, start_date, end_date, description } = this.ctx.request.body;
-console.log('===tag_conf===', tag_conf);
+    const project_id = ctx.query.project_id;
+    const body = ctx.request.body;
+    
     const data = {
-      title, 
-      start_date, 
-      end_date, 
-      description,
-      tag_conf:JSON.stringify(tag_conf), 
+      ...body, 
+      tag_conf: JSON.stringify(body.tag_conf)
     };
 
-    const res = await ctx.service.project.update(data, { project_id });
-
-    ctx.body = ctx.helper.apiResponse(200, 'sucess');
+    const project = await ctx.model.Project.findByPk(project_id);
+    await project.update(data);
+    ctx.body = ctx.helper.apiResponse(200, 'success', data);
   }
 
   async delete() {
     const ctx = this.ctx;
-    const id = ctx.query.id;
-    const res = await ctx.service.project.delete(id);
-
-    ctx.body = ctx.helper.apiResponse(200, 'sucess');
+    const project_id = ctx.query.project_id;
+    const project = await ctx.model.Project.findByPk(project_id);
+    await project.destroy();
+    ctx.body = ctx.helper.apiResponse(200, 'success');
   }
 
 }

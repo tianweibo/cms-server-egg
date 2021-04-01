@@ -10,7 +10,8 @@
   <ul>
     <li><a href="sys-tag/list">tag</a></li>
     <li><a href="sys-tag/tagList">tag/tagList</a></li>
-    <li><a href="project/list">project</a></li>
+    <li><a href="project/index">project/index</a></li>
+    <li><a href="project/list">project/list</a></li>
     <li><a href="activity/list">activity</a></li>
     <li><a href="article/list">article</a></li>
     <li><a href="news">news</a></li>

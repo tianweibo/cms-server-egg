@@ -47,8 +47,8 @@ class ProjectController extends Controller {
       }
     })
 
-    const res = await ctx.model.Project.findAndCountAll(options);
-    const { rows, count } = res;
+    const projects = await ctx.model.Project.findAndCountAll(options);
+    const { rows, count } = projects;
 
     ctx.body = ctx.helper.apiResponse(200, 'success', { 
       page,
@@ -62,22 +62,36 @@ class ProjectController extends Controller {
     const ctx = this.ctx;    
     const project_id = ctx.query.project_id;
 
-    let res = await ctx.model.Project.findByPk(project_id);
+    let project = await ctx.model.Project.findByPk(project_id);
     ctx.body = ctx.helper.apiResponse(200, 'success', {
-      ...res
+      ...project,
+      tag_conf: JSON.parse(project.tag_conf),
     });
   }
 
   async create() {
     const ctx = this.ctx;
-    const res = await ctx.model.Project.create({ name:"张三", age:20 });
+    const body = ctx.request.body;
+
+    const data = {
+      ...body, 
+      tag_conf: JSON.stringify(body.tag_conf)
+    };
+
+    const res = await ctx.model.Project.create(data);
     ctx.body = ctx.helper.apiResponse(200, 'success');
   }
 
   async update() {
     const ctx = this.ctx;
     const project_id = ctx.query.project_id;
-    const data = ctx.query.data;
+    const body = ctx.request.body;
+    
+    const data = {
+      ...body, 
+      tag_conf: JSON.stringify(body.tag_conf)
+    };
+
     const project = await ctx.model.Project.findByPk(project_id);
     await project.update(data);
     ctx.body = ctx.helper.apiResponse(200, 'success');

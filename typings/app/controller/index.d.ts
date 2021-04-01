@@ -10,6 +10,7 @@ import ExportNews = require('../../../app/controller/news');
 import ExportProject = require('../../../app/controller/project');
 import ExportReport = require('../../../app/controller/report');
 import ExportSysTag = require('../../../app/controller/sysTag');
+import ExportTest = require('../../../app/controller/test');
 
 declare module 'egg' {
   interface IController {
@@ -21,5 +22,6 @@ declare module 'egg' {
     project: ExportProject;
     report: ExportReport;
     sysTag: ExportSysTag;
+    test: ExportTest;
   }
 }

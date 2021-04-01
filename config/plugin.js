@@ -11,10 +11,15 @@ module.exports = {
     package: 'egg-view-nunjucks',
   },
 
-  mysql: {
+  sequelize: {
     enable: true,
-    package: 'egg-mysql',
+    package: 'egg-sequelize'
   },
+  
+  // mysql: {
+  //   enable: true,
+  //   package: 'egg-mysql',
+  // },
 
   cors: {
     enable: true,

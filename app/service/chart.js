@@ -6,7 +6,6 @@ class ChartService extends Service {
   }
 
   async query(params) {
-    this.ctx.logger.info(`chart service query`)
     const res = await this.ctx.curl('https://huidu.enbrands.com/v1/fed', {
         method: 'GET',
         rejectUnauthorized: false,

@@ -32,7 +32,7 @@ class SysTagService extends BaseService {
 
   async update(row, where) {
     const result = await super.update(row, {
-      where: where
+      tag_id: row.tag_id
     });
     // 判断更新成功
     const updateSuccess = result.affectedRows === 1;

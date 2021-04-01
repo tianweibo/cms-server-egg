@@ -50,10 +50,9 @@ class SysTagController extends Controller {
 
   async detail() {
     const ctx = this.ctx;
-    const sysTag_id = ctx.query.sysTag_id;
-    console.log('===ctx.query===', ctx.query);
+    const sysTag_id = ctx.query.id;
     const articleInfo = await ctx.service.sysTag.findOne({
-      sysTag_id: sysTag_id,
+      tag_id: sysTag_id,
     });
 
     ctx.body = ctx.helper.apiResponse(200, 'sucess', articleInfo);
@@ -63,14 +62,10 @@ class SysTagController extends Controller {
     const ctx = this.ctx;
     const id = ctx.query.id;
     const body = this.ctx.request.body;
+    console.log('body: ', body);
 
-    const data = {
-      title: body.title,
-      description: body.description,
-    };
-
-    const res = await ctx.service.sysTag.update(data, {
-      id: id
+    const res = await ctx.service.sysTag.update(body.data, {
+      tag_id: id
     });
 
     ctx.body = ctx.helper.apiResponse(200, 'sucess');

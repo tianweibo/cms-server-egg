@@ -110,23 +110,30 @@ class SysTagController extends Controller {
       tag_conf: JSON.stringify(body.tag_conf)
     };
 
-    const res = await ctx.model.SysTag.create(data);
-    ctx.body = ctx.helper.apiResponse(200, 'success');
+    ctx.body = ctx.helper.apiResponse(200, 'sucess');
+  }
+
+  async detail() {
+    const ctx = this.ctx;
+    const sysTag_id = ctx.query.id;
+    const articleInfo = await ctx.service.sysTag.findOne({
+      tag_id: sysTag_id,
+    });
+
+    ctx.body = ctx.helper.apiResponse(200, 'sucess', articleInfo);
   }
 
   async update() {
     const ctx = this.ctx;
-    const tag_id = ctx.query.tag_id;
-    const body = ctx.request.body;
-    
-    const data = {
-      ...body, 
-      tag_conf: JSON.stringify(body.tag_conf)
-    };
+    const id = ctx.query.id;
+    const body = this.ctx.request.body;
+    console.log('body: ', body);
 
-    const tag = await ctx.model.SysTag.findByPk(tag_id);
-    await tag.update(data);
-    ctx.body = ctx.helper.apiResponse(200, 'success');
+    const res = await ctx.service.sysTag.update(body.data, {
+      tag_id: id
+    });
+
+    ctx.body = ctx.helper.apiResponse(200, 'sucess');
   }
 
   async delete() {

@@ -11,7 +11,21 @@ const Op = Sequelize.Op;
 class ProjectController extends Controller {
   async index() {
     const ctx = this.ctx;    
-    ctx.body = {};
+    ctx.body = {
+      list: {
+        page: 1,
+        page_size: 10,
+        filters: {},
+      },
+      detail: {
+        project_id: 0,
+      },
+      create: {
+        project_id: 0,
+      },
+      update: '更新数据',
+      delete: '删除数据',
+    };
   }
 
   async list() {
@@ -58,15 +72,14 @@ class ProjectController extends Controller {
     });
   }
 
-  async findOne() {
+  async detail() {
     const ctx = this.ctx;    
     const project_id = ctx.query.project_id;
 
     let project = await ctx.model.Project.findByPk(project_id);
-    ctx.body = ctx.helper.apiResponse(200, 'success', {
-      ...project,
-      tag_conf: JSON.parse(project.tag_conf),
-    });
+        project.tag_conf = JSON.parse(project.tag_conf);
+        
+    ctx.body = ctx.helper.apiResponse(200, 'success', project);
   }
 
   async create() {

@@ -19,10 +19,10 @@ module.exports = app => {
 
   router.get('/project/index', controller.project.index);
   router.get('/project/list', controller.project.list);
-  // router.get('/project/detail', controller.project.detail);
-  // router.post('/project/create', controller.project.create);
-  // router.post('/project/update', controller.project.update);
-  // router.post('/project/delete', controller.project.delete);
+  router.get('/project/detail', controller.project.detail);
+  router.post('/project/create', controller.project.create);
+  router.post('/project/update', controller.project.update);
+  router.post('/project/delete', controller.project.delete);
 
   // router.get('/activity/list', controller.activity.list);
   // router.get('/activity/detail', controller.activity.detail);

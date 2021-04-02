@@ -14,7 +14,7 @@ class ProjectController extends Controller {
     const ctx = this.ctx;    
     
     const page = ctx.query.page || 1;
-    const page_size = 2;
+    const page_size = 10;
 
     let options = {
       order:[["project_id","desc"]],

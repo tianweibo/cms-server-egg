@@ -46,6 +46,10 @@ class ProjectController extends Controller {
     const projects = await ctx.model.Project.findAndCountAll(options);
     const { rows, count } = projects;
 
+    rows.forEach((item)=>{
+      item.tag_conf = JSON.parse(item.tag_conf);
+    })
+
     ctx.body = ctx.helper.apiResponse(200, 'success', { 
       page,
       page_size,

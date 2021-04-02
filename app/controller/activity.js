@@ -46,6 +46,10 @@ class ActivityController extends Controller {
     const activitys = await ctx.model.Activity.findAndCountAll(options);
     const { rows, count } = activitys;
 
+    rows.forEach((item)=>{
+      item.tag_conf = JSON.parse(item.tag_conf);
+    })
+
     ctx.body = ctx.helper.apiResponse(200, 'success', { 
       page,
       page_size,

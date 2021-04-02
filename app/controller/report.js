@@ -46,6 +46,10 @@ class ReportController extends Controller {
     const reports = await ctx.model.Report.findAndCountAll(options);
     const { rows, count } = reports;
 
+    rows.forEach((item)=>{
+      item.tag_conf = JSON.parse(item.tag_conf);
+    })
+
     ctx.body = ctx.helper.apiResponse(200, 'success', { 
       page,
       page_size,

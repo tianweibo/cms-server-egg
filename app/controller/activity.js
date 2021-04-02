@@ -9,8 +9,8 @@ const Op = Sequelize.Op;
 
 // app/controller/activity.js
 class ActivityController extends Controller {
-
-  async list() {
+  
+  async index() {
     const ctx = this.ctx;    
     
     const page = ctx.query.page || 1;
@@ -56,6 +56,10 @@ class ActivityController extends Controller {
       total: count,
       list: rows,
     });
+  }
+
+  async list() {
+    
   }
 
   async detail() {

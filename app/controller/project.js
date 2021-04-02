@@ -10,7 +10,7 @@ const Op = Sequelize.Op;
 // app/controller/project.js
 class ProjectController extends Controller {
 
-  async list() {
+  async index() {
     const ctx = this.ctx;    
     
     const page = ctx.query.page || 1;
@@ -55,6 +55,22 @@ class ProjectController extends Controller {
       page_size,
       total: count,
       list: rows,
+    });
+  }
+
+  async list() {
+    const ctx = this.ctx;    
+    
+    let options = {
+      attributes:['project_id','title'],
+      order:[["project_id","desc"]],
+      where: {}
+    };
+
+    const project = await ctx.model.Project.findAll(options);
+
+    ctx.body = ctx.helper.apiResponse(200, 'success', { 
+      list: project,
     });
   }
 

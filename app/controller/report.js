@@ -10,7 +10,7 @@ const Op = Sequelize.Op;
 // app/controller/report.js
 class ReportController extends Controller {
 
-  async list() {
+  async index() {
     const ctx = this.ctx;    
     
     const page = ctx.query.page || 1;
@@ -56,6 +56,10 @@ class ReportController extends Controller {
       total: count,
       list: rows,
     });
+  }
+
+  async list() {
+  
   }
 
   async detail() {

@@ -10,25 +10,7 @@
   // app/controller/tag.js
   class SysTagController extends Controller {
     
-    async tagList() {
-      const ctx = this.ctx;    
-      
-      let options = {
-        attributes:['tag_key','tag_name', 'description'],
-        order:[["tag_id","desc"]],
-        where: {}
-      };
-
-      const sysTags = await ctx.model.SysTag.findAndCountAll(options);
-      const { rows, count } = sysTags;
-
-      ctx.body = ctx.helper.apiResponse(200, 'success', { 
-        total: count,
-        list: rows,
-      });
-    }
-  
-    async list() {
+    async index() {
       const ctx = this.ctx;    
       
       const page = ctx.query.page || 1;
@@ -69,6 +51,22 @@
         page_size,
         total: count,
         list: rows,
+      });
+    }
+
+    async list() {
+      const ctx = this.ctx;    
+      
+      let options = {
+        attributes:['tag_key','tag_name', 'description'],
+        order:[["tag_id","desc"]],
+        where: {}
+      };
+
+      const sysTags = await ctx.model.SysTag.findAll(options);
+
+      ctx.body = ctx.helper.apiResponse(200, 'success', { 
+        list: sysTags,
       });
     }
   

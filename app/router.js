@@ -7,6 +7,15 @@ module.exports = app => {
   const { router, controller } = app;
   router.get('/', controller.home.index);
 
+  router.get('/user/login', controller.user.login);
+  router.get('/user/loginOut', controller.user.loginOut);
+  router.get('/user/index', controller.user.index);
+  router.get('/user/list', controller.user.list);
+  router.get('/user/detail', controller.user.detail);
+  router.post('/user/create', controller.user.create);
+  router.post('/user/update', controller.user.update);
+  router.post('/user/delete', controller.user.delete);
+
   router.get('/sys-tag/index', controller.sysTag.index);
   router.get('/sys-tag/list', controller.sysTag.list);
   router.get('/sys-tag/detail', controller.sysTag.detail);

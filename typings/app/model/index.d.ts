@@ -6,6 +6,7 @@ import ExportActivity = require('../../../app/model/activity');
 import ExportProject = require('../../../app/model/project');
 import ExportReport = require('../../../app/model/report');
 import ExportSysTag = require('../../../app/model/sysTag');
+import ExportUser = require('../../../app/model/user');
 
 declare module 'egg' {
   interface IModel {
@@ -13,5 +14,6 @@ declare module 'egg' {
     Project: ReturnType<typeof ExportProject>;
     Report: ReturnType<typeof ExportReport>;
     SysTag: ReturnType<typeof ExportSysTag>;
+    User: ReturnType<typeof ExportUser>;
   }
 }

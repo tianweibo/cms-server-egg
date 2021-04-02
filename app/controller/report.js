@@ -3,70 +3,119 @@
 // app/controller/report.js
 const Controller = require('egg').Controller;
 
+const Sequelize = require('sequelize');
+
+const Op = Sequelize.Op;
+
+// app/controller/report.js
 class ReportController extends Controller {
+  async index() {
+    const ctx = this.ctx;    
+    ctx.body = {
+      list: {
+        page: 1,
+        page_size: 10,
+        filters: {},
+      },
+      detail: {
+        report_id: 0,
+      },
+      create: {
+        report_id: 0,
+      },
+      update: '更新数据',
+      delete: '删除数据',
+    };
+  }
 
   async list() {
-    const ctx = this.ctx;
+    const ctx = this.ctx;    
+    
     const page = ctx.query.page || 1;
     const page_size = 2;
 
     let options = {
+      order:[["report_id","desc"]],
       limit: page_size, // 返回数据量
-      offset: (page - 1) * page_size, // 数据偏移量  
+      offset: (page - 1) * page_size, // 数据偏移量
+      where: {}
     };
-    const list = await ctx.service.report.list(options);
-    const total = await ctx.service.report.count();
 
-    ctx.body = ctx.helper.apiResponse(200, 'success', { page, page_size, total, list });
+    let { filters } = ctx.query;
+
+    if (filters){
+      filters = JSON.parse(filters);
+    }
+
+    //处理查询
+    filters && Object.keys(filters).forEach(field => {
+      switch(field){
+        case 'title':
+          options.where[field] = { 
+            [Op.like]:'%' +filters[field] + '%'
+          };
+          break;
+        case 'report_id':
+          options.where[field] = filters[field];
+          break;
+      }
+    })
+
+    const reports = await ctx.model.Report.findAndCountAll(options);
+    const { rows, count } = reports;
+
+    ctx.body = ctx.helper.apiResponse(200, 'success', { 
+      page,
+      page_size,
+      total: count,
+      list: rows,
+    });
+  }
+
+  async detail() {
+    const ctx = this.ctx;    
+    const report_id = ctx.query.report_id;
+
+    let report = await ctx.model.Report.findByPk(report_id);
+        report.tag_conf = JSON.parse(report.tag_conf);
+        
+    ctx.body = ctx.helper.apiResponse(200, 'success', report);
   }
 
   async create() {
     const ctx = this.ctx;
-    const body = this.ctx.request.body;
+    const body = ctx.request.body;
 
     const data = {
-      title: body.title,
-      description: body.description,
+      ...body, 
+      tag_conf: JSON.stringify(body.tag_conf)
     };
-    const res = await ctx.service.report.create(data);
 
-    ctx.body = ctx.helper.apiResponse(200, 'sucess');
-  }
-
-  async detail() {
-    const ctx = this.ctx;
-    const report_id = ctx.query.report_id;
-    console.log('===ctx.query===', ctx.query);
-    const articleInfo = await ctx.service.report.findOne({
-      report_id: report_id,
-    });
-
-    ctx.body = ctx.helper.apiResponse(200, 'sucess', articleInfo);
+    const res = await ctx.model.Report.create(data);
+    ctx.body = ctx.helper.apiResponse(200, 'success');
   }
 
   async update() {
     const ctx = this.ctx;
-    const id = ctx.query.id;
-    const body = this.ctx.request.body;
-
+    const report_id = ctx.query.report_id;
+    const body = ctx.request.body;
+    
     const data = {
-      title: body.title,
-      description: body.description,
+      ...body, 
+      tag_conf: JSON.stringify(body.tag_conf)
     };
 
-    const res = await ctx.service.report.update(data, {
-      id: id
-    });
-
-    ctx.body = ctx.helper.apiResponse(200, 'sucess');
+    const report = await ctx.model.Report.findByPk(report_id);
+    await report.update(data);
+    ctx.body = ctx.helper.apiResponse(200, 'success', data);
   }
 
   async delete() {
     const ctx = this.ctx;
-    const id = ctx.query.id;
-    const res = await ctx.service.report.delete(id);
-
-    ctx.body = ctx.helper.apiResponse(200, 'sucess');
+    const report_id = ctx.query.report_id;
+    const report = await ctx.model.Report.findByPk(report_id);
+    await report.destroy();
+    ctx.body = ctx.helper.apiResponse(200, 'success');
   }
 
 }

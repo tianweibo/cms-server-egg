@@ -31,11 +31,11 @@ module.exports = app => {
   router.get('/activity/update', controller.activity.update);
   router.get('/activity/delete', controller.activity.delete);
 
-  // router.get('/report/list', controller.report.list);
-  // router.get('/report/detail', controller.report.detail);
-  // router.get('/report/create', controller.report.create);
-  // router.get('/report/update', controller.report.update);
-  // router.get('/report/delete', controller.report.delete);
+  router.get('/report/list', controller.report.list);
+  router.get('/report/detail', controller.report.detail);
+  router.get('/report/create', controller.report.create);
+  router.get('/report/update', controller.report.update);
+  router.get('/report/delete', controller.report.delete);
 
   // router.get('/article/list', controller.article.list);
   // router.get('/article/createView', controller.article.createView);

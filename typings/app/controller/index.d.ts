@@ -3,25 +3,19 @@
 
 import 'egg';
 import ExportActivity = require('../../../app/controller/activity');
-import ExportArticle = require('../../../app/controller/article');
-import ExportChart = require('../../../app/controller/chart');
 import ExportHome = require('../../../app/controller/home');
-import ExportNews = require('../../../app/controller/news');
+import ExportOldReport = require('../../../app/controller/old-report');
 import ExportProject = require('../../../app/controller/project');
 import ExportReport = require('../../../app/controller/report');
 import ExportSysTag = require('../../../app/controller/sysTag');
-import ExportTest = require('../../../app/controller/test');
 
 declare module 'egg' {
   interface IController {
     activity: ExportActivity;
-    article: ExportArticle;
-    chart: ExportChart;
     home: ExportHome;
-    news: ExportNews;
+    oldReport: ExportOldReport;
     project: ExportProject;
     report: ExportReport;
     sysTag: ExportSysTag;
-    test: ExportTest;
   }
 }

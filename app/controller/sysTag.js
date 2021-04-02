@@ -8,7 +8,8 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 // app/controller/tag.js
-class TagController extends Controller {
+class SysTagController extends Controller {
+
   async index() {
     const ctx = this.ctx;    
     ctx.body = {
@@ -50,7 +51,7 @@ class TagController extends Controller {
     const ctx = this.ctx;    
     
     const page = ctx.query.page || 1;
-    const page_size = 2;
+    const page_size = 10;
 
     let options = {
       order:[["tag_id","desc"]],
@@ -68,7 +69,7 @@ class TagController extends Controller {
     //处理查询
     filters && Object.keys(filters).forEach(field => {
       switch(field){
-        case 'title':
+        case 'tag_name':
           options.where[field] = { 
             [Op.like]:'%' +filters[field] + '%'
           };
@@ -79,8 +80,8 @@ class TagController extends Controller {
       }
     })
 
-    const tags = await ctx.model.Tag.findAndCountAll(options);
-    const { rows, count } = tags;
+    const sysTags = await ctx.model.SysTag.findAndCountAll(options);
+    const { rows, count } = sysTags;
 
     ctx.body = ctx.helper.apiResponse(200, 'success', { 
       page,
@@ -94,7 +95,7 @@ class TagController extends Controller {
     const ctx = this.ctx;    
     const tag_id = ctx.query.tag_id;
 
-    let tag = await ctx.model.Tag.findByPk(tag_id);
+    let tag = await ctx.model.SysTag.findByPk(tag_id);
         tag.tag_conf = JSON.parse(tag.tag_conf);
         
     ctx.body = ctx.helper.apiResponse(200, 'success', tag);
@@ -109,34 +110,40 @@ class TagController extends Controller {
       tag_conf: JSON.stringify(body.tag_conf)
     };
 
-    const res = await ctx.model.Tag.create(data);
-    ctx.body = ctx.helper.apiResponse(200, 'success');
+    ctx.body = ctx.helper.apiResponse(200, 'sucess');
+  }
+
+  async detail() {
+    const ctx = this.ctx;
+    const sysTag_id = ctx.query.id;
+    const articleInfo = await ctx.service.sysTag.findOne({
+      tag_id: sysTag_id,
+    });
+
+    ctx.body = ctx.helper.apiResponse(200, 'sucess', articleInfo);
   }
 
   async update() {
     const ctx = this.ctx;
-    const tag_id = ctx.query.tag_id;
-    const body = ctx.request.body;
-    
-    const data = {
-      ...body, 
-      tag_conf: JSON.stringify(body.tag_conf)
-    };
+    const id = ctx.query.id;
+    const body = this.ctx.request.body;
+    console.log('body: ', body);
 
-    const tag = await ctx.model.Tag.findByPk(tag_id);
-    await tag.update(data);
-    ctx.body = ctx.helper.apiResponse(200, 'success', data);
+    const res = await ctx.service.sysTag.update(body.data, {
+      tag_id: id
+    });
+
+    ctx.body = ctx.helper.apiResponse(200, 'sucess');
   }
 
   async delete() {
     const ctx = this.ctx;
     const tag_id = ctx.query.tag_id;
-    const tag = await ctx.model.Tag.findByPk(tag_id);
+    const tag = await ctx.model.SysTag.findByPk(tag_id);
     await tag.destroy();
     ctx.body = ctx.helper.apiResponse(200, 'success');
   }
 
 }
 
-module.exports = TagController;
-
+module.exports = SysTagController;

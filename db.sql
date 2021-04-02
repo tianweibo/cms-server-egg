@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.33)
 # Database: buried_points_server
-# Generation Time: 2021-04-01 08:38:58 +0000
+# Generation Time: 2021-04-02 01:54:53 +0000
 # ************************************************************
 
 
@@ -97,7 +97,7 @@ VALUES
 	(1,'欧莱雅111a a a','[{\"tag_name\":\"用户PV\",\"tag_key\":\"field_pv\",\"description\":\"\"}]','描述信息222bbb',1617173360641,1618901360641,0,1617173360641,0),
 	(2,'欧莱雅111','[{\"tag_name\":\"aaa\",\"tag_key\":\"aaa\",\"description\":\"aaa\"},{\"tag_key\":\"field_join\",\"tag_name\":\"加购\",\"description\":\"\"}]','描述信息222',1617263212166,1618472812166,0,1617173360641,0),
 	(3,'aaaa111','[{\"tag_name\":\"用户UV\",\"tag_key\":\"field_uv\",\"description\":\"\"},{\"tag_name\":\"用户PV\",\"tag_key\":\"field_pv\",\"description\":\"\"}]','bbb222',1617166084449,1618894084449,0,1617173360641,0),
-	(4,'aaa','[{\"tag_name\":\"加购\",\"tag_key\":\"field_join\",\"description\":\"\"},{\"tag_key\":\"field_uv\",\"tag_name\":\"用户UV\",\"description\":\"\"}]','bbb',1617264873292,1618042473292,0,0,0);
+	(4,'aaa111','[{\"tag_key\":\"field_pv\",\"tag_name\":\"用户PV\",\"description\":\"\"},{\"tag_key\":\"field_uv\",\"tag_name\":\"用户UV\",\"description\":\"\"}]','bbb222',1617264873292,1618042473292,0,0,0);
 
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -110,7 +110,7 @@ DROP TABLE IF EXISTS `report`;
 
 CREATE TABLE `report` (
   `report_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) NOT NULL DEFAULT '',
+  `title` varchar(64) NOT NULL DEFAULT '',
   `tag_conf` text NOT NULL,
   `description` text NOT NULL,
   `status` tinyint(2) unsigned NOT NULL DEFAULT '0',
@@ -122,7 +122,7 @@ CREATE TABLE `report` (
 LOCK TABLES `report` WRITE;
 /*!40000 ALTER TABLE `report` DISABLE KEYS */;
 
-INSERT INTO `report` (`report_id`, `name`, `tag_conf`, `description`, `status`, `created_at`, `updated_at`)
+INSERT INTO `report` (`report_id`, `title`, `tag_conf`, `description`, `status`, `created_at`, `updated_at`)
 VALUES
 	(1,'报表-1','[]','',0,0,0);
 

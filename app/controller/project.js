@@ -62,15 +62,19 @@ class ProjectController extends Controller {
     const ctx = this.ctx;    
     
     let options = {
-      attributes:['project_id','title'],
+      attributes:['project_id','title', 'tag_conf'],
       order:[["project_id","desc"]],
       where: {}
     };
 
-    const project = await ctx.model.Project.findAll(options);
+    const projects = await ctx.model.Project.findAll(options);
+
+    projects.forEach((item)=>{
+      item.tag_conf = JSON.parse(item.tag_conf);
+    })
 
     ctx.body = ctx.helper.apiResponse(200, 'success', { 
-      list: project,
+      list: projects,
     });
   }
 

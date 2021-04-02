@@ -77,8 +77,6 @@
       const tag_id = ctx.query.tag_id;
   
       let tag = await ctx.model.SysTag.findByPk(tag_id);
-          tag.tag_conf = JSON.parse(tag.tag_conf);
-          
       ctx.body = ctx.helper.apiResponse(200, 'success', tag);
     }
   

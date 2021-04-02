@@ -25,8 +25,11 @@ module.exports = appInfo => {
       // raw: true,
       underscored: true,
       freezeTableName: true, //直接查找设置的表名，默认是表名加s或者es
-      timestamps: false,   
-    },
+      timestamps: false,
+      createdAt: "CreatedAt",  //自定义时间戳
+      updatedAt: "UpdatedAt", // 自定义时间戳
+      timezone: '+08:00' // 保存为本地时区
+    }
   };
 
   // config.mysql = {

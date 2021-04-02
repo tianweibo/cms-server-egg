@@ -7,8 +7,8 @@ module.exports = app => {
   const { router, controller } = app;
   router.get('/', controller.home.index);
 
-  router.get('/user/login', controller.user.login);
-  router.get('/user/loginOut', controller.user.loginOut);
+  router.post('/user/login', controller.user.login);
+  router.post('/user/loginOut', controller.user.loginOut);
   router.get('/user/index', controller.user.index);
   router.get('/user/list', controller.user.list);
   router.get('/user/detail', controller.user.detail);

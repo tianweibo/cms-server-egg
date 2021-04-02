@@ -3,68 +3,119 @@
 // app/controller/activity.js
 const Controller = require('egg').Controller;
 
+const Sequelize = require('sequelize');
+
+const Op = Sequelize.Op;
+
+// app/controller/activity.js
 class ActivityController extends Controller {
+  async index() {
+    const ctx = this.ctx;    
+    ctx.body = {
+      list: {
+        page: 1,
+        page_size: 10,
+        filters: {},
+      },
+      detail: {
+        activity_id: 0,
+      },
+      create: {
+        activity_id: 0,
+      },
+      update: '更新数据',
+      delete: '删除数据',
+    };
+  }
 
   async list() {
-    const ctx = this.ctx;
-    const page = ctx.query.page || 2;
+    const ctx = this.ctx;    
+    
+    const page = ctx.query.page || 1;
     const page_size = 2;
 
     let options = {
-      orders: [['created_at','desc'], ['activity_id','desc']], // 排序方式
+      order:[["activity_id","desc"]],
       limit: page_size, // 返回数据量
-      offset: (page - 1) * page_size, // 数据偏移量  
+      offset: (page - 1) * page_size, // 数据偏移量
+      where: {}
     };
-    const list = await ctx.service.activity.list(options);
-    const total = await ctx.service.activity.count();
 
-    ctx.body = ctx.helper.apiResponse(200, 'success', { page, page_size, total, list });
+    let { filters } = ctx.query;
+
+    if (filters){
+      filters = JSON.parse(filters);
+    }
+
+    //处理查询
+    filters && Object.keys(filters).forEach(field => {
+      switch(field){
+        case 'title':
+          options.where[field] = { 
+            [Op.like]:'%' +filters[field] + '%'
+          };
+          break;
+        case 'activity_id':
+          options.where[field] = filters[field];
+          break;
+      }
+    })
+
+    const activitys = await ctx.model.Activity.findAndCountAll(options);
+    const { rows, count } = activitys;
+
+    ctx.body = ctx.helper.apiResponse(200, 'success', { 
+      page,
+      page_size,
+      total: count,
+      list: rows,
+    });
+  }
+
+  async detail() {
+    const ctx = this.ctx;    
+    const activity_id = ctx.query.activity_id;
+
+    let activity = await ctx.model.Activity.findByPk(activity_id);
+        activity.tag_conf = JSON.parse(activity.tag_conf);
+        
+    ctx.body = ctx.helper.apiResponse(200, 'success', activity);
   }
 
   async create() {
     const ctx = this.ctx;
-    const body = this.ctx.request.body;
+    const body = ctx.request.body;
 
     const data = {
-      title: body.title,
-      description: body.description,
+      ...body, 
+      tag_conf: JSON.stringify(body.tag_conf)
     };
-    const res = await ctx.service.activity.create(data);
 
-    ctx.body = ctx.helper.apiResponse(200, 'sucess');
-  }
-
-  async detail() {
-    const ctx = this.ctx;
-    const id = ctx.query.id;
-    const articleInfo = await ctx.service.activity.find(id);
-
-    ctx.body = ctx.helper.apiResponse(200, 'sucess', articleInfo);
+    const res = await ctx.model.Activity.create(data);
+    ctx.body = ctx.helper.apiResponse(200, 'success');
   }
 
   async update() {
     const ctx = this.ctx;
-    const id = ctx.query.id;
-    const body = this.ctx.request.body;
-
+    const activity_id = ctx.query.activity_id;
+    const body = ctx.request.body;
+    
     const data = {
-      title: body.title,
-      description: body.description,
+      ...body, 
+      tag_conf: JSON.stringify(body.tag_conf)
     };
 
-    const res = await ctx.service.activity.update(data, {
-      id: id
-    });
-
-    ctx.body = ctx.helper.apiResponse(200, 'sucess');
+    const activity = await ctx.model.Activity.findByPk(activity_id);
+    await activity.update(data);
+    ctx.body = ctx.helper.apiResponse(200, 'success', data);
   }
 
   async delete() {
     const ctx = this.ctx;
-    const id = ctx.query.id;
-    const res = await ctx.service.activity.delete(id);
-
-    ctx.body = ctx.helper.apiResponse(200, 'sucess');
+    const activity_id = ctx.query.activity_id;
+    const activity = await ctx.model.Activity.findByPk(activity_id);
+    await activity.destroy();
+    ctx.body = ctx.helper.apiResponse(200, 'success');
   }
 
 }

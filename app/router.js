@@ -25,11 +25,11 @@ module.exports = app => {
   router.post('/project/update', controller.project.update);
   router.post('/project/delete', controller.project.delete);
 
-  // router.get('/activity/list', controller.activity.list);
-  // router.get('/activity/detail', controller.activity.detail);
-  // router.get('/activity/create', controller.activity.create);
-  // router.get('/activity/update', controller.activity.update);
-  // router.get('/activity/delete', controller.activity.delete);
+  router.get('/activity/list', controller.activity.list);
+  router.get('/activity/detail', controller.activity.detail);
+  router.get('/activity/create', controller.activity.create);
+  router.get('/activity/update', controller.activity.update);
+  router.get('/activity/delete', controller.activity.delete);
 
   // router.get('/report/list', controller.report.list);
   // router.get('/report/detail', controller.report.detail);

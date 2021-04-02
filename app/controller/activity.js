@@ -9,24 +9,6 @@ const Op = Sequelize.Op;
 
 // app/controller/activity.js
 class ActivityController extends Controller {
-  async index() {
-    const ctx = this.ctx;    
-    ctx.body = {
-      list: {
-        page: 1,
-        page_size: 10,
-        filters: {},
-      },
-      detail: {
-        activity_id: 0,
-      },
-      create: {
-        activity_id: 0,
-      },
-      update: '更新数据',
-      delete: '删除数据',
-    };
-  }
 
   async list() {
     const ctx = this.ctx;    

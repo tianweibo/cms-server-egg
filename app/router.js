@@ -7,10 +7,6 @@ module.exports = app => {
   const { router, controller } = app;
   router.get('/', controller.home.index);
 
-  // router.get('/news/list', controller.news.list);
-
-
-  router.get('/sys-tag/index', controller.sysTag.index);
   router.get('/sys-tag/list', controller.sysTag.list);
   router.get('/sys-tag/detail', controller.sysTag.detail);
   router.post('/sys-tag/create', controller.sysTag.create);
@@ -18,7 +14,6 @@ module.exports = app => {
   router.post('/sys-tag/delete', controller.sysTag.delete);
   router.get('/sys-tag/tagList', controller.sysTag.tagList);
 
-  router.get('/project/index', controller.project.index);
   router.get('/project/list', controller.project.list);
   router.get('/project/detail', controller.project.detail);
   router.post('/project/create', controller.project.create);
@@ -37,16 +32,4 @@ module.exports = app => {
   router.get('/report/update', controller.report.update);
   router.get('/report/delete', controller.report.delete);
 
-  // router.get('/article/list', controller.article.list);
-  // router.get('/article/createView', controller.article.createView);
-  // router.get('/article/detail', controller.article.detail);
-  // router.get('/article/edit', controller.article.edit);
-
-  // router.post('/article/create', controller.article.create);
-  // router.post('/article/update', controller.article.update);
-  // router.get('/article/delete', controller.article.delete);
-
-  // router.get('/chart/chart', controller.chart.chart), 
-  // router.post('/chart/add', controller.chart.add)
-  // router.post('/chart/query', controller.chart.query)
 };

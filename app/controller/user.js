@@ -3,6 +3,8 @@
   // app/controller/user.js
   const Controller = require('egg').Controller;
   
+  const md5 = require("md5");
+
   const Sequelize = require('sequelize');
   
   const Op = Sequelize.Op;
@@ -10,20 +12,28 @@
   // app/controller/user.js
   class UserController extends Controller {
     
+    setPassword(password){
+      return md5(md5(password))
+    }
+
     async login() {
       const ctx = this.ctx;    
-      const { token } = ctx.query;
+      const {mobile, password} = ctx.request.body;
   
-      let user = await ctx.model.User.findOne({token});
-      if (!user){
-        ctx.body = ctx.helper.apiResponse(404, 'fail');
-      }
+      console.log('===ctx.helper.setPassword(password)==', ctx.helper.setPassword(password));
 
+      let user = await ctx.model.User.findOne({ where: {mobile} });
+      if (!user){
+        return ctx.body = ctx.helper.apiResponse(1, '账号不存在!');
+      }else if (user.password != ctx.helper.setPassword(password)){
+        return ctx.body = ctx.helper.apiResponse(2, '账号或密码有误!');
+      }
+      
       const data = {
-        token: 'token',
+        token: md5(Math.random()),
       };
       await user.update(data);
-      ctx.body = ctx.helper.apiResponse(200, 'success', data);
+      ctx.body = ctx.helper.apiResponse(0, 'success', data);
     }
 
     async loginOut() {
@@ -38,7 +48,7 @@
         await user.update(data);
       }
 
-      ctx.body = ctx.helper.apiResponse(200, 'success', data);
+      ctx.body = ctx.helper.apiResponse(0, 'success');
     }
 
     async index() {

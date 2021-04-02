@@ -17,7 +17,7 @@
       created_at: STRING(64),
       updated_at: STRING(64),
     });
-  
+
     return User;
   };
   

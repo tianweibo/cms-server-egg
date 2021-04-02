@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.33)
 # Database: buried_points_server
-# Generation Time: 2021-04-02 01:54:53 +0000
+# Generation Time: 2021-04-02 09:28:52 +0000
 # ************************************************************
 
 
@@ -130,6 +130,24 @@ VALUES
 UNLOCK TABLES;
 
 
+# Dump of table sys_role
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `sys_role`;
+
+CREATE TABLE `sys_role` (
+  `role_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(64) NOT NULL DEFAULT '',
+  `role_alias` varchar(64) NOT NULL DEFAULT '',
+  `routes_conf` tinyint(2) unsigned NOT NULL DEFAULT '0',
+  `description` text NOT NULL,
+  `created_at` int(11) NOT NULL DEFAULT '0',
+  `updated_at` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
 # Dump of table sys_tag
 # ------------------------------------------------------------
 
@@ -153,9 +171,39 @@ INSERT INTO `sys_tag` (`tag_id`, `tag_name`, `tag_key`, `description`, `status`,
 VALUES
 	(1,'用户PV','field_pv','',0,0,0),
 	(2,'用户UV','field_uv','',0,0,0),
-	(3,'加购','field_join','',0,0,0);
+	(3,'bb','aa','cc',0,0,0),
+	(4,'gg','eee','hh',0,0,0);
 
 /*!40000 ALTER TABLE `sys_tag` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table sys_user
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `sys_user`;
+
+CREATE TABLE `sys_user` (
+  `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `mobile` varchar(64) NOT NULL DEFAULT '',
+  `password` varchar(64) NOT NULL DEFAULT '',
+  `role_id` tinyint(4) NOT NULL DEFAULT '0',
+  `status` tinyint(2) unsigned NOT NULL DEFAULT '0',
+  `description` text NOT NULL,
+  `token` varchar(32) NOT NULL DEFAULT '',
+  `created_at` int(11) NOT NULL DEFAULT '0',
+  `updated_at` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `sys_user` WRITE;
+/*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
+
+INSERT INTO `sys_user` (`user_id`, `mobile`, `password`, `role_id`, `status`, `description`, `token`, `created_at`, `updated_at`)
+VALUES
+	(1,'17611220968','63ee451939ed580ef3c4b6f0109d1fd0',0,0,'','a62082e0729c37dca0c93546f7831362',0,0);
+
+/*!40000 ALTER TABLE `sys_user` ENABLE KEYS */;
 UNLOCK TABLES;
 
 

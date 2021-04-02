@@ -8,8 +8,7 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 // app/controller/tag.js
-class SysTagController extends Controller {
-
+class TagController extends Controller {
   async index() {
     const ctx = this.ctx;    
     ctx.body = {
@@ -51,7 +50,7 @@ class SysTagController extends Controller {
     const ctx = this.ctx;    
     
     const page = ctx.query.page || 1;
-    const page_size = 10;
+    const page_size = 2;
 
     let options = {
       order:[["tag_id","desc"]],
@@ -69,7 +68,7 @@ class SysTagController extends Controller {
     //处理查询
     filters && Object.keys(filters).forEach(field => {
       switch(field){
-        case 'tag_name':
+        case 'title':
           options.where[field] = { 
             [Op.like]:'%' +filters[field] + '%'
           };
@@ -80,8 +79,8 @@ class SysTagController extends Controller {
       }
     })
 
-    const sysTags = await ctx.model.SysTag.findAndCountAll(options);
-    const { rows, count } = sysTags;
+    const tags = await ctx.model.Tag.findAndCountAll(options);
+    const { rows, count } = tags;
 
     ctx.body = ctx.helper.apiResponse(200, 'success', { 
       page,
@@ -95,7 +94,7 @@ class SysTagController extends Controller {
     const ctx = this.ctx;    
     const tag_id = ctx.query.tag_id;
 
-    let tag = await ctx.model.SysTag.findByPk(tag_id);
+    let tag = await ctx.model.Tag.findByPk(tag_id);
         tag.tag_conf = JSON.parse(tag.tag_conf);
         
     ctx.body = ctx.helper.apiResponse(200, 'success', tag);
@@ -110,40 +109,34 @@ class SysTagController extends Controller {
       tag_conf: JSON.stringify(body.tag_conf)
     };
 
-    ctx.body = ctx.helper.apiResponse(200, 'sucess');
-  }
-
-  async detail() {
-    const ctx = this.ctx;
-    const sysTag_id = ctx.query.id;
-    const articleInfo = await ctx.service.sysTag.findOne({
-      tag_id: sysTag_id,
-    });
-
-    ctx.body = ctx.helper.apiResponse(200, 'sucess', articleInfo);
+    const res = await ctx.model.Tag.create(data);
+    ctx.body = ctx.helper.apiResponse(200, 'success');
   }
 
   async update() {
     const ctx = this.ctx;
-    const id = ctx.query.id;
-    const body = this.ctx.request.body;
-    console.log('body: ', body);
+    const tag_id = ctx.query.tag_id;
+    const body = ctx.request.body;
+    
+    const data = {
+      ...body, 
+      tag_conf: JSON.stringify(body.tag_conf)
+    };
 
-    const res = await ctx.service.sysTag.update(body.data, {
-      tag_id: id
-    });
-
-    ctx.body = ctx.helper.apiResponse(200, 'sucess');
+    const tag = await ctx.model.Tag.findByPk(tag_id);
+    await tag.update(data);
+    ctx.body = ctx.helper.apiResponse(200, 'success', data);
   }
 
   async delete() {
     const ctx = this.ctx;
     const tag_id = ctx.query.tag_id;
-    const tag = await ctx.model.SysTag.findByPk(tag_id);
+    const tag = await ctx.model.Tag.findByPk(tag_id);
     await tag.destroy();
     ctx.body = ctx.helper.apiResponse(200, 'success');
   }
 
 }
 
-module.exports = SysTagController;
+module.exports = TagController;
+

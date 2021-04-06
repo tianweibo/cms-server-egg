@@ -1,9 +1,0 @@
-2021-02-23 09:07:05,782 INFO 564 [Timer] D:\WorkSpace\buried-points-server\node_modules\egg-logrotator\app\schedule\clean_log.js next time will execute after 53574430ms at 2021-02-24 00:00:00.211
-2021-02-23 09:07:05,794 INFO 564 [Timer] D:\WorkSpace\buried-points-server\node_modules\egg-logrotator\app\schedule\rotate_by_file.js next time will execute after 53575212ms at 2021-02-24 00:00:01.002
-2021-02-23 09:07:05,798 INFO 564 [Timer] D:\WorkSpace\buried-points-server\node_modules\egg-multipart\app\schedule\clean_tmpdir.js next time will execute after 69774205ms at 2021-02-24 04:30:00.003
-2021-02-23 09:07:15,284 INFO 21020 [Job#161404242554611206582114339004] D:\WorkSpace\buried-points-server\node_modules\egg-logrotator\app\schedule\clean_log.js executing by app
-2021-02-23 09:07:15,305 INFO 21020 [Job#161404242578611206584472194004] D:\WorkSpace\buried-points-server\node_modules\egg-logrotator\app\schedule\rotate_by_file.js executing by app
-2021-02-23 09:07:15,319 INFO 21020 [Job#161404242579411206584550768994] D:\WorkSpace\buried-points-server\node_modules\egg-multipart\app\schedule\clean_tmpdir.js executing by app
-2021-02-23 09:07:15,342 INFO 21020 [Job#161404242554611206582114339004] D:\WorkSpace\buried-points-server\node_modules\egg-logrotator\app\schedule\clean_log.js execute succeed, used 46ms. 
-2021-02-23 09:07:15,419 INFO 21020 [Job#161404242579411206584550768994] D:\WorkSpace\buried-points-server\node_modules\egg-multipart\app\schedule\clean_tmpdir.js execute succeed, used 100ms. 
-2021-02-23 09:07:15,425 INFO 21020 [Job#161404242578611206584472194004] D:\WorkSpace\buried-points-server\node_modules\egg-logrotator\app\schedule\rotate_by_file.js execute succeed, used 120ms. 

@@ -30,9 +30,9 @@
     "node": ">=10.0.0"
   },
   "scripts": {
-    "start:docker": "egg-scripts start --env=prod --title=egg-server-prod",
     "start": "egg-scripts start --daemon --title=egg-server",
-    "stop": "egg-scripts stop --title=egg-server-test",
+    "start:docker": "egg-scripts start --title=egg-server --env=prod",
+    "stop": "egg-scripts stop --title=egg-server",
     "dev": "egg-bin dev --env=dev",
     "test": "egg-bin dev --env=test",
     "debug": "egg-bin debug",

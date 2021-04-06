@@ -3,4 +3,3 @@
 /logs/*
 .github/
 package-lock.json
-config/config.default.js

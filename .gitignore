@@ -1,0 +1,5 @@
+*node_modules/*
+/run/*
+/logs/*
+.github/
+package-lock.json

@@ -16,11 +16,27 @@ class ReportController extends Controller {
     const page = ctx.query.page || 1;
     const page_size = 10;
 
+    // console.log('==ctx.model.Activity==', ctx.model.Activity);
+
+    const ReportHasOneActivity = ctx.model.Report.hasOne(ctx.model.Activity, { 
+      // 最外部的作用域就定义一下这个映射关系，这样运行周期里只会执行一次
+      foreignKey: 'activity_id',
+      sourceKey: 'activity_id',
+      // as: 'activityInfo',
+      distinct: true
+    });
+
+    // console.log('==ReportHasOneActivity==', ReportHasOneActivity);
+   
     let options = {
       order:[["report_id","desc"]],
       limit: page_size, // 返回数据量
       offset: (page - 1) * page_size, // 数据偏移量
-      where: {}
+      where: {},
+      include: [{
+        association: ReportHasOneActivity // 这里再传入他，这个对象只是类似一个工厂函数，实际查询的时候findAll会找到最新的结果
+      }],
+      distinct: true
     };
 
     let { filters } = ctx.query;

@@ -80,11 +80,6 @@ module.exports = appInfo => {
     },
   };
 
-  config.api = {
-    pageSize: 5,
-    serverUrl: 'http://39.98.134.148:30002',
-  };
-
   config.cors = {
     origin:'*',
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'

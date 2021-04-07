@@ -59,7 +59,23 @@ class ActivityController extends Controller {
   }
 
   async list() {
+    const ctx = this.ctx;    
     
+    let options = {
+      attributes:['activity_id','title','tag_conf','created_at'],
+      order:[["activity_id","desc"]],
+      where: {}
+    };
+
+    const activities = await ctx.model.Activity.findAll(options);
+
+    activities.forEach((item)=>{
+      item.tag_conf = JSON.parse(item.tag_conf);
+    })
+
+    ctx.body = ctx.helper.apiResponse(200, 'success', { 
+      list: activities,
+    });
   }
 
   async detail() {
@@ -67,6 +83,8 @@ class ActivityController extends Controller {
     const activity_id = ctx.query.activity_id;
 
     let activity = await ctx.model.Activity.findByPk(activity_id);
+    console.log('activity')
+    console.log(activity)
         activity.tag_conf = JSON.parse(activity.tag_conf);
         
     ctx.body = ctx.helper.apiResponse(200, 'success', activity);

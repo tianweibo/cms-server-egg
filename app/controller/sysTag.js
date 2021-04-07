@@ -58,7 +58,7 @@
       const ctx = this.ctx;    
       
       let options = {
-        attributes:['tag_key','tag_name', 'description'],
+        attributes:['tag_id','tag_key','tag_name', 'description'],
         order:[["tag_id","desc"]],
         where: {}
       };

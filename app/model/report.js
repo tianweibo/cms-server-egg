@@ -8,6 +8,7 @@
         primaryKey: true, 
         autoIncrement: true 
       },
+      activity_id: INTEGER,
       title: STRING(64),
       tag_conf: STRING,
       description: STRING,
@@ -21,6 +22,14 @@
         defaultValue: Date.now()
       }
     });
+
+    Report.associate = function (){
+      // 与Activity存在一对多关系，所以是hasOne()
+      app.model.Report.hasOne(app.model.Activity, {
+        foreignKey: 'activity_id', 
+        sourceKey:'activity_id'
+      });
+    }
   
     return Report;
   };

@@ -37,7 +37,7 @@ node {
 
            //定义部署机器
            def deployNodes = [
-             'test': ['172.16.0.127'],
+             'prod': ['172.16.0.127'],
            ]
            def node = []
            if(deploy_env in deployNodes) {

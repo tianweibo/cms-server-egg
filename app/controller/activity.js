@@ -92,10 +92,23 @@ class ActivityController extends Controller {
 
   async create() {
     const ctx = this.ctx;
-    const body = ctx.request.body;
+
+    const {
+      project_id,
+      title,
+      start_date,
+      end_date,
+      tag_conf,
+      description,
+    } = ctx.request.body;
 
     const data = {
-      ...body, 
+      project_id,
+      title,
+      start_date,
+      end_date,
+      tag_conf,
+      description,
       tag_conf: JSON.stringify(body.tag_conf)
     };
 
@@ -108,8 +121,22 @@ class ActivityController extends Controller {
     const activity_id = ctx.query.activity_id;
     const body = ctx.request.body;
     
+    const {
+      project_id,
+      title,
+      start_date,
+      end_date,
+      tag_conf,
+      description,
+    } = ctx.request.body;
+
     const data = {
-      ...body, 
+      project_id,
+      title,
+      start_date,
+      end_date,
+      tag_conf,
+      description,
       tag_conf: JSON.stringify(body.tag_conf)
     };
 

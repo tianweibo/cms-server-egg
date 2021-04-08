@@ -33,15 +33,15 @@ module.exports = app => {
   router.get('/activity/index', controller.activity.index);
   router.get('/activity/list', controller.activity.list);
   router.get('/activity/detail', controller.activity.detail);
-  router.get('/activity/create', controller.activity.create);
-  router.get('/activity/update', controller.activity.update);
-  router.get('/activity/delete', controller.activity.delete);
+  router.post('/activity/create', controller.activity.create);
+  router.post('/activity/update', controller.activity.update);
+  router.post('/activity/delete', controller.activity.delete);
 
   router.get('/report/index', controller.report.index);
   router.get('/report/list', controller.report.list);
   router.get('/report/detail', controller.report.detail);
-  router.get('/report/create', controller.report.create);
-  router.get('/report/update', controller.report.update);
-  router.get('/report/delete', controller.report.delete);
+  router.post('/report/create', controller.report.create);
+  router.post('/report/update', controller.report.update);
+  router.post('/report/delete', controller.report.delete);
 
 };

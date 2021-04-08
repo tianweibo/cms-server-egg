@@ -118,10 +118,9 @@ class ActivityController extends Controller {
 
   async update() {
     const ctx = this.ctx;
-    const activity_id = ctx.query.activity_id;
-    const body = ctx.request.body;
     
     const {
+      activity_id,
       project_id,
       title,
       start_date,
@@ -137,7 +136,7 @@ class ActivityController extends Controller {
       end_date,
       tag_conf,
       description,
-      tag_conf: JSON.stringify(body.tag_conf)
+      tag_conf: JSON.stringify(tag_conf)
     };
 
     const activity = await ctx.model.Activity.findByPk(activity_id);

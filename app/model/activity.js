@@ -11,8 +11,8 @@
       title: STRING(64),
       tag_conf: STRING,
       description: STRING,
-      start_date: INTEGER,
-      end_date: INTEGER,
+      start_date: STRING(32),
+      end_date: STRING(32),
       status: INTEGER,
       project_id: INTEGER,
       // created_at: {

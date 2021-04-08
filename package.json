@@ -34,6 +34,7 @@
     "start:docker": "egg-scripts start --title=egg-server --env=prod",
     "stop": "egg-scripts stop --title=egg-server",
     "dev": "egg-bin dev --env=dev",
+    "local": "egg-bin dev",
     "test": "egg-bin dev --env=test",
     "debug": "egg-bin debug",
     "test-local": "egg-bin test",

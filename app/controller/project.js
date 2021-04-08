@@ -113,9 +113,9 @@ class ProjectController extends Controller {
 
   async update() {
     const ctx = this.ctx;
-    const project_id = ctx.query.project_id;
 
     const {
+      project_id,
       title,
       tag_conf,
       description,
@@ -125,10 +125,10 @@ class ProjectController extends Controller {
 
     const data = {
       title,
-      // description,
-      // start_date,
-      // end_date,
-      // tag_conf: JSON.stringify(tag_conf)
+      description,
+      start_date,
+      end_date,
+      tag_conf: JSON.stringify(tag_conf)
     };
 
     const project = await ctx.model.Project.findByPk(project_id);

@@ -32,7 +32,7 @@
       //处理查询
       filters && Object.keys(filters).forEach(field => {
         switch(field){
-          case 'title':
+          case 'tag_name':
             options.where[field] = { 
               [Op.like]:'%' +filters[field] + '%'
             };
@@ -93,12 +93,18 @@
   
     async update() {
       const ctx = this.ctx;
-      const tag_id = ctx.query.tag_id;
-      const body = ctx.request.body;
+
+      const {
+        tag_id,
+        tag_name,
+        tag_key,
+        description,
+      } = ctx.request.body;
       
       const data = {
-        ...body, 
-        tag_conf: JSON.stringify(body.tag_conf)
+        tag_name,
+        tag_key,
+        description,
       };
   
       const tag = await ctx.model.SysTag.findByPk(tag_id);

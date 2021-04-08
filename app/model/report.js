@@ -13,14 +13,14 @@
       tag_conf: STRING,
       description: STRING,
       status: INTEGER,
-      created_at: {
-        type: DATE,
-        defaultValue: Date.now()
-      },
-      updated_at: {
-        type: DATE,
-        defaultValue: Date.now()
-      }
+      // created_at: {
+      //   type: DATE,
+      //   defaultValue: Date.now()
+      // },
+      // updated_at: {
+      //   type: DATE,
+      //   defaultValue: Date.now()
+      // }
     });
 
     Report.associate = function (){

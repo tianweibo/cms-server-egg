@@ -12,8 +12,8 @@
       tag_key: STRING(64),
       description: STRING,
       status: INTEGER,
-      created_at: STRING(64),
-      updated_at: STRING(64),
+      // created_at: STRING(64),
+      // updated_at: STRING(64),
     });
   
     return SysTag;

@@ -90,11 +90,21 @@ class ProjectController extends Controller {
 
   async create() {
     const ctx = this.ctx;
-    const body = ctx.request.body;
+
+    const {
+      title,
+      tag_conf,
+      description,
+      start_date,
+      end_date,
+    } = ctx.request.body;
 
     const data = {
-      ...body, 
-      tag_conf: JSON.stringify(body.tag_conf)
+      title,
+      description,
+      start_date,
+      end_date,
+      tag_conf: JSON.stringify(tag_conf)
     };
 
     const res = await ctx.model.Project.create(data);
@@ -104,11 +114,21 @@ class ProjectController extends Controller {
   async update() {
     const ctx = this.ctx;
     const project_id = ctx.query.project_id;
-    const body = ctx.request.body;
-    
+
+    const {
+      title,
+      tag_conf,
+      description,
+      start_date,
+      end_date,
+    } = ctx.request.body;
+
     const data = {
-      ...body, 
-      tag_conf: JSON.stringify(body.tag_conf)
+      title,
+      // description,
+      // start_date,
+      // end_date,
+      // tag_conf: JSON.stringify(tag_conf)
     };
 
     const project = await ctx.model.Project.findByPk(project_id);

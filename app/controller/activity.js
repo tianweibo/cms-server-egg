@@ -109,7 +109,7 @@ class ActivityController extends Controller {
       end_date,
       tag_conf,
       description,
-      tag_conf: JSON.stringify(body.tag_conf)
+      tag_conf: JSON.stringify(tag_conf)
     };
 
     const res = await ctx.model.Activity.create(data);

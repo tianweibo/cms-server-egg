@@ -12,13 +12,15 @@ module.exports = appInfo => {
    **/
   const config = exports = {};
 
+  // console.log('==process.env==', process.env);
+
   // config.sequelize = {
   //   dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
   //   database: 'buried_points_server',
-  //   host: 'rm-k2jq4d1297g80t326.mysql.zhangbei.rds.aliyuncs.com',
+  //   host: '127.0.0.1',
   //   port: 3306,
-  //   username: 'prod',
-  //   password: 'Prodc959ed5e61ce4451803Enbrands',
+  //   username: 'root',
+  //   password: 'root',
   //   delegate: 'model',
   //   baseDir: 'model',
   //   define: {

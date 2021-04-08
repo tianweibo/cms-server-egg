@@ -14,8 +14,8 @@
       status: INTEGER,
       description: STRING,
       token: STRING(32),
-      created_at: STRING(64),
-      updated_at: STRING(64),
+      // created_at: STRING(64),
+      // updated_at: STRING(64),
     });
 
     return User;

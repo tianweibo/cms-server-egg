@@ -14,14 +14,14 @@
       start_date: INTEGER,
       end_date: INTEGER,
       status: INTEGER,
-      created_at: {
-        type: DATE,
-        defaultValue: Date.now()
-      },
-      updated_at: {
-        type: DATE,
-        defaultValue: Date.now()
-      }
+      // created_at: {
+      //   type: DATE,
+      //   defaultValue: Date.now()
+      // },
+      // updated_at: {
+      //   type: DATE,
+      //   defaultValue: Date.now()
+      // }
     });
   
     return Project;

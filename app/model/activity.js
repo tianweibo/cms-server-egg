@@ -15,14 +15,14 @@
       end_date: INTEGER,
       status: INTEGER,
       project_id: INTEGER,
-      created_at: {
-        type: DATE,
-        defaultValue: Date.now()
-      },
-      updated_at: {
-        type: DATE,
-        defaultValue: Date.now()
-      }
+      // created_at: {
+      //   type: DATE,
+      //   defaultValue: Date.now()
+      // },
+      // updated_at: {
+      //   type: DATE,
+      //   defaultValue: Date.now()
+      // }
     });
   
     return Activity;

@@ -90,11 +90,19 @@ class ReportController extends Controller {
 
   async create() {
     const ctx = this.ctx;
-    const body = ctx.request.body;
+
+    const {
+      activity_id,
+      title,
+      tag_conf,
+      description,
+    } = ctx.request.body;
 
     const data = {
-      ...body, 
-      tag_conf: JSON.stringify(body.tag_conf)
+      activity_id,
+      title,
+      description,
+      tag_conf: JSON.stringify(tag_conf)
     };
 
     const res = await ctx.model.Report.create(data);
@@ -104,11 +112,19 @@ class ReportController extends Controller {
   async update() {
     const ctx = this.ctx;
     const report_id = ctx.query.report_id;
-    const body = ctx.request.body;
-    
+
+    const {
+      activity_id,
+      title,
+      tag_conf,
+      description,
+    } = ctx.request.body;
+
     const data = {
-      ...body, 
-      tag_conf: JSON.stringify(body.tag_conf)
+      activity_id,
+      title,
+      description,
+      tag_conf: JSON.stringify(tag_conf)
     };
 
     const report = await ctx.model.Report.findByPk(report_id);

@@ -111,9 +111,9 @@ class ReportController extends Controller {
 
   async update() {
     const ctx = this.ctx;
-    const report_id = ctx.query.report_id;
 
     const {
+      report_id,
       activity_id,
       title,
       tag_conf,

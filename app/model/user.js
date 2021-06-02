@@ -1,23 +1,71 @@
-// app/model/sysTag.js
-  module.exports = app => {
-    const { STRING, INTEGER, DATE } = app.Sequelize;
-  
-    const User = app.model.define('sys_user', {
-      user_id: { 
-        type: INTEGER, 
-        primaryKey: true, 
-        autoIncrement: true 
-      },
-      mobile: STRING(64),
-      password: STRING(64),
-      role_id: INTEGER,
-      status: INTEGER,
-      description: STRING,
-      token: STRING(32),
-      // created_at: STRING(64),
-      // updated_at: STRING(64),
-    });
-
-    return User;
-  };
-  
+const  moment =require('moment');
+const  crypto =require('crypto');
+module.exports=app=>{
+	const {STRING,INTEGER,DATE}=app.Sequelize;
+	const user=app.model.define('user',{
+		id:{
+			type:INTEGER,
+			primaryKey:true,
+			autoIncrement:true,
+		},
+		username:{
+			type:STRING,
+		},
+		realname:{
+			type:STRING,
+		},
+		password:{
+			type:STRING(200),
+			set:function(password){
+				var pas=crypto.createHash('md5').update(Buffer.from(password,'base64').toString()).digest('hex').toUpperCase();
+				this.setDataValue("password", pas);
+			},
+			get:function(){
+				return this.getDataValue('password')
+			}
+		},
+		avatar:{
+			type:STRING,
+		},
+		phone:{
+			type:STRING,
+		},
+		role:{defaultValue:1,type:INTEGER(11)},
+		status:{defaultValue:1,type:INTEGER(11)},
+		created_at:{
+			type:DATE,
+			get(){
+				return moment(this.getDataValue('created_at')).format(
+					'YYYY-MM-DD HH:MM:SS'
+				);
+			}
+		},
+		updated_at:{
+			type:DATE,
+			get(){
+				return moment(this.getDataValue('created_at')).format(
+					'YYYY-MM-DD HH:MM:SS'
+				);
+			}
+		},
+		remark:{
+			type:STRING
+		}
+	},{
+		freezeTableName: true, // 使用数据库里的真实表名
+		underscored: true, // 不使用下划线
+		tableName:'user'
+	});
+	user.prototype.validPassword = function (password) {
+		//密码验证
+        let deBase64 = Buffer.from(password, 'base64').toString();
+        var md5 = crypto.createHash('md5');
+		let userpass = md5.update(deBase64).digest('hex').toUpperCase();
+		console.log(userpass,'userpass')
+        return this.password === userpass; 
+    }
+	user.associate=function(){
+       
+	};
+	return user;
+}

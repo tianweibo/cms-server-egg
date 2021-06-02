@@ -11,16 +11,20 @@ module.exports = appInfo => {
    * @type {Egg.EggAppConfig}
    **/
   const config = exports = {};
-
+  config.middleware = ['error'];
+  config.error = {
+    // 这里使用appInfo.env来判断环境，仅仅在非生产环境下打开堆栈信息，用于调试
+    postFormat: (e, { stack, ...rest}) => appInfo.env === 'prod' ? rest: { stack, ...rest}
+	}
   // console.log('==process.env==', process.env);
 
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
-    database: 'buried_points_server',
+    database: 'baseform',
     host: '127.0.0.1',
     port: 3306,
     username: 'root',
-    password: 'root',
+    password: '314159',
     delegate: 'model',
     baseDir: 'model',
     define: {
@@ -33,7 +37,9 @@ module.exports = appInfo => {
       timezone: '+08:00' // 保存为本地时区
     }
   };
-
+  config.jwt={
+    cert: 'twb' // jwt秘钥
+  };
   // config.mysql = {
   //   // 单数据库信息配置
   //   client: {

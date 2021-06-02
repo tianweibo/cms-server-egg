@@ -15,7 +15,13 @@ module.exports = {
     enable: true,
     package: 'egg-sequelize'
   },
-  
+  validate:{
+		package: "egg-validate"
+	},
+  uuid: {
+		enable: true,
+		package: 'uuid',
+	},
   // mysql: {
   //   enable: true,
   //   package: 'egg-mysql',

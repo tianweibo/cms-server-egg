@@ -1,4 +1,4 @@
-// This file is created by egg-ts-helper@1.25.8
+// This file is created by egg-ts-helper@1.25.9
 // Do not modify this file!!!!!!!!!
 
 import 'egg';
@@ -16,6 +16,8 @@ import 'egg-jsonp';
 import 'egg-view';
 import 'egg-view-nunjucks';
 import 'egg-sequelize';
+import 'egg-validate';
+import 'uuid';
 import 'egg-cors';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
@@ -34,6 +36,8 @@ declare module 'egg' {
     view?: EggPluginItem;
     nunjucks?: EggPluginItem;
     sequelize?: EggPluginItem;
+    validate?: EggPluginItem;
+    uuid?: EggPluginItem;
     cors?: EggPluginItem;
   }
 }

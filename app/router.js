@@ -1,47 +1,29 @@
-'use strict';
 
-/**
- * @param {Egg.Application} app - egg application
- */
 module.exports = app => {
-  const { router, controller } = app;
+  const { router, controller ,swagger} = app;
+  const path = require('path');
+  //const Auth = app.middleware.auth()
+  // 加载所有的校验规则
+  const directory = path.join(app.config.baseDir, 'app/validate');
+  app.loader.loadToApp(directory, 'validate');
+  const { Auth} = require('./middleware/authClass')
+  console.log(app.config.env,'app.config')
+  //if(app.config.env==='dev'){
+    app.beforeStart(async ()=>{     //定义模型
+      await app.model.sync({alter:true});
+    })  
+  //} 
   router.get('/', controller.home.index);
+  router.post('/api/user/login',controller.user.login);//系统登录-done
+  router.post('/api/user/create',controller.user.create);//创建用户
+  //router.post('/api/user/list',Auth,controller.user.list);// 用户列表获取
+  router.post('/api/user/list',new Auth(1).check,controller.user.list);// 用户列表获取
+  router.get('/api/user/loginOut',controller.user.loginOut);// 用户退出
+  router.get('/api/user/isLogin',controller.user.isLogin);// 是否登录
 
-  router.post('/user/login', controller.user.login);
-  router.post('/user/loginOut', controller.user.loginOut);
-  router.get('/user/index', controller.user.index);
-  router.get('/user/list', controller.user.list);
-  router.get('/user/detail', controller.user.detail);
-  router.post('/user/create', controller.user.create);
-  router.post('/user/update', controller.user.update);
-  router.post('/user/delete', controller.user.delete);
-
-  router.get('/sys-tag/index', controller.sysTag.index);
-  router.get('/sys-tag/list', controller.sysTag.list);
-  router.get('/sys-tag/detail', controller.sysTag.detail);
-  router.post('/sys-tag/create', controller.sysTag.create);
-  router.post('/sys-tag/update', controller.sysTag.update);
-  router.post('/sys-tag/delete', controller.sysTag.delete);
-
-  router.get('/project/index', controller.project.index);
-  router.get('/project/list', controller.project.list);
-  router.get('/project/detail', controller.project.detail);
-  router.post('/project/create', controller.project.create);
-  router.post('/project/update', controller.project.update);
-  router.post('/project/delete', controller.project.delete);
-
-  router.get('/activity/index', controller.activity.index);
-  router.get('/activity/list', controller.activity.list);
-  router.get('/activity/detail', controller.activity.detail);
-  router.post('/activity/create', controller.activity.create);
-  router.post('/activity/update', controller.activity.update);
-  router.post('/activity/delete', controller.activity.delete);
-
-  router.get('/report/index', controller.report.index);
-  router.get('/report/list', controller.report.list);
-  router.get('/report/detail', controller.report.detail);
-  router.post('/report/create', controller.report.create);
-  router.post('/report/update', controller.report.update);
-  router.post('/report/delete', controller.report.delete);
-
+  //事件
+  //属性
+  //指标
+  //产品
+  //公共数据的获取
 };

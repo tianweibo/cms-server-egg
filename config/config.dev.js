@@ -2,11 +2,11 @@
 
 exports.sequelize = {
   dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
-  database: 'baseform',
+  database: 'buried_points_server',
   host: '127.0.0.1',
   port: 3306,
   username: 'root',
-  password: '314159',
+  password: 'woainia123',
   delegate: 'model',
   baseDir: 'model',
   define: {

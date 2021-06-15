@@ -4,10 +4,10 @@ module.exports=app=>{
 	const attribute=app.model.define('attribute',{
 		attribute_id:{type:INTEGER,primaryKey:true,autoIncrement:true},
 		attribute_name:{type:STRING(20),comment:"属性名称"},            
-		attribute_type:{type:INTEGER(20),comment:'属性代码'},     
-		data_type:{type:INTEGER(20),comment:'数据类型'},
+		attribute_code:{type:STRING(20),comment:'属性代码'},     
+		data_type:{type:STRING(20),comment:'数据类型'},
 		desc:{type:STRING(20),comment:'单位格式说明'},               
-		attribute_source:{type:INTEGER(20),comment:'属性来源'},        
+		attribute_source:{type:STRING(20),comment:'属性来源'},        
         attribute_label:{type:STRING(20),comment:'属性标签'},          
 		note:{type:STRING,comment:'备注'},                     
 		create_time:{

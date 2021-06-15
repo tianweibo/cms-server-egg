@@ -16,7 +16,6 @@ module.exports = appInfo => {
     // 这里使用appInfo.env来判断环境，仅仅在非生产环境下打开堆栈信息，用于调试
     postFormat: (e, { stack, ...rest}) => appInfo.env === 'prod' ? rest: { stack, ...rest}
 	}
-  // console.log('==process.env==', process.env);
 
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
@@ -79,7 +78,27 @@ module.exports = appInfo => {
     },
     domainWhiteList: ['*']
  }
-
+ config.multipart = {
+  fileSize: "4gb",
+  mode: 'file', // 文件模式
+  whitelist: ['.xlsx'], // 文件类型白名单
+  fileExtensions: [
+    ".csv",
+    ".zip",
+    ".geojson",
+    ".json",
+    ".mbtiles",
+    ".ttf",
+    ".otf",
+    ".xlsx"
+  ]
+}
+const baseDir = "data/import"
+  config.dataPath = {
+    Event: baseDir + "/Event",
+    //Dw: baseDir + "/Dw",
+    //Cd: baseDir + "/Cd"
+  }
   // 添加 view 配置
   config.view = {
     defaultViewEngine: 'nunjucks',

@@ -4,9 +4,11 @@ module.exports=app=>{
 		fid:STRING(20),
         id:{type:INTEGER,primaryKey:true,autoIncrement:true},
         fname:STRING(20),
-		key:STRING(20),
+		label:STRING(20),
         value:STRING(20),
-		state:{defaultValue:1,type:INTEGER(11)},
+		children:TEXT,
+		state:{defaultValue:1,type:INTEGER(2)},
+		is_lower:{defaultValue:1,type:INTEGER(2)},
 		bz:STRING
 	}, {
 		underscored: true,

@@ -1,9 +1,11 @@
 const  moment =require('moment');
+const sd = require('silly-datetime');
+//var updatetimes = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
 module.exports=app=>{
     const {STRING,INTEGER,DATE,TEXT}=app.Sequelize;
 	const event=app.model.define('event',{
 		event_id:{type:INTEGER,primaryKey:true,autoIncrement:true},
-		event_name:{type:STRING(255),unique: true,comment:'事件名称'},            
+		event_name:{type:STRING(255),comment:'事件名称'},            
         event_code:{type:STRING(255),comment:'事件代码'},            
 		event_trigger_mode:{type:STRING(255),comment:'触发类型'},         
 		trigger_time:{type:STRING(255),comment:'触发时机'},          
@@ -18,9 +20,29 @@ module.exports=app=>{
 				);
 			}
 		},
+		update_time:{
+			type:DATE,
+			get(){
+				return moment(this.getDataValue('create_time')).format(
+					'YYYY-MM-DD HH:MM:SS'
+				);
+			},
+			defaultValue(){
+				var sj = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+				return sj
+			}
+		},
+		update_people:{
+			type:STRING(255),
+			comment:'更新人'
+		},
+		create_people:{
+			type:STRING(255),comment:'创建人'
+		},
 		state:{defaultValue:1,type:INTEGER(6)},
 	}, {
         timestamps: false,
+		updatedAt:'update_time',
 		underscored: true,
 		freezeTableName: true,
 		tableName: 'event',

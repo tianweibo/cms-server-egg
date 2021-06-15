@@ -12,10 +12,10 @@ module.exports=app=>{
 		defaultValue:uuidv4().replace(/-/g, '')
 	    },  */
 		application_id:{type:INTEGER,primaryKey:true,autoIncrement:true},
-		application_name:{type:STRING(20),comment: '应用名称'},
-		application_code:{type:STRING(20),comment:'应用代码'},          
-		application_version:{type:STRING(20),comment:'应用版本'},       
-		application_platform:{type:STRING(20),comment:'应用平台'},     
+		platform_app:{type:STRING(20),comment: '应用名称'},
+		platform_app_code:{type:STRING(20),comment:'应用代码'},          
+		platform_app_version:{type:STRING(20),comment:'应用版本'},       
+		platform_business:{type:STRING(20),comment:'应用平台'},     
 		application_dep_platform:{type:STRING(20),comment:'应用部署平台'},  
 		application_type:{type:STRING(20),comment:'应用类型'},  
 		application_label:{type:STRING(20),comment:'应用标签'}, 

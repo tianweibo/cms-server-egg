@@ -58,7 +58,7 @@ class Application extends Service {
   async create(app) {  
 	const hasApp=await this.Application.findOne({
 		where:{
-			application_code:app.info.application_code
+			platform_app_code:app.info.platform_app_code
 		}
 	})
 	if(hasApp==null){
@@ -201,9 +201,9 @@ class Application extends Service {
 			application_label:obj.application_label,
 		})
     }
-    if(obj.application_platform){
+    if(obj.platform_business){
         arr.push({
-			application_platform:obj.application_platform,
+			platform_business:obj.platform_business,
 		})
     }
     arr.push({
@@ -211,9 +211,9 @@ class Application extends Service {
     })
 	var objOption={
         [Op.or]:[{
-			application_name:{[Op.like]:`%${obj.keyword}%`}
+			platform_app:{[Op.like]:`%${obj.keyword}%`}
 		},{
-			application_code:{[Op.like]:`%${obj.keyword}%`}
+			platform_app_code:{[Op.like]:`%${obj.keyword}%`}
 		}],
         [Op.and]:arr
 	}

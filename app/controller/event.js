@@ -8,6 +8,7 @@ class EventController extends Controller {
 	this.Event=ctx.service.event;
     this.EventM=ctx.model.Event;
     this.BasicData=ctx.model.BasicData;
+    this.Attribute=ctx.model.Attribute;
    }
     async list(){
 	  const ctx=this.ctx;
@@ -41,6 +42,7 @@ class EventController extends Controller {
         const response=await this.Event.delete(ctx.helper.parseInt(ctx.query.id));
         ctx.body=response;
     }
+   
     async importEvent() {
 	// 获取文件对象
    // const ctx=this.ctx;
@@ -67,12 +69,19 @@ class EventController extends Controller {
       for(var i=0;i<arr1.length;i++){
         eventLabelList[arr1[i].label]=arr1[i].value
       }
+      //属性 
+      var generalAttr={}
+      var arr2=await this.Attribute.findAll({attributes:['attribute_name','attribute_code']});
+      for(var i=0;i<arr2.length;i++){
+        generalAttr[arr2[i].attribute_name]=arr2[i].attribute_code
+      }
       const rowTransform = (row) => ({
         ...row,
-       general_attr: row.general_attr.toString(),
-       event_label:eventLabelList[row.event_label],
-       event_trigger_mode:triggerMode[row.event_trigger_mode]
-        //userGroups: row.userGroups ? row.userGroups.split(/,|，/) : [],
+       //general_attr: row.general_attr.toString(),
+       //event_label:eventLabelList[row.event_label],
+       event_label:ctx.helper.dealMulValue(row.event_label,eventLabelList),
+       event_trigger_mode:triggerMode[row.event_trigger_mode],
+       general_attr:ctx.helper.dealMulValue(row.general_attr,generalAttr)
       });
       //event_code 的唯一性判定
       const Op = app.Sequelize.Op;

@@ -26,6 +26,7 @@ module.exports = appInfo => {
     password: '314159',
     delegate: 'model',
     baseDir: 'model',
+    timezone: '+08:00', // 保存为本地时区
     define: {
       // raw: true,
       underscored: true,
@@ -81,7 +82,7 @@ module.exports = appInfo => {
  config.multipart = {
   fileSize: "4gb",
   mode: 'file', // 文件模式
-  whitelist: ['.xlsx'], // 文件类型白名单
+  whitelist: ['.xlsx','.xlsm'], // 文件类型白名单
   fileExtensions: [
     ".csv",
     ".zip",
@@ -90,7 +91,8 @@ module.exports = appInfo => {
     ".mbtiles",
     ".ttf",
     ".otf",
-    ".xlsx"
+    ".xlsx",
+    '.xlsm'
   ]
 }
 const baseDir = "data/import"

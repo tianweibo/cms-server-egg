@@ -88,6 +88,11 @@ class Attribute extends Service {
 			data_type:obj.data_type,
 		})
     }
+	if(obj.is_common){
+        arr.push({
+			is_common:obj.is_common,
+		})
+    }
 	var objOption={
         [Op.or]:[{
 			attribute_name:{[Op.like]:`%${obj.keyword}%`}

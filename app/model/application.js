@@ -28,6 +28,10 @@ module.exports=app=>{
 				return moment(this.getDataValue('create_time')).format(
 					'YYYY-MM-DD HH:MM:SS'
 				);
+			},
+			defaultValue(){
+				var sj = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+				return sj
 			}
 		},
 		update_time:{

@@ -19,7 +19,7 @@ const eventExcel = {
     触发时机: 'trigger_time',
     备注:'note',
     事件标签: 'event_label',
-    通用属性:'general_attr',
+    属性:'general_attr',
     创建人:'create_people'
 };
 const eventLabel={   //事件标签

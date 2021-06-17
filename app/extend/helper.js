@@ -10,7 +10,9 @@ module.exports = {
 		const workbook = XLSX.readFile(filepath);
 		// 读取内容
 		let exceldata = [];
-		workbook.SheetNames.forEach(sheet => {
+		let arr=[]
+		arr[0]=workbook.SheetNames[0]
+		arr.forEach(sheet => {
 			if (workbook.Sheets.hasOwnProperty(sheet)) {
 				const data = XLSX.utils.sheet_to_json(workbook.Sheets[sheet]).map((row) => {
 					const obj = {};
@@ -44,5 +46,17 @@ module.exports = {
 			}
 		}
 		return uuid.join('');
+    },
+	dealMulValue(str,data){
+		var temp='';
+		if(str){
+			var arr=str.split(',');
+			for(var i=0;i<arr.length;i++){
+				var sj = arr[i].replace(/\s*/g,"");
+				temp+=data[sj]+',';
+			}
+        	temp=temp.substring(0, temp.lastIndexOf(','));
+		}
+        return temp
     }
 }

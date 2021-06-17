@@ -7,6 +7,7 @@ class IndicatorController extends Controller {
 	this.request=ctx.request;
 	this.Indicator=ctx.service.indicator;
     this.IndicatorM=ctx.model.Indicator;
+    this.BasicData=ctx.model.BasicData;
    }
     async list(){
 	  const ctx=this.ctx;
@@ -50,11 +51,37 @@ class IndicatorController extends Controller {
      const file = ctx.request.files[0];
      // 中文表头转换为数据的key值，所使用的的映射map indicatorExcel
     try {
-      // 每行数据要进行的特殊处理函数
+      //每行数据要进行的特殊处理函数
+      //处理指标类型
+      var indicatorType={}
+      var arr=await this.BasicData.findAll({where:{fid:'indicator_type'},attributes:['label','value']});
+      for(var i=0;i<arr.length;i++){
+        indicatorType[arr[i].label]=arr[i].value
+      }
+      //处理一级指标
+      var indicatorLevel={}
+      var arr2=await this.BasicData.findAll({where:{fid:'indicator_level'},attributes:['label','value']});
+      for(var i=0;i<arr2.length;i++){
+        indicatorLevel[arr2[i].label]=arr2[i].value
+      }
+      //处理指标标签
+      var indicatorLabel={}
+      var arr1=await this.BasicData.findAll({where:{fid:'indicator_label'},attributes:['label','value','is_lower']});
+      for(var i=0;i<arr1.length;i++){
+        if(arr1[i].is_lower==0){
+          var b=await this.BasicData.findAll({where:{fid:arr1[i].value},attributes:['fid','label','value','is_lower']});
+          arr1 = arr1.concat(b);
+        }
+      }
+      for(var i=0;i<arr1.length;i++){
+        indicatorLabel[arr1[i].label]=arr1[i].value
+      }
+
       const rowTransform = (row) => ({
         ...row,
-         // general_attr: row.general_attr.toString(),
-         //userGroups: row.userGroups ? row.userGroups.split(/,|，/) : [],
+        indicator_label:ctx.helper.dealMulValue(row.indicator_label,indicatorLabel),
+        indicator_type:indicatorType[row.indicator_type],
+        indicator_level:indicatorLevel[row.indicator_level]
       });
       //indicator_code 的唯一性判定
       const Op = app.Sequelize.Op;

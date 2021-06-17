@@ -1,4 +1,5 @@
 const  moment =require('moment');
+const sd = require('silly-datetime');
 module.exports=app=>{
     const {STRING,INTEGER,DATE,TEXT}=app.Sequelize;
 	const attribute=app.model.define('attribute',{
@@ -9,14 +10,37 @@ module.exports=app=>{
 		desc:{type:STRING(20),comment:'单位格式说明'},               
 		attribute_source:{type:STRING(20),comment:'属性来源'},        
         attribute_label:{type:STRING(20),comment:'属性标签'},          
-		note:{type:STRING,comment:'备注'},                     
+		note:{type:STRING,comment:'备注'}, 
+		is_common:{defaultValue:1,type:INTEGER(6),comment:'1公共属性 0自定义属性'},                    
 		create_time:{
 			type:DATE,
 			get(){
 				return moment(this.getDataValue('create_time')).format(
 					'YYYY-MM-DD HH:MM:SS'
 				);
+			},defaultValue(){
+				var sj = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+				return sj
 			}
+		},
+		create_people:{
+			type:STRING(255),comment:'创建人'
+		}, 
+		update_time:{
+			type:DATE,
+			get(){
+				return moment(this.getDataValue('create_time')).format(
+					'YYYY-MM-DD HH:MM:SS'
+				);
+			},
+			defaultValue(){
+				var sj = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+				return sj
+			}
+		},
+		update_people:{
+			type:STRING(255),
+			comment:'更新人'
 		},
 		state:{defaultValue:1,type:INTEGER(6)},
 		enum_data:STRING(255),                //数据字典的枚举

@@ -1,216 +1,495 @@
-# ************************************************************
-# Sequel Pro SQL dump
-# Version 4541
-#
-# http://www.sequelpro.com/
-# https://github.com/sequelpro/sequelpro
-#
-# Host: 127.0.0.1 (MySQL 5.7.33)
-# Database: buried_points_server
-# Generation Time: 2021-04-06 01:11:28 +0000
-# ************************************************************
+/*
+ Navicat Premium Data Transfer
 
+ Source Server         : glxt
+ Source Server Type    : MySQL
+ Source Server Version : 80021
+ Source Host           : localhost:3306
+ Source Schema         : baseform
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+ Target Server Type    : MySQL
+ Target Server Version : 80021
+ File Encoding         : 65001
 
+ Date: 17/06/2021 09:08:05
+*/
 
-# Dump of table activity
-# ------------------------------------------------------------
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
-DROP TABLE IF EXISTS `activity`;
+-- ----------------------------
+-- Table structure for application
+-- ----------------------------
+DROP TABLE IF EXISTS `application`;
+CREATE TABLE `application` (
+  `application_id` int NOT NULL AUTO_INCREMENT,
+  `application_dep_platform` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '应用部署平台',
+  `application_type` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '应用类型',
+  `application_label` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '应用标签',
+  `note` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
+  `apply_time` datetime DEFAULT NULL,
+  `state` int DEFAULT '1',
+  `application_use` int DEFAULT '1' COMMENT '是否启用',
+  `is_interactive` int DEFAULT '1' COMMENT '是否互动应用',
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `update_people` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '更新人',
+  `create_people` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',
+  `platform_app` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '应用名称',
+  `platform_app_code` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '应用代码',
+  `platform_app_version` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '应用版本',
+  `platform_business` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '应用平台',
+  PRIMARY KEY (`application_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-CREATE TABLE `activity` (
-  `activity_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `project_id` int(11) unsigned NOT NULL,
-  `title` varchar(64) NOT NULL,
-  `start_date` int(10) unsigned NOT NULL DEFAULT '0',
-  `end_date` int(10) unsigned NOT NULL DEFAULT '0',
-  `tag_conf` text NOT NULL,
-  `description` text NOT NULL,
-  `status` tinyint(2) unsigned NOT NULL DEFAULT '0',
-  `created_at` int(11) NOT NULL DEFAULT '0',
-  `updated_at` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`activity_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- ----------------------------
+-- Records of application
+-- ----------------------------
+BEGIN;
+INSERT INTO `application` VALUES (2, '22', '22', '22', '22', NULL, 1, 22, 1, '2021-06-03 13:00:00', '2021-06-10 07:13:15', NULL, 'twb', 'tes', '1', '11', NULL);
+INSERT INTO `application` VALUES (3, '22', '22', '22', '22', NULL, 1, 22, 1, '2021-06-03 13:00:00', '2021-06-10 07:13:32', NULL, 'twb', 'test1', '2', '22', NULL);
+INSERT INTO `application` VALUES (4, '22', '22', '22', '22', NULL, 1, 22, 1, '2021-06-03 13:00:00', '2021-06-10 07:16:33', NULL, 'twb', 'test2', '3', '33', NULL);
+COMMIT;
 
-LOCK TABLES `activity` WRITE;
-/*!40000 ALTER TABLE `activity` DISABLE KEYS */;
+-- ----------------------------
+-- Table structure for applicationIndicator
+-- ----------------------------
+DROP TABLE IF EXISTS `applicationIndicator`;
+CREATE TABLE `applicationIndicator` (
+  `application_id` int NOT NULL,
+  `indicator_id` int NOT NULL,
+  PRIMARY KEY (`application_id`,`indicator_id`),
+  UNIQUE KEY `applicationIndicator_indicator_id_application_id_unique` (`application_id`,`indicator_id`),
+  KEY `indicator_id` (`indicator_id`),
+  CONSTRAINT `applicationindicator_ibfk_1` FOREIGN KEY (`application_id`) REFERENCES `application` (`application_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `applicationindicator_ibfk_2` FOREIGN KEY (`indicator_id`) REFERENCES `indicator` (`indicator_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `activity` (`activity_id`, `project_id`, `title`, `start_date`, `end_date`, `tag_conf`, `description`, `status`, `created_at`, `updated_at`)
-VALUES
-	(3,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(4,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(5,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(6,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(7,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(8,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(9,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(10,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(11,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(12,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(13,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(14,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(15,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(16,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(17,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(18,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(19,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(20,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(21,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(22,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(23,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0),
-	(24,1,'测试标题002',0,0,'[{\"tag_name\":\"PV\",\"tag_key\":\"field_pv\"},{\"tag_name\":\"UV\",\"tag_key\":\"field_uv\"},{\"tag_name\":\"加购\",\"tag_key\":\"field_join_cart\"}]','测试内容002',0,1613631695,0);
+-- ----------------------------
+-- Records of applicationIndicator
+-- ----------------------------
+BEGIN;
+INSERT INTO `applicationIndicator` VALUES (4, 3);
+COMMIT;
 
-/*!40000 ALTER TABLE `activity` ENABLE KEYS */;
-UNLOCK TABLES;
+-- ----------------------------
+-- Table structure for attribute
+-- ----------------------------
+DROP TABLE IF EXISTS `attribute`;
+CREATE TABLE `attribute` (
+  `attribute_id` int NOT NULL AUTO_INCREMENT,
+  `attribute_name` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '属性名称',
+  `data_type` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '数据类型',
+  `desc` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '单位格式说明',
+  `attribute_source` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '属性来源',
+  `attribute_label` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '属性标签',
+  `note` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
+  `create_time` datetime DEFAULT NULL,
+  `state` int DEFAULT '1',
+  `enum_data` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `attribute_code` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '属性代码',
+  PRIMARY KEY (`attribute_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
+-- ----------------------------
+-- Records of attribute
+-- ----------------------------
+BEGIN;
+INSERT INTO `attribute` VALUES (1, 'test ', '1', NULL, NULL, '1', NULL, '2021-06-03 11:40:25', 1, NULL, '');
+INSERT INTO `attribute` VALUES (2, 'www', '2', NULL, NULL, '2', NULL, '2021-06-03 14:28:22', 1, NULL, NULL);
+COMMIT;
 
-# Dump of table project
-# ------------------------------------------------------------
+-- ----------------------------
+-- Table structure for basicData
+-- ----------------------------
+DROP TABLE IF EXISTS `basicData`;
+CREATE TABLE `basicData` (
+  `fid` varchar(40) DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `fname` varchar(20) DEFAULT NULL,
+  `value` varchar(40) DEFAULT NULL,
+  `state` int DEFAULT '1',
+  `bz` varchar(255) DEFAULT NULL,
+  `label` varchar(20) DEFAULT NULL,
+  `is_lower` int DEFAULT '1',
+  `children` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=235 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `project`;
+-- ----------------------------
+-- Records of basicData
+-- ----------------------------
+BEGIN;
+INSERT INTO `basicData` VALUES ('0', 90, '一级', 'indicator_label', 1, NULL, '指标标签', 0, NULL);
+INSERT INTO `basicData` VALUES ('indicator_label', 91, '指标标签', 'Indicator_obj', 1, NULL, '指标分析对象', 0, NULL);
+INSERT INTO `basicData` VALUES ('Indicator_obj', 92, '指标分析对象', 'parti_user', 1, NULL, '参与用户', 1, NULL);
+INSERT INTO `basicData` VALUES ('Indicator_obj', 96, '指标分析对象', 'members', 1, NULL, '会员', 1, NULL);
+INSERT INTO `basicData` VALUES ('Indicator_obj', 97, '指标分析对象', 'invite_user', 1, NULL, '被邀用户', 1, NULL);
+INSERT INTO `basicData` VALUES ('Indicator_obj', 98, '指标分析对象', 'access_user', 1, NULL, '访问用户', 1, NULL);
+INSERT INTO `basicData` VALUES ('indicator_label', 99, '指标标签', 'Indicator_stage', 1, NULL, '指标所属阶段', 0, NULL);
+INSERT INTO `basicData` VALUES ('Indicator_stage', 100, '指标所属阶段', 'cognitive', 1, NULL, '认知', 1, NULL);
+INSERT INTO `basicData` VALUES ('Indicator_stage', 101, '指标所属阶段', 'interest', 1, NULL, '兴趣', 1, NULL);
+INSERT INTO `basicData` VALUES ('Indicator_stage', 102, '指标所属阶段', 'conversion', 1, NULL, '转化', 1, NULL);
+INSERT INTO `basicData` VALUES ('Indicator_stage', 103, '指标所属阶段', 'loyalty', 1, NULL, '忠诚', 1, NULL);
+INSERT INTO `basicData` VALUES ('0', 104, '一级', 'event_trigger_mode', 1, NULL, '触发类型', 0, NULL);
+INSERT INTO `basicData` VALUES ('event_trigger_mode', 105, '触发类型', 'open', 1, NULL, 'open', 1, NULL);
+INSERT INTO `basicData` VALUES ('event_trigger_mode', 106, '触发类型', 'click', 1, NULL, 'click', 1, NULL);
+INSERT INTO `basicData` VALUES ('event_trigger_mode', 107, '触发类型', 'slide', 1, NULL, 'slide', 1, NULL);
+INSERT INTO `basicData` VALUES ('event_trigger_mode', 108, '触发类型', 'callback', 1, NULL, 'callback', 1, NULL);
+INSERT INTO `basicData` VALUES ('event_trigger_mode', 109, '触发类型', 'jump', 1, NULL, 'jump', 1, NULL);
+INSERT INTO `basicData` VALUES ('event_trigger_mode', 110, '触发类型', 'play', 1, NULL, 'play', 1, NULL);
+INSERT INTO `basicData` VALUES ('0', 111, '一级', 'event_label', 1, NULL, '事件标签', 0, NULL);
+INSERT INTO `basicData` VALUES ('event_label', 112, '事件标签', 'general_label', 1, NULL, '事件通用性', 0, NULL);
+INSERT INTO `basicData` VALUES ('general_label', 113, '事件通用性', 'all_general', 1, NULL, '全部通用', 1, NULL);
+INSERT INTO `basicData` VALUES ('general_label', 114, '事件通用性', 'interactive_general', 1, NULL, '互动通用', 1, NULL);
+INSERT INTO `basicData` VALUES ('general_label', 115, '事件通用性', 'policy_general', 1, NULL, '天策通用', 1, NULL);
+INSERT INTO `basicData` VALUES ('general_label', 116, '事件通用性', 'crm_general', 1, NULL, 'CRM通用', 1, NULL);
+INSERT INTO `basicData` VALUES ('general_label', 117, '事件通用性', 'interactive_custom', 1, NULL, '互动定制', 1, NULL);
+INSERT INTO `basicData` VALUES ('general_label', 118, '事件通用性', 'policy_custom', 1, NULL, '天策定制', 1, NULL);
+INSERT INTO `basicData` VALUES ('general_label', 119, '事件通用性', 'crm_custom', 1, NULL, 'CRM定制', 1, NULL);
+INSERT INTO `basicData` VALUES ('0', 120, '一级', 'indicator_type', 1, NULL, '指标类型', 0, NULL);
+INSERT INTO `basicData` VALUES ('indicator_type', 121, '指标类型', 'frequency', 1, NULL, '次数', 1, NULL);
+INSERT INTO `basicData` VALUES ('indicator_type', 122, '指标类型', 'people', 1, NULL, '人数', 1, NULL);
+INSERT INTO `basicData` VALUES ('indicator_type', 123, '指标类型', 'retained', 1, NULL, '留存', 1, NULL);
+INSERT INTO `basicData` VALUES ('indicator_type', 124, '指标类型', 'time', 1, NULL, '时长', 1, NULL);
+INSERT INTO `basicData` VALUES ('indicator_type', 125, '指标类型', 'other', 1, NULL, '其他统计', 1, NULL);
+INSERT INTO `basicData` VALUES ('0', 126, '一级', 'indicator_level', 1, NULL, '一级指标', 1, NULL);
+INSERT INTO `basicData` VALUES ('indicator_level', 127, '一级指标', 'access', 1, NULL, '访问', 1, NULL);
+INSERT INTO `basicData` VALUES ('indicator_level', 128, '一级指标', 'partin', 1, NULL, '参与', 1, NULL);
+INSERT INTO `basicData` VALUES ('indicator_level', 129, '一级指标', 'purchased', 1, NULL, '加购', 1, NULL);
+INSERT INTO `basicData` VALUES ('indicator_level', 130, '一级指标', 'order', 1, NULL, '下单', 1, NULL);
+INSERT INTO `basicData` VALUES ('indicator_level', 131, '一级指标', 'pay', 1, NULL, '付款', 1, NULL);
+INSERT INTO `basicData` VALUES ('indicator_level', 132, '一级指标', 'membership', 1, NULL, '入会', 1, NULL);
+INSERT INTO `basicData` VALUES ('0', 133, '一级', 'attribute_label', 1, NULL, '属性标签', 0, NULL);
+INSERT INTO `basicData` VALUES ('attribute_label', 134, '属性标签', 'attribute_general', 1, NULL, '属性通用性', 0, NULL);
+INSERT INTO `basicData` VALUES ('attribute_general', 135, '属性通用性', 'all_genarel', 1, NULL, '全部通用', 1, NULL);
+INSERT INTO `basicData` VALUES ('attribute_general', 136, '属性通用性', 'active_general', 1, NULL, '互动通用', 1, NULL);
+INSERT INTO `basicData` VALUES ('attribute_general', 137, '属性通用性', 'policy_general', 1, NULL, '天策通用', 1, NULL);
+INSERT INTO `basicData` VALUES ('attribute_general', 138, '属性通用性', 'crm_general', 1, NULL, 'CRM通用', 1, NULL);
+INSERT INTO `basicData` VALUES ('attribute_general', 139, '属性通用性', 'active_custom', 1, NULL, '互动定制', 1, NULL);
+INSERT INTO `basicData` VALUES ('attribute_general', 140, '属性通用性', 'policy_custom', 1, NULL, '天策定制', 1, NULL);
+INSERT INTO `basicData` VALUES ('attribute_general', 141, '属性通用性', 'crm_custom', 1, NULL, 'CRM定制', 1, NULL);
+INSERT INTO `basicData` VALUES ('attribute_label', 142, '属性标签', 'attribute_obj', 1, NULL, '属性对象', 0, NULL);
+INSERT INTO `basicData` VALUES ('attribute_obj', 143, '属性对象', 'member', 1, NULL, '会员', 1, NULL);
+INSERT INTO `basicData` VALUES ('attribute_obj', 144, '属性对象', 'brand', 1, NULL, '品牌', 1, NULL);
+INSERT INTO `basicData` VALUES ('0', 145, '一级', 'app_label', 1, NULL, '应用标签', 0, NULL);
+INSERT INTO `basicData` VALUES ('app_label', 146, '应用标签', 'app_value', 1, NULL, '互动应用价值', 0, NULL);
+INSERT INTO `basicData` VALUES ('app_value', 147, '互动应用价值', 'pull_new', 1, NULL, '拉新', 1, NULL);
+INSERT INTO `basicData` VALUES ('app_value', 148, '互动应用价值', 'promote', 1, NULL, '促活', 1, NULL);
+INSERT INTO `basicData` VALUES ('app_value', 149, '互动应用价值', 'conversion', 1, NULL, '转化', 1, NULL);
+INSERT INTO `basicData` VALUES ('app_value', 150, '互动应用价值', 'purchase', 1, NULL, '复购', 1, NULL);
+INSERT INTO `basicData` VALUES ('app_value', 151, '互动应用价值', 'spread\n\nspread', 1, NULL, '传播', 1, NULL);
+INSERT INTO `basicData` VALUES ('app_label', 152, '应用标签', 'app_type', 1, NULL, '互动应用类型', 0, NULL);
+INSERT INTO `basicData` VALUES ('app_type', 153, '互动应用类型', 'active_draw', 1, NULL, '活动抽奖', 1, NULL);
+INSERT INTO `basicData` VALUES ('app_type', 154, '互动应用类型', 'fission_drainage', 1, NULL, '裂变引流', 1, NULL);
+INSERT INTO `basicData` VALUES ('app_type', 155, '互动应用类型', 'commercial_promotion', 1, NULL, '商业促销', 1, NULL);
+INSERT INTO `basicData` VALUES ('app_type', 156, '互动应用类型', 'long_active', 1, NULL, '长期活动', 1, NULL);
+INSERT INTO `basicData` VALUES ('app_type', 157, '互动应用类型', 'voting\n\nvoting', 1, NULL, '投票活动', 1, NULL);
+INSERT INTO `basicData` VALUES ('app_type', 158, '互动应用类型', 'solving', 1, NULL, '答题活动', 1, NULL);
+INSERT INTO `basicData` VALUES ('app_type', 159, '互动应用类型', 'living', 1, NULL, '现场活动', 1, NULL);
+INSERT INTO `basicData` VALUES ('app_label', 160, '应用标签', 'promote_stage', 1, NULL, '大促阶段', 0, NULL);
+INSERT INTO `basicData` VALUES ('promote_stage', 161, '大促阶段', 'water_storage', 1, NULL, '蓄水', 1, NULL);
+INSERT INTO `basicData` VALUES ('promote_stage', 162, '大促阶段', 'first_wave', 1, NULL, '第一波', 1, NULL);
+INSERT INTO `basicData` VALUES ('promote_stage', 163, '大促阶段', 'second_wave', 1, NULL, '第二波', 1, NULL);
+INSERT INTO `basicData` VALUES ('app_label', 164, '应用标签', 'business', 1, NULL, '所属业务线', 0, NULL);
+INSERT INTO `basicData` VALUES ('business', 165, '所属业务线', 'business_platform', 1, NULL, '商家平台', 1, NULL);
+INSERT INTO `basicData` VALUES ('business', 166, '所属业务线', 'data_srategy', 1, NULL, '数据策略', 1, NULL);
+INSERT INTO `basicData` VALUES ('business', 167, '所属业务线', 'interactive_market', 1, NULL, '互动营销', 1, NULL);
+INSERT INTO `basicData` VALUES ('business', 168, '所属业务线', 'customer_operation', 1, NULL, '客户运营', 1, NULL);
+INSERT INTO `basicData` VALUES ('app_label', 169, '应用标签', 'own_interaction', 1, NULL, '所属互动', 0, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 170, '所属互动', 'sign_in', 1, NULL, '签到', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 171, '所属互动', 'Big wheel\n\nbig_wheel', 1, NULL, '大转盘', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 172, '所属互动', 'attente_store', 1, NULL, '关注店铺', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 173, '所属互动', 'collect_informate', 1, NULL, '收集会员信息', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 174, '所属互动', 'question_survey', 1, NULL, '问卷调查', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 175, '所属互动', 'tiger_machine', 1, NULL, '疯狂老虎机', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 176, '所属互动', 'line_up', 1, NULL, '排队', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 177, '所属互动', 'brand_around', 1, NULL, '品牌环游', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 178, '所属互动', 'card_draw', 1, NULL, '翻卡抽奖', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 179, '所属互动', 'wishing_bag', 1, NULL, '许愿购物袋', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 180, '所属互动', 'trial_activitie', 1, NULL, '试用活动', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 181, '所属互动', 'scratchable_latex', 1, NULL, '九宫格', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 182, '所属互动', 'acticle_interacte', 1, NULL, '文章互动', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 183, '所属互动', 'a_bulk', 1, NULL, '团购', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 184, '所属互动', 'solving_problem', 1, NULL, '答题有礼', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 185, '所属互动', 'fission_treasure', 1, NULL, '裂变宝', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 186, '所属互动', 'send_samples', 1, NULL, '派小样', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 187, '所属互动', 'sales_promotion', 1, NULL, '大促搭配购', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 188, '所属互动', 'shop_assistant', 1, NULL, '导购助手', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 189, '所属互动', 'exchange_active', 1, NULL, '兑换活动', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 190, '所属互动', 'purchase_fission', 1, NULL, '邀请预购裂变', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 191, '所属互动', 'registered_fission', 1, NULL, '邀请注册裂变', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 192, '所属互动', 'invite_sign', 1, NULL, '邀请好友签到', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 193, '所属互动', 'invite_registered', 1, NULL, '邀请好友注册', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 194, '所属互动', 'focus_shop', 1, NULL, '邀请好友关注店铺', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 195, '所属互动', 'invite_draw', 1, NULL, '邀请好友抽奖', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 196, '所属互动', 'invite_perfect', 1, NULL, '邀请好友完善信息', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 197, '所属互动', 'share_sign', 1, NULL, '分享签到', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 198, '所属互动', 'share_registered', 1, NULL, '分享注册', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 199, '所属互动', 'share_focus', 1, NULL, '分享关注店铺', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 200, '所属互动', 'share_draw', 1, NULL, '分享抽奖', 1, NULL);
+INSERT INTO `basicData` VALUES ('own_interaction', 201, '所属互动', 'share_collection', 1, NULL, '分享收集会员信息', 1, NULL);
+INSERT INTO `basicData` VALUES ('0', 204, '一级', 'platform_business', 1, NULL, '业务平台', 0, NULL);
+INSERT INTO `basicData` VALUES ('platform_business', 205, '业务平台', 'TB', 1, NULL, '淘宝', 1, NULL);
+INSERT INTO `basicData` VALUES ('platform_business', 206, '业务平台', 'JD', 1, NULL, '京东', 1, NULL);
+INSERT INTO `basicData` VALUES ('platform_business', 207, '业务平台', 'TM', 1, NULL, '天猫', 1, NULL);
+INSERT INTO `basicData` VALUES ('platform_business', 208, '业务平台', 'WX', 1, NULL, '微信', 1, NULL);
+INSERT INTO `basicData` VALUES ('platform_business', 209, '业务平台', 'JZONE', 1, NULL, '京微通', 1, NULL);
+INSERT INTO `basicData` VALUES ('platform_business', 210, '业务平台', 'BD', 1, NULL, '百度', 1, NULL);
+INSERT INTO `basicData` VALUES ('platform_business', 211, '业务平台', 'DY', 1, NULL, '抖音', 1, NULL);
+INSERT INTO `basicData` VALUES ('platform_business', 212, '业务平台', 'YZ', 1, NULL, '有赞', 1, NULL);
+INSERT INTO `basicData` VALUES ('0', 213, '一级', 'application_dep_platform', 1, NULL, '应用部署平台', 0, NULL);
+INSERT INTO `basicData` VALUES ('application_dep_platform', 214, '应用部署平台', 'platform-ali', 1, NULL, '客户运营平台-阿里版', 1, NULL);
+INSERT INTO `basicData` VALUES ('application_dep_platform', 215, '应用部署平台', 'platform-jd', 1, NULL, ' 客户运营平台-京东版', 1, NULL);
+INSERT INTO `basicData` VALUES ('application_dep_platform', 216, '应用部署平台', 'platform-jdy', 1, NULL, '客户运营平台-京东云版', 1, NULL);
+INSERT INTO `basicData` VALUES ('application_dep_platform', 217, '应用部署平台', 'crm_enbrands', 1, NULL, 'Enbrands', 1, NULL);
+INSERT INTO `basicData` VALUES ('application_dep_platform', 218, '应用部署平台', 'crm_jd', 1, NULL, '智客', 1, NULL);
+INSERT INTO `basicData` VALUES ('application_dep_platform', 219, '应用部署平台', 'crm_dy', 1, NULL, '抖音', 1, NULL);
+INSERT INTO `basicData` VALUES ('application_dep_platform', 220, '应用部署平台', 'crm_sn', 1, NULL, '苏宁', 1, NULL);
+INSERT INTO `basicData` VALUES ('application_dep_platform', 221, '应用部署平台', 'crm_jzone', 1, NULL, '京微通', 1, NULL);
+INSERT INTO `basicData` VALUES ('0', 222, '一级', 'platform_system', 1, NULL, '应用类型', 0, NULL);
+INSERT INTO `basicData` VALUES ('platform_system', 223, '应用类型', 'IOS', 1, NULL, 'IOS', 1, NULL);
+INSERT INTO `basicData` VALUES ('platform_system', 224, '应用类型', 'Android', 1, NULL, 'Android', 1, NULL);
+INSERT INTO `basicData` VALUES ('platform_system', 225, '应用类型', 'PC', 1, NULL, 'PC', 1, NULL);
+INSERT INTO `basicData` VALUES ('platform_system', 226, '应用类型', 'H5', 1, NULL, 'H5', 1, NULL);
+INSERT INTO `basicData` VALUES ('platform_system', 227, '应用类型', 'program-wx', 1, NULL, '微信小程序', 1, NULL);
+INSERT INTO `basicData` VALUES ('platform_system', 228, '应用类型', 'program-dd', 1, NULL, '钉钉小程序', 1, NULL);
+INSERT INTO `basicData` VALUES ('platform_system', 229, '应用类型', 'program-zfb', 1, NULL, '支付宝小程序', 1, NULL);
+INSERT INTO `basicData` VALUES ('0', 231, '一级', 'role', 1, NULL, '角色', 1, NULL);
+INSERT INTO `basicData` VALUES ('role', 232, '角色', 'admin', 1, NULL, '管理员', 1, NULL);
+INSERT INTO `basicData` VALUES ('role', 233, '角色', 'common', 1, NULL, '普通用户', 1, NULL);
+INSERT INTO `basicData` VALUES ('application_dep_platform', 234, '应用部署平台', 'crm_yz', 1, NULL, '有赞', 1, NULL);
+COMMIT;
 
-CREATE TABLE `project` (
-  `project_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(64) NOT NULL DEFAULT '',
-  `tag_conf` text NOT NULL,
-  `description` text NOT NULL,
-  `start_date` bigint(20) NOT NULL DEFAULT '0',
-  `end_date` bigint(20) NOT NULL DEFAULT '0',
-  `status` tinyint(2) unsigned NOT NULL DEFAULT '0',
-  `created_at` bigint(20) NOT NULL DEFAULT '0',
-  `updated_at` bigint(20) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`project_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- ----------------------------
+-- Table structure for event
+-- ----------------------------
+DROP TABLE IF EXISTS `event`;
+CREATE TABLE `event` (
+  `event_id` int NOT NULL AUTO_INCREMENT,
+  `event_name` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '事件名称',
+  `event_code` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '事件代码',
+  `event_trigger_mode` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '触发类型',
+  `trigger_time` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '触发时机',
+  `event_label` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '事件标签',
+  `note` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
+  `general_attr` text COLLATE utf8_bin COMMENT '通用属性',
+  `create_time` datetime DEFAULT NULL,
+  `state` int DEFAULT '1',
+  `update_time` datetime DEFAULT NULL,
+  `update_people` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '更新人',
+  `create_people` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',
+  PRIMARY KEY (`event_id`),
+  UNIQUE KEY `event_name` (`event_name`),
+  UNIQUE KEY `event_name_2` (`event_name`),
+  UNIQUE KEY `event_name_3` (`event_name`),
+  UNIQUE KEY `event_name_4` (`event_name`),
+  UNIQUE KEY `event_name_5` (`event_name`),
+  UNIQUE KEY `event_name_6` (`event_name`),
+  UNIQUE KEY `event_name_7` (`event_name`),
+  UNIQUE KEY `event_name_8` (`event_name`),
+  UNIQUE KEY `event_name_9` (`event_name`),
+  UNIQUE KEY `event_name_10` (`event_name`),
+  UNIQUE KEY `event_name_11` (`event_name`),
+  UNIQUE KEY `event_name_12` (`event_name`),
+  UNIQUE KEY `event_name_13` (`event_name`),
+  UNIQUE KEY `event_name_14` (`event_name`),
+  UNIQUE KEY `event_name_15` (`event_name`),
+  UNIQUE KEY `event_name_16` (`event_name`),
+  UNIQUE KEY `event_name_17` (`event_name`),
+  UNIQUE KEY `event_name_18` (`event_name`),
+  UNIQUE KEY `event_name_19` (`event_name`),
+  UNIQUE KEY `event_name_20` (`event_name`),
+  UNIQUE KEY `event_name_21` (`event_name`),
+  UNIQUE KEY `event_name_22` (`event_name`),
+  UNIQUE KEY `event_name_23` (`event_name`),
+  UNIQUE KEY `event_name_24` (`event_name`),
+  UNIQUE KEY `event_name_25` (`event_name`),
+  UNIQUE KEY `event_name_26` (`event_name`),
+  UNIQUE KEY `event_name_27` (`event_name`),
+  UNIQUE KEY `event_name_28` (`event_name`),
+  UNIQUE KEY `event_name_29` (`event_name`),
+  UNIQUE KEY `event_name_30` (`event_name`),
+  UNIQUE KEY `event_name_31` (`event_name`),
+  UNIQUE KEY `event_name_32` (`event_name`),
+  UNIQUE KEY `event_name_33` (`event_name`),
+  UNIQUE KEY `event_name_34` (`event_name`),
+  UNIQUE KEY `event_name_35` (`event_name`),
+  UNIQUE KEY `event_name_36` (`event_name`),
+  UNIQUE KEY `event_name_37` (`event_name`),
+  UNIQUE KEY `event_name_38` (`event_name`),
+  UNIQUE KEY `event_name_39` (`event_name`),
+  UNIQUE KEY `event_name_40` (`event_name`),
+  UNIQUE KEY `event_name_41` (`event_name`),
+  UNIQUE KEY `event_name_42` (`event_name`),
+  UNIQUE KEY `event_name_43` (`event_name`),
+  UNIQUE KEY `event_name_44` (`event_name`),
+  UNIQUE KEY `event_name_45` (`event_name`),
+  UNIQUE KEY `event_name_46` (`event_name`),
+  UNIQUE KEY `event_name_47` (`event_name`),
+  UNIQUE KEY `event_name_48` (`event_name`),
+  UNIQUE KEY `event_name_49` (`event_name`),
+  UNIQUE KEY `event_name_50` (`event_name`),
+  UNIQUE KEY `event_name_51` (`event_name`),
+  UNIQUE KEY `event_name_52` (`event_name`),
+  UNIQUE KEY `event_name_53` (`event_name`),
+  UNIQUE KEY `event_name_54` (`event_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-LOCK TABLES `project` WRITE;
-/*!40000 ALTER TABLE `project` DISABLE KEYS */;
+-- ----------------------------
+-- Records of event
+-- ----------------------------
+BEGIN;
+INSERT INTO `event` VALUES (2, '22221231', 'tw122w122111', 'test', 'liji', '22', '22', '22', '2021-06-03 13:00:00', 1, NULL, NULL, NULL);
+INSERT INTO `event` VALUES (27, '1111', 'tww', 'test', 'liji', '22', '22', '22', NULL, 1, NULL, NULL, NULL);
+INSERT INTO `event` VALUES (30, '11112', 'tww1', 'test', 'liji', '22', '22', '22', NULL, 1, NULL, NULL, NULL);
+INSERT INTO `event` VALUES (31, '3333', 'tww21', 'test', 'liji', '22', '22', '22', NULL, 1, NULL, NULL, NULL);
+INSERT INTO `event` VALUES (32, '3333444', 'tww212', 'test', 'liji', '22', '22', '22', '2021-06-03 13:00:00', 1, NULL, NULL, NULL);
+INSERT INTO `event` VALUES (33, NULL, '2222', 'click', '问问', NULL, '好', NULL, '1970-01-01 00:00:44', 1, NULL, NULL, NULL);
+INSERT INTO `event` VALUES (34, NULL, 'test2', 'click', '试试', NULL, '坏', NULL, '1970-01-01 00:00:44', 1, NULL, NULL, NULL);
+INSERT INTO `event` VALUES (35, 'twb', 'test3', 'click', '问问', NULL, '好', NULL, NULL, 1, NULL, NULL, NULL);
+INSERT INTO `event` VALUES (36, '问问', 'test', 'click', '试试', NULL, '坏', NULL, NULL, 1, NULL, NULL, NULL);
+INSERT INTO `event` VALUES (37, 'twb1', 'test9', 'click', '问问', NULL, '好', NULL, NULL, 1, NULL, NULL, NULL);
+INSERT INTO `event` VALUES (38, '问问1', 'test8', 'click', '试试', NULL, '坏', NULL, NULL, 1, NULL, NULL, NULL);
+INSERT INTO `event` VALUES (115, '呜呜呜呜', 'tw1w2211', 'test', 'liji', '22', '22', '22', '2021-06-03 13:00:00', 1, '2021-06-08 03:50:06', '', NULL);
+INSERT INTO `event` VALUES (116, '呜呜呜呜1', 'tw1w22111', 'test', 'liji', '22', '22', '22', '2021-06-03 13:00:00', 1, '2021-06-08 03:52:47', NULL, NULL);
+INSERT INTO `event` VALUES (117, '呜呜呜1呜1', 'tw1w122111', 'test', 'liji', '22', '22', '22', '2021-06-03 13:00:00', 1, '2021-06-08 03:53:28', NULL, NULL);
+INSERT INTO `event` VALUES (119, 'twb1236', 'test222', 'click', '问问', '1', NULL, '2', NULL, 1, '2021-06-10 09:18:54', NULL, 'twb');
+INSERT INTO `event` VALUES (120, '问问1235', 'test82', 'click', '试试', '2', NULL, '2', NULL, 1, '2021-06-10 09:18:54', NULL, 'twb');
+INSERT INTO `event` VALUES (135, 'twb12361', 'test2221', 'click', '问问', 'general_label', NULL, '2', NULL, 1, '2021-06-15 02:02:35', NULL, 'twb');
+INSERT INTO `event` VALUES (136, '问问12351', 'test821', 'click', '试试', 'general_label', NULL, '2', NULL, 1, '2021-06-15 02:02:35', NULL, 'twb');
+INSERT INTO `event` VALUES (137, '2222', 'tw2w122111', 'test', 'liji', '22', '22', '22', '2021-06-03 13:00:00', 1, '2021-06-16 06:20:18', NULL, NULL);
+COMMIT;
 
-INSERT INTO `project` (`project_id`, `title`, `tag_conf`, `description`, `start_date`, `end_date`, `status`, `created_at`, `updated_at`)
-VALUES
-	(1,'欧莱雅111a a a','[{\"tag_name\":\"用户PV\",\"tag_key\":\"field_pv\",\"description\":\"\"}]','描述信息222bbb',1617173360641,1618901360641,0,1617173360641,0),
-	(2,'欧莱雅111','[{\"tag_name\":\"aaa\",\"tag_key\":\"aaa\",\"description\":\"aaa\"},{\"tag_key\":\"field_join\",\"tag_name\":\"加购\",\"description\":\"\"}]','描述信息222',1617263212166,1618472812166,0,1617173360641,0),
-	(3,'aaaa111','[{\"tag_name\":\"用户UV\",\"tag_key\":\"field_uv\",\"description\":\"\"},{\"tag_name\":\"用户PV\",\"tag_key\":\"field_pv\",\"description\":\"\"}]','bbb222',1617166084449,1618894084449,0,1617173360641,0),
-	(4,'aaa111','[{\"tag_key\":\"field_pv\",\"tag_name\":\"用户PV\",\"description\":\"\"},{\"tag_key\":\"field_uv\",\"tag_name\":\"用户UV\",\"description\":\"\"}]','bbb222',1617264873292,1618042473292,0,0,0);
+-- ----------------------------
+-- Table structure for eventAttribute
+-- ----------------------------
+DROP TABLE IF EXISTS `eventAttribute`;
+CREATE TABLE `eventAttribute` (
+  `event_id` int NOT NULL,
+  `attribute_id` int NOT NULL,
+  PRIMARY KEY (`event_id`,`attribute_id`),
+  UNIQUE KEY `eventAttribute_event_id_attribute_id_unique` (`event_id`,`attribute_id`),
+  KEY `attribute_id` (`attribute_id`),
+  CONSTRAINT `eventattribute_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `event` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `eventattribute_ibfk_2` FOREIGN KEY (`attribute_id`) REFERENCES `attribute` (`attribute_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-/*!40000 ALTER TABLE `project` ENABLE KEYS */;
-UNLOCK TABLES;
+-- ----------------------------
+-- Records of eventAttribute
+-- ----------------------------
+BEGIN;
+INSERT INTO `eventAttribute` VALUES (31, 1);
+INSERT INTO `eventAttribute` VALUES (32, 1);
+INSERT INTO `eventAttribute` VALUES (115, 1);
+INSERT INTO `eventAttribute` VALUES (116, 1);
+INSERT INTO `eventAttribute` VALUES (117, 1);
+INSERT INTO `eventAttribute` VALUES (137, 1);
+INSERT INTO `eventAttribute` VALUES (31, 2);
+INSERT INTO `eventAttribute` VALUES (32, 2);
+INSERT INTO `eventAttribute` VALUES (115, 2);
+INSERT INTO `eventAttribute` VALUES (116, 2);
+INSERT INTO `eventAttribute` VALUES (117, 2);
+INSERT INTO `eventAttribute` VALUES (137, 2);
+COMMIT;
 
+-- ----------------------------
+-- Table structure for indicator
+-- ----------------------------
+DROP TABLE IF EXISTS `indicator`;
+CREATE TABLE `indicator` (
+  `indicator_id` int NOT NULL AUTO_INCREMENT,
+  `indicator_name` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '指标名称',
+  `indicator_type` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '指标类型',
+  `indicator_level` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '一级指标',
+  `indicator_code` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '指标代码',
+  `indicator_label` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '指标标签',
+  `note` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
+  `create_time` datetime DEFAULT NULL,
+  `state` int DEFAULT '1',
+  `dimension_general_attr` varchar(25) COLLATE utf8_bin DEFAULT NULL COMMENT '自定义维度属性',
+  `dimension_general_name` varchar(25) COLLATE utf8_bin DEFAULT NULL COMMENT '自定义维度名称',
+  `dimension_custom_attr` varchar(25) COLLATE utf8_bin DEFAULT NULL COMMENT '通用维度属性',
+  `dimension_custom_name` varchar(25) COLLATE utf8_bin DEFAULT NULL COMMENT '通用维度名称',
+  `update_time` datetime DEFAULT NULL,
+  `update_people` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '更新人',
+  `create_people` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',
+  PRIMARY KEY (`indicator_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-# Dump of table report
-# ------------------------------------------------------------
+-- ----------------------------
+-- Records of indicator
+-- ----------------------------
+BEGIN;
+INSERT INTO `indicator` VALUES (2, '1112222222', 'tw122w122111', 'test', 'liji', '22', '22', '2021-06-03 13:00:00', 1, '22', '22', '22', '22', '2021-06-09 07:37:29', NULL, 'twb');
+INSERT INTO `indicator` VALUES (3, '问问1235', 'click', '试试', 'test8122', '坏', NULL, '1970-01-01 00:00:44', 1, '22', '2222', '11', '22', '2021-06-09 07:37:29', NULL, '田卫勃');
+INSERT INTO `indicator` VALUES (4, 'twb1236', 'click', '问问', 'test912', '好', NULL, '1970-01-01 00:00:44', 1, '22', '22', '22', '2', '2021-06-09 07:52:23', NULL, 'twb');
+INSERT INTO `indicator` VALUES (5, '问问1235', 'click', '试试', 'test812', '坏', NULL, '1970-01-01 00:00:44', 1, '22', '2222', '11', '22', '2021-06-09 07:52:23', NULL, '田卫勃');
+INSERT INTO `indicator` VALUES (6, 'twb1236', 'click', '问问', 'test9121', '好', NULL, '1970-01-01 00:00:44', 1, '22', '22', '22', '2', '2021-06-09 08:22:33', NULL, 'twb');
+INSERT INTO `indicator` VALUES (7, '问问1235', 'click', '试试', 'test8121', '坏', NULL, '1970-01-01 00:00:44', 1, '22', '2222', '11', '22', '2021-06-09 08:22:33', NULL, '田卫勃');
+INSERT INTO `indicator` VALUES (8, '2221112', 'tw122w122111', 'test', 'liji11', '22', '22', '2021-06-03 13:00:00', 1, '22', '22', '22', '22', '2021-06-16 07:19:50', NULL, 'twb');
+INSERT INTO `indicator` VALUES (9, '2221112', 'tw122w122111', 'test', 'liji211', '22', '22', '2021-06-03 13:00:00', 1, '22', '22', '22', '22', '2021-06-16 07:21:19', NULL, 'twb');
+INSERT INTO `indicator` VALUES (10, '22212222112', 'tw122w122111', 'test', 'q', '22', '22', '2021-06-03 13:00:00', 1, '22', '22', '22', '22', '2021-06-16 07:24:58', NULL, 'twb');
+INSERT INTO `indicator` VALUES (11, '2212222112', 'tw122w122111', 'test', '1q', '22', '22', '2021-06-03 13:00:00', 1, '22', '22', '22', '22', '2021-06-16 07:25:54', NULL, 'twb');
+COMMIT;
 
-DROP TABLE IF EXISTS `report`;
+-- ----------------------------
+-- Table structure for indicatorEvent
+-- ----------------------------
+DROP TABLE IF EXISTS `indicatorEvent`;
+CREATE TABLE `indicatorEvent` (
+  `indicator_id` int NOT NULL,
+  `event_id` int NOT NULL,
+  PRIMARY KEY (`indicator_id`,`event_id`),
+  UNIQUE KEY `indicatorEvent_indicator_id_event_id_unique` (`indicator_id`,`event_id`),
+  KEY `event_id` (`event_id`),
+  CONSTRAINT `indicatorevent_ibfk_1` FOREIGN KEY (`indicator_id`) REFERENCES `indicator` (`indicator_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `indicatorevent_ibfk_2` FOREIGN KEY (`event_id`) REFERENCES `event` (`event_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-CREATE TABLE `report` (
-  `report_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(64) NOT NULL DEFAULT '',
-  `tag_conf` text NOT NULL,
-  `description` text NOT NULL,
-  `status` tinyint(2) unsigned NOT NULL DEFAULT '0',
-  `created_at` int(11) NOT NULL DEFAULT '0',
-  `updated_at` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`report_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- ----------------------------
+-- Records of indicatorEvent
+-- ----------------------------
+BEGIN;
+INSERT INTO `indicatorEvent` VALUES (2, 2);
+INSERT INTO `indicatorEvent` VALUES (3, 2);
+INSERT INTO `indicatorEvent` VALUES (8, 2);
+INSERT INTO `indicatorEvent` VALUES (9, 2);
+INSERT INTO `indicatorEvent` VALUES (10, 2);
+INSERT INTO `indicatorEvent` VALUES (11, 2);
+INSERT INTO `indicatorEvent` VALUES (2, 27);
+INSERT INTO `indicatorEvent` VALUES (8, 27);
+INSERT INTO `indicatorEvent` VALUES (9, 27);
+INSERT INTO `indicatorEvent` VALUES (10, 27);
+INSERT INTO `indicatorEvent` VALUES (11, 27);
+INSERT INTO `indicatorEvent` VALUES (3, 30);
+INSERT INTO `indicatorEvent` VALUES (3, 31);
+COMMIT;
 
-LOCK TABLES `report` WRITE;
-/*!40000 ALTER TABLE `report` DISABLE KEYS */;
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `realname` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `password` varchar(200) COLLATE utf8_bin DEFAULT NULL,
+  `avatar` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `phone` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  `role` int DEFAULT '1',
+  `status` int DEFAULT '1',
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `remark` varchar(255) COLLATE utf8_bin DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
-INSERT INTO `report` (`report_id`, `title`, `tag_conf`, `description`, `status`, `created_at`, `updated_at`)
-VALUES
-	(1,'报表-1','[]','',0,0,0);
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+BEGIN;
+INSERT INTO `user` VALUES (1, 'twb', 'tianweibi', 'BEA15426B7AF9DC91F3F583AFDD6443D', NULL, NULL, 10, 1, NULL, NULL, NULL);
+COMMIT;
 
-/*!40000 ALTER TABLE `report` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table sys_role
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `sys_role`;
-
-CREATE TABLE `sys_role` (
-  `role_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(64) NOT NULL DEFAULT '',
-  `role_alias` varchar(64) NOT NULL DEFAULT '',
-  `routes_conf` tinyint(2) unsigned NOT NULL DEFAULT '0',
-  `description` text NOT NULL,
-  `created_at` int(11) NOT NULL DEFAULT '0',
-  `updated_at` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-
-# Dump of table sys_tag
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `sys_tag`;
-
-CREATE TABLE `sys_tag` (
-  `tag_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `tag_name` varchar(64) NOT NULL DEFAULT '',
-  `tag_key` varchar(64) NOT NULL DEFAULT '',
-  `description` text NOT NULL,
-  `status` tinyint(2) unsigned NOT NULL DEFAULT '0',
-  `created_at` int(11) NOT NULL DEFAULT '0',
-  `updated_at` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`tag_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-LOCK TABLES `sys_tag` WRITE;
-/*!40000 ALTER TABLE `sys_tag` DISABLE KEYS */;
-
-INSERT INTO `sys_tag` (`tag_id`, `tag_name`, `tag_key`, `description`, `status`, `created_at`, `updated_at`)
-VALUES
-	(1,'用户PV','field_pv','',0,0,0),
-	(2,'用户UV','field_uv','',0,0,0),
-	(3,'bb','aa','cc',0,0,0),
-	(4,'gg','eee','hh',0,0,0);
-
-/*!40000 ALTER TABLE `sys_tag` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Dump of table sys_user
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `sys_user`;
-
-CREATE TABLE `sys_user` (
-  `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `mobile` varchar(64) NOT NULL DEFAULT '',
-  `password` varchar(64) NOT NULL DEFAULT '',
-  `role_id` tinyint(4) NOT NULL DEFAULT '0',
-  `status` tinyint(2) unsigned NOT NULL DEFAULT '0',
-  `description` text NOT NULL,
-  `token` varchar(32) NOT NULL DEFAULT '',
-  `created_at` int(11) NOT NULL DEFAULT '0',
-  `updated_at` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-LOCK TABLES `sys_user` WRITE;
-/*!40000 ALTER TABLE `sys_user` DISABLE KEYS */;
-
-INSERT INTO `sys_user` (`user_id`, `mobile`, `password`, `role_id`, `status`, `description`, `token`, `created_at`, `updated_at`)
-VALUES
-	(1,'17611220968','63ee451939ed580ef3c4b6f0109d1fd0',0,0,'','a62082e0729c37dca0c93546f7831362',0,0);
-
-/*!40000 ALTER TABLE `sys_user` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+SET FOREIGN_KEY_CHECKS = 1;

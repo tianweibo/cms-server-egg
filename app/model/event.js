@@ -10,7 +10,7 @@ module.exports=app=>{
 		event_trigger_mode:{type:STRING(255),comment:'触发类型'},         
 		trigger_time:{type:STRING(255),comment:'触发时机'},          
         event_label:{type:STRING(255),comment:'事件标签'},           
-		note:{type:STRING,comment:'备注'},  
+		note:{type:TEXT,comment:'备注'},  
         general_attr:{type:TEXT,comment:'通用属性'},                 
 		create_time:{
 			type:DATE,
@@ -18,6 +18,9 @@ module.exports=app=>{
 				return moment(this.getDataValue('create_time')).format(
 					'YYYY-MM-DD HH:MM:SS'
 				);
+			},defaultValue(){
+				var sj = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+				return sj
 			}
 		},
 		update_time:{

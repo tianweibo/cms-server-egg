@@ -18,7 +18,6 @@ class ProjectService extends Service {
 	if(hasProject==null){
 		var project1=project
 		project1['username']=this.ctx.session.username;
-		console.log(project1)
 		const projectInfo=await this.TheProject.create(project1);
 		if (!projectInfo) {
 			return this.ServerResponse.networkError('网络问题');

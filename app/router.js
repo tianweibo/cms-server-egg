@@ -7,7 +7,6 @@ module.exports = app => {
   const directory = path.join(app.config.baseDir, 'app/validate');
   app.loader.loadToApp(directory, 'validate');
   const { Auth} = require('./middleware/authClass')
-  console.log(app.config.env,'app.config')
   //if(app.config.env==='dev'){
     app.beforeStart(async ()=>{     //定义模型
       await app.model.sync({alter:true});

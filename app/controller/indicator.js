@@ -54,13 +54,18 @@ class IndicatorController extends Controller {
       //每行数据要进行的特殊处理函数
       //处理指标类型
       var indicatorType={}
-      var arr=await this.BasicData.findAll({where:{fid:'indicator_type'},attributes:['label','value']});
+      var arr=await this.BasicData.findAll({where:{fid:'indicator_type_level'},attributes:['label','value']});
       for(var i=0;i<arr.length;i++){
         indicatorType[arr[i].label]=arr[i].value
       }
       //处理一级指标
+	  const Op = app.Sequelize.Op;
+      var data=[{fid:'frequency'},{fid:'people'},{fid:'time'},{fid:'retained'},{fid:'retained'}];
+      var objOption={
+		[Op.or]:data,
+	  }
       var indicatorLevel={}
-      var arr2=await this.BasicData.findAll({where:{fid:'indicator_level'},attributes:['label','value']});
+      var arr2=await this.BasicData.findAll({where:objOption,attributes:['label','value']});
       for(var i=0;i<arr2.length;i++){
         indicatorLevel[arr2[i].label]=arr2[i].value
       }
@@ -76,7 +81,6 @@ class IndicatorController extends Controller {
       for(var i=0;i<arr1.length;i++){
         indicatorLabel[arr1[i].label]=arr1[i].value
       }
-
       const rowTransform = (row) => ({
         ...row,
         indicator_label:ctx.helper.dealMulValue(row.indicator_label,indicatorLabel),
@@ -84,7 +88,6 @@ class IndicatorController extends Controller {
         indicator_level:indicatorLevel[row.indicator_level]
       });
       //indicator_code 的唯一性判定
-      const Op = app.Sequelize.Op;
       var arr=[];
       const userData = ctx.helper.excelData(file, indicatorExcel, rowTransform);
       if(userData.length>0){

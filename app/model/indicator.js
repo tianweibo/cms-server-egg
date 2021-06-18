@@ -7,7 +7,7 @@ module.exports=app=>{
 		indicator_name:{type:STRING(20),comment:'指标名称'},         
 		indicator_type:{type:STRING(20),comment:'指标类型'},     
 		indicator_level:{type:STRING(20),comment:'一级指标'},   
-		indicator_code:{type:STRING(20),comment:'指标代码'},         
+		indicator_code:{type:STRING(40),comment:'指标代码'},         
 		indicator_label:{type:STRING(20),comment:'指标标签'},        
 		note:{type:STRING,comment:"备注"},                      
 		create_time:{
@@ -42,10 +42,6 @@ module.exports=app=>{
 			type:STRING(255),comment:'创建人'
 		},
 		state:{defaultValue:1,type:INTEGER(6)},
-		dimension_general_attr:{type:STRING(25),comment:'自定义维度属性'},   
-		dimension_general_name:{type:STRING(25),comment:'自定义维度名称'},    
-		dimension_custom_attr:{type:STRING(25),comment:'通用维度属性'},   
-		dimension_custom_name:{type:STRING(25),comment:'通用维度名称'},  
 	}, {
         timestamps: false,
 		underscored: true,

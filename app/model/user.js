@@ -61,7 +61,6 @@ module.exports=app=>{
         let deBase64 = Buffer.from(password, 'base64').toString();
         var md5 = crypto.createHash('md5');
 		let userpass = md5.update(deBase64).digest('hex').toUpperCase();
-		console.log(userpass,'userpass')
         return this.password === userpass; 
     }
 	user.associate=function(){

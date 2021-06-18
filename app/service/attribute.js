@@ -38,7 +38,6 @@ class Attribute extends Service {
   async eventList(obj){
 	try{
         var arr=await this.EventAttribute.findAll({where:{attribute_id:obj.id},attributes:['event_id']});
-		//console.log(arr,'arr')
 		const {ctx,app}=this;
 		const Op = app.Sequelize.Op;
 		var list={

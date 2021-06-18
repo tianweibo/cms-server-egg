@@ -1,6 +1,6 @@
 'use strict';
 const Controller = require('egg').Controller;
-const {eventExcel,eventLabel}=require('../common/excelEnum.js')
+const {eventExcel}=require('../common/excelEnum.js')
 class EventController extends Controller {
    constructor(ctx){
 	super(ctx);

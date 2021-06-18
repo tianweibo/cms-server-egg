@@ -6,10 +6,6 @@ const indicatorExcel = {
     指标标签: 'indicator_label',
     备注:'note',
     创建时间:'create_time',
-    自定义维度属性:'dimension_general_attr',
-    自定义维度名称:'dimension_general_name',
-    通用维度属性:'dimension_custom_attr',
-    通用维度名称:'dimension_custom_name',
     创建人:'create_people'
 };
 const eventExcel = {
@@ -22,15 +18,7 @@ const eventExcel = {
     属性:'general_attr',
     创建人:'create_people'
 };
-const eventLabel={   //事件标签
-    全部通用:'1',
-    互动通用:"2",
-    天策通用:"3",
-    CRM通用:"4",
-    互动定制:"5",
-    天策定制:"6",
-    CRM定制:"7"
-}
+
 const triggerMode={ //触发类型
     open:"open",
     click:"click",
@@ -39,31 +27,8 @@ const triggerMode={ //触发类型
     jump:"jump",
     play:"play"
 }
-const indicatorLabel={   //指标标签
-    全部通用:'1',
-    互动通用:"2",
-    天策通用:"3",
-    CRM通用:"4",
-    互动定制:"5",
-    天策定制:"6",
-    CRM定制:"7"
-}
-const indicatorType={  //指标类型
-    次数:'1',
-    人数:"2",
-    留存:"3",
-    时长:"4",
-    其他统计:"5"
-}
-const indicatorLevel={  //一级指标
-    访问:'1',
-    参与:"2",
-    加购:"3",
-    下单:"4",
-    付款:"5",
-    入会:"6"
-}
+
+
 module.exports={
-	eventExcel ,indicatorExcel,eventLabel,triggerMode,indicatorLabel,
-    indicatorType,indicatorLevel
+	eventExcel ,indicatorExcel,triggerMode
 }

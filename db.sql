@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 17/06/2021 09:08:05
+ Date: 18/06/2021 18:11:10
 */
 
 SET NAMES utf8mb4;
@@ -48,7 +48,6 @@ CREATE TABLE `application` (
 BEGIN;
 INSERT INTO `application` VALUES (2, '22', '22', '22', '22', NULL, 1, 22, 1, '2021-06-03 13:00:00', '2021-06-10 07:13:15', NULL, 'twb', 'tes', '1', '11', NULL);
 INSERT INTO `application` VALUES (3, '22', '22', '22', '22', NULL, 1, 22, 1, '2021-06-03 13:00:00', '2021-06-10 07:13:32', NULL, 'twb', 'test1', '2', '22', NULL);
-INSERT INTO `application` VALUES (4, '22', '22', '22', '22', NULL, 1, 22, 1, '2021-06-03 13:00:00', '2021-06-10 07:16:33', NULL, 'twb', 'test2', '3', '33', NULL);
 COMMIT;
 
 -- ----------------------------
@@ -69,7 +68,6 @@ CREATE TABLE `applicationIndicator` (
 -- Records of applicationIndicator
 -- ----------------------------
 BEGIN;
-INSERT INTO `applicationIndicator` VALUES (4, 3);
 COMMIT;
 
 -- ----------------------------
@@ -88,15 +86,20 @@ CREATE TABLE `attribute` (
   `state` int DEFAULT '1',
   `enum_data` varchar(255) COLLATE utf8_bin DEFAULT NULL,
   `attribute_code` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '属性代码',
+  `update_time` datetime DEFAULT NULL,
+  `update_people` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '更新人',
+  `is_common` int DEFAULT '1' COMMENT '1公共属性 0自定义属性',
+  `create_people` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`attribute_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of attribute
 -- ----------------------------
 BEGIN;
-INSERT INTO `attribute` VALUES (1, 'test ', '1', NULL, NULL, '1', NULL, '2021-06-03 11:40:25', 1, NULL, '');
-INSERT INTO `attribute` VALUES (2, 'www', '2', NULL, NULL, '2', NULL, '2021-06-03 14:28:22', 1, NULL, NULL);
+INSERT INTO `attribute` VALUES (1, '返回状态', 'Boolean', 'Ture/False', '上报值本身', '全部通用', NULL, NULL, 1, NULL, 'is_success', NULL, NULL, 1, 'Jiangxinyu');
+INSERT INTO `attribute` VALUES (2, '商品ID', 'String', '商品ID', '上报值本身', '全部通用', '商品ID与业务库表中一致', NULL, 1, NULL, 'goods_id', NULL, NULL, 1, 'Jiangxinyu');
+INSERT INTO `attribute` VALUES (3, '会员状态', 'Boolean', 'Ture/False', '上报值本身', '全部通用', NULL, NULL, 1, NULL, 'is_member', NULL, NULL, 1, 'Jiangxinyu');
 COMMIT;
 
 -- ----------------------------
@@ -114,7 +117,7 @@ CREATE TABLE `basicData` (
   `is_lower` int DEFAULT '1',
   `children` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=235 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=262 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of basicData
@@ -147,19 +150,6 @@ INSERT INTO `basicData` VALUES ('general_label', 116, '事件通用性', 'crm_ge
 INSERT INTO `basicData` VALUES ('general_label', 117, '事件通用性', 'interactive_custom', 1, NULL, '互动定制', 1, NULL);
 INSERT INTO `basicData` VALUES ('general_label', 118, '事件通用性', 'policy_custom', 1, NULL, '天策定制', 1, NULL);
 INSERT INTO `basicData` VALUES ('general_label', 119, '事件通用性', 'crm_custom', 1, NULL, 'CRM定制', 1, NULL);
-INSERT INTO `basicData` VALUES ('0', 120, '一级', 'indicator_type', 1, NULL, '指标类型', 0, NULL);
-INSERT INTO `basicData` VALUES ('indicator_type', 121, '指标类型', 'frequency', 1, NULL, '次数', 1, NULL);
-INSERT INTO `basicData` VALUES ('indicator_type', 122, '指标类型', 'people', 1, NULL, '人数', 1, NULL);
-INSERT INTO `basicData` VALUES ('indicator_type', 123, '指标类型', 'retained', 1, NULL, '留存', 1, NULL);
-INSERT INTO `basicData` VALUES ('indicator_type', 124, '指标类型', 'time', 1, NULL, '时长', 1, NULL);
-INSERT INTO `basicData` VALUES ('indicator_type', 125, '指标类型', 'other', 1, NULL, '其他统计', 1, NULL);
-INSERT INTO `basicData` VALUES ('0', 126, '一级', 'indicator_level', 1, NULL, '一级指标', 1, NULL);
-INSERT INTO `basicData` VALUES ('indicator_level', 127, '一级指标', 'access', 1, NULL, '访问', 1, NULL);
-INSERT INTO `basicData` VALUES ('indicator_level', 128, '一级指标', 'partin', 1, NULL, '参与', 1, NULL);
-INSERT INTO `basicData` VALUES ('indicator_level', 129, '一级指标', 'purchased', 1, NULL, '加购', 1, NULL);
-INSERT INTO `basicData` VALUES ('indicator_level', 130, '一级指标', 'order', 1, NULL, '下单', 1, NULL);
-INSERT INTO `basicData` VALUES ('indicator_level', 131, '一级指标', 'pay', 1, NULL, '付款', 1, NULL);
-INSERT INTO `basicData` VALUES ('indicator_level', 132, '一级指标', 'membership', 1, NULL, '入会', 1, NULL);
 INSERT INTO `basicData` VALUES ('0', 133, '一级', 'attribute_label', 1, NULL, '属性标签', 0, NULL);
 INSERT INTO `basicData` VALUES ('attribute_label', 134, '属性标签', 'attribute_general', 1, NULL, '属性通用性', 0, NULL);
 INSERT INTO `basicData` VALUES ('attribute_general', 135, '属性通用性', 'all_genarel', 1, NULL, '全部通用', 1, NULL);
@@ -259,6 +249,33 @@ INSERT INTO `basicData` VALUES ('0', 231, '一级', 'role', 1, NULL, '角色', 1
 INSERT INTO `basicData` VALUES ('role', 232, '角色', 'admin', 1, NULL, '管理员', 1, NULL);
 INSERT INTO `basicData` VALUES ('role', 233, '角色', 'common', 1, NULL, '普通用户', 1, NULL);
 INSERT INTO `basicData` VALUES ('application_dep_platform', 234, '应用部署平台', 'crm_yz', 1, NULL, '有赞', 1, NULL);
+INSERT INTO `basicData` VALUES ('0', 235, '一级', 'indicator_type_level', 1, NULL, '指标类型', 0, NULL);
+INSERT INTO `basicData` VALUES ('indicator_type_level', 236, '指标类型', 'frequency', 1, NULL, '次数', 1, NULL);
+INSERT INTO `basicData` VALUES ('indicator_type_level', 237, '指标类型', 'people', 1, NULL, '人数', 1, NULL);
+INSERT INTO `basicData` VALUES ('indicator_type_level', 238, '指标类型', 'retained', 1, NULL, '留存', 1, NULL);
+INSERT INTO `basicData` VALUES ('indicator_type_level', 239, '指标类型', 'time', 1, NULL, '时长', 1, NULL);
+INSERT INTO `basicData` VALUES ('indicator_type_level', 240, '指标类型', 'other', 1, NULL, '其他统计', 1, NULL);
+INSERT INTO `basicData` VALUES ('frequency', 241, '次数', 'cyhdcs', 1, NULL, '参与活动次数', 1, NULL);
+INSERT INTO `basicData` VALUES ('frequency', 242, '次数', 'pv', 1, NULL, 'PV', 1, NULL);
+INSERT INTO `basicData` VALUES ('frequency', 243, '次数', 'hdfxcs', 1, NULL, '活动分享次数', 1, NULL);
+INSERT INTO `basicData` VALUES ('frequency', 244, '次数', 'fcyqcs', 1, NULL, '发出邀请次数', 1, NULL);
+INSERT INTO `basicData` VALUES ('frequency', 245, '次数', 'jsyqcs', 1, NULL, '接受邀请次数', 1, NULL);
+INSERT INTO `basicData` VALUES ('frequency', 246, '次数', 'appdkcs', 1, NULL, 'APP打开次数', 1, NULL);
+INSERT INTO `basicData` VALUES ('frequency', 247, '次数', 'qtfwcs', 1, NULL, '其他访问次数', 1, NULL);
+INSERT INTO `basicData` VALUES ('people', 248, '人数', 'uv', 1, NULL, 'UV', 1, NULL);
+INSERT INTO `basicData` VALUES ('people', 249, '人数', 'cyhdrs', 1, NULL, '参与活动人数', 1, NULL);
+INSERT INTO `basicData` VALUES ('people', 250, '人数', 'gzdprs', 1, NULL, '关注店铺人数', 1, NULL);
+INSERT INTO `basicData` VALUES ('people', 251, '人数', 'scdprs', 1, NULL, '收藏店铺人数', 1, NULL);
+INSERT INTO `basicData` VALUES ('people', 252, '人数', 'scsprs', 1, NULL, '收藏商品人数', 1, NULL);
+INSERT INTO `basicData` VALUES ('people', 253, '人数', 'jgsprs', 1, NULL, '加购商品人数', 1, NULL);
+INSERT INTO `basicData` VALUES ('people', 254, '人数', 'fcyqrs', 1, NULL, '发出邀请人数', 1, NULL);
+INSERT INTO `basicData` VALUES ('people', 255, '人数', 'jsyqrs', 1, NULL, '接受邀请人数', 1, NULL);
+INSERT INTO `basicData` VALUES ('people', 256, '人数', 'hdfxrs', 1, NULL, '活动分享人数', 1, NULL);
+INSERT INTO `basicData` VALUES ('people', 257, '人数', 'xzhyrs', 1, NULL, '新增会员人数', 1, NULL);
+INSERT INTO `basicData` VALUES ('people', 258, '人数', 'qtrs', 1, NULL, '其他人数', 1, NULL);
+INSERT INTO `basicData` VALUES ('time', 259, '时长', 'ympjtlsj', 1, NULL, '页面平均停留时间', 1, NULL);
+INSERT INTO `basicData` VALUES ('retained', 260, '留存', 'clrs', 1, NULL, '存留人数', 1, NULL);
+INSERT INTO `basicData` VALUES ('other', 261, '其他统计', 'other', 1, NULL, '其他', 1, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -272,7 +289,7 @@ CREATE TABLE `event` (
   `event_trigger_mode` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '触发类型',
   `trigger_time` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '触发时机',
   `event_label` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '事件标签',
-  `note` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
+  `note` text COLLATE utf8_bin COMMENT '备注',
   `general_attr` text COLLATE utf8_bin COMMENT '通用属性',
   `create_time` datetime DEFAULT NULL,
   `state` int DEFAULT '1',
@@ -334,31 +351,38 @@ CREATE TABLE `event` (
   UNIQUE KEY `event_name_52` (`event_name`),
   UNIQUE KEY `event_name_53` (`event_name`),
   UNIQUE KEY `event_name_54` (`event_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=272 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of event
 -- ----------------------------
 BEGIN;
-INSERT INTO `event` VALUES (2, '22221231', 'tw122w122111', 'test', 'liji', '22', '22', '22', '2021-06-03 13:00:00', 1, NULL, NULL, NULL);
-INSERT INTO `event` VALUES (27, '1111', 'tww', 'test', 'liji', '22', '22', '22', NULL, 1, NULL, NULL, NULL);
-INSERT INTO `event` VALUES (30, '11112', 'tww1', 'test', 'liji', '22', '22', '22', NULL, 1, NULL, NULL, NULL);
-INSERT INTO `event` VALUES (31, '3333', 'tww21', 'test', 'liji', '22', '22', '22', NULL, 1, NULL, NULL, NULL);
-INSERT INTO `event` VALUES (32, '3333444', 'tww212', 'test', 'liji', '22', '22', '22', '2021-06-03 13:00:00', 1, NULL, NULL, NULL);
-INSERT INTO `event` VALUES (33, NULL, '2222', 'click', '问问', NULL, '好', NULL, '1970-01-01 00:00:44', 1, NULL, NULL, NULL);
-INSERT INTO `event` VALUES (34, NULL, 'test2', 'click', '试试', NULL, '坏', NULL, '1970-01-01 00:00:44', 1, NULL, NULL, NULL);
-INSERT INTO `event` VALUES (35, 'twb', 'test3', 'click', '问问', NULL, '好', NULL, NULL, 1, NULL, NULL, NULL);
-INSERT INTO `event` VALUES (36, '问问', 'test', 'click', '试试', NULL, '坏', NULL, NULL, 1, NULL, NULL, NULL);
-INSERT INTO `event` VALUES (37, 'twb1', 'test9', 'click', '问问', NULL, '好', NULL, NULL, 1, NULL, NULL, NULL);
-INSERT INTO `event` VALUES (38, '问问1', 'test8', 'click', '试试', NULL, '坏', NULL, NULL, 1, NULL, NULL, NULL);
-INSERT INTO `event` VALUES (115, '呜呜呜呜', 'tw1w2211', 'test', 'liji', '22', '22', '22', '2021-06-03 13:00:00', 1, '2021-06-08 03:50:06', '', NULL);
-INSERT INTO `event` VALUES (116, '呜呜呜呜1', 'tw1w22111', 'test', 'liji', '22', '22', '22', '2021-06-03 13:00:00', 1, '2021-06-08 03:52:47', NULL, NULL);
-INSERT INTO `event` VALUES (117, '呜呜呜1呜1', 'tw1w122111', 'test', 'liji', '22', '22', '22', '2021-06-03 13:00:00', 1, '2021-06-08 03:53:28', NULL, NULL);
-INSERT INTO `event` VALUES (119, 'twb1236', 'test222', 'click', '问问', '1', NULL, '2', NULL, 1, '2021-06-10 09:18:54', NULL, 'twb');
-INSERT INTO `event` VALUES (120, '问问1235', 'test82', 'click', '试试', '2', NULL, '2', NULL, 1, '2021-06-10 09:18:54', NULL, 'twb');
-INSERT INTO `event` VALUES (135, 'twb12361', 'test2221', 'click', '问问', 'general_label', NULL, '2', NULL, 1, '2021-06-15 02:02:35', NULL, 'twb');
-INSERT INTO `event` VALUES (136, '问问12351', 'test821', 'click', '试试', 'general_label', NULL, '2', NULL, 1, '2021-06-15 02:02:35', NULL, 'twb');
-INSERT INTO `event` VALUES (137, '2222', 'tw2w122111', 'test', 'liji', '22', '22', '22', '2021-06-03 13:00:00', 1, '2021-06-16 06:20:18', NULL, NULL);
+INSERT INTO `event` VALUES (1, '落地页统计', 'pageview', 'open', '访问落地页', 'all_general', '针对小程序而言，就是在小程序的onLoad周期函数中，上报该事件。\n\n针对vue而言，就是在vue项目中的mounted周期函数中，上报该事件。\n\n针对react项目而言，就是在react的componentDidMount中，上报该事件。\n\n针对react的Hook中，一般在一个依赖参数为空的 useEffect 的回调中，上报该事件。', '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, 'Jiangxinyu');
+INSERT INTO `event` VALUES (2, '前往页面', 'page', 'jump', '页面跳转', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, 'Jiangxinyu');
+INSERT INTO `event` VALUES (3, '打开app', 'app', 'open', '打开应用', 'all_general', '统计一个app打开的次数。这里的app，一般是某一个单独的应用，对于前端同学来说，就是一个单独的项目仓库。', '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, 'Jiangxinyu');
+INSERT INTO `event` VALUES (4, '打开详情页', 'detail', 'open', '打开一个详情页面时', 'all_general', '该事件与商品详情页（event_code = goods_detail）区别是，任何打开详情页的行为都是使用该事件进行统计。 而 goods_detail 的事件一般用来描述电商的详情页。同时他们的 event_parameters 中的参数不一样。', '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, 'Jiangxinyu');
+INSERT INTO `event` VALUES (5, '打开商品详情页', 'goods_detail', 'open', '打开一个商品详情页面时', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, 'Jiangxinyu');
+INSERT INTO `event` VALUES (6, '会员登陆', 'login', 'click', '点击登录按钮', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, 'Jiangxinyu');
+INSERT INTO `event` VALUES (7, '点击参与活动', 'join_act_click', 'click', '点击参互活动', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, 'Jiangxinyu');
+INSERT INTO `event` VALUES (8, '成功参与活动', 'join_act_callback', 'callback', '参与活动成功的回调事件', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, 'Jiangxinyu');
+INSERT INTO `event` VALUES (9, '点击店铺收藏', 'favor_click', 'click', '点击收藏店铺', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, 'Jiangxinyu');
+INSERT INTO `event` VALUES (10, '成功店铺收藏', 'favor_callback', 'callback', '回调收藏店铺', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, 'Jiangxinyu');
+INSERT INTO `event` VALUES (11, '点击店铺关注', 'follow_click', 'click', '点击店铺关注', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, 'Jiangxinyu');
+INSERT INTO `event` VALUES (12, '成功店铺关注', 'follow_callback', 'callback', '成功店铺关注', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, 'Jiangxinyu');
+INSERT INTO `event` VALUES (13, '点击活动签到', 'sign_click', 'click', '点击活动签到', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, NULL);
+INSERT INTO `event` VALUES (14, '成功活动签到', 'sign_callback', 'callback', '成功活动签到', 'all_general', 'event_type使用click/callback的场景：签到一般会有一个签到的按钮，点击该按钮的时候，使用click；签到成功/失败的回调，使用callback。', '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, NULL);
+INSERT INTO `event` VALUES (15, '完善个人信息', 'perfect_userinfo', 'callback', '完善个人信息提交成功事件', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, NULL);
+INSERT INTO `event` VALUES (16, '点击注册入会', 'register_click', 'click', '点击注册入会', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, NULL);
+INSERT INTO `event` VALUES (17, '成功注册入会', 'register_callback', 'callback', '成功注册入会', 'all_general', 'event_type使用click/callback的场景：入会一般会有一个入会的按钮，点击该按钮的时候，使用click；入会其实也是一个过程，当入会成功之后，会到达一个入会成功/入会失败的页面，这个时候，使用callback。', '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, NULL);
+INSERT INTO `event` VALUES (18, '完成抽奖', 'wheel', 'callback', '完成抽奖回调', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, NULL);
+INSERT INTO `event` VALUES (19, '点击加入购物车', 'add_cart_click', 'click', '点击加入购物车', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, NULL);
+INSERT INTO `event` VALUES (20, '成功加入购物车', 'add_cart_callback', 'callback', '成功加入购物车', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, NULL);
+INSERT INTO `event` VALUES (21, '点击收藏商品', 'favor_goods_click', 'click', '点击收藏商品', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, NULL);
+INSERT INTO `event` VALUES (22, '成功收藏商品', 'favor_goods_callback', 'callback', '成功收藏商品', 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, NULL);
+INSERT INTO `event` VALUES (23, '点击分享页面', 'share_click', 'click', '点击分享页面', 'all_general', '只要点击分享的按钮就进行事件上报', '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, NULL);
+INSERT INTO `event` VALUES (24, '成功分享页面', 'share_callback', 'callback', '成功分享页面', 'all_general', '分享成功/失败的回调中上报事件', '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, NULL);
+INSERT INTO `event` VALUES (25, '发送邀请', 'invite', 'click', NULL, 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, NULL);
+INSERT INTO `event` VALUES (26, '接受邀请', 'be_invited', 'click', NULL, 'all_general', NULL, '', '2021-06-17 18:15:32', 1, '2021-06-17 18:15:32', NULL, NULL);
 COMMIT;
 
 -- ----------------------------
@@ -379,18 +403,6 @@ CREATE TABLE `eventAttribute` (
 -- Records of eventAttribute
 -- ----------------------------
 BEGIN;
-INSERT INTO `eventAttribute` VALUES (31, 1);
-INSERT INTO `eventAttribute` VALUES (32, 1);
-INSERT INTO `eventAttribute` VALUES (115, 1);
-INSERT INTO `eventAttribute` VALUES (116, 1);
-INSERT INTO `eventAttribute` VALUES (117, 1);
-INSERT INTO `eventAttribute` VALUES (137, 1);
-INSERT INTO `eventAttribute` VALUES (31, 2);
-INSERT INTO `eventAttribute` VALUES (32, 2);
-INSERT INTO `eventAttribute` VALUES (115, 2);
-INSERT INTO `eventAttribute` VALUES (116, 2);
-INSERT INTO `eventAttribute` VALUES (117, 2);
-INSERT INTO `eventAttribute` VALUES (137, 2);
 COMMIT;
 
 -- ----------------------------
@@ -402,35 +414,48 @@ CREATE TABLE `indicator` (
   `indicator_name` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '指标名称',
   `indicator_type` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '指标类型',
   `indicator_level` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '一级指标',
-  `indicator_code` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '指标代码',
+  `indicator_code` varchar(40) COLLATE utf8_bin DEFAULT NULL COMMENT '指标代码',
   `indicator_label` varchar(20) COLLATE utf8_bin DEFAULT NULL COMMENT '指标标签',
   `note` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '备注',
   `create_time` datetime DEFAULT NULL,
   `state` int DEFAULT '1',
-  `dimension_general_attr` varchar(25) COLLATE utf8_bin DEFAULT NULL COMMENT '自定义维度属性',
-  `dimension_general_name` varchar(25) COLLATE utf8_bin DEFAULT NULL COMMENT '自定义维度名称',
-  `dimension_custom_attr` varchar(25) COLLATE utf8_bin DEFAULT NULL COMMENT '通用维度属性',
-  `dimension_custom_name` varchar(25) COLLATE utf8_bin DEFAULT NULL COMMENT '通用维度名称',
   `update_time` datetime DEFAULT NULL,
   `update_people` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '更新人',
   `create_people` varchar(255) COLLATE utf8_bin DEFAULT NULL COMMENT '创建人',
   PRIMARY KEY (`indicator_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=413 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of indicator
 -- ----------------------------
 BEGIN;
-INSERT INTO `indicator` VALUES (2, '1112222222', 'tw122w122111', 'test', 'liji', '22', '22', '2021-06-03 13:00:00', 1, '22', '22', '22', '22', '2021-06-09 07:37:29', NULL, 'twb');
-INSERT INTO `indicator` VALUES (3, '问问1235', 'click', '试试', 'test8122', '坏', NULL, '1970-01-01 00:00:44', 1, '22', '2222', '11', '22', '2021-06-09 07:37:29', NULL, '田卫勃');
-INSERT INTO `indicator` VALUES (4, 'twb1236', 'click', '问问', 'test912', '好', NULL, '1970-01-01 00:00:44', 1, '22', '22', '22', '2', '2021-06-09 07:52:23', NULL, 'twb');
-INSERT INTO `indicator` VALUES (5, '问问1235', 'click', '试试', 'test812', '坏', NULL, '1970-01-01 00:00:44', 1, '22', '2222', '11', '22', '2021-06-09 07:52:23', NULL, '田卫勃');
-INSERT INTO `indicator` VALUES (6, 'twb1236', 'click', '问问', 'test9121', '好', NULL, '1970-01-01 00:00:44', 1, '22', '22', '22', '2', '2021-06-09 08:22:33', NULL, 'twb');
-INSERT INTO `indicator` VALUES (7, '问问1235', 'click', '试试', 'test8121', '坏', NULL, '1970-01-01 00:00:44', 1, '22', '2222', '11', '22', '2021-06-09 08:22:33', NULL, '田卫勃');
-INSERT INTO `indicator` VALUES (8, '2221112', 'tw122w122111', 'test', 'liji11', '22', '22', '2021-06-03 13:00:00', 1, '22', '22', '22', '22', '2021-06-16 07:19:50', NULL, 'twb');
-INSERT INTO `indicator` VALUES (9, '2221112', 'tw122w122111', 'test', 'liji211', '22', '22', '2021-06-03 13:00:00', 1, '22', '22', '22', '22', '2021-06-16 07:21:19', NULL, 'twb');
-INSERT INTO `indicator` VALUES (10, '22212222112', 'tw122w122111', 'test', 'q', '22', '22', '2021-06-03 13:00:00', 1, '22', '22', '22', '22', '2021-06-16 07:24:58', NULL, 'twb');
-INSERT INTO `indicator` VALUES (11, '2212222112', 'tw122w122111', 'test', '1q', '22', '22', '2021-06-03 13:00:00', 1, '22', '22', '22', '22', '2021-06-16 07:25:54', NULL, 'twb');
+INSERT INTO `indicator` VALUES (1, 'PV', 'frequency', 'pv', 'pv', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (2, '参与活动次数', 'frequency', 'cyhdcs', 'join_act_pv_click', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (3, '参与活动成功次数', 'frequency', 'cyhdcs', 'join_act_pv_callback', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (4, '活动分享次数', 'frequency', 'hdfxcs', 'share_pv_click', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (5, '活动分享成功次数', 'frequency', 'hdfxcs', 'share_pv_callback', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (6, '发出邀请次数', 'frequency', 'fcyqcs', 'invite_pv', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (7, '接受邀请次数', 'frequency', 'jsyqcs', 'invited_pv', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (8, 'APP打开次数', 'frequency', 'appdkcs', 'app_pv', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (9, 'UV', 'people', 'uv', 'uv', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (10, '参与活动人数', 'people', 'cyhdrs', 'join_act_uv_click', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (11, '参与活动成功人数', 'people', 'cyhdrs', 'join_act_uv_callback', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (12, '关注店铺人数', 'people', 'gzdprs', 'follow_shop_uv_click', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (13, '关注店铺成功人数', 'people', 'gzdprs', 'follow_shop_uv_callback', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (14, '收藏店铺人数', 'people', 'scdprs', 'favor_shop_uv_click', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (15, '收藏店铺成功人数', 'people', 'scdprs', 'favor_shop_uv_callback', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (16, '收藏商品人数', 'people', 'scsprs', 'favor_goods_uv_click', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (17, '收藏商品成功人数', 'people', 'scsprs', 'favor_goods_uv_callback', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (18, '加购商品人数', 'people', 'jgsprs', 'add_cart_uv_click', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (19, '加购商品成功人数', 'people', 'jgsprs', 'add_cart_uv_callback', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (20, '发出邀请人数', 'people', 'fcyqrs', 'invite_uv', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (21, '接受邀请人数', 'people', 'jsyqrs', 'invited_uv', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (22, '活动分享人数', 'people', 'hdfxrs', 'share_uv_click', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (23, '活动分享成功人数', 'people', 'hdfxrs', 'share_uv_callback', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (24, '新增会员人数', 'people', 'xzhyrs', 'membership_uv_click', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (25, '新增会员成功人数', 'people', 'xzhyrs', 'membership_uv_callback', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (26, '页面平均停留时间', 'time', 'ympjtlsj', 'page_length', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
+INSERT INTO `indicator` VALUES (27, '存留人数', 'retained', 'clrs', 'survivors', '', NULL, '2021-06-18 14:36:17', 1, '2021-06-18 14:36:17', NULL, 'Jiangxinyu');
 COMMIT;
 
 -- ----------------------------
@@ -451,19 +476,34 @@ CREATE TABLE `indicatorEvent` (
 -- Records of indicatorEvent
 -- ----------------------------
 BEGIN;
-INSERT INTO `indicatorEvent` VALUES (2, 2);
-INSERT INTO `indicatorEvent` VALUES (3, 2);
-INSERT INTO `indicatorEvent` VALUES (8, 2);
-INSERT INTO `indicatorEvent` VALUES (9, 2);
-INSERT INTO `indicatorEvent` VALUES (10, 2);
-INSERT INTO `indicatorEvent` VALUES (11, 2);
-INSERT INTO `indicatorEvent` VALUES (2, 27);
-INSERT INTO `indicatorEvent` VALUES (8, 27);
-INSERT INTO `indicatorEvent` VALUES (9, 27);
-INSERT INTO `indicatorEvent` VALUES (10, 27);
-INSERT INTO `indicatorEvent` VALUES (11, 27);
-INSERT INTO `indicatorEvent` VALUES (3, 30);
-INSERT INTO `indicatorEvent` VALUES (3, 31);
+INSERT INTO `indicatorEvent` VALUES (1, 1);
+INSERT INTO `indicatorEvent` VALUES (9, 1);
+INSERT INTO `indicatorEvent` VALUES (26, 1);
+INSERT INTO `indicatorEvent` VALUES (26, 2);
+INSERT INTO `indicatorEvent` VALUES (8, 3);
+INSERT INTO `indicatorEvent` VALUES (2, 7);
+INSERT INTO `indicatorEvent` VALUES (10, 7);
+INSERT INTO `indicatorEvent` VALUES (27, 7);
+INSERT INTO `indicatorEvent` VALUES (3, 8);
+INSERT INTO `indicatorEvent` VALUES (11, 8);
+INSERT INTO `indicatorEvent` VALUES (14, 9);
+INSERT INTO `indicatorEvent` VALUES (15, 10);
+INSERT INTO `indicatorEvent` VALUES (12, 11);
+INSERT INTO `indicatorEvent` VALUES (13, 12);
+INSERT INTO `indicatorEvent` VALUES (24, 16);
+INSERT INTO `indicatorEvent` VALUES (25, 17);
+INSERT INTO `indicatorEvent` VALUES (18, 19);
+INSERT INTO `indicatorEvent` VALUES (19, 20);
+INSERT INTO `indicatorEvent` VALUES (16, 21);
+INSERT INTO `indicatorEvent` VALUES (17, 22);
+INSERT INTO `indicatorEvent` VALUES (4, 23);
+INSERT INTO `indicatorEvent` VALUES (22, 23);
+INSERT INTO `indicatorEvent` VALUES (5, 24);
+INSERT INTO `indicatorEvent` VALUES (23, 24);
+INSERT INTO `indicatorEvent` VALUES (6, 25);
+INSERT INTO `indicatorEvent` VALUES (20, 25);
+INSERT INTO `indicatorEvent` VALUES (7, 26);
+INSERT INTO `indicatorEvent` VALUES (21, 26);
 COMMIT;
 
 -- ----------------------------

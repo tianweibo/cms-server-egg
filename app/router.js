@@ -43,6 +43,7 @@ module.exports = app => {
   router.delete('/api/application/delete',controller.application.delete);//应用的删除
   //指标
   router.post('/api/indicator/listById',controller.indicator.listById);// 通过ID获取指标的列表
+  router.post('/api/indicator/listByType',controller.indicator.listByType);// 通过指标类型和一级指标获取指标的列表
   router.post('/api/indicator/list',controller.indicator.list);// 指标列表的获取
   router.post('/api/indicator/create',controller.indicator.create);//指标的创建
   router.get('/api/indicator/detail',controller.indicator.detail);//指标详情的查看

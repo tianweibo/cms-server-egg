@@ -188,6 +188,33 @@ class Indicator extends Service {
             return this.ServerResponse.networkError('网络问题');
         }
     }
+    async listByType(obj){
+        const { ctx, app } = this;
+        const Op = app.Sequelize.Op;
+        var arr=[]
+        if (obj.indicator_type) {
+            arr.push({
+                indicator_type: obj.indicator_type,
+            })
+        }
+        if (obj.indicator_level) {
+            arr.push({
+                indicator_level: obj.indicator_level,
+            })
+        }
+        var objOption = {
+            [Op.and]: arr
+        }
+        try {
+            var arr1 = await this.Indicator.findAll({
+                where: objOption,
+                attributes: ['indicator_id', 'indicator_name', 'indicator_code']
+            })
+            return this.ServerResponse.requireData('查询成功', arr1);
+        } catch (e) {
+            return this.ServerResponse.networkError('网络问题');
+        }
+    }
     async list(obj) {
         const { ctx, app } = this;
         const Op = app.Sequelize.Op;

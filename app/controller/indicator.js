@@ -36,6 +36,11 @@ class IndicatorController extends Controller {
         const response=await this.Indicator.detail(ctx.query.id);
         ctx.body=response;
     }
+    async listByType(){
+     const ctx=this.ctx;
+	   const response=await this.Indicator.listByType(ctx.request.body);
+	   ctx.body=response;
+    }
     async archive(){ 
         const ctx=this.ctx;
         const response=await this.Indicator.archive(ctx.helper.parseInt(ctx.query.id));

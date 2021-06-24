@@ -8,7 +8,6 @@ class Application extends Service {
         this.Application = ctx.model.Application;
         this.Event = ctx.model.Event;
         this.ApplicationIndicator = ctx.model.ApplicationIndicator;
-        this.ApplicationIndicator = ctx.model.ApplicationIndicator;
         this.IndicatorEvent = ctx.model.IndicatorEvent
         this.Indicator = ctx.model.Indicator;
         this.ResponseCode = ctx.response.ResponseCode;

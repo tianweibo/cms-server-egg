@@ -81,7 +81,9 @@ class EventController extends Controller {
        //event_label:eventLabelList[row.event_label],
        event_label:ctx.helper.dealMulValue(row.event_label,eventLabelList),
        event_trigger_mode:triggerMode[row.event_trigger_mode],
-       general_attr:ctx.helper.dealMulValue(row.general_attr,generalAttr)
+       general_attr:ctx.helper.dealMulValue(row.general_attr,generalAttr),
+       event_label_label:row.event_label,
+       event_trigger_mode_label:row.event_trigger_mode
       });
       //event_code 的唯一性判定
       const Op = app.Sequelize.Op;

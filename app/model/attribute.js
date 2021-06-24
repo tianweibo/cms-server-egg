@@ -7,6 +7,7 @@ module.exports=app=>{
 		attribute_name:{type:STRING(20),comment:"属性名称"},            
 		attribute_code:{type:STRING(20),comment:'属性代码'},     
 		data_type:{type:STRING(20),comment:'数据类型'},
+		data_type_label:{type:STRING(20),comment:'数据类型label'},
 		desc:{type:STRING(20),comment:'单位格式说明'},               
 		attribute_source:{type:STRING(20),comment:'属性来源'},        
         attribute_label:{type:STRING(20),comment:'属性标签'},          

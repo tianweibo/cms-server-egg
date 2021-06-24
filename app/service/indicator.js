@@ -135,10 +135,11 @@ class Indicator extends Service {
         })
         const idAPPArr = await this.ApplicationIndicator.findAll({
             where: {
-                application_id: id
+                indicator_id: id
             },
-            attributes: ['application_id']
+            //attributes: ['application_id']
         })
+        console.log('idAPPArr',id,idAPPArr)
         var dataAppArr = [];
         if (idAPPArr && idAPPArr.length > 0) {
             for (var i = 0; i < idAPPArr.length; i++) {

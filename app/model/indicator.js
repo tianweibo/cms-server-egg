@@ -11,6 +11,7 @@ module.exports=app=>{
 		indicator_level_label:{type:STRING(20),comment:'一级指标label'},   
 		indicator_code:{type:STRING(40),comment:'指标代码'},         
 		indicator_label:{type:STRING(60),comment:'指标标签'}, 
+		relationship_event:{defaultValue:1,type:INTEGER(2),comment:'事件关系'}, 
 		indicator_label_label:{type:STRING(60),comment:'指标标签label'},         
 		note:{type:STRING,comment:"备注"},                      
 		create_time:{
@@ -28,7 +29,7 @@ module.exports=app=>{
 		update_time:{
 			type:DATE,
 			get(){
-				return moment(this.getDataValue('create_time')).format(
+				return moment(this.getDataValue('update_time')).format(
 					'YYYY-MM-DD HH:MM:SS'
 				);
 			},

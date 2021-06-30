@@ -2,6 +2,7 @@
 const path = require("path");
 const fs = require("fs");
 const Service = require('egg').Service;
+const sd = require('silly-datetime');
 class Event extends Service {
 	constructor(ctx) {
 		super(ctx);
@@ -21,7 +22,8 @@ class Event extends Service {
 			return this.ServerResponse.requireData('事件不存在', { code: 1 })
 		} else {
 			var obj = data.updates;
-			obj.update_people = this.ctx.session.username;
+			obj.info.update_people = this.ctx.session.username;
+			obj.info['update_time']=sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
 			const thedata = await this.Event.update(obj.info, {
 				where: {
 					event_id: data.id
@@ -150,6 +152,9 @@ class Event extends Service {
 			await this.Event.findAndCountAll({
 				where: objOption,
 				limit: parseInt(obj.pageSize),
+				order: [
+                    ['create_time', 'DESC'] //降序desc，升序asc
+                ],
 				offset: parseInt((obj.pageNo - 1) * obj.pageSize)
 			}).then(function (result) {
 				list.count = result.count,

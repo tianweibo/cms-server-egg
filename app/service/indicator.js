@@ -1,5 +1,6 @@
 'use strict';
 const Service = require('egg').Service;
+const sd = require('silly-datetime');
 class Indicator extends Service {
     constructor(ctx) {
         super(ctx);
@@ -21,14 +22,16 @@ class Indicator extends Service {
             return this.ServerResponse.requireData('指标不存在', { code: 1 })
         } else {
             var obj = data.updates;
-            obj.update_people = this.ctx.session.username;
+            obj.info.update_people = this.ctx.session.username;
+            obj.info['update_time']=sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
             const thedata = await this.Indicator.update(obj.info, {
                 where: {
                     indicator_id: data.id
                 }
             })
             if (thedata) {
-                var data1 = [];
+                if(data.updates.eventArr){
+                    var data1 = [];
                 for (var i = 0; i < data.updates.eventArr.length; i++) {
                     var obj = {
                         indicator_id: data.id,
@@ -41,18 +44,21 @@ class Indicator extends Service {
                 if (!eventIndicatorInfo) {
                     return this.ServerResponse.networkError('网络问题');
                 }
-                var data2 = [];
-                for (var i = 0; i < data.updates.appArr.length; i++) {
-                    var obj = {
-                        indicator_id: data.id,
-                        application_id: data.updates.appArr[i]
-                    }
-                    data2.push(obj)
                 }
-                await this.ApplicationIndicator.destroy({ where: { indicator_id: data.id } });
-                const appIndicatorInfo = await this.ApplicationIndicator.bulkCreate(data2, { updateOnDuplicate: ["indicator_id"] })
-                if (!appIndicatorInfo) {
-                    return this.ServerResponse.networkError('网络问题');
+                if(data.updates.appArr){
+                    var data2 = [];
+                    for (var i = 0; i < data.updates.appArr.length; i++) {
+                        var obj = {
+                            indicator_id: data.id,
+                            application_id: data.updates.appArr[i]
+                        }
+                        data2.push(obj)
+                    }
+                    await this.ApplicationIndicator.destroy({ where: { indicator_id: data.id } });
+                    const appIndicatorInfo = await this.ApplicationIndicator.bulkCreate(data2, { updateOnDuplicate: ["indicator_id"] })
+                    if (!appIndicatorInfo) {
+                        return this.ServerResponse.networkError('网络问题');
+                    }
                 }
                 return this.ServerResponse.requireData('更新成功', { code: 0 });
             } else {
@@ -69,33 +75,35 @@ class Indicator extends Service {
         if (hasIndicator == null) {
             const indicatorInfo = await this.Indicator.create(indicator.info);
             if (indicatorInfo) {
-                var data = [];
-                for (var i = 0; i < indicator.eventArr.length; i++) {
-                    var obj = {
-                        indicator_id: indicatorInfo.dataValues.indicator_id,
-                        event_id: indicator.eventArr[i]
+                if(indicator.eventArr){
+                    var data = [];
+                    for (var i = 0; i < indicator.eventArr.length; i++) {
+                        var obj = {
+                            indicator_id: indicatorInfo.dataValues.indicator_id,
+                            event_id: indicator.eventArr[i]
+                        }
+                        data.push(obj)
                     }
-                    data.push(obj)
-                }
-                const eventIndicatorInfo = await this.IndicatorEvent.bulkCreate(data)
-                if (!eventIndicatorInfo) {
-                    return this.ServerResponse.networkError('网络问题');
-                }
-
-                //ApplicationIndicator
-                var data = [];
-                for (var i = 0; i < indicator.appArr.length; i++) {
-                    var obj = {
-                        indicator_id: indicatorInfo.dataValues.indicator_id,
-                        application_id: indicator.appArr[i]
+                    const eventIndicatorInfo = await this.IndicatorEvent.bulkCreate(data)
+                    if (!eventIndicatorInfo) {
+                        return this.ServerResponse.networkError('网络问题');
                     }
-                    data.push(obj)
                 }
-                const eventAppInfo = await this.ApplicationIndicator.bulkCreate(data)
-                if (!eventAppInfo) {
+                var data = [];
+                if(indicator.appArr){
+                    for (var i = 0; i < indicator.appArr.length; i++) {
+                        var obj = {
+                            indicator_id: indicatorInfo.dataValues.indicator_id,
+                            application_id: indicator.appArr[i]
+                        }
+                        data.push(obj)
+                    }
+                    const eventAppInfo = await this.ApplicationIndicator.bulkCreate(data)
+                  if (!eventAppInfo) {
                     return this.ServerResponse.networkError('网络问题');
+                   }
                 }
-
+                
                 return this.ServerResponse.requireData('注册成功', { code: 0 });
             } else {
                 return this.ServerResponse.networkError('网络问题');
@@ -139,7 +147,6 @@ class Indicator extends Service {
             },
             //attributes: ['application_id']
         })
-        console.log('idAPPArr',id,idAPPArr)
         var dataAppArr = [];
         if (idAPPArr && idAPPArr.length > 0) {
             for (var i = 0; i < idAPPArr.length; i++) {
@@ -245,10 +252,14 @@ class Indicator extends Service {
         try {
             await this.Indicator.findAndCountAll({
                 where: objOption,
+                //order: "create_time",
+                order: [
+                    ['create_time', 'DESC'] //降序desc，升序asc
+                ],
                 limit: parseInt(obj.pageSize),
                 offset: parseInt((obj.pageNo - 1) * obj.pageSize)
             }).then(function (result) {
-                list.count = result.count,
+                    list.count = result.count,
                     list.arr = result.rows
             })
             return this.ServerResponse.requireData('查询成功', list);

@@ -8,6 +8,8 @@ class Event extends Service {
 		super(ctx);
 		this.Event = ctx.model.Event;
 		this.EventAttribute = ctx.model.EventAttribute;
+		this.IndicatorEvent=ctx.model.IndicatorEvent;
+		this.Indicator=ctx.model.Indicator
 		this.Attribute = ctx.model.Attribute;
 		this.ResponseCode = ctx.response.ResponseCode;
 		this.ServerResponse = ctx.response.ServerResponse;
@@ -82,6 +84,35 @@ class Event extends Service {
 			}
 		} else {
 			return this.ServerResponse.requireData('事件英文代码已存在,请换个再试试', { code: 1 })
+		}
+	}
+	async indicByEventId(id){
+		const { ctx, app } = this;
+		const Op = app.Sequelize.Op;
+		const idArr = await this.IndicatorEvent.findAll({
+			where: {
+				event_id: id
+			},
+			attributes: ['indicator_id']
+		})
+		var dataArr = [];
+		if (idArr && idArr.length > 0) {
+			for (var i = 0; i < idArr.length; i++) {
+				dataArr.push({
+					indicator_id: idArr[i].indicator_id
+				})
+			}
+		}
+		var objOption = {
+			[Op.or]: dataArr,
+		}
+		var list = await this.Indicator.findAll({
+			where: objOption,
+		})
+		if (list == null) {
+			return this.ServerResponse.requireData('指标不存在', { code: 1 });
+		} else {
+			return this.ServerResponse.requireData('查询成功', { code: 0, data: list });
 		}
 	}
 	async detail(id) {
@@ -178,9 +209,9 @@ class Event extends Service {
 			}, { where: { event_id: id }, individualHooks: true });
 
 			if (row) {
-				return this.ServerResponse.requireData('删除成功', { code: 0 });
+				return this.ServerResponse.requireData('归档成功', { code: 0 });
 			} else {
-				return this.ServerResponse.requireData('删除失败', { code: 1 });
+				return this.ServerResponse.requireData('归档失败', { code: 1 });
 			}
 		} catch (e) {
 			return this.ServerResponse.networkError('网络问题');

@@ -32,6 +32,12 @@ class EventController extends Controller {
         const response=await this.Event.detail(ctx.query.id);
         ctx.body=response;
     }
+    async indicByEventId(){
+      console.log(1111)
+      const ctx=this.ctx;
+      const response=await this.Event.indicByEventId(ctx.query.id);
+      ctx.body=response;
+    }
     async archive(){ 
         const ctx=this.ctx;
         const response=await this.Event.archive(ctx.helper.parseInt(ctx.query.id));

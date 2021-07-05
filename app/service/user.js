@@ -27,7 +27,7 @@ class User extends Service {
 		id:hasUser.dataValues.id,
 		scope:hasUser.id
 	},this.app.config.jwt.cert,{
-		expiresIn:60*60
+		expiresIn:60*60*24
 	})
 	//await this.app.redis.set('userid', hasUser.dataValues.id);
 	this.ctx.session.userid=hasUser.dataValues.id

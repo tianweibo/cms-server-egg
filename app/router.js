@@ -28,6 +28,7 @@ module.exports = app => {
   router.get('/event/archive',controller.event.archive);//事件的归档-done
   router.delete('/event/delete',controller.event.delete);//事件的删除-done
   router.post('/event/update',controller.event.update);//事件的更新-done
+  router.get('/event/indicByEventId',controller.event.indicByEventId);//事件下的指标
   //属性
   router.post('/attribute/list',controller.attribute.list);// 属性列表的获取
   router.post('/attribute/detail',controller.attribute.detail);//属性详情的查看
@@ -43,6 +44,7 @@ module.exports = app => {
   router.delete('/application/delete',controller.application.delete);//应用的删除
   //指标
   router.post('/indicator/listById',controller.indicator.listById);// 通过ID获取指标的列表
+  router.post('/indicator/listByType',controller.indicator.listByType);// 通过指标类型和一级指标获取指标的列表
   router.post('/indicator/list',controller.indicator.list);// 指标列表的获取
   router.post('/indicator/create',controller.indicator.create);//指标的创建
   router.get('/indicator/detail',controller.indicator.detail);//指标详情的查看

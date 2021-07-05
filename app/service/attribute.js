@@ -1,6 +1,7 @@
 'use strict';
 
 const Service = require('egg').Service;
+const sd = require('silly-datetime');
 class Attribute extends Service {
   constructor(ctx){
 	  super(ctx);
@@ -103,6 +104,9 @@ class Attribute extends Service {
 	try{
 		await this.Attribute.findAndCountAll({
 			where:objOption,
+			order: [
+                    ['create_time', 'DESC'] //降序desc，升序asc
+            ],
 			limit: parseInt(obj.pageSize),
 			offset:parseInt((obj.pageNo-1) * obj.pageSize)
 		}).then(function(result){

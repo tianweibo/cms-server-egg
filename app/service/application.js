@@ -1,13 +1,13 @@
 'use strict';
 const path = require("path");
 const fs = require("fs");
+const sd = require('silly-datetime');
 const Service = require('egg').Service;
 class Application extends Service {
     constructor(ctx) {
         super(ctx);
         this.Application = ctx.model.Application;
         this.Event = ctx.model.Event;
-        this.ApplicationIndicator = ctx.model.ApplicationIndicator;
         this.ApplicationIndicator = ctx.model.ApplicationIndicator;
         this.IndicatorEvent = ctx.model.IndicatorEvent
         this.Indicator = ctx.model.Indicator;
@@ -24,7 +24,8 @@ class Application extends Service {
             return this.ServerResponse.requireData('应用不存在', { code: 1 })
         } else {
             var obj = data.updates;
-            obj.update_people = this.ctx.session.username;
+            obj.info.update_people = this.ctx.session.username;
+            obj.info['update_time']=sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
             const thedata = await this.Application.update(obj.info, {
                 where: {
                     application_id: data.id
@@ -217,6 +218,9 @@ class Application extends Service {
         try {
             await this.Application.findAndCountAll({
                 where: objOption,
+                order: [
+                    ['create_time', 'DESC'] //降序desc，升序asc
+                ],
                 limit: parseInt(obj.pageSize),
                 offset: parseInt((obj.pageNo - 1) * obj.pageSize)
             }).then(function (result) {

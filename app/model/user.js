@@ -43,7 +43,7 @@ module.exports=app=>{
 		updated_at:{
 			type:DATE,
 			get(){
-				return moment(this.getDataValue('created_at')).format(
+				return moment(this.getDataValue('update_time')).format(
 					'YYYY-MM-DD HH:MM:SS'
 				);
 			}

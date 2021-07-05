@@ -7,9 +7,11 @@ module.exports=app=>{
 		attribute_name:{type:STRING(20),comment:"属性名称"},            
 		attribute_code:{type:STRING(20),comment:'属性代码'},     
 		data_type:{type:STRING(20),comment:'数据类型'},
+		data_type_label:{type:STRING(20),comment:'数据类型label'},
 		desc:{type:STRING(20),comment:'单位格式说明'},               
 		attribute_source:{type:STRING(20),comment:'属性来源'},        
-        attribute_label:{type:STRING(20),comment:'属性标签'},          
+        attribute_label:{type:STRING(60),comment:'属性标签'},
+		attribute_label_label:{type:STRING(60),comment:'属性标签label'},          
 		note:{type:STRING,comment:'备注'}, 
 		is_common:{defaultValue:1,type:INTEGER(6),comment:'1公共属性 0自定义属性'},                    
 		create_time:{
@@ -29,7 +31,7 @@ module.exports=app=>{
 		update_time:{
 			type:DATE,
 			get(){
-				return moment(this.getDataValue('create_time')).format(
+				return moment(this.getDataValue('update_time')).format(
 					'YYYY-MM-DD HH:MM:SS'
 				);
 			},

@@ -32,6 +32,12 @@ class EventController extends Controller {
         const response=await this.Event.detail(ctx.query.id);
         ctx.body=response;
     }
+    async indicByEventId(){
+      console.log(1111)
+      const ctx=this.ctx;
+      const response=await this.Event.indicByEventId(ctx.query.id);
+      ctx.body=response;
+    }
     async archive(){ 
         const ctx=this.ctx;
         const response=await this.Event.archive(ctx.helper.parseInt(ctx.query.id));
@@ -81,7 +87,9 @@ class EventController extends Controller {
        //event_label:eventLabelList[row.event_label],
        event_label:ctx.helper.dealMulValue(row.event_label,eventLabelList),
        event_trigger_mode:triggerMode[row.event_trigger_mode],
-       general_attr:ctx.helper.dealMulValue(row.general_attr,generalAttr)
+       general_attr:ctx.helper.dealMulValue(row.general_attr,generalAttr),
+       event_label_label:row.event_label,
+       event_trigger_mode_label:row.event_trigger_mode
       });
       //event_code 的唯一性判定
       const Op = app.Sequelize.Op;

@@ -36,6 +36,12 @@ class IndicatorController extends Controller {
         const response=await this.Indicator.detail(ctx.query.id);
         ctx.body=response;
     }
+   
+    async listByType(){
+     const ctx=this.ctx;
+	   const response=await this.Indicator.listByType(ctx.request.body);
+	   ctx.body=response;
+    }
     async archive(){ 
         const ctx=this.ctx;
         const response=await this.Indicator.archive(ctx.helper.parseInt(ctx.query.id));
@@ -85,7 +91,10 @@ class IndicatorController extends Controller {
         ...row,
         indicator_label:ctx.helper.dealMulValue(row.indicator_label,indicatorLabel),
         indicator_type:indicatorType[row.indicator_type],
-        indicator_level:indicatorLevel[row.indicator_level]
+        indicator_level:indicatorLevel[row.indicator_level],
+        indicator_type_label:row.indicator_type,
+        indicator_level_label:row.indicator_level,
+        indicator_label_label:row.indicator_label
       });
       //indicator_code 的唯一性判定
       var arr=[];

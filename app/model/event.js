@@ -11,7 +11,7 @@ module.exports=app=>{
 		event_trigger_mode_label:{type:STRING(60),comment:'触发类型label'},       
 		trigger_time:{type:STRING(255),comment:'触发时机'},          
         event_label:{type:STRING(255),comment:'事件标签'}, 
-		event_label_label:{type:STRING(255),comment:'事件标签label'},           
+		label:{type:STRING(255),comment:'事件标签label'},           
 		note:{type:TEXT,comment:'备注'},  
         general_attr:{type:TEXT,comment:'通用属性'},                 
 		create_time:{

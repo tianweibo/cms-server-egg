@@ -33,7 +33,6 @@ class EventController extends Controller {
         ctx.body=response;
     }
     async indicByEventId(){
-      console.log(1111)
       const ctx=this.ctx;
       const response=await this.Event.indicByEventId(ctx.query.id);
       ctx.body=response;
@@ -145,13 +144,9 @@ class EventController extends Controller {
       console.log('error',error)
       ctx.badRequest({
         data: {},
-        msg: error.errmsg,
+        msg: error.msg,
       });
     }
   }
-  
-
-
-
 }
 module.exports = EventController;

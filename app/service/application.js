@@ -60,6 +60,7 @@ class Application extends Service {
             }
         })
         if (hasApp == null) {
+            app.info.create_people = this.ctx.session.username;
             const appInfo = await this.Application.create(app.info);
             if (appInfo) {
                 if (app.indicatorArr.length > 0) {
@@ -75,10 +76,10 @@ class Application extends Service {
                     if (!tempInfo) {
                         return this.ServerResponse.networkError('网络问题');
                     } else {
-                        return this.ServerResponse.requireData('注册成功', { code: 0 });
+                        return this.ServerResponse.requireData('创建成功', { code: 0 });
                     }
                 } else {
-                    return this.ServerResponse.requireData('注册成功', { code: 0 });
+                    return this.ServerResponse.requireData('创建成功', { code: 0 });
                 }
             } else {
                 return this.ServerResponse.networkError('网络问题');

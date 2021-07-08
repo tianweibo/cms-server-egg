@@ -28,6 +28,7 @@ module.exports = app => {
     router.get('/api/event/archive',controller.event.archive);//事件的归档-done
     router.delete('/api/event/delete',controller.event.delete);//事件的删除-done
     router.post('/api/event/update',controller.event.update);//事件的更新-done
+    router.get('/api/event/indicByEventId',controller.event.indicByEventId);//事件下的指标
     //属性
     router.post('/api/attribute/list',controller.attribute.list);// 属性列表的获取
     router.post('/api/attribute/detail',controller.attribute.detail);//属性详情的查看

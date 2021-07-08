@@ -73,6 +73,7 @@ class Indicator extends Service {
             }
         })
         if (hasIndicator == null) {
+            indicator.info.create_people = this.ctx.session.username;
             const indicatorInfo = await this.Indicator.create(indicator.info);
             if (indicatorInfo) {
                 if(indicator.eventArr){
@@ -103,8 +104,7 @@ class Indicator extends Service {
                     return this.ServerResponse.networkError('网络问题');
                    }
                 }
-                
-                return this.ServerResponse.requireData('注册成功', { code: 0 });
+                return this.ServerResponse.requireData('创建成功', { code: 0 });
             } else {
                 return this.ServerResponse.networkError('网络问题');
             }
@@ -231,6 +231,9 @@ class Indicator extends Service {
             arr: [],
         }
         var arr = [];
+        arr.push({
+			state:1
+		})
         if (obj.indicator_label) {
             arr.push({
                 indicator_label: obj.indicator_label,

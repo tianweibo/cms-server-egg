@@ -60,6 +60,7 @@ class Event extends Service {
 		})
 		if (hasEvent == null) {
 			const eventInfo = await this.Event.create(event.info);
+			event.info.create_people = this.ctx.session.username;
 			if (eventInfo) {
 				if (event.attributeArr) {
 					var data = [];
@@ -74,10 +75,10 @@ class Event extends Service {
 					if (!eventAttributeInfo) {
 						return this.ServerResponse.networkError('网络问题');
 					} else {
-						return this.ServerResponse.requireData('注册成功', { code: 0 });
+						return this.ServerResponse.requireData('创建成功', { code: 0 });
 					}
 				} else {
-					return this.ServerResponse.requireData('注册成功', { code: 0 });
+					return this.ServerResponse.requireData('创建成功', { code: 0 });
 				}
 			} else {
 				return this.ServerResponse.networkError('网络问题');
@@ -161,6 +162,9 @@ class Event extends Service {
 			arr: [],
 		}
 		var arr = [];
+		arr.push({
+			state:1
+		})
 		if (obj.event_label) {
 			arr.push({
 				event_label: obj.event_label,
@@ -227,9 +231,9 @@ class Event extends Service {
 			}
 			const row = await this.Event.destroy({ where: { event_id: id } });
 			if (row) {
-				return this.ServerResponse.requireData('归档成功', { code: 0 });
+				return this.ServerResponse.requireData('删除成功', { code: 0 });
 			} else {
-				return this.ServerResponse.requireData('归档失败', { code: 1 });
+				return this.ServerResponse.requireData('删除失败', { code: 1 });
 			}
 		} catch (e) {
 			return this.ServerResponse.networkError('网络问题');

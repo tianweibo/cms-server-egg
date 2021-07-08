@@ -23,7 +23,7 @@ class ProjectService extends Service {
 			return this.ServerResponse.networkError('网络问题');
 		}else{
 			var projectInfo1 = projectInfo.toJSON();
-			return this.ServerResponse.requireData('注册成功', {code:0});
+			return this.ServerResponse.requireData('创建成功', {code:0});
 		}
 	}else{
 		return this.ServerResponse.requireData('项目已存在,请换个名字试试',{code:1})

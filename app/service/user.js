@@ -105,7 +105,7 @@ class User extends Service {
 		if (!userInfo) {
 			return this.ServerResponse.networkError('网络问题');
 		}else{
-			return this.ServerResponse.requireData('注册成功', {code:0});
+			return this.ServerResponse.requireData('创建成功', {code:0});
 		}
 	}else{
 		return this.ServerResponse.requireData('账号已存在,请换个名字试试',{code:1})

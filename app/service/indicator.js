@@ -278,6 +278,24 @@ class Indicator extends Service {
             if (!result) {
                 return this.ServerResponse.requireData('指标不存在', { code: 1 });
             }
+            const eventArr = await this.IndicatorEvent.findAll({
+                where: {
+                    indicator_id: id
+                },
+                attributes: ['event_id']
+            })
+            const appArr = await this.ApplicationIndicator.findAll({
+                where: {
+                    indicator_id: id
+                },
+                attributes: ['application_id']
+            })
+            if(eventArr.length!=0){
+                return this.ServerResponse.requireData('该指标有关联的有效事件,不支持归档指标，请解除事件关联再进行操作', { code: 1 });
+            }
+            if(appArr.length!=0){
+                return this.ServerResponse.requireData('该指标有关联的有效应用,不支持归档指标，请解除应用关联再进行操作', { code: 1 });
+            }
             const row = await this.Indicator.update({
                 state: 0,
             }, { where: { indicator_id: id }, individualHooks: true });
@@ -298,6 +316,24 @@ class Indicator extends Service {
             });
             if (!result) {
                 return this.ServerResponse.requireData('指标不存在', { code: 1 });
+            }
+            const eventArr = await this.IndicatorEvent.findAll({
+                where: {
+                    indicator_id: id
+                },
+                attributes: ['event_id']
+            })
+            const appArr = await this.ApplicationIndicator.findAll({
+                where: {
+                    indicator_id: id
+                },
+                attributes: ['application_id']
+            })
+            if(eventArr.length!=0){
+                return this.ServerResponse.requireData('该指标有关联的有效事件,不支持删除指标，请解除事件关联再进行操作', { code: 1 });
+            }
+            if(appArr.length!=0){
+                return this.ServerResponse.requireData('该指标有关联的有效应用,不支持删除指标，请解除应用关联再进行操作', { code: 1 });
             }
             const row = await this.Indicator.destroy({ where: { indicator_id: id } });
             if (row) {

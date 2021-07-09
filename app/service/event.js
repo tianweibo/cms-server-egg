@@ -206,8 +206,26 @@ class Event extends Service {
 				where: { event_id: id },
 			});
 			if (!result) {
-				return this.ServerResponse.requireData('项目不存在', { code: 1 });
+				return this.ServerResponse.requireData('事件不存在', { code: 1 });
 			}
+			const indicatorArr = await this.IndicatorEvent.findAll({
+                where: {
+                    event_id: id
+                },
+                attributes: ['indicator_id']
+            })
+            const attributeArr = await this.EventAttribute.findAll({
+                where: {
+                    event_id: id
+                },
+                attributes: ['attribute_id']
+            })
+            if(indicatorArr.length!=0){
+                return this.ServerResponse.requireData('该事件有关联的有效指标,不支持归档事件，请解除指标关联再进行操作', { code: 1 });
+            }
+            if(attributeArr.length!=0){
+                return this.ServerResponse.requireData('该指标有关联的有效属性,不支持归档事件，请解除属性关联再进行操作', { code: 1 });
+            }
 			const row = await this.Event.update({
 				state: 0,
 			}, { where: { event_id: id }, individualHooks: true });
@@ -227,8 +245,26 @@ class Event extends Service {
 				where: { event_id: id },
 			});
 			if (!result) {
-				return this.ServerResponse.requireData('项目不存在', { code: 1 });
+				return this.ServerResponse.requireData('事件不存在', { code: 1 });
 			}
+			const indicatorArr = await this.IndicatorEvent.findAll({
+                where: {
+                    event_id: id
+                },
+                attributes: ['indicator_id']
+            })
+            const attributeArr = await this.EventAttribute.findAll({
+                where: {
+                    event_id: id
+                },
+                attributes: ['attribute_id']
+            })
+            if(indicatorArr.length!=0){
+                return this.ServerResponse.requireData('该事件有关联的有效指标,不支持删除事件，请解除指标关联再进行操作', { code: 1 });
+            }
+            if(attributeArr.length!=0){
+                return this.ServerResponse.requireData('该指标有关联的有效属性,不支持删除事件，请解除属性关联再进行操作', { code: 1 });
+            }
 			const row = await this.Event.destroy({ where: { event_id: id } });
 			if (row) {
 				return this.ServerResponse.requireData('删除成功', { code: 0 });

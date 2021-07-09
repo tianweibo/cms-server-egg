@@ -53,8 +53,10 @@ class Attribute extends Service {
 		} 
 		var objOption={
 			[Op.or]:arr1,
-		    [Op.and]:[{
+		    [Op.or]:[{
 				event_name:{[Op.like]:`%${obj.keyword}%`}
+			},{
+				event_code:{[Op.like]:`%${obj.keyword}%`}
 			}], 
 		}
 		await this.Event.findAndCountAll({

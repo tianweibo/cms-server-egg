@@ -241,14 +241,23 @@ class Application extends Service {
             if (!result) {
                 return this.ServerResponse.requireData('应用不存在', { code: 1 });
             }
+            var sj=0;
+            var str='';
+            if(result.application_use==0){
+                sj=1;
+                str='启用'
+            }else{
+                sj=0;
+                str='停用'
+            }
             const row = await this.Application.update({
-                state: 0,
+                application_use: sj,
             }, { where: { application_id: id }, individualHooks: true });
 
             if (row) {
-                return this.ServerResponse.requireData('停用成功', { code: 0 });
+                return this.ServerResponse.requireData(`${str}成功`, { code: 0 });
             } else {
-                return this.ServerResponse.requireData('停用失败', { code: 1 });
+                return this.ServerResponse.requireData(`${str}失败`, { code: 1 });
             }
         } catch (e) {
             return this.ServerResponse.networkError('网络问题');
@@ -261,6 +270,9 @@ class Application extends Service {
             });
             if (!result) {
                 return this.ServerResponse.requireData('应用不存在', { code: 1 });
+            }
+            if (result.application_use==1) {
+                return this.ServerResponse.requireData('应用已启用,不支持进行删除的操作', { code: 1 });
             }
             const row = await this.Application.destroy({ where: { application_id: id } });
             if (row) {

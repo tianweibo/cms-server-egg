@@ -9,6 +9,7 @@ class Event extends Service {
 		this.Event = ctx.model.Event;
 		this.EventAttribute = ctx.model.EventAttribute;
 		this.IndicatorEvent=ctx.model.IndicatorEvent;
+		this.ApplicationIndicator=ctx.model.ApplicationIndicator
 		this.Indicator=ctx.model.Indicator
 		this.Attribute = ctx.model.Attribute;
 		this.ResponseCode = ctx.response.ResponseCode;
@@ -201,6 +202,8 @@ class Event extends Service {
 		}
 	}
 	async archive(id) {
+		const { ctx, app } = this;
+		const Op = app.Sequelize.Op;
 		try {
 			const result = await this.Event.findOne({
 				where: { event_id: id },
@@ -218,23 +221,23 @@ class Event extends Service {
             if(indicatorArr.length!=0){
 				for (var i = 0; i < indicatorArr.length; i++) {
 					data1.push({
-						indicator_id: indicatorArr[i]
+						indicator_id: indicatorArr[i].indicator_id
 					})
 				}
 				var objOption = {
 					[Op.or]: data1,
 				}
-				const arr1 = await this.IndicatorEvent.findAll({ //事件去重（不去重也行）后按IDS获取详情
+				const arr1 = await this.ApplicationIndicator.findAll({ //事件去重（不去重也行）后按IDS获取详情
 					where: objOption,
-					attributes: ['event_id']
+					attributes: ['application_id']
 				})
 				if(arr1.length!=0){
-					return this.ServerResponse.requireData('该事件有关联的有效应用,不支持删除事件，请解除应用关联再进行操作', { code: 1 });
+					return this.ServerResponse.requireData('该事件有关联的有效应用,不支持归档事件，请解除应用关联再进行操作', { code: 1 });
 				}
             }
 			const row = await this.Event.update({
 				state: 0,
-			}, { where: { event_id: id }, individualHooks: true });
+			}, { where: { event_id: id }, individualHooks: true }); 
 
 			if (row) {
 				return this.ServerResponse.requireData('归档成功', { code: 0 });
@@ -246,6 +249,8 @@ class Event extends Service {
 		}
 	}
 	async delete(id) {
+		const { ctx, app } = this;
+		const Op = app.Sequelize.Op;
 		try {
 			const result = await this.Event.findOne({
 				where: { event_id: id },
@@ -253,7 +258,6 @@ class Event extends Service {
 			if (!result) {
 				return this.ServerResponse.requireData('事件不存在', { code: 1 });
 			}
-
 			const indicatorArr = await this.IndicatorEvent.findAll({
                 where: {
                     event_id: id
@@ -264,7 +268,7 @@ class Event extends Service {
             if(indicatorArr.length!=0){
 				for (var i = 0; i < indicatorArr.length; i++) {
 					data1.push({
-						indicator_id: indicatorArr[i]
+						indicator_id: indicatorArr[i].indicator_id
 					})
 				}
 				var objOption = {
@@ -278,7 +282,6 @@ class Event extends Service {
 					return this.ServerResponse.requireData('该事件有关联的有效应用,不支持删除事件，请解除应用关联再进行操作', { code: 1 });
 				}
             }
-
 			const row = await this.Event.destroy({ where: { event_id: id } });
 			if (row) {
 				return this.ServerResponse.requireData('删除成功', { code: 0 });

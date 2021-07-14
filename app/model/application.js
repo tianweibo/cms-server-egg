@@ -73,11 +73,12 @@ module.exports=app=>{
 		tableName: 'application',
 	  })
 	  application.associate=function(){
-		 app.model.Application.belongsToMany(app.model.Indicator, {
+		app.model.Application.belongsToMany(app.model.Indicator, {
             through: app.model.ApplicationIndicator,
             foreignKey: 'application_id',
             otherKey: 'indicator_id'
         }); 
+		app.model.Application.hasMany(app.model.Report, {foreignKey: 'application_id', targetKey: 'report_id'});
 	  } 
 	return application;
 }

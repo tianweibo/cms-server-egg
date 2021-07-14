@@ -24,6 +24,7 @@ module.exports=app=>{
 				return this.getDataValue('password')
 			}
 		},
+		user_use:{defaultValue:1,type:INTEGER(2),comment:'是否启用'},
 		avatar:{
 			type:STRING,
 		},
@@ -31,6 +32,7 @@ module.exports=app=>{
 			type:STRING,
 		},
 		role:{defaultValue:1,type:INTEGER(11)},
+		role_name:{defaultValue:'普通用户',type:STRING(11)},
 		status:{defaultValue:1,type:INTEGER(11)},
 		created_at:{
 			type:DATE,
@@ -47,6 +49,13 @@ module.exports=app=>{
 					'YYYY-MM-DD HH:MM:SS'
 				);
 			}
+		},
+		update_people:{
+			type:STRING(255),
+			comment:'更新人'
+		},
+		create_people:{
+			type:STRING(255),comment:'创建人'
 		},
 		remark:{
 			type:STRING

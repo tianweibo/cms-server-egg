@@ -8,8 +8,9 @@ class Application extends Service {
         super(ctx);
         this.Application = ctx.model.Application;
         this.Event = ctx.model.Event;
+        this.Report = ctx.model.Report;
         this.ApplicationIndicator = ctx.model.ApplicationIndicator;
-        this.IndicatorEvent = ctx.model.IndicatorEvent
+        this.IndicatorEvent = ctx.model.IndicatorEvent;
         this.Indicator = ctx.model.Indicator;
         this.ResponseCode = ctx.response.ResponseCode;
         this.ServerResponse = ctx.response.ServerResponse;
@@ -270,6 +271,12 @@ class Application extends Service {
             });
             if (!result) {
                 return this.ServerResponse.requireData('应用不存在', { code: 1 });
+            }
+            const arr = await this.Report.findAll({
+                where: { application_id: id },
+            });
+            if(arr.length>0){
+                return this.ServerResponse.requireData('该应用下存在报表,不支持进行删除的操作', { code: 1 });
             }
             if (result.application_use==1) {
                 return this.ServerResponse.requireData('应用已启用,不支持进行删除的操作', { code: 1 });

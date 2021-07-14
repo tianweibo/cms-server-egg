@@ -78,7 +78,7 @@ class User extends Service {
 	}
 	var objOption={
 		username:{[Op.like]:`%${obj.keyword}%`},
-		status:1
+		role:obj.role
 	}
 	try{
 		await this.TheUser.findAndCountAll({
@@ -109,6 +109,107 @@ class User extends Service {
 		}
 	}else{
 		return this.ServerResponse.requireData('账号已存在,请换个名字试试',{code:1})
+	}
+  }
+  async update(data) {
+	const userInfo = await this.TheUser.findOne({
+		where: {
+			id: data.id
+		}
+	})
+	if (userInfo == null) {
+		return this.ServerResponse.requireData('用户不存在', { code: 1 })
+	} else {
+		var obj = data.updates;
+		obj.info.update_people = this.ctx.session.username;
+		obj.info['update_time']=sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+		const thedata = await this.TheUser.update(obj.info, {
+			where: {
+				id: data.id
+			}
+		})
+		if (thedata) {
+			return this.ServerResponse.requireData('更新成功', { code: 0 });
+		} else {
+			return this.ServerResponse.networkError('网络问题');
+		}
+	}
+  }
+  async detail(id) {
+	const userInfo = await this.TheUser.findOne({
+		where: {
+			id: id
+		}
+	})
+	if (userInfo == null) {
+		return this.ServerResponse.requireData('用户不存在', { code: 1 });
+	} else {
+		var userObj = {
+			userInfo
+		}
+		return this.ServerResponse.requireData('查询成功', { code: 0, data: userObj });
+	}
+}
+  async delete(){
+	try {
+		const result = await this.TheUser.findOne({
+			where: {id: id },
+		});
+		if (!result) {
+			return this.ServerResponse.requireData('用户不存在', { code: 1 });
+		}
+		const row = await this.TheUser.destroy({ where: { id: id } });
+		if (row) {
+			return this.ServerResponse.requireData('删除成功', { code: 0 });
+		} else {
+			return this.ServerResponse.requireData('删除失败', { code: 1 });
+		}
+	} catch (e) {
+		return this.ServerResponse.networkError('网络问题');
+	}
+  }
+  async editPassword(data){
+	try{
+		const row = await this.TheUser.update({
+			password: data.password,
+		}, { where: { id: data.id }, individualHooks: true });
+		if (row) {
+			return this.ServerResponse.requireData(`密码修改成功`, { code: 0 });
+		} else {
+			return this.ServerResponse.requireData(`密码修改失败`, { code: 1 });
+		}
+	}catch(e){
+		return this.ServerResponse.networkError('网络问题');
+	}
+  }
+  async useful(id) {
+	try {
+		const result = await this.TheUser.findOne({
+			where: { id: id },
+		});
+		if (!result) {
+			return this.ServerResponse.requireData('用户不存在', { code: 1 });
+		}
+		var sj=0;
+		var str='';
+		if(result.user_use==0){
+			sj=1;
+			str='启用'
+		}else{
+			sj=0;
+			str='停用'
+		}
+		const row = await this.TheUser.update({
+			user_use: sj,
+		}, { where: { id: id }, individualHooks: true });
+
+		if (row) {
+			return this.ServerResponse.requireData(`${str}成功`, { code: 0 });
+		} else {
+			return this.ServerResponse.requireData(`${str}失败`, { code: 1 });
+		}
+	} catch (e) {
+		return this.ServerResponse.networkError('网络问题');
 	}
   }
 }

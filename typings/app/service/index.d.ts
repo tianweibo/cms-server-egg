@@ -11,7 +11,9 @@ import ExportAttribute = require('../../../app/service/attribute');
 import ExportBasic = require('../../../app/service/basic');
 import ExportEvent = require('../../../app/service/event');
 import ExportIndicator = require('../../../app/service/indicator');
+import ExportPhoto = require('../../../app/service/photo');
 import ExportProject = require('../../../app/service/project');
+import ExportTheLabel = require('../../../app/service/theLabel');
 import ExportUser = require('../../../app/service/user');
 
 declare module 'egg' {
@@ -21,7 +23,9 @@ declare module 'egg' {
     basic: AutoInstanceType<typeof ExportBasic>;
     event: AutoInstanceType<typeof ExportEvent>;
     indicator: AutoInstanceType<typeof ExportIndicator>;
+    photo: AutoInstanceType<typeof ExportPhoto>;
     project: AutoInstanceType<typeof ExportProject>;
+    theLabel: AutoInstanceType<typeof ExportTheLabel>;
     user: AutoInstanceType<typeof ExportUser>;
   }
 }

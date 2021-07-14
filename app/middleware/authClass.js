@@ -13,7 +13,7 @@ class Auth {
                     ctx.status = 401
                     ctx.body = {
                         errcode: 1,
-                        msg: 'token已过期'
+                        msg: 'token已过期,请重新登录'
                     }
                     return
                 }

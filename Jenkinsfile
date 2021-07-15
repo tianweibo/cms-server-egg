@@ -49,7 +49,7 @@ node {
              }  catch (err) {
                echo "not exist old contains"
              }
-             if( deploy_env == "test") {
+             if( deploy_env == "zk-test") {
                  sh("ssh ${IP} docker run -d --net host --name ${docker_name} -v /data/logs/data-engine:/var/data-engine/logs  ${docker_image}")
              }
            }

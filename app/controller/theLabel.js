@@ -37,5 +37,10 @@ class TheLabel extends Controller {
         const response=await this.TheLabel.labelType();
         ctx.body=response;
     }
+    async calcNumber(){
+        const ctx=this.ctx;
+        const response=await this.TheLabel.calcNumber(ctx.request.body);
+        ctx.body=response;
+    }
 }
 module.exports = TheLabel;

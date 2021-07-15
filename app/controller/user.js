@@ -76,5 +76,10 @@ class UserController extends Controller {
         const response=await this.TheUser.useful(ctx.helper.parseInt(ctx.query.id));
         ctx.body=response;
     }
+	async resetPassword(){ 
+        const ctx=this.ctx;
+        const response=await this.TheUser.resetPassword(ctx.helper.parseInt(ctx.query.id));
+        ctx.body=response;
+    }
 }
 module.exports = UserController;

@@ -9,6 +9,7 @@ module.exports=app=>{
 		label:STRING(20),
         value:STRING(40),
 		state:{defaultValue:1,type:INTEGER(2)},
+		number:{defaultValue:0,type:INTEGER},
 		is_lower:{defaultValue:1,type:INTEGER(2)},
 		create_time:{
 			type:DATE,

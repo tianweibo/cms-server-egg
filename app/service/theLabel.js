@@ -46,6 +46,12 @@ class TheLabel extends Service {
 		return this.ServerResponse.requireData('项目已存在,请换个名字试试',{code:1})
 	}
   }
+  async calcNumber(data){
+    var data=[{
+        label_id:'',
+        type:'add',
+    }]
+  }
   async createSon(project) {
     var data=[
         {

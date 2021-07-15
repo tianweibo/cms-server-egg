@@ -17,7 +17,8 @@ module.exports = app => {
   router.post('/api/photo/upload',controller.photo.upload);//头像上传
   router.post('/api/user/editPassword',controller.user.editPassword);//密码修改
   router.post('/api/user/create',controller.user.create);//创建用户
-  router.post('/api/user/useful',controller.user.useful);//用户禁用与否
+  router.get('/api/user/useful',controller.user.useful);//用户禁用与否
+  router.get('/api/user/resetPassword',controller.user.resetPassword);//用户禁用与否
   router.post('/api/user/update',controller.user.update);//编辑用户
   router.get('/api/user/detail',controller.user.detail);//用户详情
   router.delete('/api/user/delete',controller.user.delete);//用户删除
@@ -67,4 +68,5 @@ module.exports = app => {
   router.delete('/api/label/delete',controller.theLabel.delete);//标签的删除
   router.post('/api/label/update',controller.theLabel.update);//标签的更新
   router.get('/api/label/labelType',controller.theLabel.labelType);//标签的类别获取
+  router.post('/api/label/calcNumber',controller.theLabel.calcNumber);//标签的数量统计
 };

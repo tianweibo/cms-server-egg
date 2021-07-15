@@ -2,6 +2,7 @@
 
 const Service = require('egg').Service;
 const jwt=require('jsonwebtoken')
+const sd = require('silly-datetime');
 class User extends Service {
   constructor(ctx){
 	  super(ctx);
@@ -17,7 +18,7 @@ class User extends Service {
 		}
 	})
 	if(hasUser==null){
-		return this.ServerResponse.createByErrorCodeMsg('账号不存在');
+		return this.ServerResponse.createByErrorCodeMsg('账号不存在或禁用');
 	}
 	const verify = await hasUser.validPassword(userInfo.password);
 	if (!verify) {
@@ -112,6 +113,7 @@ class User extends Service {
 	}
   }
   async update(data) {
+	console.log(data,'data')
 	const userInfo = await this.TheUser.findOne({
 		where: {
 			id: data.id
@@ -121,9 +123,9 @@ class User extends Service {
 		return this.ServerResponse.requireData('用户不存在', { code: 1 })
 	} else {
 		var obj = data.updates;
-		obj.info.update_people = this.ctx.session.username;
-		obj.info['update_time']=sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
-		const thedata = await this.TheUser.update(obj.info, {
+		obj['update_people'] = this.ctx.session.username;
+		obj['update_time']=sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+		const thedata = await this.TheUser.update(obj, {
 			where: {
 				id: data.id
 			}
@@ -150,7 +152,7 @@ class User extends Service {
 		return this.ServerResponse.requireData('查询成功', { code: 0, data: userObj });
 	}
 }
-  async delete(){
+  async delete(id){
 	try {
 		const result = await this.TheUser.findOne({
 			where: {id: id },
@@ -179,6 +181,27 @@ class User extends Service {
 			return this.ServerResponse.requireData(`密码修改失败`, { code: 1 });
 		}
 	}catch(e){
+		return this.ServerResponse.networkError('网络问题');
+	}
+  }
+  async resetPassword(id){
+	try {
+		const result = await this.TheUser.findOne({
+			where: { id: id },
+		});
+		if (!result) {
+			return this.ServerResponse.requireData('用户不存在', { code: 1 });
+		}
+		const row = await this.TheUser.update({
+			password: 'yjf@123456',
+		}, { where: { id: id }, individualHooks: true });
+
+		if (row) {
+			return this.ServerResponse.requireData(`密码还原成功`, { code: 0 });
+		} else {
+			return this.ServerResponse.requireData(`密码还原失败`, { code: 1 });
+		}
+	} catch (e) {
 		return this.ServerResponse.networkError('网络问题');
 	}
   }

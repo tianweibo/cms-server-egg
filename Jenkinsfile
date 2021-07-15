@@ -37,7 +37,7 @@ node {
 
            //定义部署机器
            def deployNodes = [
-             'test': ['114.67.94.229'],
+             'zk-test': ['114.67.94.229'],
            ]
            def node = []
            if(deploy_env in deployNodes) {

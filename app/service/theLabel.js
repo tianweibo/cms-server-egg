@@ -46,12 +46,7 @@ class TheLabel extends Service {
 		return this.ServerResponse.requireData('项目已存在,请换个名字试试',{code:1})
 	}
   }
-  async calcNumber(data){
-    var data=[{
-        label_id:'',
-        type:'add',
-    }]
-  }
+  
   async createSon(project) {
     var data=[
         {
@@ -97,6 +92,24 @@ class TheLabel extends Service {
 		if (!result) {
 			return this.ServerResponse.requireData('标签不存在',{code:1});
 		}
+		if(result.number>0 && result.is_lower==1){
+			return this.ServerResponse.requireData('标签被使用，不支持删除操作', { code: 1 });
+		}
+		if(result.is_lower==0){
+			var num=0
+			await this.TheLabel.findAndCountAll({
+				where:{
+					fid:result.fid
+				},
+				limit: 100,
+				offset:0
+			}).then(function(result){
+				num=result.count
+			})
+			if(num>0){
+				return this.ServerResponse.requireData('该父级标签存在子级，不支持删除操作', { code: 1 });
+			}
+		}
 		const row = await this.TheLabel.destroy({ where: {id: id } });
 		if (row) {
 			return this.ServerResponse.requireData('删除成功', { code: 0 });
@@ -107,8 +120,8 @@ class TheLabel extends Service {
 		return this.ServerResponse.networkError('网络问题');
 	}
   }
-  async list(obj){
-	const {ctx,app}=this;
+  async listTree(obj){
+    const {ctx,app}=this;
 	const Op = app.Sequelize.Op;
 	var list={
 		count:0,
@@ -116,8 +129,41 @@ class TheLabel extends Service {
 	}
 	var objOption={
 		label:{[Op.like]:`%${obj.keyword}%`},
-		id:obj.id
 	}
+	try{
+		await this.TheLabel.findAndCountAll({
+			where:objOption,
+			limit: 1000,
+			offset:0
+		}).then(function(result){
+			list.count=result.count
+			list.arr=ctx.helper.listToTree(result.rows);
+		})
+        //var b=this.ctx.helper.listToTree(result.rows);
+		return this.ServerResponse.requireData('查询成功', list);
+	}catch(e){
+        console.log(e)
+		return this.ServerResponse.networkError('网络问题');
+	}
+  }
+  async list(obj){
+	const {ctx,app}=this;
+	const Op = app.Sequelize.Op;
+	var list={
+		count:0,
+		arr:[],
+	}
+	if(obj.fid===''){
+		var objOption={
+			label:{[Op.like]:`%${obj.keyword}%`},
+		}
+	}else{
+		var objOption={
+			label:{[Op.like]:`%${obj.keyword}%`},
+			fid:obj.fid
+		}
+	}
+	
 	try{
 		await this.TheLabel.findAndCountAll({
 			where:objOption,

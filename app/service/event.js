@@ -7,6 +7,7 @@ class Event extends Service {
 	constructor(ctx) {
 		super(ctx);
 		this.Event = ctx.model.Event;
+		this.TheLabel = ctx.model.TheLabel;
 		this.EventAttribute = ctx.model.EventAttribute;
 		this.IndicatorEvent=ctx.model.IndicatorEvent;
 		this.ApplicationIndicator=ctx.model.ApplicationIndicator
@@ -16,6 +17,7 @@ class Event extends Service {
 		this.ServerResponse = ctx.response.ServerResponse;
 	}
 	async update(data) {
+		const Op = this.app.Sequelize.Op;
 		const eventInfo = await this.Event.findOne({
 			where: {
 				event_id: data.id
@@ -24,6 +26,31 @@ class Event extends Service {
 		if (eventInfo == null) {
 			return this.ServerResponse.requireData('事件不存在', { code: 1 })
 		} else {
+			var qian=[];
+            var hou=[];
+            if(eventInfo.event_label){
+                qian=eventInfo.event_label.split(',');
+            }
+            if(data.updates.info.event_label){
+                hou=data.updates.info.event_label.split(',');
+            }
+            var tempArr=[]
+            for(var i=0;i<qian.length;i++){
+                if(hou.indexOf(qian[i])==-1){
+                    var obj={id:qian[i],type:'redu'}
+                    tempArr.push(obj)
+                }
+            }
+            for(var i=0;i<hou.length;i++){
+                if(qian.indexOf(hou[i])==-1){
+                    var obj={id:hou[i],type:'add'}
+                    tempArr.push(obj)
+                }
+            }
+            if(tempArr.length>0){
+                this.ctx.helper.calcLabelNumber(tempArr,Op,this.TheLabel,null)
+            }
+
 			var obj = data.updates;
 			obj.info.update_people = this.ctx.session.username;
 			obj.info['update_time']=sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
@@ -54,6 +81,7 @@ class Event extends Service {
 		}
 	}
 	async create(event) {
+		const Op = this.app.Sequelize.Op;
 		const hasEvent = await this.Event.findOne({
 			where: {
 				event_code: event.info.event_code
@@ -62,6 +90,10 @@ class Event extends Service {
 		if (hasEvent == null) {
 			const eventInfo = await this.Event.create(event.info);
 			event.info.create_people = this.ctx.session.username;
+			if (event.info.event_label) {
+                var temp=event.info.event_label.split(',');
+                this.ctx.helper.calcLabelNumber(temp,Op,this.TheLabel,'add')
+            } 
 			if (eventInfo) {
 				if (event.attributeArr) {
 					var data = [];
@@ -258,6 +290,10 @@ class Event extends Service {
 			if (!result) {
 				return this.ServerResponse.requireData('事件不存在', { code: 1 });
 			}
+			if (result.event_label) {
+                var temp=result.event_label.split(',');
+                this.ctx.helper.calcLabelNumber(temp,Op,this.TheLabel,'redu')
+            } 
 			const indicatorArr = await this.IndicatorEvent.findAll({
                 where: {
                     event_id: id

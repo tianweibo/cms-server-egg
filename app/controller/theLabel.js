@@ -4,7 +4,7 @@ class TheLabel extends Controller {
    constructor(ctx){
 	super(ctx);
 	this.request=ctx.request;
-	this.TheLabel=ctx.service.TheLabel;
+    this.TheLabel=ctx.service.theLabel;
    }
     async createParent(){
 	  const ctx=this.ctx;
@@ -27,6 +27,11 @@ class TheLabel extends Controller {
         const response=await this.TheLabel.list(ctx.request.body);
         ctx.body=response;
     }
+    async listTree(){
+        const ctx=this.ctx;
+        const response=await this.TheLabel.listTree(ctx.request.body);
+        ctx.body=response;
+    }
     async delete(){  //待测试
         const ctx=this.ctx;
         const response=await this.TheLabel.delete(ctx.helper.parseInt(ctx.query.id));
@@ -35,11 +40,6 @@ class TheLabel extends Controller {
     async labelType(){ //待测试
         const ctx=this.ctx;
         const response=await this.TheLabel.labelType();
-        ctx.body=response;
-    }
-    async calcNumber(){
-        const ctx=this.ctx;
-        const response=await this.TheLabel.calcNumber(ctx.request.body);
         ctx.body=response;
     }
 }

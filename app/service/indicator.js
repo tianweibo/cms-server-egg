@@ -6,6 +6,7 @@ class Indicator extends Service {
         super(ctx);
         this.Indicator = ctx.model.Indicator;
         this.IndicatorEvent = ctx.model.IndicatorEvent;
+        this.TheLabel = ctx.model.TheLabel;
         this.ApplicationIndicator = ctx.model.ApplicationIndicator;
         this.Event = ctx.model.Event;
         this.Application = ctx.model.Application;
@@ -13,6 +14,7 @@ class Indicator extends Service {
         this.ServerResponse = ctx.response.ServerResponse;
     }
     async update(data) {
+        const Op = this.app.Sequelize.Op;
         const indicatorInfo = await this.Indicator.findOne({
             where: {
                 indicator_id: data.id
@@ -21,6 +23,32 @@ class Indicator extends Service {
         if (indicatorInfo == null) {
             return this.ServerResponse.requireData('指标不存在', { code: 1 })
         } else {
+            var qian=[];
+            var hou=[];
+            if(indicatorInfo.indicator_label){
+                qian=indicatorInfo.indicator_label.split(',');
+            }
+            if(data.updates.info.indicator_label){
+                hou=data.updates.info.indicator_label.split(',');
+            }
+            var tempArr=[]
+            for(var i=0;i<qian.length;i++){
+                if(hou.indexOf(qian[i])==-1){
+                    var obj={id:qian[i],type:'redu'}
+                    tempArr.push(obj)
+                }
+            }
+            for(var i=0;i<hou.length;i++){
+                if(qian.indexOf(hou[i])==-1){
+                    var obj={id:hou[i],type:'add'}
+                    tempArr.push(obj)
+                }
+            }
+            if(tempArr.length>0){
+                this.ctx.helper.calcLabelNumber(tempArr,Op,this.TheLabel,null)
+            }
+
+
             var obj = data.updates;
             obj.info.update_people = this.ctx.session.username;
             obj.info['update_time']=sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
@@ -67,6 +95,7 @@ class Indicator extends Service {
         }
     }
     async create(indicator) {
+        const Op = this.app.Sequelize.Op;
         const hasIndicator = await this.Indicator.findOne({
             where: {
                 indicator_code: indicator.info.indicator_code
@@ -75,6 +104,10 @@ class Indicator extends Service {
         if (hasIndicator == null) {
             indicator.info.create_people = this.ctx.session.username;
             const indicatorInfo = await this.Indicator.create(indicator.info);
+            if (indicator.info.indicator_label) {
+                var temp=indicator.info.indicator_label.split(',');
+                this.ctx.helper.calcLabelNumber(temp,Op,this.TheLabel,'add')
+            } 
             if (indicatorInfo) {
                 if(indicator.eventArr){
                     var data = [];
@@ -311,6 +344,7 @@ class Indicator extends Service {
         }
     }
     async delete(id) {
+        const Op = this.app.Sequelize.Op;
         try {
             const result = await this.Indicator.findOne({
                 where: { indicator_id: id },
@@ -318,6 +352,10 @@ class Indicator extends Service {
             if (!result) {
                 return this.ServerResponse.requireData('指标不存在', { code: 1 });
             }
+            if (result.indicator_label) {
+                var temp=result.indicator_label.split(',');
+                this.ctx.helper.calcLabelNumber(temp,Op,this.TheLabel,'redu')
+            } 
             /* const eventArr = await this.IndicatorEvent.findAll({
                 where: {
                     indicator_id: id

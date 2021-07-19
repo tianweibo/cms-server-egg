@@ -58,5 +58,71 @@ module.exports = {
         	temp=temp.substring(0, temp.lastIndexOf(','));
 		}
         return temp
-    }
+    },
+	listToTree(oldArr1){
+		var oldArr=[]
+		for(var i=0;i<oldArr1.length;i++){
+			var obj={
+				key:oldArr1[i].id,
+				fid:oldArr1[i].fid,
+				title:oldArr1[i].label
+			}
+			oldArr.push(obj)
+		} 
+		oldArr.forEach(element => {
+			let fid = element.fid;
+			if(fid !== 0){
+			  oldArr.forEach(ele => {
+				if(ele.key == fid){ //当内层循环的ID== 外层循环的parendId时，（说明有children），需要往该内层id里建个children并push对应的数组；
+				  if(!ele.children){
+					ele.children = [];
+				  }
+				  ele.children.push(element);
+				  ele.disabled=true
+				}
+			  });
+			}
+		  });
+		  oldArr = oldArr.filter(ele => ele.fid === 0); //这一步是过滤，按树展开，将多余的数组剔除；
+		  return oldArr;
+	},
+	async calcLabelNumber(temp,Op,TheLabel,type){
+		console.log(temp,'temp')
+			var idArr=[];
+			if(type){
+				for (var i = 0; i < temp.length; i++) {
+					idArr.push({id:+temp[i]})
+				} 
+			}else{
+				for (var i = 0; i < temp.length; i++) {
+					idArr.push({id:+temp[i].id})
+				} 
+				//idArr=temp
+			}
+			var objOption = {
+				[Op.or]: idArr,
+			} 
+			var zhi= await TheLabel.findAll({
+				where: objOption,
+			},{attributes:['number','id']})
+			var dataArr = [];
+			if (zhi && zhi.length > 0) {
+				for (var i = 0; i < zhi.length; i++) {
+					if(type){
+						dataArr.push({
+							number:type=='add' ? zhi[i].number+1:(zhi[i].number==0?0:zhi[i].number-1),
+							id:+zhi[i].id
+						})
+					}else{
+						dataArr.push({
+							number:temp[i].type=='add' ? zhi[i].number+1:(zhi[i].number==0?0:zhi[i].number-1),
+							id:+zhi[i].id
+						})
+					}
+				}
+			}
+			await TheLabel.bulkCreate(dataArr,{updateOnDuplicate:['number']})
+	} 
+	
+
 }

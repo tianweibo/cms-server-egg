@@ -63,10 +63,10 @@ module.exports = app => {
   router.get('/api/basic/data',controller.basic.data);
   //标签
   router.post('/api/label/list',controller.theLabel.list);// 标签的列表的获取
+  router.post('/api/label/listTree',controller.theLabel.listTree);// 标签的树获取
   router.post('/api/label/createParent',controller.theLabel.createParent);//标签的创建-父级
   router.post('/api/label/createSon',controller.theLabel.createSon);//标签的创建-子级
   router.delete('/api/label/delete',controller.theLabel.delete);//标签的删除
   router.post('/api/label/update',controller.theLabel.update);//标签的更新
   router.get('/api/label/labelType',controller.theLabel.labelType);//标签的类别获取
-  router.post('/api/label/calcNumber',controller.theLabel.calcNumber);//标签的数量统计
 };

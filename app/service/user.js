@@ -113,7 +113,6 @@ class User extends Service {
 	}
   }
   async update(data) {
-	console.log(data,'data')
 	const userInfo = await this.TheUser.findOne({
 		where: {
 			id: data.id

@@ -6,21 +6,15 @@ class TheLabel extends Controller {
 	this.request=ctx.request;
     this.TheLabel=ctx.service.theLabel;
    }
-    async createParent(){
+    async create(){
 	  const ctx=this.ctx;
-	  const response=await this.TheLabel.createParent(ctx.request.body);
+	  const response=await this.TheLabel.create(ctx.request.body);
 	  ctx.body=response;
     }
-    async createSon(){
-        const ctx=this.ctx;
-        const response=await this.TheLabel.createSon(ctx.request.body);
-        ctx.body=response;
-      }
     async update() {
         const ctx = this.ctx;
-        const id = ctx.helper.parseInt(ctx.query.id);
         const body = ctx.request.body;
-        ctx.body = await this.TheLabel.update({ id, updates: body });
+        ctx.body = await this.TheLabel.update(ctx.request.body);
     }
     async list(){  //待测试
         const ctx=this.ctx;

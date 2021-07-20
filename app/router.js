@@ -64,8 +64,7 @@ module.exports = app => {
   //标签
   router.post('/api/label/list',controller.theLabel.list);// 标签的列表的获取
   router.post('/api/label/listTree',controller.theLabel.listTree);// 标签的树获取
-  router.post('/api/label/createParent',controller.theLabel.createParent);//标签的创建-父级
-  router.post('/api/label/createSon',controller.theLabel.createSon);//标签的创建-子级
+  router.post('/api/label/create',controller.theLabel.create);//标签的创建
   router.delete('/api/label/delete',controller.theLabel.delete);//标签的删除
   router.post('/api/label/update',controller.theLabel.update);//标签的更新
   router.get('/api/label/labelType',controller.theLabel.labelType);//标签的类别获取

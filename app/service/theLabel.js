@@ -1,5 +1,5 @@
 'use strict';
-
+const sd = require('silly-datetime');
 const Service = require('egg').Service;
 class TheLabel extends Service {
   constructor(ctx){
@@ -9,81 +9,48 @@ class TheLabel extends Service {
 	  this.ServerResponse = ctx.response.ServerResponse;	  
   }
   
-  async createParent(project) {
-    var data=[
-        {
-            fid:0,
-            fname:'一级',
-            label:'其他',
-            is_lower:0,
-            value:''  ,//前端生成
-        },{
-            fid:'',    //父级标签value
-            fname:'一级',//父级标签label
-            label:'其他',
-            is_lower:1,
-            value:''  ,//前端生成
-        },{
-
+  async create(data) {
+    const {ctx,app}=this;
+	const Op = app.Sequelize.Op;
+	//重名校验
+	var temp=data.labelList.replace(/\s/g,"").replace(/，|\./g, ',').split(',');
+	var arr=[];
+	var dataArr=[];
+	for(var i=0;i<temp.length;i++){
+        var obj={
+          fid:data.label,
+          fname:data.label===0?'标签':data.fname,
+          label:temp[i],
+          is_lower:data.label===0?0:1,
+		  create_people:this.ctx.session.username
         }
-    ] //校验数据的重复
-	const hasProject=await this.TheLabel.findOne({
+		arr.push(obj)
+		dataArr.push({
+			label: temp[i]
+		})
+      }
+	const hasLabel=await this.TheLabel.findAll({
 		where:{
-			project_name:project.project_name
+			[Op.or]: dataArr
 		}
 	})
-	if(hasProject==null){
-		var project1=project
-		project1['username']=this.ctx.session.username;
-		const projectInfo=await this.TheLabel.create(project1);
-		if (!projectInfo) {
+	if(hasLabel.length==0){
+		const tempInfo=await this.TheLabel.bulkCreate(arr);
+		if (!tempInfo) {
 			return this.ServerResponse.networkError('网络问题');
-		}else{
-			var projectInfo1 = projectInfo.toJSON();
-			return this.ServerResponse.requireData('创建成功', {code:0});
+		} else {
+			return this.ServerResponse.requireData('创建成功', { code: 0 });
 		}
 	}else{
-		return this.ServerResponse.requireData('项目已存在,请换个名字试试',{code:1})
+		var str=''
+		for(var i=0;i<hasLabel.length;i++){
+			str+=hasLabel[i].label
+		}
+		return this.ServerResponse.requireData(`标签[${str}]已存在,请换个名字试试`,{code:1})
 	}
   }
   
-  async createSon(project) {
-    var data=[
-        {
-            fid:0,
-            fname:'一级',
-            label:'其他',
-            is_lower:0,
-            value:''  ,//前端生成
-        },{
-            fid:'',    //父级标签value
-            fname:'一级',//父级标签label
-            label:'其他',
-            is_lower:1,
-            value:''  ,//前端生成
-        },{
-
-        }
-    ] //校验数据的重复
-	const hasProject=await this.TheLabel.findOne({
-		where:{
-			project_name:project.project_name
-		}
-	})
-	if(hasProject==null){
-		var project1=project
-		project1['username']=this.ctx.session.username;
-		const projectInfo=await this.TheLabel.create(project1);
-		if (!projectInfo) {
-			return this.ServerResponse.networkError('网络问题');
-		}else{
-			var projectInfo1 = projectInfo.toJSON();
-			return this.ServerResponse.requireData('创建成功', {code:0});
-		}
-	}else{
-		return this.ServerResponse.requireData('项目已存在,请换个名字试试',{code:1})
-	}
-  }
+  
   async delete(id){
 	try{
 		const result = await this.TheLabel.findOne({
@@ -93,13 +60,13 @@ class TheLabel extends Service {
 			return this.ServerResponse.requireData('标签不存在',{code:1});
 		}
 		if(result.number>0 && result.is_lower==1){
-			return this.ServerResponse.requireData('标签被使用，不支持删除操作', { code: 1 });
+			return this.ServerResponse.requireData('标签使用中，请先去除标签的使用', { code: 1 });
 		}
 		if(result.is_lower==0){
 			var num=0
 			await this.TheLabel.findAndCountAll({
 				where:{
-					fid:result.fid
+					fid:result.id
 				},
 				limit: 100,
 				offset:0
@@ -179,23 +146,36 @@ class TheLabel extends Service {
 	}
   }
   async update(data){
-	const projectInfo=await this.TheLabel.findOne({
+	const labelInfo=await this.TheLabel.findOne({
 		where:{
-			project_id:data.id
+			id:data.id
 		}
 	})
-	if(projectInfo==null){
-		return this.ServerResponse.requireData('项目不存在',{code:1})
+	if(labelInfo==null){
+		return this.ServerResponse.requireData('标签不存在',{code:1})
 	}else{
-		const thedata=await this.TheLabel.update(data.updates,{
-			where:{
-				project_id:data.id
-			}
-		})
-		if(thedata[0]==1){
+		if(data.label==labelInfo.label){
 			return this.ServerResponse.requireData('修改成功', {code:0});
 		}else{
-			return this.ServerResponse.requireData('项目修改失败',{code:1})
+			const thename=await this.TheLabel.findOne({
+				where:{
+					label:data.label
+				}
+			})
+			if(thename){
+				return this.ServerResponse.requireData('标签名已存在',{code:1})
+			}else{
+				const thedata=await this.TheLabel.update({label:data.label,update_people:this.ctx.session.username,update_time:sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss')},{
+					where:{
+						id:data.id
+					}
+				})
+				if(thedata[0]==1){
+					return this.ServerResponse.requireData('修改成功', {code:0});
+				}else{
+					return this.ServerResponse.requireData('项目修改失败',{code:1})
+				}
+			}
 		}
 	}
   }

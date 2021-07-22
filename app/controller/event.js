@@ -141,7 +141,6 @@ class EventController extends Controller {
      ctx.body = response;
       return;
     } catch (error) {
-      console.log('error',error)
       ctx.badRequest({
         data: {},
         msg: error.msg,

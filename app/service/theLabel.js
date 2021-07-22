@@ -109,7 +109,6 @@ class TheLabel extends Service {
         //var b=this.ctx.helper.listToTree(result.rows);
 		return this.ServerResponse.requireData('查询成功', list);
 	}catch(e){
-        console.log(e)
 		return this.ServerResponse.networkError('网络问题');
 	}
   }

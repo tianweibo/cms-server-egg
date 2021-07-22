@@ -1,18 +1,18 @@
 module.exports = app => {
-    const { INTEGER } = app.Sequelize;
+    const { INTEGER,STRING } = app.Sequelize;
     const reportBetween = app.model.define('reportBetween', {
         report_id: {
             type: INTEGER,
             primaryKey: true
         },
-        card_id: {
-            type: INTEGER
+        card_ids: {
+            type: STRING
         },
-        table_id: {
-            type: INTEGER
+        table_ids: {
+            type: STRING
         },
-        trend_id: {
-            type: INTEGER
+        trend_ids: {
+            type: STRING
         }
     },{
         timestamps: false,

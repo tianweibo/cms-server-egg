@@ -10,6 +10,7 @@ import ExportHome = require('../../../app/controller/home');
 import ExportIndicator = require('../../../app/controller/indicator');
 import ExportPhoto = require('../../../app/controller/photo');
 import ExportProject = require('../../../app/controller/project');
+import ExportReport = require('../../../app/controller/report');
 import ExportTheLabel = require('../../../app/controller/theLabel');
 import ExportUser = require('../../../app/controller/user');
 
@@ -23,6 +24,7 @@ declare module 'egg' {
     indicator: ExportIndicator;
     photo: ExportPhoto;
     project: ExportProject;
+    report: ExportReport;
     theLabel: ExportTheLabel;
     user: ExportUser;
   }

@@ -13,6 +13,7 @@ import ExportEvent = require('../../../app/service/event');
 import ExportIndicator = require('../../../app/service/indicator');
 import ExportPhoto = require('../../../app/service/photo');
 import ExportProject = require('../../../app/service/project');
+import ExportReport = require('../../../app/service/report');
 import ExportTheLabel = require('../../../app/service/theLabel');
 import ExportUser = require('../../../app/service/user');
 
@@ -25,6 +26,7 @@ declare module 'egg' {
     indicator: AutoInstanceType<typeof ExportIndicator>;
     photo: AutoInstanceType<typeof ExportPhoto>;
     project: AutoInstanceType<typeof ExportProject>;
+    report: AutoInstanceType<typeof ExportReport>;
     theLabel: AutoInstanceType<typeof ExportTheLabel>;
     user: AutoInstanceType<typeof ExportUser>;
   }

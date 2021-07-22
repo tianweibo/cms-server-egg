@@ -84,10 +84,10 @@ module.exports = {
 			}
 		  });
 		  oldArr = oldArr.filter(ele => ele.fid === 0); //这一步是过滤，按树展开，将多余的数组剔除；
+		  oldArr = oldArr.filter(ele => ele.children!=undefined); //无子级的不展示
 		  return oldArr;
 	},
 	async calcLabelNumber(temp,Op,TheLabel,type){
-		console.log(temp,'temp')
 			var idArr=[];
 			if(type){
 				for (var i = 0; i < temp.length; i++) {
@@ -97,7 +97,6 @@ module.exports = {
 				for (var i = 0; i < temp.length; i++) {
 					idArr.push({id:+temp[i].id})
 				} 
-				//idArr=temp
 			}
 			var objOption = {
 				[Op.or]: idArr,

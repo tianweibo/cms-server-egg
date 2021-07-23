@@ -73,7 +73,7 @@ class Event extends Service {
 				if (!eventAttributeInfo) {
 					return this.ServerResponse.networkError('网络问题');
 				} else {
-					return this.ServerResponse.requireData('更新成功', { code: 0 });
+					return this.ServerResponse.createBySuccessMsg('更新成功');
 				}
 			} else {
 				return this.ServerResponse.networkError('网络问题');
@@ -108,10 +108,10 @@ class Event extends Service {
 					if (!eventAttributeInfo) {
 						return this.ServerResponse.networkError('网络问题');
 					} else {
-						return this.ServerResponse.requireData('创建成功', { code: 0 });
+						return this.ServerResponse.createBySuccessMsg('创建成功');
 					}
 				} else {
-					return this.ServerResponse.requireData('创建成功', { code: 0 });
+					return this.ServerResponse.createBySuccessMsg('创建成功');
 				}
 			} else {
 				return this.ServerResponse.networkError('网络问题');
@@ -184,7 +184,7 @@ class Event extends Service {
 			var eventObj = {
 				eventInfo, attrInfo
 			}
-			return this.ServerResponse.requireData('查询成功', { code: 0, data: eventObj });
+			return this.ServerResponse.requireData('查询成功', eventObj);
 		}
 	}
 	async list(obj) {
@@ -272,7 +272,7 @@ class Event extends Service {
 			}, { where: { event_id: id }, individualHooks: true }); 
 
 			if (row) {
-				return this.ServerResponse.requireData('归档成功', { code: 0 });
+				return this.ServerResponse.requireData('归档成功');
 			} else {
 				return this.ServerResponse.requireData('归档失败', { code: 1 });
 			}
@@ -320,7 +320,7 @@ class Event extends Service {
             }
 			const row = await this.Event.destroy({ where: { event_id: id } });
 			if (row) {
-				return this.ServerResponse.requireData('删除成功', { code: 0 });
+				return this.ServerResponse.requireData('删除成功');
 			} else {
 				return this.ServerResponse.requireData('删除失败', { code: 1 });
 			}

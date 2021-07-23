@@ -88,7 +88,7 @@ class Indicator extends Service {
                         return this.ServerResponse.networkError('网络问题');
                     }
                 }
-                return this.ServerResponse.requireData('更新成功', { code: 0 });
+                return this.ServerResponse.createBySuccessMsg('更新成功');
             } else {
                 return this.ServerResponse.networkError('网络问题');
             }
@@ -137,7 +137,7 @@ class Indicator extends Service {
                     return this.ServerResponse.networkError('网络问题');
                    }
                 }
-                return this.ServerResponse.requireData('创建成功', { code: 0 });
+                return this.ServerResponse.createBySuccessMsg('创建成功');
             } else {
                 return this.ServerResponse.networkError('网络问题');
             }
@@ -199,10 +199,10 @@ class Indicator extends Service {
         if (indicatorInfo == null) {
             return this.ServerResponse.requireData('指标不存在', { code: 1 });
         } else {
-            var eventObj = {
+            var indicatorObj = {
                 indicatorInfo, eventInfo, appInfo
             }
-            return this.ServerResponse.requireData('查询成功', { code: 0, data: eventObj });
+            return this.ServerResponse.requireData('查询成功', indicatorObj);
         }
     }
     async listById(id) {      //id 数组
@@ -335,7 +335,7 @@ class Indicator extends Service {
             }, { where: { indicator_id: id }, individualHooks: true });
 
             if (row) {
-                return this.ServerResponse.requireData('归档成功', { code: 0 });
+                return this.ServerResponse.requireData('归档成功');
             } else {
                 return this.ServerResponse.requireData('归档失败', { code: 1 });
             }
@@ -377,7 +377,7 @@ class Indicator extends Service {
             }
             const row = await this.Indicator.destroy({ where: { indicator_id: id } });
             if (row) {
-                return this.ServerResponse.requireData('删除成功', { code: 0 });
+                return this.ServerResponse.requireData('删除成功');
             } else {
                 return this.ServerResponse.requireData('删除失败', { code: 1 });
             }

@@ -26,9 +26,9 @@ class User extends Service {
 	}
 	const token=jwt.sign({
 		id:hasUser.dataValues.id,
-		scope:hasUser.id
+		scope:hasUser.role
 	},this.app.config.jwt.cert,{
-		expiresIn:60*60*24
+		expiresIn:60*60*2
 	})
 	//await this.app.redis.set('userid', hasUser.dataValues.id);
 	this.ctx.session.userid=hasUser.dataValues.id
@@ -106,7 +106,7 @@ class User extends Service {
 		if (!userInfo) {
 			return this.ServerResponse.networkError('网络问题');
 		}else{
-			return this.ServerResponse.requireData('创建成功', {code:0});
+			return this.ServerResponse.createBySuccessMsg('创建成功');
 		}
 	}else{
 		return this.ServerResponse.requireData('账号已存在,请换个名字试试',{code:1})
@@ -130,7 +130,7 @@ class User extends Service {
 			}
 		})
 		if (thedata) {
-			return this.ServerResponse.requireData('更新成功', { code: 0 });
+			return this.ServerResponse.createBySuccessMsg('更新成功');
 		} else {
 			return this.ServerResponse.networkError('网络问题');
 		}
@@ -145,10 +145,7 @@ class User extends Service {
 	if (userInfo == null) {
 		return this.ServerResponse.requireData('用户不存在', { code: 1 });
 	} else {
-		var userObj = {
-			userInfo
-		}
-		return this.ServerResponse.requireData('查询成功', { code: 0, data: userObj });
+		return this.ServerResponse.requireData('查询成功',userInfo);
 	}
 }
   async delete(id){
@@ -161,7 +158,7 @@ class User extends Service {
 		}
 		const row = await this.TheUser.destroy({ where: { id: id } });
 		if (row) {
-			return this.ServerResponse.requireData('删除成功', { code: 0 });
+			return this.ServerResponse.createBySuccessMsg('删除成功');
 		} else {
 			return this.ServerResponse.requireData('删除失败', { code: 1 });
 		}
@@ -175,7 +172,7 @@ class User extends Service {
 			password: data.password,
 		}, { where: { id: data.id }, individualHooks: true });
 		if (row) {
-			return this.ServerResponse.requireData(`密码修改成功`, { code: 0 });
+			return this.ServerResponse.createBySuccessMsg('密码修改成功');
 		} else {
 			return this.ServerResponse.requireData(`密码修改失败`, { code: 1 });
 		}
@@ -196,7 +193,7 @@ class User extends Service {
 		}, { where: { id: id }, individualHooks: true });
 
 		if (row) {
-			return this.ServerResponse.requireData(`密码还原成功`, { code: 0 });
+			return this.ServerResponse.createBySuccessMsg('密码还原成功');
 		} else {
 			return this.ServerResponse.requireData(`密码还原失败`, { code: 1 });
 		}
@@ -226,9 +223,9 @@ class User extends Service {
 		}, { where: { id: id }, individualHooks: true });
 
 		if (row) {
-			return this.ServerResponse.requireData(`${str}成功`, { code: 0 });
+			return this.ServerResponse.createBySuccessMsg(`${str}成功`);
 		} else {
-			return this.ServerResponse.requireData(`${str}失败`, { code: 1 });
+			return this.ServerResponse.createBySuccessMsg(`${str}失败`);
 		}
 	} catch (e) {
 		return this.ServerResponse.networkError('网络问题');

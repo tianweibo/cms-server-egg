@@ -39,7 +39,7 @@ class TheLabel extends Service {
 		if (!tempInfo) {
 			return this.ServerResponse.networkError('网络问题');
 		} else {
-			return this.ServerResponse.requireData('创建成功', { code: 0 });
+			return this.ServerResponse.createBySuccessMsg('创建成功');
 		}
 	}else{
 		var str=''
@@ -79,7 +79,7 @@ class TheLabel extends Service {
 		}
 		const row = await this.TheLabel.destroy({ where: {id: id } });
 		if (row) {
-			return this.ServerResponse.requireData('删除成功', { code: 0 });
+			return this.ServerResponse.createBySuccessMsg('删除成功');
 		} else {
 			return this.ServerResponse.requireData('删除失败', { code: 1 });
 		}
@@ -154,7 +154,7 @@ class TheLabel extends Service {
 		return this.ServerResponse.requireData('标签不存在',{code:1})
 	}else{
 		if(data.label==labelInfo.label){
-			return this.ServerResponse.requireData('修改成功', {code:0});
+			return this.ServerResponse.createBySuccessMsg('更新成功');
 		}else{
 			const thename=await this.TheLabel.findOne({
 				where:{
@@ -170,7 +170,7 @@ class TheLabel extends Service {
 					}
 				})
 				if(thedata[0]==1){
-					return this.ServerResponse.requireData('修改成功', {code:0});
+					return this.ServerResponse.createBySuccessMsg('更新成功');
 				}else{
 					return this.ServerResponse.requireData('项目修改失败',{code:1})
 				}

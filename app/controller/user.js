@@ -18,11 +18,11 @@ class UserController extends Controller {
 			},
 			phone:{
 				type:'phone',
-			},
-			password:'password'
+			}
 		}
 		const ctx=this.ctx;
-		const sj=this.app.validator.validate(rule,ctx.request.body)
+		const sj=this.app.validator.validate(rule,ctx.request.body);
+		console.log(sj,'sj')
 		//var para=ctx.params();
 		if(sj){
 			ctx.body={

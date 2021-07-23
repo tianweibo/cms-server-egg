@@ -50,7 +50,7 @@ class Application extends Service {
             if(tempArr.length>0){
                 this.ctx.helper.calcLabelNumber(tempArr,Op,this.TheLabel,null)
             }
-            
+
             var obj = data.updates;
             obj.info.update_people = this.ctx.session.username;
             obj.info['update_time'] = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
@@ -73,7 +73,7 @@ class Application extends Service {
                 if (!eventAppInfo) {
                     return this.ServerResponse.networkError('网络问题');
                 } else {
-                    return this.ServerResponse.requireData('更新成功', { code: 0 });
+                    return this.ServerResponse.createBySuccessMsg('更新成功');
                 }
 
             } else {
@@ -110,10 +110,10 @@ class Application extends Service {
                     if (!tempInfo) {
                         return this.ServerResponse.networkError('网络问题');
                     } else {
-                        return this.ServerResponse.requireData('创建成功', { code: 0 });
+                        return this.ServerResponse.createBySuccessMsg('创建成功');
                     }
                 } else {
-                    return this.ServerResponse.requireData('创建成功', { code: 0 });
+                    return this.ServerResponse.createBySuccessMsg('创建成功');
                 }
                 //标签数量的统计
                 
@@ -148,7 +148,7 @@ class Application extends Service {
             var appObj = {
                 appInfo, indicatorIds
             }
-            return this.ServerResponse.requireData('查询成功', { code: 0, data: appObj });
+            return this.ServerResponse.requireData('查询成功', appObj );
         }
     }
     async detailByIndicator(data) {  //应用下的指标
@@ -291,7 +291,7 @@ class Application extends Service {
             }, { where: { application_id: id }, individualHooks: true });
 
             if (row) {
-                return this.ServerResponse.requireData(`${str}成功`, { code: 0 });
+                return this.ServerResponse.requireData(`${str}成功`);
             } else {
                 return this.ServerResponse.requireData(`${str}失败`, { code: 1 });
             }

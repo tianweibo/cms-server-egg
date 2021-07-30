@@ -5,9 +5,6 @@ module.exports=app=>{
 	const report=app.model.define('report',{
 		report_id:{type:INTEGER,primaryKey:true,autoIncrement:true},
         report_name:{type:STRING(20),comment:'报表名称'},
-        report_obj_label:{type:STRING(20),comment:'报表对象label'}, 
-        report_status:{type:STRING(20),comment:'报表状态'},
-        report_status_label:{type:STRING(20),comment:'报表状态label'},                           
 		create_time:{
 			type:DATE,
 			get(){
@@ -39,6 +36,7 @@ module.exports=app=>{
 			type:STRING(255),comment:'创建人'
 		},
 		state:{defaultValue:1,type:INTEGER(6)},
+		data_state:{defaultValue:0,type:INTEGER(6),comment:'数据状态'},
 	}, {
         timestamps: false,
 		updatedAt:'update_time',

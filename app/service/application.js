@@ -124,6 +124,19 @@ class Application extends Service {
             return this.ServerResponse.requireData('应用英文代码已存在,请换个再试试', { code: 1 })
         }
     }
+    async indicatorNum(id){
+        try{
+            var arr = await this.ApplicationIndicator.findAll({
+                where: {
+                    application_id: id
+                },
+                attributes: ['indicator_id']
+            })
+            return this.ServerResponse.requireData('查询成功', arr.length);
+        }catch(e){
+            return this.ServerResponse.networkError('网络问题');
+        }
+    }
     async detail(id) {
         const { ctx, app } = this;
         const Op = app.Sequelize.Op;

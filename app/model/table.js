@@ -3,13 +3,13 @@ const sd = require('silly-datetime');
 module.exports=app=>{
     const {STRING,INTEGER,DATE,TEXT}=app.Sequelize;
 	const table=app.model.define('table',{
-		table_id:{type:INTEGER,primaryKey:true,autoIncrement:true},
-        indicator_id:{type:STRING(255),comment:'指标id'},
+		table_id:{type:STRING(50),primaryKey:true,},
+        indicator_id:{type:INTEGER,comment:'指标id'},
 		indicator_name:{type:STRING(255),comment:'指标名称'},         
 		indicator_show_name:{type:STRING(255),comment:'指标显示名称'},            
         indicator_desc:{type:STRING(255),comment:'指标说明'},              
-	    time_dimension:{type:STRING(20),comment:'时间维度'},  
-		time_dimension_label:{type:STRING(20),comment:'时间维度label'},     
+	    time_dimension:{type:STRING(255),comment:'时间维度'},  
+		time_dimension_label:{type:STRING(255),comment:'时间维度label'},     
         is_import:{defaultValue:1,type:INTEGER(6),comment:'是否支持导出'},
 		state:{defaultValue:1,type:INTEGER(6)},
 	}, {

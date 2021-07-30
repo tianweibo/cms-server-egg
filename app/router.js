@@ -47,6 +47,7 @@ module.exports = app => {
   router.post('/api/application/detailByEvent',new Auth(10).check,controller.application.detailByEvent);//应用详情的查看-事件
   router.post('/api/application/list',new Auth(10).check,controller.application.list);// 应用列表的获取
   router.get('/api/application/useful',new Auth(10).check,controller.application.useful);//应用的启停与否
+  router.get('/api/application/indicatorNum',new Auth(10).check,controller.application.indicatorNum);//应用下是否有指标
   router.delete('/api/application/delete',new Auth(10).check,controller.application.delete);//应用的删除
   //指标
   router.post('/api/indicator/listById',new Auth(10).check,controller.indicator.listById);// 通过ID获取指标的列表
@@ -73,5 +74,7 @@ module.exports = app => {
   router.post('/api/report/create',new Auth(10).check,controller.report.create);//报表的创建
   router.delete('/api/report/delete',new Auth(10).check,controller.report.delete);//报表的删除
   router.post('/api/report/update',new Auth(10).check,controller.report.update);//报表的更新
-  router.get('/api/report/detail',new Auth(10).check,controller.report.detail);//标签的详情
+  router.post('/api/report/deleteTable',controller.report.deleteTable);//表单中三张表的删除
+  router.get('/api/report/detail',new Auth(10).check,controller.report.detail);//报表的详情获取
+  router.get('/api/report/checkName',new Auth(10).check,controller.report.checkName);//报表的重名校验
 };

@@ -8,7 +8,8 @@ module.exports=app=>{
 		indicator_name:{type:STRING(255),comment:'指标名称'},         
 		indicator_show_name:{type:STRING(255),comment:'指标显示名称'},            
         indicator_desc:{type:STRING(255),comment:'指标说明'},              
-	    time_scope:{type:STRING(20),comment:'时间范围'},  
+	    time_scope:{type:STRING(20),comment:'时间范围'}, 
+		time_scope_label:{type:STRING(20),comment:'时间范围label'},
 		state:{defaultValue:1,type:INTEGER(6)},
 	}, {
         timestamps: false,

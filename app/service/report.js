@@ -178,6 +178,7 @@ class Report extends Service {
             }
             return this.ServerResponse.createBySuccessMsgAndData('创建成功', { code: 0 })
         } catch (e) {
+            console.log(e)
             return this.ServerResponse.networkError('网络问题');
         }
     }

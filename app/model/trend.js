@@ -5,6 +5,7 @@ module.exports=app=>{
 	const trend=app.model.define('trend',{
 		trend_id:{type:STRING(50),primaryKey:true},
         indicator_id:{type:INTEGER,comment:'指标id'},
+		events:{type:STRING(255),comment:'指标下对应的事件codes'},   
 		indicator_name:{type:STRING(255),comment:'指标名称'},         
 		indicator_show_name:{type:STRING(255),comment:'指标显示名称'},            
         indicator_desc:{type:STRING(255),comment:'指标说明'},              

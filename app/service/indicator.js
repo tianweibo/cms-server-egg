@@ -13,6 +13,42 @@ class Indicator extends Service {
         this.ResponseCode = ctx.response.ResponseCode;
         this.ServerResponse = ctx.response.ServerResponse;
     }
+    async eventCodesByIndic(id){
+        const Op = this.app.Sequelize.Op;
+        try{
+            const idEventArr = await this.IndicatorEvent.findAll({
+                where: {
+                    indicator_id: id
+                },
+                attributes: ['event_id']
+            })
+            var dataEventArr = [];
+            if (idEventArr && idEventArr.length > 0) {
+                for (var i = 0; i < idEventArr.length; i++) {
+                    dataEventArr.push({
+                        event_id: idEventArr[i].event_id
+                    })
+                }
+            }
+            var objOption = {
+                [Op.or]: dataEventArr,
+            }
+            var eventInfo = await this.Event.findAll({
+                where: objOption,
+                attributes: ['event_code']
+            })
+            var temp=[]
+            if (eventInfo && eventInfo.length > 0) {
+                for (var i = 0; i < eventInfo.length; i++) {
+                    temp.push(eventInfo[i].event_code)
+                }
+            }
+            return this.ServerResponse.requireData('查询成功', temp);
+        }catch(e){
+            console.log(e)
+            return this.ServerResponse.networkError('网络问题');
+        }
+    }
     async update(data) {
         const Op = this.app.Sequelize.Op;
         const indicatorInfo = await this.Indicator.findOne({

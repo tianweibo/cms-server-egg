@@ -51,6 +51,7 @@ module.exports = app => {
   router.delete('/api/application/delete',new Auth(10).check,controller.application.delete);//应用的删除
   //指标
   router.post('/api/indicator/listById',new Auth(10).check,controller.indicator.listById);// 通过ID获取指标的列表
+  router.get('/api/indicator/eventCodesByIndic',controller.indicator.eventCodesByIndic);// 获取指标下对应的事件code
   router.post('/api/indicator/listByType',new Auth(10).check,controller.indicator.listByType);// 通过指标类型和一级指标获取指标的列表
   router.post('/api/indicator/list',new Auth(10).check,controller.indicator.list);// 指标列表的获取
   router.post('/api/indicator/create',new Auth(10).check,controller.indicator.create);//指标的创建

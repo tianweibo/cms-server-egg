@@ -5,7 +5,8 @@ module.exports=app=>{
 	const card=app.model.define('card',{
 		card_id:{type:STRING,primaryKey:true},
         indicator_id:{type:INTEGER,comment:'指标id'},
-		indicator_name:{type:STRING(255),comment:'指标名称'},         
+		indicator_name:{type:STRING(255),comment:'指标名称'}, 
+		events:{type:STRING(255),comment:'指标下对应的事件codes'},           
 		indicator_show_name:{type:STRING(255),comment:'指标显示名称'},            
         indicator_desc:{type:STRING(255),comment:'指标说明'},              
 	    time_dimension:{type:STRING(20),comment:'时间维度'},  

@@ -13,7 +13,8 @@ module.exports=app=>{
 		time_dimension_label:{type:STRING(20),comment:'时间维度label'},     
         sequential:{defaultValue:1,type:INTEGER(6),comment:'环比'},  
         indicator_level:{type:STRING(20),comment:'二级指标'},  
-		indicator_level_label:{type:STRING(20),comment:'二级指标label'},               
+		indicator_level_label:{type:STRING(20),comment:'二级指标label'}, 
+		show_type:{defaultValue:1,type:INTEGER(6),comment:'1次数0人数'},              
 		state:{defaultValue:1,type:INTEGER(6)},
 	}, {
         timestamps: false,

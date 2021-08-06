@@ -13,6 +13,7 @@ module.exports=app=>{
 		time_dimension_label:{type:STRING(255),comment:'时间维度label'},     
         is_import:{defaultValue:1,type:INTEGER(6),comment:'是否支持导出'},
 		state:{defaultValue:1,type:INTEGER(6)},
+		show_type:{defaultValue:1,type:INTEGER(6),comment:'1次数0人数'},
 	}, {
         timestamps: false,
 		updatedAt:'update_time',

@@ -12,6 +12,7 @@ module.exports=app=>{
 	    time_scope:{type:STRING(20),comment:'时间范围'}, 
 		time_scope_label:{type:STRING(20),comment:'时间范围label'},
 		state:{defaultValue:1,type:INTEGER(6)},
+		show_type:{defaultValue:1,type:INTEGER(6),comment:'1次数0人数'},
 	}, {
         timestamps: false,
 		updatedAt:'update_time',

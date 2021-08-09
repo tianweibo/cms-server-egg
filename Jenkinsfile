@@ -37,7 +37,7 @@ node {
 
            //定义部署机器
            def deployNodes = [
-             'test': ['172.16.0.127'],
+             'zk-test': ['114.67.94.229'],
            ]
            def node = []
            if(deploy_env in deployNodes) {
@@ -49,7 +49,7 @@ node {
              }  catch (err) {
                echo "not exist old contains"
              }
-             if( deploy_env == "test") {
+             if( deploy_env == "zk-test") {
                  sh("ssh ${IP} docker run -d --net host --name ${docker_name} -v /data/logs/data-engine:/var/data-engine/logs  ${docker_image}")
              }
            }

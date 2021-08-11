@@ -82,9 +82,9 @@ class Attribute extends Service {
     var arr=[];
     if(obj.attribute_label){
         arr.push({
-			attribute_label:obj.attribute_label,
+			attribute_label:{[Op.like]:`%${obj.attribute_label}%`}
 		})
-    }
+    }  
     if(obj.data_type){
         arr.push({
 			data_type:obj.data_type,
@@ -101,7 +101,7 @@ class Attribute extends Service {
 		},{
 			attribute_code:{[Op.like]:`%${obj.keyword}%`}
 		}],
-        [Op.and]:arr
+        [Op.and]:arr,
 	}
 	try{
 		await this.Attribute.findAndCountAll({

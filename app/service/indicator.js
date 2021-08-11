@@ -304,8 +304,11 @@ class Indicator extends Service {
 			state:1
 		})
         if (obj.indicator_label) {
-            arr.push({
+            /* arr.push({
                 indicator_label: obj.indicator_label,
+            }) */
+            arr.push({
+                indicator_label:{[Op.like]:`%${obj.indicator_label}%`}
             })
         }
         if (obj.indicator_type) {

@@ -199,9 +199,12 @@ class Event extends Service {
 			state:1
 		})
 		if (obj.event_label) {
-			arr.push({
+			/* arr.push({
 				event_label: obj.event_label,
-			})
+			}) */
+			arr.push({
+                event_label:{[Op.like]:`%${obj.event_label}%`}
+            })
 		}
 		if (obj.event_trigger_mode) {
 			arr.push({

@@ -130,17 +130,111 @@ CREATE TABLE `basicData` (
 -- Records of basicData
 -- ----------------------------
 BEGIN;
-INSERT INTO `basicData` VALUES ('0', 90, '一级', 'indicator_label', 1, NULL, '指标标签', 0, NULL);
-INSERT INTO `basicData` VALUES ('indicator_label', 91, '指标标签', 'Indicator_obj', 1, NULL, '指标分析对象', 0, NULL);
-INSERT INTO `basicData` VALUES ('Indicator_obj', 92, '指标分析对象', 'parti_user', 1, NULL, '参与用户', 1, NULL);
-INSERT INTO `basicData` VALUES ('Indicator_obj', 96, '指标分析对象', 'members', 1, NULL, '会员', 1, NULL);
-INSERT INTO `basicData` VALUES ('Indicator_obj', 97, '指标分析对象', 'invite_user', 1, NULL, '被邀用户', 1, NULL);
-INSERT INTO `basicData` VALUES ('Indicator_obj', 98, '指标分析对象', 'access_user', 1, NULL, '访问用户', 1, NULL);
-INSERT INTO `basicData` VALUES ('indicator_label', 99, '指标标签', 'Indicator_stage', 1, NULL, '指标所属阶段', 0, NULL);
-INSERT INTO `basicData` VALUES ('Indicator_stage', 100, '指标所属阶段', 'cognitive', 1, NULL, '认知', 1, NULL);
-INSERT INTO `basicData` VALUES ('Indicator_stage', 101, '指标所属阶段', 'interest', 1, NULL, '兴趣', 1, NULL);
-INSERT INTO `basicData` VALUES ('Indicator_stage', 102, '指标所属阶段', 'conversion', 1, NULL, '转化', 1, NULL);
-INSERT INTO `basicData` VALUES ('Indicator_stage', 103, '指标所属阶段', 'loyalty', 1, NULL, '忠诚', 1, NULL);
+INSERT INTO `theLabel` VALUES (0, 1, '标签', '指标标签',1,0,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (1, 10, '指标标签', '指标分析对象', 1, 0,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (10, 20, '指标分析对象', '参与用户', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (10, 21, '指标分析对象', '会员', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (10, 22, '指标分析对象', '被邀用户', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (10, 23, '指标分析对象', '访问用户', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (1, 11, '指标标签', '指标所属阶段', 1, 0,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (11, 24, '指标所属阶段', '认知', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (11, 25, '指标所属阶段', '兴趣', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (11, 26, '指标所属阶段', '转化', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (11, 27, '指标所属阶段', '忠诚', 1, 1,null,null,null,'admin',0);
+
+
+INSERT INTO `theLabel` VALUES (0, 2, '标签', '事件标签', 1,0, null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (2, 28, '事件标签','事件通用性', 1, 0,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (28, 29, '事件通用性','全部通用', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (28, 30, '事件通用性','互动通用',1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (28, 31, '事件通用性','天策通用', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (28, 32, '事件通用性','CRM通用', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (28, 33, '事件通用性','互动定制', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (28, 34, '事件通用性','天策定制', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (28, 35,'事件通用性', 'CRM定制',1, 1,null,null,null,'admin',0);
+
+
+INSERT INTO `theLabel` VALUES (0, 3, '标签','属性标签', 1,0,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (3, 36, '属性标签', '属性通用性',1,0,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (36, 37, '属性通用性', '全部通用', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (36,38, '属性通用性', '互动通用', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (36,39, '属性通用性', '天策通用', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (36,40, '属性通用性', 'CRM通用', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (36,41, '属性通用性', '互动定制', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (36,42, '属性通用性', '天策定制', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (36,43, '属性通用性', 'CRM定制', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (3,44, '属性标签','属性对象', 1,0,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (44,45, '属性对象', '会员', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (44,46, '属性对象', '品牌', 1, 1,null,null,null,'admin',0);
+
+
+
+INSERT INTO `theLabel` VALUES (0, 4, '标签', '应用标签', 1,0,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (4,47,'应用标签','互动应用价值',1,0,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (47, 48, '互动应用价值', '拉新', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (47, 49, '互动应用价值', '促活', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (47, 50, '互动应用价值', '转化', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (47, 51, '互动应用价值', '复购', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (47, 52, '互动应用价值', '传播', 1, 1,null,null,null,'admin',0);
+
+INSERT INTO `theLabel` VALUES (4, 53, '应用标签', '互动应用类型', 1,0,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (53, 54, '互动应用类型', '活动抽奖', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (53, 55, '互动应用类型', '裂变引流', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (53, 56, '互动应用类型', '商业促销', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (53, 57, '互动应用类型', '长期活动', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (53, 58, '互动应用类型', '投票活动', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (53, 59, '互动应用类型', '答题活动', 1, 1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (53, 60, '互动应用类型', '现场活动', 1, 1,null,null,null,'admin',0);
+
+INSERT INTO `theLabel` VALUES (4, 61, '应用标签', '大促阶段', 1,0,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (61, 62, '大促阶段', '蓄水', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (61,63, '大促阶段', '第一波',1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (61,64, '大促阶段', '第二波', 1,1,null,null,null,'admin',0);
+
+INSERT INTO `theLabel` VALUES (4,65, '应用标签', '所属业务线', 1,0,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (65,66, '所属业务线', '商家平台', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (65,67, '所属业务线', '数据策略', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (65,68, '所属业务线', '互动营销', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (65,69, '所属业务线', '客户运营', 1,1,null,null,null,'admin',0);
+
+INSERT INTO `theLabel` VALUES (4,70, '应用标签', '所属互动', 1,0,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 71, '所属互动', '签到', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 72, '所属互动', '大转盘', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 73, '所属互动', '关注店铺', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 74, '所属互动', '收集会员信息', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 75, '所属互动', '问卷调查', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 76, '所属互动', '疯狂老虎机', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 77, '所属互动', '排队', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 78, '所属互动', '品牌环游', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 79, '所属互动', '翻卡抽奖', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 80, '所属互动', '许愿购物袋', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 81, '所属互动', '试用活动', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 82, '所属互动', '九宫格', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 83, '所属互动', '文章互动', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 84, '所属互动', '团购', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 85, '所属互动', '答题有礼', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 86, '所属互动', '裂变宝', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 87, '所属互动', '派小样', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 88, '所属互动', '大促搭配购', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 89, '所属互动', '导购助手', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 90, '所属互动', '兑换活动', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 91, '所属互动', '邀请预购裂变', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 92, '所属互动', '邀请注册裂变', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 93, '所属互动', '邀请好友签到', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 94, '所属互动', '邀请好友注册', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 95, '所属互动', '邀请好友关注店铺', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 96, '所属互动', '邀请好友抽奖', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 97, '所属互动', '邀请好友完善信息', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 98, '所属互动', '分享签到', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 99, '所属互动', '分享注册', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 100, '所属互动', '分享关注店铺', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 101, '所属互动', '分享抽奖', 1,1,null,null,null,'admin',0);
+INSERT INTO `theLabel` VALUES (70, 102, '所属互动', '分享收集会员信息', 1,1,null,null,null,'admin',0);
+
+
+
+
+
 INSERT INTO `basicData` VALUES ('0', 104, '一级', 'event_trigger_mode', 1, NULL, '触发类型', 0, NULL);
 INSERT INTO `basicData` VALUES ('event_trigger_mode', 105, '触发类型', 'open', 1, NULL, 'open', 1, NULL);
 INSERT INTO `basicData` VALUES ('event_trigger_mode', 106, '触发类型', 'click', 1, NULL, 'click', 1, NULL);
@@ -148,84 +242,7 @@ INSERT INTO `basicData` VALUES ('event_trigger_mode', 107, '触发类型', 'slid
 INSERT INTO `basicData` VALUES ('event_trigger_mode', 108, '触发类型', 'callback', 1, NULL, 'callback', 1, NULL);
 INSERT INTO `basicData` VALUES ('event_trigger_mode', 109, '触发类型', 'jump', 1, NULL, 'jump', 1, NULL);
 INSERT INTO `basicData` VALUES ('event_trigger_mode', 110, '触发类型', 'play', 1, NULL, 'play', 1, NULL);
-INSERT INTO `basicData` VALUES ('0', 111, '一级', 'event_label', 1, NULL, '事件标签', 0, NULL);
-INSERT INTO `basicData` VALUES ('event_label', 112, '事件标签', 'general_label', 1, NULL, '事件通用性', 0, NULL);
-INSERT INTO `basicData` VALUES ('general_label', 113, '事件通用性', 'all_general', 1, NULL, '全部通用', 1, NULL);
-INSERT INTO `basicData` VALUES ('general_label', 114, '事件通用性', 'interactive_general', 1, NULL, '互动通用', 1, NULL);
-INSERT INTO `basicData` VALUES ('general_label', 115, '事件通用性', 'policy_general', 1, NULL, '天策通用', 1, NULL);
-INSERT INTO `basicData` VALUES ('general_label', 116, '事件通用性', 'crm_general', 1, NULL, 'CRM通用', 1, NULL);
-INSERT INTO `basicData` VALUES ('general_label', 117, '事件通用性', 'interactive_custom', 1, NULL, '互动定制', 1, NULL);
-INSERT INTO `basicData` VALUES ('general_label', 118, '事件通用性', 'policy_custom', 1, NULL, '天策定制', 1, NULL);
-INSERT INTO `basicData` VALUES ('general_label', 119, '事件通用性', 'crm_custom', 1, NULL, 'CRM定制', 1, NULL);
-INSERT INTO `basicData` VALUES ('0', 133, '一级', 'attribute_label', 1, NULL, '属性标签', 0, NULL);
-INSERT INTO `basicData` VALUES ('attribute_label', 134, '属性标签', 'attribute_general', 1, NULL, '属性通用性', 0, NULL);
-INSERT INTO `basicData` VALUES ('attribute_general', 135, '属性通用性', 'all_genarel', 1, NULL, '全部通用', 1, NULL);
-INSERT INTO `basicData` VALUES ('attribute_general', 136, '属性通用性', 'active_general', 1, NULL, '互动通用', 1, NULL);
-INSERT INTO `basicData` VALUES ('attribute_general', 137, '属性通用性', 'policy_general', 1, NULL, '天策通用', 1, NULL);
-INSERT INTO `basicData` VALUES ('attribute_general', 138, '属性通用性', 'crm_general', 1, NULL, 'CRM通用', 1, NULL);
-INSERT INTO `basicData` VALUES ('attribute_general', 139, '属性通用性', 'active_custom', 1, NULL, '互动定制', 1, NULL);
-INSERT INTO `basicData` VALUES ('attribute_general', 140, '属性通用性', 'policy_custom', 1, NULL, '天策定制', 1, NULL);
-INSERT INTO `basicData` VALUES ('attribute_general', 141, '属性通用性', 'crm_custom', 1, NULL, 'CRM定制', 1, NULL);
-INSERT INTO `basicData` VALUES ('attribute_label', 142, '属性标签', 'attribute_obj', 1, NULL, '属性对象', 0, NULL);
-INSERT INTO `basicData` VALUES ('attribute_obj', 143, '属性对象', 'member', 1, NULL, '会员', 1, NULL);
-INSERT INTO `basicData` VALUES ('attribute_obj', 144, '属性对象', 'brand', 1, NULL, '品牌', 1, NULL);
-INSERT INTO `basicData` VALUES ('0', 145, '一级', 'app_label', 1, NULL, '应用标签', 0, NULL);
-INSERT INTO `basicData` VALUES ('app_label', 146, '应用标签', 'app_value', 1, NULL, '互动应用价值', 0, NULL);
-INSERT INTO `basicData` VALUES ('app_value', 147, '互动应用价值', 'pull_new', 1, NULL, '拉新', 1, NULL);
-INSERT INTO `basicData` VALUES ('app_value', 148, '互动应用价值', 'promote', 1, NULL, '促活', 1, NULL);
-INSERT INTO `basicData` VALUES ('app_value', 149, '互动应用价值', 'conversion', 1, NULL, '转化', 1, NULL);
-INSERT INTO `basicData` VALUES ('app_value', 150, '互动应用价值', 'purchase', 1, NULL, '复购', 1, NULL);
-INSERT INTO `basicData` VALUES ('app_value', 151, '互动应用价值', 'spread\n\nspread', 1, NULL, '传播', 1, NULL);
-INSERT INTO `basicData` VALUES ('app_label', 152, '应用标签', 'app_type', 1, NULL, '互动应用类型', 0, NULL);
-INSERT INTO `basicData` VALUES ('app_type', 153, '互动应用类型', 'active_draw', 1, NULL, '活动抽奖', 1, NULL);
-INSERT INTO `basicData` VALUES ('app_type', 154, '互动应用类型', 'fission_drainage', 1, NULL, '裂变引流', 1, NULL);
-INSERT INTO `basicData` VALUES ('app_type', 155, '互动应用类型', 'commercial_promotion', 1, NULL, '商业促销', 1, NULL);
-INSERT INTO `basicData` VALUES ('app_type', 156, '互动应用类型', 'long_active', 1, NULL, '长期活动', 1, NULL);
-INSERT INTO `basicData` VALUES ('app_type', 157, '互动应用类型', 'voting\n\nvoting', 1, NULL, '投票活动', 1, NULL);
-INSERT INTO `basicData` VALUES ('app_type', 158, '互动应用类型', 'solving', 1, NULL, '答题活动', 1, NULL);
-INSERT INTO `basicData` VALUES ('app_type', 159, '互动应用类型', 'living', 1, NULL, '现场活动', 1, NULL);
-INSERT INTO `basicData` VALUES ('app_label', 160, '应用标签', 'promote_stage', 1, NULL, '大促阶段', 0, NULL);
-INSERT INTO `basicData` VALUES ('promote_stage', 161, '大促阶段', 'water_storage', 1, NULL, '蓄水', 1, NULL);
-INSERT INTO `basicData` VALUES ('promote_stage', 162, '大促阶段', 'first_wave', 1, NULL, '第一波', 1, NULL);
-INSERT INTO `basicData` VALUES ('promote_stage', 163, '大促阶段', 'second_wave', 1, NULL, '第二波', 1, NULL);
-INSERT INTO `basicData` VALUES ('app_label', 164, '应用标签', 'business', 1, NULL, '所属业务线', 0, NULL);
-INSERT INTO `basicData` VALUES ('business', 165, '所属业务线', 'business_platform', 1, NULL, '商家平台', 1, NULL);
-INSERT INTO `basicData` VALUES ('business', 166, '所属业务线', 'data_srategy', 1, NULL, '数据策略', 1, NULL);
-INSERT INTO `basicData` VALUES ('business', 167, '所属业务线', 'interactive_market', 1, NULL, '互动营销', 1, NULL);
-INSERT INTO `basicData` VALUES ('business', 168, '所属业务线', 'customer_operation', 1, NULL, '客户运营', 1, NULL);
-INSERT INTO `basicData` VALUES ('app_label', 169, '应用标签', 'own_interaction', 1, NULL, '所属互动', 0, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 170, '所属互动', 'sign_in', 1, NULL, '签到', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 171, '所属互动', 'Big wheel\n\nbig_wheel', 1, NULL, '大转盘', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 172, '所属互动', 'attente_store', 1, NULL, '关注店铺', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 173, '所属互动', 'collect_informate', 1, NULL, '收集会员信息', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 174, '所属互动', 'question_survey', 1, NULL, '问卷调查', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 175, '所属互动', 'tiger_machine', 1, NULL, '疯狂老虎机', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 176, '所属互动', 'line_up', 1, NULL, '排队', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 177, '所属互动', 'brand_around', 1, NULL, '品牌环游', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 178, '所属互动', 'card_draw', 1, NULL, '翻卡抽奖', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 179, '所属互动', 'wishing_bag', 1, NULL, '许愿购物袋', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 180, '所属互动', 'trial_activitie', 1, NULL, '试用活动', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 181, '所属互动', 'scratchable_latex', 1, NULL, '九宫格', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 182, '所属互动', 'acticle_interacte', 1, NULL, '文章互动', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 183, '所属互动', 'a_bulk', 1, NULL, '团购', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 184, '所属互动', 'solving_problem', 1, NULL, '答题有礼', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 185, '所属互动', 'fission_treasure', 1, NULL, '裂变宝', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 186, '所属互动', 'send_samples', 1, NULL, '派小样', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 187, '所属互动', 'sales_promotion', 1, NULL, '大促搭配购', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 188, '所属互动', 'shop_assistant', 1, NULL, '导购助手', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 189, '所属互动', 'exchange_active', 1, NULL, '兑换活动', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 190, '所属互动', 'purchase_fission', 1, NULL, '邀请预购裂变', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 191, '所属互动', 'registered_fission', 1, NULL, '邀请注册裂变', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 192, '所属互动', 'invite_sign', 1, NULL, '邀请好友签到', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 193, '所属互动', 'invite_registered', 1, NULL, '邀请好友注册', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 194, '所属互动', 'focus_shop', 1, NULL, '邀请好友关注店铺', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 195, '所属互动', 'invite_draw', 1, NULL, '邀请好友抽奖', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 196, '所属互动', 'invite_perfect', 1, NULL, '邀请好友完善信息', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 197, '所属互动', 'share_sign', 1, NULL, '分享签到', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 198, '所属互动', 'share_registered', 1, NULL, '分享注册', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 199, '所属互动', 'share_focus', 1, NULL, '分享关注店铺', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 200, '所属互动', 'share_draw', 1, NULL, '分享抽奖', 1, NULL);
-INSERT INTO `basicData` VALUES ('own_interaction', 201, '所属互动', 'share_collection', 1, NULL, '分享收集会员信息', 1, NULL);
+
 INSERT INTO `basicData` VALUES ('0', 204, '一级', 'platform_business', 1, NULL, '业务平台', 0, NULL);
 INSERT INTO `basicData` VALUES ('platform_business', 205, '业务平台', 'TB', 1, NULL, '淘宝', 1, NULL);
 INSERT INTO `basicData` VALUES ('platform_business', 206, '业务平台', 'JD', 1, NULL, '京东', 1, NULL);

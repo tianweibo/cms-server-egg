@@ -59,13 +59,22 @@ module.exports = {
 		}
         return temp
     },
-	listToTree(oldArr1){
+	listToTree(oldArr1,flag){
 		var oldArr=[]
 		for(var i=0;i<oldArr1.length;i++){
-			var obj={
-				key:oldArr1[i].id,
-				fid:oldArr1[i].fid,
-				title:oldArr1[i].label
+			if(flag){
+				var obj={
+					key:oldArr1[i].id,
+					fid:oldArr1[i].fid,
+					title:oldArr1[i].label
+				}
+			}else{
+				var obj={
+					key:oldArr1[i].id,
+					fid:oldArr1[i].fid,
+					title:oldArr1[i].label,
+					children:[]
+				}
 			}
 			oldArr.push(obj)
 		} 
@@ -78,14 +87,20 @@ module.exports = {
 					ele.children = [];
 				  }
 				  ele.children.push(element);
-				  ele.disabled=true
+				  if(flag){
+					ele.disabled=true
+				  }
 				}
 			  });
 			}
-		  });
-		  oldArr = oldArr.filter(ele => ele.fid === 0); //这一步是过滤，按树展开，将多余的数组剔除；
-		  oldArr = oldArr.filter(ele => ele.children!=undefined); //无子级的不展示
-		  return oldArr;
+		});
+		oldArr = oldArr.filter(ele => ele.fid === 0); //这一步是过滤，按树展开，将多余的数组剔除；
+		oldArr = oldArr.filter(ele => ele.children!=undefined); //无子级的不展示
+		if(flag){
+			var temp=oldArr[0].children
+			return temp;
+		}
+		return oldArr;
 	},
 	async calcLabelNumber(temp,Op,TheLabel,type){
 			var idArr=[];

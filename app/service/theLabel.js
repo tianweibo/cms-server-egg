@@ -18,10 +18,10 @@ class TheLabel extends Service {
 	var dataArr=[];
 	for(var i=0;i<temp.length;i++){
         var obj={
-          fid:data.label,
-          fname:data.label===0?'标签':data.fname,
+          fid:data.fuid===0? 0:data.fuid,
+          fname:data.fuid===0?'标签':data.fname,
           label:temp[i],
-          is_lower:data.label===0?0:1,
+          is_lower:data.isfu===1?0:1,
 		  create_people:this.ctx.session.username
         }
 		arr.push(obj)
@@ -89,13 +89,32 @@ class TheLabel extends Service {
   }
   async listTree(obj){
     const {ctx,app}=this;
+	var theid=obj.id
 	const Op = app.Sequelize.Op;
 	var list={
 		count:0,
 		arr:[],
 	}
-	var objOption={
-		label:{[Op.like]:`%${obj.keyword}%`},
+	const arr1 = await this.TheLabel.findAll({ 
+		where: {
+			fid:theid
+		},
+		attributes: ['id']
+	})
+	var ids=[]
+	for (var i = 0; i < arr1.length; i++) {
+		ids.push(arr1[i].id);
+	}
+	ids.unshift(theid);
+	ids.unshift(0);
+	var data1=[]
+	for (var i = 0; i < ids.length; i++) {
+		data1.push({
+			fid: ids[i]
+		})
+	}
+	var objOption = {
+		[Op.or]: data1,
 	}
 	try{
 		await this.TheLabel.findAndCountAll({
@@ -104,9 +123,8 @@ class TheLabel extends Service {
 			offset:0
 		}).then(function(result){
 			list.count=result.count
-			list.arr=ctx.helper.listToTree(result.rows);
+			list.arr=ctx.helper.listToTree(result.rows,true);
 		})
-        //var b=this.ctx.helper.listToTree(result.rows);
 		return this.ServerResponse.requireData('查询成功', list);
 	}catch(e){
 		return this.ServerResponse.networkError('网络问题');
@@ -119,7 +137,7 @@ class TheLabel extends Service {
 		count:0,
 		arr:[],
 	}
-	if(obj.fid===''){
+	if(obj.fid.length==0){
 		var objOption={
 			label:{[Op.like]:`%${obj.keyword}%`},
 		}
@@ -180,15 +198,15 @@ class TheLabel extends Service {
   }
   async labelType(){
 	try{
-		const result = await this.TheLabel.findOne({
-			where: {fid: 0},
-		});
-		if (!result) {
-			return this.ServerResponse.requireData('数据不存在',{code:1});
-		}else{
-            return this.ServerResponse.requireData('获取成功', { code: 0 ,data:result});
-        }
+		const arr1 = await this.TheLabel.findAll({ 
+			where: {
+				is_lower:0
+			},
+		})
+		var list=this.ctx.helper.listToTree(arr1,false);
+		return this.ServerResponse.requireData('查询成功', list);
 	}catch(e){
+		console.log(e)
 		return this.ServerResponse.networkError('网络问题');
 	}
   }

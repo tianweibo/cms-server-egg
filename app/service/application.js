@@ -245,8 +245,11 @@ class Application extends Service {
         }
         var arr = [];
         if (obj.application_label) {
-            arr.push({
+            /* arr.push({
                 application_label: obj.application_label,
+            }) */
+            arr.push({
+                application_label:{[Op.like]:`%${obj.application_label}%`}
             })
         }
         if (obj.platform_business) {

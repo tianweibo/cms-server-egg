@@ -7,6 +7,7 @@ class Event extends Service {
 	constructor(ctx) {
 		super(ctx);
 		this.Event = ctx.model.Event;
+		this.TheLabel = ctx.model.TheLabel;
 		this.EventAttribute = ctx.model.EventAttribute;
 		this.IndicatorEvent=ctx.model.IndicatorEvent;
 		this.ApplicationIndicator=ctx.model.ApplicationIndicator
@@ -16,6 +17,7 @@ class Event extends Service {
 		this.ServerResponse = ctx.response.ServerResponse;
 	}
 	async update(data) {
+		const Op = this.app.Sequelize.Op;
 		const eventInfo = await this.Event.findOne({
 			where: {
 				event_id: data.id
@@ -24,6 +26,31 @@ class Event extends Service {
 		if (eventInfo == null) {
 			return this.ServerResponse.requireData('事件不存在', { code: 1 })
 		} else {
+			var qian=[];
+            var hou=[];
+            if(eventInfo.event_label){
+                qian=eventInfo.event_label.split(',');
+            }
+            if(data.updates.info.event_label){
+                hou=data.updates.info.event_label.split(',');
+            }
+            var tempArr=[]
+            for(var i=0;i<qian.length;i++){
+                if(hou.indexOf(qian[i])==-1){
+                    var obj={id:qian[i],type:'redu'}
+                    tempArr.push(obj)
+                }
+            }
+            for(var i=0;i<hou.length;i++){
+                if(qian.indexOf(hou[i])==-1){
+                    var obj={id:hou[i],type:'add'}
+                    tempArr.push(obj)
+                }
+            }
+            if(tempArr.length>0){
+                this.ctx.helper.calcLabelNumber(tempArr,Op,this.TheLabel,null)
+            }
+
 			var obj = data.updates;
 			obj.info.update_people = this.ctx.session.username;
 			obj.info['update_time']=sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
@@ -46,7 +73,7 @@ class Event extends Service {
 				if (!eventAttributeInfo) {
 					return this.ServerResponse.networkError('网络问题');
 				} else {
-					return this.ServerResponse.requireData('更新成功', { code: 0 });
+					return this.ServerResponse.createBySuccessMsg('更新成功');
 				}
 			} else {
 				return this.ServerResponse.networkError('网络问题');
@@ -54,6 +81,7 @@ class Event extends Service {
 		}
 	}
 	async create(event) {
+		const Op = this.app.Sequelize.Op;
 		const hasEvent = await this.Event.findOne({
 			where: {
 				event_code: event.info.event_code
@@ -62,6 +90,10 @@ class Event extends Service {
 		if (hasEvent == null) {
 			const eventInfo = await this.Event.create(event.info);
 			event.info.create_people = this.ctx.session.username;
+			if (event.info.event_label) {
+                var temp=event.info.event_label.split(',');
+                this.ctx.helper.calcLabelNumber(temp,Op,this.TheLabel,'add')
+            } 
 			if (eventInfo) {
 				if (event.attributeArr) {
 					var data = [];
@@ -76,10 +108,10 @@ class Event extends Service {
 					if (!eventAttributeInfo) {
 						return this.ServerResponse.networkError('网络问题');
 					} else {
-						return this.ServerResponse.requireData('创建成功', { code: 0 });
+						return this.ServerResponse.createBySuccessMsg('创建成功');
 					}
 				} else {
-					return this.ServerResponse.requireData('创建成功', { code: 0 });
+					return this.ServerResponse.createBySuccessMsg('创建成功');
 				}
 			} else {
 				return this.ServerResponse.networkError('网络问题');
@@ -152,7 +184,7 @@ class Event extends Service {
 			var eventObj = {
 				eventInfo, attrInfo
 			}
-			return this.ServerResponse.requireData('查询成功', { code: 0, data: eventObj });
+			return this.ServerResponse.requireData('查询成功', eventObj);
 		}
 	}
 	async list(obj) {
@@ -167,9 +199,12 @@ class Event extends Service {
 			state:1
 		})
 		if (obj.event_label) {
-			arr.push({
+			/* arr.push({
 				event_label: obj.event_label,
-			})
+			}) */
+			arr.push({
+                event_label:{[Op.like]:`%${obj.event_label}%`}
+            })
 		}
 		if (obj.event_trigger_mode) {
 			arr.push({
@@ -240,7 +275,7 @@ class Event extends Service {
 			}, { where: { event_id: id }, individualHooks: true }); 
 
 			if (row) {
-				return this.ServerResponse.requireData('归档成功', { code: 0 });
+				return this.ServerResponse.requireData('归档成功');
 			} else {
 				return this.ServerResponse.requireData('归档失败', { code: 1 });
 			}
@@ -258,6 +293,10 @@ class Event extends Service {
 			if (!result) {
 				return this.ServerResponse.requireData('事件不存在', { code: 1 });
 			}
+			if (result.event_label) {
+                var temp=result.event_label.split(',');
+                this.ctx.helper.calcLabelNumber(temp,Op,this.TheLabel,'redu')
+            } 
 			const indicatorArr = await this.IndicatorEvent.findAll({
                 where: {
                     event_id: id
@@ -284,7 +323,7 @@ class Event extends Service {
             }
 			const row = await this.Event.destroy({ where: { event_id: id } });
 			if (row) {
-				return this.ServerResponse.requireData('删除成功', { code: 0 });
+				return this.ServerResponse.requireData('删除成功');
 			} else {
 				return this.ServerResponse.requireData('删除失败', { code: 1 });
 			}

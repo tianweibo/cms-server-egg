@@ -8,13 +8,16 @@ class Application extends Service {
         super(ctx);
         this.Application = ctx.model.Application;
         this.Event = ctx.model.Event;
+        this.TheLabel = ctx.model.TheLabel;
+        this.Report = ctx.model.Report;
         this.ApplicationIndicator = ctx.model.ApplicationIndicator;
-        this.IndicatorEvent = ctx.model.IndicatorEvent
+        this.IndicatorEvent = ctx.model.IndicatorEvent;
         this.Indicator = ctx.model.Indicator;
         this.ResponseCode = ctx.response.ResponseCode;
         this.ServerResponse = ctx.response.ServerResponse;
     }
     async update(data) {
+        const Op = this.app.Sequelize.Op;
         const appInfo = await this.Application.findOne({
             where: {
                 application_id: data.id
@@ -23,9 +26,34 @@ class Application extends Service {
         if (appInfo == null) {
             return this.ServerResponse.requireData('应用不存在', { code: 1 })
         } else {
+            var qian=[];
+            var hou=[];
+            if(appInfo.application_label){
+                qian=appInfo.application_label.split(',');
+            }
+            if(data.updates.info.application_label){
+                hou=data.updates.info.application_label.split(',');
+            }
+            var tempArr=[]
+            for(var i=0;i<qian.length;i++){
+                if(hou.indexOf(qian[i])==-1){
+                    var obj={id:qian[i],type:'redu'}
+                    tempArr.push(obj)
+                }
+            }
+            for(var i=0;i<hou.length;i++){
+                if(qian.indexOf(hou[i])==-1){
+                    var obj={id:hou[i],type:'add'}
+                    tempArr.push(obj)
+                }
+            }
+            if(tempArr.length>0){
+                this.ctx.helper.calcLabelNumber(tempArr,Op,this.TheLabel,null)
+            }
+
             var obj = data.updates;
             obj.info.update_people = this.ctx.session.username;
-            obj.info['update_time']=sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+            obj.info['update_time'] = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
             const thedata = await this.Application.update(obj.info, {
                 where: {
                     application_id: data.id
@@ -45,7 +73,7 @@ class Application extends Service {
                 if (!eventAppInfo) {
                     return this.ServerResponse.networkError('网络问题');
                 } else {
-                    return this.ServerResponse.requireData('更新成功', { code: 0 });
+                    return this.ServerResponse.createBySuccessMsg('更新成功');
                 }
 
             } else {
@@ -54,6 +82,8 @@ class Application extends Service {
         }
     }
     async create(app) {
+        //const { ctx, app } = this;
+		const Op = this.app.Sequelize.Op;
         const hasApp = await this.Application.findOne({
             where: {
                 platform_app_code: app.info.platform_app_code
@@ -62,6 +92,10 @@ class Application extends Service {
         if (hasApp == null) {
             app.info.create_people = this.ctx.session.username;
             const appInfo = await this.Application.create(app.info);
+            if (app.info.application_label) {
+                var temp=app.info.application_label.split(',');
+                this.ctx.helper.calcLabelNumber(temp,Op,this.TheLabel,'add')
+            } 
             if (appInfo) {
                 if (app.indicatorArr.length > 0) {
                     var data = [];
@@ -76,16 +110,31 @@ class Application extends Service {
                     if (!tempInfo) {
                         return this.ServerResponse.networkError('网络问题');
                     } else {
-                        return this.ServerResponse.requireData('创建成功', { code: 0 });
+                        return this.ServerResponse.createBySuccessMsg('创建成功');
                     }
                 } else {
-                    return this.ServerResponse.requireData('创建成功', { code: 0 });
+                    return this.ServerResponse.createBySuccessMsg('创建成功');
                 }
+                //标签数量的统计
+                
             } else {
                 return this.ServerResponse.networkError('网络问题');
             }
         } else {
             return this.ServerResponse.requireData('应用英文代码已存在,请换个再试试', { code: 1 })
+        }
+    }
+    async indicatorNum(id){
+        try{
+            var arr = await this.ApplicationIndicator.findAll({
+                where: {
+                    application_id: id
+                },
+                attributes: ['indicator_id']
+            })
+            return this.ServerResponse.requireData('查询成功', arr.length);
+        }catch(e){
+            return this.ServerResponse.networkError('网络问题');
         }
     }
     async detail(id) {
@@ -112,7 +161,7 @@ class Application extends Service {
             var appObj = {
                 appInfo, indicatorIds
             }
-            return this.ServerResponse.requireData('查询成功', { code: 0, data: appObj });
+            return this.ServerResponse.requireData('查询成功', appObj );
         }
     }
     async detailByIndicator(data) {  //应用下的指标
@@ -196,8 +245,11 @@ class Application extends Service {
         }
         var arr = [];
         if (obj.application_label) {
-            arr.push({
+            /* arr.push({
                 application_label: obj.application_label,
+            }) */
+            arr.push({
+                application_label:{[Op.like]:`%${obj.application_label}%`}
             })
         }
         if (obj.platform_business) {
@@ -241,21 +293,21 @@ class Application extends Service {
             if (!result) {
                 return this.ServerResponse.requireData('应用不存在', { code: 1 });
             }
-            var sj=0;
-            var str='';
-            if(result.application_use==0){
-                sj=1;
-                str='启用'
-            }else{
-                sj=0;
-                str='停用'
+            var sj = 0;
+            var str = '';
+            if (result.application_use == 0) {
+                sj = 1;
+                str = '启用'
+            } else {
+                sj = 0;
+                str = '停用'
             }
             const row = await this.Application.update({
                 application_use: sj,
             }, { where: { application_id: id }, individualHooks: true });
 
             if (row) {
-                return this.ServerResponse.requireData(`${str}成功`, { code: 0 });
+                return this.ServerResponse.requireData(`${str}成功`);
             } else {
                 return this.ServerResponse.requireData(`${str}失败`, { code: 1 });
             }
@@ -264,6 +316,7 @@ class Application extends Service {
         }
     }
     async delete(id) {
+        const Op = this.app.Sequelize.Op;
         try {
             const result = await this.Application.findOne({
                 where: { application_id: id },
@@ -271,7 +324,17 @@ class Application extends Service {
             if (!result) {
                 return this.ServerResponse.requireData('应用不存在', { code: 1 });
             }
-            if (result.application_use==1) {
+            if (result.application_label) {
+                var temp=result.application_label.split(',');
+                this.ctx.helper.calcLabelNumber(temp,Op,this.TheLabel,'redu')
+            } 
+            const arr = await this.Report.findAll({
+                where: { application_id: id },
+            });
+            if (arr.length > 0) {
+                return this.ServerResponse.requireData('该应用下存在报表,不支持进行删除的操作', { code: 1 });
+            }
+            if (result.application_use == 1) {
                 return this.ServerResponse.requireData('应用已启用,不支持进行删除的操作', { code: 1 });
             }
             const row = await this.Application.destroy({ where: { application_id: id } });

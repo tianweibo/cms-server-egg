@@ -18,11 +18,11 @@ class UserController extends Controller {
 			},
 			phone:{
 				type:'phone',
-			},
-			password:'password'
+			}
 		}
 		const ctx=this.ctx;
-		const sj=this.app.validator.validate(rule,ctx.request.body)
+		const sj=this.app.validator.validate(rule,ctx.request.body);
+		console.log(sj,'sj')
 		//var para=ctx.params();
 		if(sj){
 			ctx.body={
@@ -39,6 +39,23 @@ class UserController extends Controller {
 		const response=await this.TheUser.list(ctx.request.body);
 		ctx.body=response;
 	}
+	async update(){
+		const ctx=this.ctx;
+        const id = ctx.query.id;
+        const body = ctx.request.body;
+        const response=await this.TheUser.update({ id, updates: body });
+        ctx.body=response;
+	}
+	async detail(){
+		const ctx=this.ctx;
+        const response=await this.TheUser.detail(ctx.query.id);
+        ctx.body=response;
+	}
+	async delete(){
+		const ctx=this.ctx;
+        const response=await this.TheUser.delete(ctx.helper.parseInt(ctx.query.id));
+        ctx.body=response;
+	}
 	async loginOut(){
 		const ctx=this.ctx;
 		const response=await this.TheUser.loginOut();
@@ -49,5 +66,20 @@ class UserController extends Controller {
 		const response=await this.TheUser.isLogin();
 		ctx.body=response;
 	}
+	async editPassword(){
+		const ctx=this.ctx;
+		const response=await this.TheUser.editPassword(ctx.request.body);
+		ctx.body=response;
+	}
+	async useful(){ 
+        const ctx=this.ctx;
+        const response=await this.TheUser.useful(ctx.helper.parseInt(ctx.query.id));
+        ctx.body=response;
+    }
+	async resetPassword(){ 
+        const ctx=this.ctx;
+        const response=await this.TheUser.resetPassword(ctx.helper.parseInt(ctx.query.id));
+        ctx.body=response;
+    }
 }
 module.exports = UserController;

@@ -28,7 +28,7 @@ module.exports=class ServerResponse{
 		return new ServerResponse(SUCCESS)
 	}
 	static createBySuccessMsg(msg){
-		return new ServerResponse(SUCCESS,msg,null)
+		return new ServerResponse(SUCCESS,msg)
 	}
 	static createBySuccessData(data){
 		return new ServerResponse(SUCCESS,null,data)

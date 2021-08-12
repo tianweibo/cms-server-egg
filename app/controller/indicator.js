@@ -2,7 +2,7 @@
 const Controller = require('egg').Controller;
 const {indicatorExcel}=require('../common/excelEnum.js')
 class IndicatorController extends Controller {
-   constructor(ctx){
+  constructor(ctx){
 	super(ctx);
 	this.request=ctx.request;
 	this.Indicator=ctx.service.indicator;
@@ -23,6 +23,11 @@ class IndicatorController extends Controller {
         const ctx=this.ctx;
         const response=await this.Indicator.create(ctx.request.body);
         ctx.body=response;
+    }
+    async eventCodesByIndic(){ //获取指标下对应的事件codes
+      const ctx=this.ctx;
+      const response=await this.Indicator.eventCodesByIndic(ctx.helper.parseInt(ctx.query.id));
+      ctx.body=response;
     }
     async update(){
         const ctx=this.ctx;

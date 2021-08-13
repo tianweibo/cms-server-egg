@@ -12,6 +12,21 @@ class Report extends Service {
         this.Trend = ctx.model.Trend;
         this.ResponseCode = ctx.response.ResponseCode;
         this.ServerResponse = ctx.response.ServerResponse;
+        this.enumObj1 = {
+            'card_ids': this.Card,
+            'table_ids': this.Table,
+            'trend_ids': this.Trend
+        }
+        this.enumObj2 = {
+            'card_ids': 'card_id',
+            'table_ids': 'table_id',
+            'trend_ids': 'trend_id'
+        }
+        this.enumObj3 = {
+            'card_ids': ['indicator_id','indicator_name','indicator_show_name','indicator_desc','time_dimension','time_dimension_label','sequential','indicator_level','indicator_level_label','events','show_type'],
+            'table_ids':['indicator_id','indicator_name','indicator_show_name','indicator_desc','time_dimension','time_dimension_label','is_import','events','show_type'],
+            'trend_ids': ['indicator_id','indicator_name','indicator_show_name','indicator_desc','time_scope','time_scope_label','events','show_type']
+        }
     }
     async checkName(name){
         try{
@@ -42,26 +57,8 @@ class Report extends Service {
                 }
             })
             if (thedata) {
-                var enumObj1 = {
-                    'card_ids': this.Card,
-                    'table_ids': this.Table,
-                    'trend_ids': this.Trend
-                }
-                var enumObj2 = {
-                    'card_ids': 'card_id',
-                    'table_ids': 'table_id',
-                    'trend_ids': 'trend_id'
-                }
+                
                 var obj = data.updates;
-
-                /* var theObj = {
-                    report_id: thedata.dataValues.report_id,
-                    card_ids: null,
-                    table_ids: null,
-                    trend_ids: null
-                }
-                await this.ReportBetween.create(theObj); */
-
                 var reportBetween = await this.ReportBetween.findOne({
                     where: {
                         report_id: ctx.helper.parseInt(data.id)
@@ -71,19 +68,13 @@ class Report extends Service {
                 for (let key in obj) {
                     if (key != 'reportInfo') {
                         var theObj = {};
-                        /* if (reportBetween.dataValues[key]) {
-                            var deleteIds = reportBetween.dataValues[key].split(',').map(Number);
-                            theObj[enumObj2[key]] = { [Op.in]: deleteIds };
-                            await enumObj1[key].destroy({ where: theObj })
-                        }  */
-                        
-                        var ids = await enumObj1[key].bulkCreate(obj[key], { updateOnDuplicate: [enumObj2[key]] });
-                       
+                        var ids = await this.enumObj1[key].bulkCreate(obj[key], { updateOnDuplicate: this.enumObj3[key] });
+
                         if (ids.length > 0) {
                             var newIds = [];
                             for (var i = 0; i < ids.length; i++) {
-                                if(ids[i][enumObj2[key]]){
-                                    newIds.push(ids[i][enumObj2[key]])
+                                if(ids[i][this.enumObj2[key]]){
+                                    newIds.push(ids[i][this.enumObj2[key]])
                                 }
                             }
                             await this.ReportBetween.update({
@@ -151,24 +142,14 @@ class Report extends Service {
                 trend_ids: null
             }
             await this.ReportBetween.create(theObj);
-            var enumObj1 = {
-                'card_ids': this.Card,
-                'table_ids': this.Table,
-                'trend_ids': this.Trend
-            }
-            var enumObj2 = {
-                'card_ids': 'card_id',
-                'table_ids': 'table_id',
-                'trend_ids': 'trend_id'
-            }
             var obj = data.updates;
             for (let key in obj) {
                 if (key != 'reportInfo') {
-                    var ids = await enumObj1[key].bulkCreate(obj[key], { updateOnDuplicate: [enumObj2[key]] });
+                    var ids = await this.enumObj1[key].bulkCreate(obj[key], { updateOnDuplicate: [this.enumObj2[key]] });
                     if (ids.length > 0) {
                         var newIds = [];
                         for (var i = 0; i < ids.length; i++) {
-                            newIds.push(ids[i][enumObj2[key]])
+                            newIds.push(ids[i][this.enumObj2[key]])
                         }
                         await this.ReportBetween.update({
                             [key]: newIds.join(','),
@@ -200,16 +181,6 @@ class Report extends Service {
                 },
                 attributes: ['card_ids', 'table_ids', 'trend_ids']
             })
-            var enumObj1 = {
-                'card_ids': 'card_id',
-                'table_ids': 'table_id',
-                'trend_ids': 'trend_id'
-            }
-            var enumObj2 = {
-                'card_ids': this.Card,
-                'table_ids': this.Table,
-                'trend_ids': this.Trend
-            }
             var temp = {
                 card_ids:[],
                 table_ids:[],
@@ -224,13 +195,13 @@ class Report extends Service {
                         var dataArr = [];
                         for (var i = 0; i < ids.length; i++) {
                             var theObj = {};
-                            theObj[enumObj1[key]] = ids[i];
+                            theObj[this.enumObj2[key]] = ids[i];
                             dataArr.push(theObj)
                         }
                         var objOption = {
                             [Op.or]: dataArr,
                         }
-                        var dataList = await enumObj2[key].findAll({
+                        var dataList = await this.enumObj1[key].findAll({
                             where: objOption,
                         })
                         temp[key] = dataList
@@ -332,16 +303,6 @@ class Report extends Service {
             if (!result) {
                 return this.ServerResponse.requireData('报表不存在', { code: 1 });
             }
-            var enumObj1 = {
-                'card_ids': this.Card,
-                'table_ids': this.Table,
-                'trend_ids': this.Trend
-            }
-            var enumObj2 = {
-                'card_ids': 'card_id',
-                'table_ids': 'table_id',
-                'trend_ids': 'trend_id'
-            }
             var reportBetween = await this.ReportBetween.findOne({
                 where: {
                     report_id: id
@@ -354,8 +315,8 @@ class Report extends Service {
                     var theObj = {};
                     if (reportBetween && reportBetween.dataValues[key]) {
                         var deleteIds = reportBetween.dataValues[key].split(',');
-                        theObj[enumObj2[key]] = { [Op.in]: deleteIds };
-                        await enumObj1[key].destroy({ where: theObj })
+                        theObj[this.enumObj2[key]] = { [Op.in]: deleteIds };
+                        await this.enumObj1[key].destroy({ where: theObj })
                     }
                 }
             }

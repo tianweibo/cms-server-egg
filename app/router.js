@@ -42,7 +42,7 @@ module.exports = app => {
   //应用
   router.post('/application/create',new Auth(10).check,controller.application.create);//应用的创建
   router.post('/application/update',new Auth(10).check,controller.application.update);//应用的编辑
-  router.get('/application/detail',new Auth(10).check,controller.application.detail);//应用详情的查看
+  router.get('/application/detail',controller.application.detail);//应用详情的查看
   router.post('/application/detailByIndicator',new Auth(10).check,controller.application.detailByIndicator);//应用详情的查看-指标
   router.post('/application/detailByEvent',new Auth(10).check,controller.application.detailByEvent);//应用详情的查看-事件
   router.post('/application/list',new Auth(10).check,controller.application.list);// 应用列表的获取

@@ -76,6 +76,6 @@ module.exports = app => {
   router.delete('/api/report/delete',new Auth(10).check,controller.report.delete);//报表的删除
   router.post('/api/report/update',new Auth(10).check,controller.report.update);//报表的更新
   router.post('/api/report/deleteTable',controller.report.deleteTable);//表单中三张表的删除
-  router.get('/api/report/detail',new Auth(10).check,controller.report.detail);//报表的详情获取
+  router.get('/api/report/detail',controller.report.detail);//报表的详情获取
   router.get('/api/report/checkName',new Auth(10).check,controller.report.checkName);//报表的重名校验
 };

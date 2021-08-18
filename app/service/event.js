@@ -88,8 +88,9 @@ class Event extends Service {
 			}
 		})
 		if (hasEvent == null) {
-			const eventInfo = await this.Event.create(event.info);
 			event.info.create_people = this.ctx.session.username;
+			const eventInfo = await this.Event.create(event.info);
+			console.log(this.ctx.session.username,2222)
 			if (event.info.event_label) {
                 var temp=event.info.event_label.split(',');
                 this.ctx.helper.calcLabelNumber(temp,Op,this.TheLabel,'add')

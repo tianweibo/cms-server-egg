@@ -102,6 +102,7 @@ class User extends Service {
 		}
 	})
 	if(hasUser==null){
+		user['create_people'] = this.ctx.session.username;
 		const userInfo=await this.TheUser.create(user);
 		if (!userInfo) {
 			return this.ServerResponse.networkError('网络问题');

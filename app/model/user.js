@@ -57,6 +57,7 @@ module.exports=app=>{
 		create_people:{
 			type:STRING(255),comment:'创建人'
 		},
+		state:{defaultValue:1,type:INTEGER(6)},
 		remark:{
 			type:STRING
 		}

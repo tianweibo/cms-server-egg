@@ -3,6 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const sd = require('silly-datetime');
 const Service = require('egg').Service;
+const {indicatorObj}=require('../common/foreignEnum.js')
 class Application extends Service {
     constructor(ctx) {
         super(ctx);
@@ -15,6 +16,165 @@ class Application extends Service {
         this.Indicator = ctx.model.Indicator;
         this.ResponseCode = ctx.response.ResponseCode;
         this.ServerResponse = ctx.response.ServerResponse;
+    }
+    async exposeCreate(data){
+        var data1={
+          platform_app:'',          //小程序名称
+          platform_app_code:'',     //小程序代码
+          platform_app_version:'',  //小程序版本
+          platform_business:'TB',     //小程序平台
+          platform_business_label:'淘宝',
+          application_dep_platform:'platform-ali',
+          application_dep_platform_label:'客户运营平台-阿里版',
+          application_type:'program-zfb',
+          application_type_label:'支付宝小程序',
+          application_label:'',      //标签类型-value(多值，字符串逗号分隔)
+          application_label_label:'',//标签类型-label(多值，字符串逗号分隔)
+          application_use:1,
+          is_interactive:1,
+          note:'',                 //小程序描述
+          create_people:'',         //创建人
+          belongTo:'IMA'
+        }
+        try{
+            const Op = this.app.Sequelize.Op;
+        const hasApp = await this.Application.findOne({
+            where: {
+                platform_app_code: data.platform_app_code
+            }
+        })
+        if (hasApp == null) {
+            const appInfo = await this.Application.create(data);
+            if (data.application_label) {
+                var temp=data.application_label.split(',');
+                this.ctx.helper.calcLabelNumber(temp,Op,this.TheLabel,'add')
+            } 
+            if (appInfo) {
+                var indicatorArr=indicatorObj[data.belongTo];
+                console.log('indicatorArr',indicatorArr)
+                if (indicatorArr.length > 0) {
+                    var data = [];
+                    for (var i = 0; i < indicatorArr.length; i++) {
+                        var obj = {
+                            application_id: appInfo.dataValues.application_id,
+                            indicator_id: indicatorArr[i]
+                        }
+                        data.push(obj)
+                    }
+                    const tempInfo = await this.ApplicationIndicator.bulkCreate(data)
+                    if (!tempInfo) {
+                        return this.ServerResponse.networkError('网络问题');
+                    } else {
+                        return this.ServerResponse.createBySuccessMsg('创建成功');
+                    }
+                } else {
+                    return this.ServerResponse.createBySuccessMsg('创建成功');
+                }
+            } else {
+                return this.ServerResponse.networkError('网络问题');
+            }
+        } else {
+            return this.ServerResponse.requireData('小程序代码已存在,请换个再试试', { code: 1 })
+        }
+        }catch(e){
+            console.log(e,'ee')
+        }
+    }
+    async exposeUpdate(data) {
+        var data1={
+            platform_app:'',          //小程序名称
+            platform_app_code:'',     //小程序代码
+            platform_app_version:'',  //小程序版本
+            platform_business:'TB',     //小程序平台
+            platform_business_label:'淘宝',
+            application_dep_platform:'platform-ali',
+            application_dep_platform_label:'客户运营平台-阿里版',
+            application_type:'program-zfb',
+            application_type_label:'支付宝小程序',
+            application_label:'',      //标签类型-value(多值，字符串逗号分隔)
+            application_label_label:'',//标签类型-label(多值，字符串逗号分隔)
+            application_use:1,
+            is_interactive:1,
+            note:'',                 //小程序描述
+            update_people:''         //更新人
+        }
+        const Op = this.app.Sequelize.Op;
+        const appInfo = await this.Application.findOne({
+            where: {
+                platform_app_code: data.platform_app_code
+            }
+        })
+        if (appInfo == null) {
+            return this.ServerResponse.requireData('应用不存在', { code: 1 })
+        } else {
+            var qian=[];
+            var hou=[];
+            if(appInfo.application_label){
+                qian=appInfo.application_label.split(',');
+            }
+            if(data.application_label){
+                hou=data.application_label.split(',');
+            }
+            var tempArr=[]
+            for(var i=0;i<qian.length;i++){
+                if(hou.indexOf(qian[i])==-1){
+                    var obj={id:qian[i],type:'redu'}
+                    tempArr.push(obj)
+                }
+            }
+            for(var i=0;i<hou.length;i++){
+                if(qian.indexOf(hou[i])==-1){
+                    var obj={id:hou[i],type:'add'}
+                    tempArr.push(obj)
+                }
+            }
+            if(tempArr.length>0){
+                this.ctx.helper.calcLabelNumber(tempArr,Op,this.TheLabel,null)
+            }
+            data['update_time'] = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+            const thedata = await this.Application.update(data, {
+                where: {
+                    platform_app_code: data.platform_app_code
+                }
+            })
+            if (thedata) {
+                return this.ServerResponse.createBySuccessMsg('更新成功');
+            } else {
+                return this.ServerResponse.networkError('网络问题');
+            }
+        }
+    }
+    async exposeDelete(platform_app_code) {
+        const Op = this.app.Sequelize.Op;
+        try {
+            const result = await this.Application.findOne({
+                where: { platform_app_code: platform_app_code },
+            });
+            if (!result) {
+                return this.ServerResponse.requireData('应用不存在', { code: 1 });
+            }
+            if (result.application_label) {
+                var temp=result.application_label.split(',');
+                this.ctx.helper.calcLabelNumber(temp,Op,this.TheLabel,'redu')
+            } 
+            const arr = await this.Report.findAll({
+                where: { application_id: result.application_id},
+            });
+            if (arr.length > 0) {
+                return this.ServerResponse.requireData('该应用下存在报表,不支持进行删除的操作', { code: 1 });
+            }
+            /* if (result.application_use == 1) {
+                return this.ServerResponse.requireData('应用已启用,不支持进行删除的操作', { code: 1 });
+            } */
+            const row = await this.Application.destroy({ where: { platform_app_code: platform_app_code } });
+            if (row) {
+                return this.ServerResponse.requireData('删除成功', { code: 0 });
+            } else {
+                return this.ServerResponse.requireData('删除失败', { code: 1 });
+            }
+        } catch (e) {
+            return this.ServerResponse.networkError('网络问题');
+        }
     }
     async update(data) {
         const Op = this.app.Sequelize.Op;
@@ -244,6 +404,9 @@ class Application extends Service {
             arr: [],
         }
         var arr = [];
+        arr.push({
+			state:1
+		})
         if (obj.application_label) {
             /* arr.push({
                 application_label: obj.application_label,

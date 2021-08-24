@@ -27,8 +27,6 @@ const triggerMode={ //触发类型
     jump:"jump",
     play:"play"
 }
-
-
 module.exports={
 	eventExcel ,indicatorExcel,triggerMode
 }

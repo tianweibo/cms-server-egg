@@ -11,6 +11,11 @@ class ReportController extends Controller {
 	  const response=await this.Report.create(ctx.request.body);
 	  ctx.body=response;
     }
+    async seeReport(){
+        const ctx=this.ctx;
+        const response=await this.Report.seeReport(ctx.request.body);
+        ctx.body=response;
+    }
     async update() {
         const ctx=this.ctx;
         const id = ctx.query.id;

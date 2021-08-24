@@ -127,6 +127,74 @@ class Report extends Service {
             return this.ServerResponse.requireData('网络问题', { code: 1 });
         }
     }
+    async seeReport(data){
+        var temp={
+            viewId: 26, 
+            groups: [
+                    "APPLICATION_DEP_PLATFORM",
+                    "PLATFORM_APP_CODE",
+                    "PLATFORM_BUSINESS",
+                
+                    
+                    "DAY_ID",
+                    "ACT_ID",
+                    "EVENT_CODE"
+                ],
+            aggregators: [
+                    {
+                        column: "DISTINCT_ID",
+                        func: "count"
+                    },
+                    {
+                        column: "DISTINCT_ID",
+                        func: "COUNTDISTINCT"
+                    }
+            ],
+            filters: [
+                
+                {
+                    type: "relation",
+                    value: "and",
+                    children: [
+                        {
+                            name: "DAY_ID",
+                            type: "filter",
+                            value: "'2021-07-01'",
+                            operator: ">=",
+                            sqlType: "VARCHAR"
+                        },
+                        {
+                            name: "DAY_ID",
+                            type: "filter",
+                            value: "'2021-09-30'",
+                            operator: "<=",
+                            sqlType: "VARCHAR"
+                        }
+                    ]
+                }
+            ],
+                orders: [],
+                pageNo: 0,
+                pageSize: 1,
+                nativeQuery: false,
+                limit: null,
+                cache: false,
+                expired: 0,
+                flush: false
+            }
+            var option={
+                method:'POST',
+                data:temp,
+                headers:{//自定义header
+                    "Accept": "*/*",
+                    "Content-Type":"application/json"
+                },
+                rejectUnauthorized: false,
+                dataType:'json'
+            }
+        var data = await this.ctx.curl('https://test-open-gateway.enbrands.com/erlang/views/getAggregData',option);
+        return this.ServerResponse.requireData('查询成功', data.data.data.resultList);
+    }
     async create(data) {
         const { ctx, app } = this;
         const Op = app.Sequelize.Op;

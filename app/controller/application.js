@@ -6,6 +6,21 @@ class ApplicationController extends Controller {
 	this.request=ctx.request;
 	this.Application=ctx.service.application;
    }
+   async exposeCreate(){
+    const ctx=this.ctx;
+    const response=await this.Application.exposeCreate(ctx.request.body);
+    ctx.body=response;
+   }
+   async exposeUpdate(){
+    const ctx=this.ctx;
+    const response=await this.Application.exposeUpdate(ctx.request.body);
+    ctx.body=response;
+   } 
+   async exposeDelete(){ 
+    const ctx=this.ctx;
+    const response=await this.Application.exposeDelete(ctx.query.id);
+    ctx.body=response;
+   }  
     async list(){
 	  const ctx=this.ctx;
 	  const response=await this.Application.list(ctx.request.body);

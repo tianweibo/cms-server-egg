@@ -72,6 +72,7 @@ module.exports = app => {
   router.delete('/api/label/delete',new Auth(10).check,controller.theLabel.delete);//标签的删除
   router.post('/api/label/update',new Auth(10).check,controller.theLabel.update);//标签的更新
   router.get('/api/label/labelType',controller.theLabel.labelType);//标签的类别获取
+  router.get('/api/label/findLabelId',controller.theLabel.findLabelId);//找父级ID
   //报表
   router.post('/api/report/list',new Auth(1).check,controller.report.list);// 报表的列表的获取
   router.post('/api/report/create',new Auth(1).check,controller.report.create);//报表的创建

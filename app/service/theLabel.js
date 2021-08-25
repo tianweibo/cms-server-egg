@@ -8,7 +8,15 @@ class TheLabel extends Service {
 	  this.ResponseCode = ctx.response.ResponseCode;
 	  this.ServerResponse = ctx.response.ServerResponse;	  
   }
-  
+  async findLabelId(id){
+	const data = await this.TheLabel.findOne({
+		where: {
+			id: id
+		},
+		attributes: ['fid']
+	})
+	return this.ServerResponse.requireData('查询成功', data );
+  }
   async create(data) {
     const {ctx,app}=this;
 	const Op = app.Sequelize.Op;
@@ -151,6 +159,9 @@ class TheLabel extends Service {
 	try{
 		await this.TheLabel.findAndCountAll({
 			where:objOption,
+			order: [
+				['create_time', 'DESC'] //降序desc，升序asc
+			],
 			limit: parseInt(obj.pageSize),
 			offset:parseInt((obj.pageNo-1) * obj.pageSize)
 		}).then(function(result){

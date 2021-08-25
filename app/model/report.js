@@ -4,7 +4,7 @@ module.exports=app=>{
     const {STRING,INTEGER,DATE,TEXT}=app.Sequelize;
 	const report=app.model.define('report',{
 		report_id:{type:INTEGER,primaryKey:true,autoIncrement:true},
-        report_name:{type:STRING(20),comment:'报表名称'},
+        report_name:{type:STRING(255),comment:'报表名称'},
 		create_time:{
 			type:DATE,
 			get(){

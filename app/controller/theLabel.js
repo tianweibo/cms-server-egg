@@ -26,6 +26,11 @@ class TheLabel extends Controller {
         const response=await this.TheLabel.listTree(ctx.request.body);
         ctx.body=response;
     }
+    async findLabelId(){
+        const ctx=this.ctx;
+        const response=await this.TheLabel.findLabelId(ctx.helper.parseInt(ctx.query.id));
+        ctx.body=response;
+    }
     async delete(){  //待测试
         const ctx=this.ctx;
         const response=await this.TheLabel.delete(ctx.helper.parseInt(ctx.query.id));

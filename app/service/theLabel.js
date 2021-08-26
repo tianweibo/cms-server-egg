@@ -17,6 +17,15 @@ class TheLabel extends Service {
 	})
 	return this.ServerResponse.requireData('查询成功', data );
   }
+  async exposeLabel(fid){
+	const data = await this.TheLabel.findAll({
+		where: {
+			fid: fid
+		},
+		attributes: ['label','id']
+	})
+	return this.ServerResponse.requireData('查询成功', data );
+  }
   async create(data) {
     const {ctx,app}=this;
 	const Op = app.Sequelize.Op;

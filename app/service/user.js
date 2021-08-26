@@ -103,6 +103,7 @@ class User extends Service {
 	})
 	if(hasUser==null){
 		user['create_people'] = this.ctx.session.username;
+		user['password'] ='yjf@123456';
 		const userInfo=await this.TheUser.create(user);
 		if (!userInfo) {
 			return this.ServerResponse.networkError('网络问题');
@@ -190,7 +191,7 @@ class User extends Service {
 			return this.ServerResponse.requireData('用户不存在', { code: 1 });
 		}
 		const row = await this.TheUser.update({
-			password: 'yjf@123456',
+			password:'yjf@123456',
 		}, { where: { id: id }, individualHooks: true });
 
 		if (row) {

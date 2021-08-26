@@ -1,5 +1,6 @@
 const  moment =require('moment');
 const  crypto =require('crypto');
+const sd = require('silly-datetime');
 module.exports=app=>{
 	const {STRING,INTEGER,DATE}=app.Sequelize;
 	const user=app.model.define('user',{
@@ -34,20 +35,27 @@ module.exports=app=>{
 		role:{defaultValue:1,type:INTEGER(11)},
 		role_name:{defaultValue:'普通用户',type:STRING(11)},
 		status:{defaultValue:1,type:INTEGER(11)},
-		created_at:{
+		create_time:{
 			type:DATE,
 			get(){
-				return moment(this.getDataValue('created_at')).format(
+				return moment(this.getDataValue('create_time')).format(
 					'YYYY-MM-DD HH:MM:SS'
 				);
+			},defaultValue(){
+				var sj = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+				return sj
 			}
 		},
-		updated_at:{
+		update_time:{
 			type:DATE,
 			get(){
 				return moment(this.getDataValue('update_time')).format(
 					'YYYY-MM-DD HH:MM:SS'
 				);
+			},
+			defaultValue(){
+				var sj = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+				return sj
 			}
 		},
 		update_people:{

@@ -350,7 +350,7 @@ class Report extends Service {
                 var obj = {
                     report_id: temp[i].report_id,
                     report_name: temp[i].report_name,
-                    create_time: temp[i].create_time,
+                    create_time: sd.format(temp[i].create_time, 'YYYY-MM-DD HH:mm:ss'),
                     application_id: temp[i]['application.application_id'],
                     platform_app_version: temp[i]['application.platform_app_version'],
                     platform_app: temp[i]['application.platform_app'],

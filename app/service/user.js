@@ -84,6 +84,9 @@ class User extends Service {
 	try{
 		await this.TheUser.findAndCountAll({
 			where:objOption,
+			order: [
+                ['create_time', 'DESC'] //降序desc，升序asc
+            ],
 			limit: parseInt(obj.pageSize),
 			offset:parseInt((obj.pageNo-1) * obj.pageSize)
 		}).then(function(result){
@@ -96,6 +99,7 @@ class User extends Service {
 	}
   }
   async create(user) {
+	  console.log(user,'user')
 	const hasUser=await this.TheUser.findOne({
 		where:{
 			username:user.username

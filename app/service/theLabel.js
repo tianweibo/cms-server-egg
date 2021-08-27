@@ -164,12 +164,11 @@ class TheLabel extends Service {
 			fid:obj.fid
 		}
 	}
-	
 	try{
 		await this.TheLabel.findAndCountAll({
 			where:objOption,
 			order: [
-				['create_time', 'DESC'] //降序desc，升序asc
+				['update_time', 'DESC'] //降序desc，升序asc
 			],
 			limit: parseInt(obj.pageSize),
 			offset:parseInt((obj.pageNo-1) * obj.pageSize)

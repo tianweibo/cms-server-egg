@@ -497,9 +497,9 @@ class Application extends Service {
             if (arr.length > 0) {
                 return this.ServerResponse.requireData('该应用下存在报表,不支持进行删除的操作', { code: 1 });
             }
-            if (result.application_use == 1) {
+            /* if (result.application_use == 1) {
                 return this.ServerResponse.requireData('应用已启用,不支持进行删除的操作', { code: 1 });
-            }
+            } */
             const row = await this.Application.destroy({ where: { application_id: id } });
             if (row) {
                 return this.ServerResponse.requireData('删除成功', { code: 0 });

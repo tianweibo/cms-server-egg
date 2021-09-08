@@ -283,6 +283,31 @@ class Event extends Service {
 			return this.ServerResponse.networkError('网络问题');
 		}
 	}
+	async listById(id) {      //id 数组
+        const { ctx, app } = this;
+        const Op = app.Sequelize.Op;
+        var data = [];
+        if (id && id.id.length > 0) {
+            var idArr = id.id;
+            for (var i = 0; i < idArr.length; i++) {
+                data.push({
+                    event_id: idArr[i]
+                })
+            }
+        }
+        var objOption = {
+            [Op.or]: data,
+        }
+        try {
+            var arr = await this.Event.findAll({
+                where: objOption,
+            })
+            return this.ServerResponse.requireData('查询成功', arr);
+        } catch (e) {
+			console.log(e,'e')
+            return this.ServerResponse.networkError('网络问题');
+        }
+    }
 	async delete(id) {
 		const { ctx, app } = this;
 		const Op = app.Sequelize.Op;

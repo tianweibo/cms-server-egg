@@ -15,6 +15,11 @@ class EventController extends Controller {
 	  const response=await this.Event.list(ctx.request.body);
 	  ctx.body=response;
     }
+    async listById(){
+      const ctx=this.ctx;
+	  const response=await this.Event.listById(ctx.request.body);
+	  ctx.body=response;
+    }
     async create(){
         const ctx=this.ctx;
         const response=await this.Event.create(ctx.request.body);

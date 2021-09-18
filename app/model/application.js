@@ -23,7 +23,8 @@ module.exports=app=>{
 		application_type_label:{type:STRING(20),comment:'应用类型label'},  
 		application_label:{type:STRING(255),comment:'应用标签'}, 
 		application_label_label:{type:STRING(255),comment:'应用标签label'},
-		application_use:{defaultValue:1,type:INTEGER(2),comment:'是否启用'}, 
+		application_use:{defaultValue:1,type:INTEGER(2),comment:'是否启用'},
+		open_type:{defaultValue:1,type:INTEGER(2),comment:'数据来源'}, 
 		is_interactive:{defaultValue:1,type:INTEGER(2),comment:'是否互动应用'}, 
 		note:{type:STRING,comment:'备注'},   
 		create_time:{

@@ -44,6 +44,7 @@ module.exports=app=>{
 			type:STRING(255),
 			comment:'更新人'
 		},
+		open_type:{defaultValue:1,type:INTEGER(2),comment:'数据来源'}, 
 		state:{defaultValue:1,type:INTEGER(6)},
 		enum_data:STRING(255),                //数据字典的枚举
 	}, {

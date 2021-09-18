@@ -42,6 +42,7 @@ module.exports=app=>{
 			type:STRING(255),
 			comment:'更新人'
 		},
+		open_type:{defaultValue:1,type:INTEGER(2),comment:'数据来源'},
 		create_people:{
 			type:STRING(255),comment:'创建人',
 		},

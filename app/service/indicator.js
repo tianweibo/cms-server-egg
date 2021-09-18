@@ -268,7 +268,9 @@ class Indicator extends Service {
     async listByType(obj){
         const { ctx, app } = this;
         const Op = app.Sequelize.Op;
-        var arr=[]
+        var arr=[{
+            open_type:1
+        }]
         if (obj.indicator_type) {
             arr.push({
                 indicator_type: obj.indicator_type,

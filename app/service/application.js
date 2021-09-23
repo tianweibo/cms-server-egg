@@ -109,7 +109,7 @@ class Application extends Service {
                 return this.ServerResponse.networkError('网络问题');
             }
         } else {
-            return this.ServerResponse.requireData('小程序代码已存在,请换个再试试', { code: 1 })
+            return this.ServerResponse.networkError('小程序代码已存在,请换个再试试')
         }
         }catch(e){
             console.log(e,'ee')
@@ -134,7 +134,7 @@ class Application extends Service {
             })
             data['open_type']=sourceFrom[data.belongTo];
             if (appInfo == null) {
-                return this.ServerResponse.requireData('应用不存在', { code: 1 })
+                return this.ServerResponse.networkError('应用不存在')
             } else {
                 //标签使用数量的更新
                 var qian=[];

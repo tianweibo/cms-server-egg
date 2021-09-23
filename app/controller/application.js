@@ -11,6 +11,11 @@ class ApplicationController extends Controller {
     const response=await this.Application.exposeCreate(ctx.request.body);
     ctx.body=response;
    }
+   async exposeList(){
+    const ctx=this.ctx;
+    const response=await this.Application.exposeList(ctx.query.keyword);
+    ctx.body=response;
+   }
    async exposeUpdate(){
     const ctx=this.ctx;
     const response=await this.Application.exposeUpdate(ctx.request.body);
@@ -40,7 +45,7 @@ class ApplicationController extends Controller {
     }
     async detail(){
         const ctx=this.ctx;
-        const response=await this.Application.detail(ctx.query.id);
+        const response=await this.Application.detail(ctx.query.id,ctx.query.open_type);
         ctx.body=response;
     }
     async indicatorNum(){

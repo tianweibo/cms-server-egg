@@ -8,7 +8,8 @@ module.exports = app => {
         indicator_id: {
             type: INTEGER,
             primaryKey: true
-        }
+        },
+        open_type:{defaultValue:1,type:INTEGER(2),comment:'数据来源'}, 
     },{
         timestamps: false,
 		underscored: true,

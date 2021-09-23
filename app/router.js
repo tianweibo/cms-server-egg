@@ -45,6 +45,7 @@ module.exports = app => {
   router.post('/application/exposeCreate',controller.application.exposeCreate);//对接互动营销分析平台-创建
   router.post('/application/exposeUpdate',controller.application.exposeUpdate);//对接互动营销分析平台-编辑
   router.delete('/application/exposeDelete',controller.application.exposeDelete);//对接互动营销分析平台-删除
+  router.get('/application/exposeList',controller.application.exposeList);//对接互动营销分析平台-列表
   router.post('/application/update',new Auth(10).check,controller.application.update);//应用的编辑
   router.get('/application/detail',controller.application.detail);//应用详情的查看
   router.post('/application/detailByIndicator',new Auth(1).check,controller.application.detailByIndicator);//应用详情的查看-指标

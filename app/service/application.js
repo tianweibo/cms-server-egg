@@ -3,7 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const sd = require('silly-datetime');
 const Service = require('egg').Service;
-const {indicatorObj}=require('../common/foreignEnum.js')
+const {indicatorObj,sourceFrom}=require('../common/foreignEnum.js')
 class Application extends Service {
     constructor(ctx) {
         super(ctx);
@@ -16,6 +16,38 @@ class Application extends Service {
         this.Indicator = ctx.model.Indicator;
         this.ResponseCode = ctx.response.ResponseCode;
         this.ServerResponse = ctx.response.ServerResponse;
+    }
+    async exposeList(keyword){
+        const { ctx, app } = this;
+        const Op = app.Sequelize.Op;
+        var objOption={}
+        if(keyword){
+            objOption = {
+                [Op.or]: [{
+                    platform_app: { [Op.like]: `%${keyword}%` }
+                }, {
+                    platform_app_code: { [Op.like]: `%${keyword}%` }
+                }],
+                [Op.and]: [{
+                    is_interactive:1
+                }]
+            }
+        }else{
+            objOption = {
+                [Op.and]: [{
+                    is_interactive:1
+                }]
+            }
+        }
+        try{
+            var arr = await this.Application.findAll({
+                where:objOption,
+                attributes: ['platform_app_code', 'platform_app']
+            })
+            return this.ServerResponse.requireData('查询成功', arr);
+        }catch(e){
+            return this.ServerResponse.networkError('网络问题');
+        }
     }
     async exposeCreate(data){
         var data1={
@@ -36,14 +68,17 @@ class Application extends Service {
           create_people:'',         //创建人
           belongTo:'IMA'
         }
+        var bj=sourceFrom[data.belongTo]
         try{
             const Op = this.app.Sequelize.Op;
-        const hasApp = await this.Application.findOne({
+            const hasApp = await this.Application.findOne({
             where: {
                 platform_app_code: data.platform_app_code
             }
         })
         if (hasApp == null) {
+            data['open_type']=sourceFrom[data.belongTo];
+            data['platform_app_version']='1.0.0';
             const appInfo = await this.Application.create(data);
             if (data.application_label) {
                 var temp=data.application_label.split(',');
@@ -51,13 +86,13 @@ class Application extends Service {
             } 
             if (appInfo) {
                 var indicatorArr=indicatorObj[data.belongTo];
-                console.log('indicatorArr',indicatorArr)
                 if (indicatorArr.length > 0) {
                     var data = [];
                     for (var i = 0; i < indicatorArr.length; i++) {
                         var obj = {
                             application_id: appInfo.dataValues.application_id,
-                            indicator_id: indicatorArr[i]
+                            indicator_id: indicatorArr[i],
+                            open_type:bj
                         }
                         data.push(obj)
                     }
@@ -74,74 +109,139 @@ class Application extends Service {
                 return this.ServerResponse.networkError('网络问题');
             }
         } else {
-            return this.ServerResponse.requireData('小程序代码已存在,请换个再试试', { code: 1 })
+            return this.ServerResponse.networkError('小程序代码已存在,请换个再试试')
         }
         }catch(e){
             console.log(e,'ee')
         }
     }
     async exposeUpdate(data) {
-        var data1={
-            platform_app:'',          //小程序名称
-            platform_app_code:'',     //小程序代码
-            platform_app_version:'',  //小程序版本
-            platform_business:'TB',     //小程序平台
-            platform_business_label:'淘宝',
-            application_dep_platform:'platform-ali',
-            application_dep_platform_label:'客户运营平台-阿里版',
-            application_type:'program-zfb',
-            application_type_label:'支付宝小程序',
-            application_label:'',      //标签类型-value(多值，字符串逗号分隔)
-            application_label_label:'',//标签类型-label(多值，字符串逗号分隔)
-            application_use:1,
-            is_interactive:1,
-            note:'',                 //小程序描述
-            update_people:''         //更新人
-        }
-        const Op = this.app.Sequelize.Op;
-        const appInfo = await this.Application.findOne({
-            where: {
-                platform_app_code: data.platform_app_code
+        try{
+            var data1={
+                platform_app:'',          //小程序名称
+                platform_app_code:'',
+                application_label:'',      //标签类型-value(多值，字符串逗号分隔)
+                application_label_label:'',//标签类型-label(多值，字符串逗号分隔)
+                note:'',                 //小程序描述
+                update_people:'',         //更新人
+                belongTo:"IMA"
             }
-        })
-        if (appInfo == null) {
-            return this.ServerResponse.requireData('应用不存在', { code: 1 })
-        } else {
-            var qian=[];
-            var hou=[];
-            if(appInfo.application_label){
-                qian=appInfo.application_label.split(',');
-            }
-            if(data.application_label){
-                hou=data.application_label.split(',');
-            }
-            var tempArr=[]
-            for(var i=0;i<qian.length;i++){
-                if(hou.indexOf(qian[i])==-1){
-                    var obj={id:qian[i],type:'redu'}
-                    tempArr.push(obj)
-                }
-            }
-            for(var i=0;i<hou.length;i++){
-                if(qian.indexOf(hou[i])==-1){
-                    var obj={id:hou[i],type:'add'}
-                    tempArr.push(obj)
-                }
-            }
-            if(tempArr.length>0){
-                this.ctx.helper.calcLabelNumber(tempArr,Op,this.TheLabel,null)
-            }
-            data['update_time'] = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
-            const thedata = await this.Application.update(data, {
+            const Op = this.app.Sequelize.Op;
+            const appInfo = await this.Application.findOne({
                 where: {
                     platform_app_code: data.platform_app_code
                 }
             })
-            if (thedata) {
-                return this.ServerResponse.createBySuccessMsg('更新成功');
+            data['open_type']=sourceFrom[data.belongTo];
+            if (appInfo == null) {
+                return this.ServerResponse.networkError('应用不存在')
             } else {
-                return this.ServerResponse.networkError('网络问题');
+                //标签使用数量的更新
+                var qian=[];
+                var hou=[];
+                if(appInfo.application_label){
+                    qian=appInfo.application_label.split(',');
+                }
+                if(data.application_label){
+                    hou=data.application_label.split(',');
+                }
+                var tempArr=[]
+                for(var i=0;i<qian.length;i++){
+                    if(hou.indexOf(qian[i])==-1){
+                        var obj={id:qian[i],type:'redu'}
+                        tempArr.push(obj)
+                    }
+                }
+                for(var i=0;i<hou.length;i++){
+                    if(qian.indexOf(hou[i])==-1){
+                        var obj={id:hou[i],type:'add'}
+                        tempArr.push(obj)
+                    }
+                }
+                if(tempArr.length>0){
+                    this.ctx.helper.calcLabelNumber(tempArr,Op,this.TheLabel,null)
+                }
+                //标签的使用数量的更新
+                data['update_time'] = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+                // 指标添加的逻辑
+                const indicInfo = await this.ApplicationIndicator.findAll({
+                    where: {
+                        application_id: appInfo.application_id,
+                        //open_type:sourceFrom[data.belongTo]
+                    }
+                })
+                var indicOpenType1=[];
+                var indicOpenType2=[];
+                console.log(indicInfo,'indicInfo')
+                for(let i=0;i<indicInfo.length;i++){
+                    if(indicInfo[i].open_type==1){
+                        indicOpenType1.push(indicInfo[i].indicator_id)
+                    } else if(indicInfo[i].open_type==2){
+                        indicOpenType2.push(indicInfo[i].indicator_id)
+                    } 
+                }
+                //指标添加的逻辑
+                console.log(indicOpenType1,indicOpenType2,'indicOpenType1,indicOpenType1')
+                if(indicOpenType1.length!=0){ //在原有的基础上添加【互动营销分析平台的指标
+                  var indicArr=[];   //indicOpenType1   indicatorObj[data.belongTo]
+                  for (let i = 0; i < indicOpenType1.length; i++) {
+                    var obj = {
+                        application_id: appInfo.application_id,
+                        indicator_id: indicOpenType1[i],
+                        open_type:1
+                    }
+                    indicArr.push(obj)
+                  }
+                  for (let i = 0; i < indicatorObj[data.belongTo].length; i++) {
+                    var obj = {
+                        application_id: appInfo.application_id,
+                        indicator_id: indicatorObj[data.belongTo][i],
+                        open_type:sourceFrom[data.belongTo]
+                    }
+                    indicArr.push(obj)
+                  }
+                  console.log('indicArr',indicArr)
+                  //先删除 再添加
+                  await this.ApplicationIndicator.destroy({ where: { application_id: parseInt(appInfo.application_id) } });
+                  const eventAppInfo = await this.ApplicationIndicator.bulkCreate(indicArr)
+                    if (!eventAppInfo) {
+                        return this.ServerResponse.networkError('网络问题');
+                    } 
+                }
+                
+                if(indicOpenType1.length==0 && indicOpenType2.length==0){  //二者都没有，则直接加【互动营销分析平台的指标】
+                    var indicatorArr=indicatorObj[data.belongTo];
+                    if (indicatorArr.length > 0) {
+                        var data1 = [];
+                        for (var i = 0; i < indicatorArr.length; i++) {
+                            var obj = {
+                                application_id: appInfo.dataValues.application_id,
+                                indicator_id: indicatorArr[i],
+                                open_type:sourceFrom[data.belongTo]
+                            }
+                            data1.push(obj)
+                        }
+                        const tempInfo = await this.ApplicationIndicator.bulkCreate(data1)
+                        if (!tempInfo) {
+                            return this.ServerResponse.networkError('网络问题');
+                        } 
+                    } 
+                }
+                //if(indicOpenType2.length!=0){ //则编辑基本信息就行
+                    const thedata = await this.Application.update(data, {
+                        where: {
+                            platform_app_code: data.platform_app_code
+                        }
+                    })
+                    if (thedata) {
+                        return this.ServerResponse.createBySuccessMsg('更新成功');
+                    } else {
+                        return this.ServerResponse.networkError('网络问题');
+                    }
+                //}
             }
+        }catch(e){
+            console.log(e,'eeeee')
         }
     }
     async exposeDelete(platform_app_code) {
@@ -297,7 +397,7 @@ class Application extends Service {
             return this.ServerResponse.networkError('网络问题');
         }
     }
-    async detail(id) {
+    async detail(id,open_type) {
         const { ctx, app } = this;
         const Op = app.Sequelize.Op;
         const appInfo = await this.Application.findOne({
@@ -305,10 +405,18 @@ class Application extends Service {
                 application_id: id
             }
         })
+        var arr1 = [];
+        if(open_type!=0){
+            arr1.push({
+                open_type:open_type
+            })
+        }
+        arr1.push({
+			application_id: id
+		})
+        var objOption = {[Op.and]: arr1}
         const arr = await this.ApplicationIndicator.findAll({
-            where: {
-                application_id: id
-            },
+            where: objOption,
             attributes: ['indicator_id']
         })
         var indicatorIds = []

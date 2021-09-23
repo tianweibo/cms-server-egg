@@ -13,7 +13,8 @@ module.exports=app=>{
         event_label:{type:STRING(255),comment:'事件标签'}, 
 		event_label_label:{type:STRING(255),comment:'事件标签label'},           
 		note:{type:TEXT,comment:'备注'},  
-        general_attr:{type:TEXT,comment:'通用属性'},                 
+        general_attr:{type:TEXT,comment:'通用属性'},  
+		open_type:{defaultValue:1,type:INTEGER(2),comment:'数据来源'},                
 		create_time:{
 			type:DATE,
 			get(){

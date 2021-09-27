@@ -63,7 +63,7 @@ class TheLabel extends Service {
 		for(var i=0;i<hasLabel.length;i++){
 			str+=hasLabel[i].label
 		}
-		return this.ServerResponse.requireData(`标签[${str}]已存在,请换个名字试试`,{code:1})
+		return this.ServerResponse.networkError(`标签[${str}]已存在,请换个名字试试`)
 	}
   }
   
@@ -77,7 +77,7 @@ class TheLabel extends Service {
 			return this.ServerResponse.requireData('标签不存在',{code:1});
 		}
 		if(result.number>0 && result.is_lower==1){
-			return this.ServerResponse.requireData('标签使用中，请先去除标签的使用', { code: 1 });
+			return this.ServerResponse.networkError('标签使用中，请先去除标签的使用');
 		}
 		if(result.is_lower==0){
 			var num=0
@@ -91,7 +91,7 @@ class TheLabel extends Service {
 				num=result.count
 			})
 			if(num>0){
-				return this.ServerResponse.requireData('该父级标签存在子级，不支持删除操作', { code: 1 });
+				return this.ServerResponse.networkError('该父级标签存在子级，不支持删除操作');
 			}
 		}
 		const row = await this.TheLabel.destroy({ where: {id: id } });
@@ -199,7 +199,7 @@ class TheLabel extends Service {
 				}
 			})
 			if(thename){
-				return this.ServerResponse.requireData('标签名已存在',{code:1})
+				return this.ServerResponse.networkError('标签名已存在')
 			}else{
 				const thedata=await this.TheLabel.update({label:data.label,update_people:this.ctx.session.username,update_time:sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss')},{
 					where:{

@@ -57,7 +57,7 @@ class Indicator extends Service {
             }
         })
         if (indicatorInfo == null) {
-            return this.ServerResponse.requireData('指标不存在', { code: 1 })
+            return this.ServerResponse.networkError('指标不存在')
         } else {
             var qian=[];
             var hou=[];
@@ -178,7 +178,7 @@ class Indicator extends Service {
                 return this.ServerResponse.networkError('网络问题');
             }
         } else {
-            return this.ServerResponse.requireData('指标英文代码已存在,请换个再试试', { code: 1 })
+            return this.ServerResponse.networkError('指标英文代码已存在,请换个再试试')
         }
     }
     async detail(id) {
@@ -233,7 +233,7 @@ class Indicator extends Service {
 
 
         if (indicatorInfo == null) {
-            return this.ServerResponse.requireData('指标不存在', { code: 1 });
+            return this.ServerResponse.networkError('指标不存在');
         } else {
             var indicatorObj = {
                 indicatorInfo, eventInfo, appInfo
@@ -350,7 +350,7 @@ class Indicator extends Service {
                 where: { indicator_id: id },
             });
             if (!result) {
-                return this.ServerResponse.requireData('指标不存在', { code: 1 });
+                return this.ServerResponse.networkError('指标不存在');
             }
             /* const eventArr = await this.IndicatorEvent.findAll({
                 where: {
@@ -378,7 +378,7 @@ class Indicator extends Service {
             if (row) {
                 return this.ServerResponse.requireData('归档成功');
             } else {
-                return this.ServerResponse.requireData('归档失败', { code: 1 });
+                return this.ServerResponse.networkError('归档失败');
             }
         } catch (e) {
             return this.ServerResponse.networkError('网络问题');
@@ -391,7 +391,7 @@ class Indicator extends Service {
                 where: { indicator_id: id },
             });
             if (!result) {
-                return this.ServerResponse.requireData('指标不存在', { code: 1 });
+                return this.ServerResponse.networkError('指标不存在');
             }
             if (result.indicator_label) {
                 var temp=result.indicator_label.split(',');
@@ -420,7 +420,7 @@ class Indicator extends Service {
             if (row) {
                 return this.ServerResponse.requireData('删除成功');
             } else {
-                return this.ServerResponse.requireData('删除失败', { code: 1 });
+                return this.ServerResponse.networkError('删除失败');
             }
         } catch (e) {
             return this.ServerResponse.networkError('网络问题');

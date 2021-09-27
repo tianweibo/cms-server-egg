@@ -36,7 +36,7 @@ class Report extends Service {
                 }
             })
             if(hasReport){
-                return this.ServerResponse.requireData('该报表名称已存在，请重新输入', { code: 1 })
+                return this.ServerResponse.requireData('该报表名称已存在，请重新输入',{ code: 1 })
             }else{
                 return this.ServerResponse.createBySuccessMsgAndData('不存在重名，可以使用', { code: 0 })
             }
@@ -121,7 +121,7 @@ class Report extends Service {
                     return this.ServerResponse.requireData('删除失败', { code: 1 });
                 }
             }else{
-                return this.ServerResponse.requireData('新增数据，不用删除', { code: 0 });
+                return this.ServerResponse.networkError('新增数据，不用删除');
             }
         }catch(e){
             return this.ServerResponse.requireData('网络问题', { code: 1 });
@@ -241,7 +241,7 @@ class Report extends Service {
                 }
             })
             if (!reportInfo) {
-                return this.ServerResponse.requireData('报表不存在', { code: 1 });
+                return this.ServerResponse.networkError('报表不存在');
             }
             var reportBetweenInfo = await this.ReportBetween.findOne({
                 where: {

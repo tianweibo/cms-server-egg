@@ -60,7 +60,7 @@ class Event extends Service {
 				}
 			})
 			if (thedata) {
-				var data1 = [];
+				/* var data1 = [];
 				for (var i = 0; i < data.updates.attributeArr.length; i++) {
 					var obj = {
 						event_id: data.id,
@@ -74,7 +74,8 @@ class Event extends Service {
 					return this.ServerResponse.networkError('网络问题');
 				} else {
 					return this.ServerResponse.createBySuccessMsg('更新成功');
-				}
+				} */
+				return this.ServerResponse.createBySuccessMsg('更新成功');
 			} else {
 				return this.ServerResponse.networkError('网络问题');
 			}
@@ -95,7 +96,7 @@ class Event extends Service {
                 this.ctx.helper.calcLabelNumber(temp,Op,this.TheLabel,'add')
             } 
 			if (eventInfo) {
-				if (event.attributeArr) {
+				/* if (event.attributeArr) {
 					var data = [];
 					for (var i = 0; i < event.attributeArr.length; i++) {
 						var obj = {
@@ -112,7 +113,8 @@ class Event extends Service {
 					}
 				} else {
 					return this.ServerResponse.createBySuccessMsg('创建成功');
-				}
+				} */
+				return this.ServerResponse.createBySuccessMsg('创建成功');
 			} else {
 				return this.ServerResponse.networkError('网络问题');
 			}
@@ -152,39 +154,43 @@ class Event extends Service {
 	async detail(id) {
 		const { ctx, app } = this;
 		const Op = app.Sequelize.Op;
-
-		const eventInfo = await this.Event.findOne({
-			where: {
-				event_id: id
+		try{
+			const eventInfo = await this.Event.findOne({
+				where: {
+					event_id: id
+				}
+			})
+			/* const idArr = await this.EventAttribute.findAll({
+				where: {
+					event_id: id
+				},
+				attributes: ['attribute_id']
+			})
+			var dataArr = [];
+			if (idArr && idArr.length > 0) {
+				for (var i = 0; i < idArr.length; i++) {
+					dataArr.push({
+						attribute_id: idArr[i].attribute_id
+					})
+				}
 			}
-		})
-		const idArr = await this.EventAttribute.findAll({
-			where: {
-				event_id: id
-			},
-			attributes: ['attribute_id']
-		})
-		var dataArr = [];
-		if (idArr && idArr.length > 0) {
-			for (var i = 0; i < idArr.length; i++) {
-				dataArr.push({
-					attribute_id: idArr[i].attribute_id
-				})
+			var objOption = {
+				[Op.or]: dataArr,
 			}
-		}
-		var objOption = {
-			[Op.or]: dataArr,
-		}
-		var attrInfo = await this.Attribute.findAll({
-			where: objOption,
-		})
-		if (eventInfo == null) {
-			return this.ServerResponse.requireData('事件不存在', { code: 1 });
-		} else {
-			var eventObj = {
-				eventInfo, attrInfo
+			var attrInfo = await this.Attribute.findAll({
+				where: objOption,
+			}) */
+			var attrInfo=[]
+			if (eventInfo == null) {
+				return this.ServerResponse.requireData('事件不存在', { code: 1 });
+			} else {
+				var eventObj = {
+					eventInfo, attrInfo
+				}
+				return this.ServerResponse.requireData('查询成功', eventObj);
 			}
-			return this.ServerResponse.requireData('查询成功', eventObj);
+		}catch(e){
+			return this.ServerResponse.networkError(e);
 		}
 	}
 	async list(obj) {

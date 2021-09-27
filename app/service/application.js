@@ -181,7 +181,6 @@ class Application extends Service {
                     } 
                 }
                 //指标添加的逻辑
-                console.log(indicOpenType1,indicOpenType2,'indicOpenType1,indicOpenType1')
                 if(indicOpenType1.length!=0){ //在原有的基础上添加【互动营销分析平台的指标
                   var indicArr=[];   //indicOpenType1   indicatorObj[data.belongTo]
                   for (let i = 0; i < indicOpenType1.length; i++) {
@@ -251,7 +250,7 @@ class Application extends Service {
                 where: { platform_app_code: platform_app_code },
             });
             if (!result) {
-                return this.ServerResponse.requireData('应用不存在', { code: 1 });
+                return this.ServerResponse.networkError('应用不存在');
             }
             if (result.application_label) {
                 var temp=result.application_label.split(',');
@@ -261,7 +260,7 @@ class Application extends Service {
                 where: { application_id: result.application_id},
             });
             if (arr.length > 0) {
-                return this.ServerResponse.requireData('该应用下存在报表,不支持进行删除的操作', { code: 1 });
+                return this.ServerResponse.networkError('该应用下存在报表,不支持进行删除的操作');
             }
             /* if (result.application_use == 1) {
                 return this.ServerResponse.requireData('应用已启用,不支持进行删除的操作', { code: 1 });
@@ -284,7 +283,7 @@ class Application extends Service {
             }
         })
         if (appInfo == null) {
-            return this.ServerResponse.requireData('应用不存在', { code: 1 })
+            return this.ServerResponse.networkError('应用不存在')
         } else {
             var qian=[];
             var hou=[];
@@ -381,7 +380,7 @@ class Application extends Service {
                 return this.ServerResponse.networkError('网络问题');
             }
         } else {
-            return this.ServerResponse.requireData('应用英文代码已存在,请换个再试试', { code: 1 })
+            return this.ServerResponse.networkError('应用英文代码已存在,请换个再试试')
         }
     }
     async indicatorNum(id){
@@ -424,7 +423,7 @@ class Application extends Service {
             indicatorIds.push(arr[i].indicator_id);
         }
         if (appInfo == null) {
-            return this.ServerResponse.requireData('应用不存在', { code: 1 });
+            return this.ServerResponse.networkError('应用不存在');
         } else {
             var appObj = {
                 appInfo, indicatorIds
@@ -450,7 +449,7 @@ class Application extends Service {
             where: objOption,
         })
         if (indicatorInfo == null) {
-            return this.ServerResponse.requireData('指标不存在', { code: 1 });
+            return this.ServerResponse.networkError('指标不存在');
         } else {
             return this.ServerResponse.requireData('查询成功', { code: 0, indicatorInfo });
         }
@@ -603,7 +602,7 @@ class Application extends Service {
                 where: { application_id: id },
             });
             if (arr.length > 0) {
-                return this.ServerResponse.requireData('该应用下存在报表,不支持进行删除的操作', { code: 1 });
+                return this.ServerResponse.networkError('该应用下存在报表,不支持进行删除的操作');
             }
             /* if (result.application_use == 1) {
                 return this.ServerResponse.requireData('应用已启用,不支持进行删除的操作', { code: 1 });

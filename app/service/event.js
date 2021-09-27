@@ -88,6 +88,14 @@ class Event extends Service {
 				event_code: event.info.event_code
 			}
 		})
+		const hasEventname = await this.Event.findOne({
+			where: {
+				event_name: event.info.event_name
+			}
+		})
+		if(hasEventname){
+			return this.ServerResponse.networkError('事件名称已存在,请换个再试试')
+		}
 		if (hasEvent == null) {
 			event.info.create_people = this.ctx.session.username;
 			const eventInfo = await this.Event.create(event.info);
@@ -119,7 +127,7 @@ class Event extends Service {
 				return this.ServerResponse.networkError('网络问题');
 			}
 		} else {
-			return this.ServerResponse.requireData('事件英文代码已存在,请换个再试试', { code: 1 })
+			return this.ServerResponse.networkError('事件英文代码已存在,请换个再试试')
 		}
 	}
 	async indicByEventId(id){
@@ -146,7 +154,7 @@ class Event extends Service {
 			where: objOption,
 		})
 		if (list == null) {
-			return this.ServerResponse.requireData('指标不存在', { code: 1 });
+			return this.ServerResponse.networkError('指标不存在');
 		} else {
 			return this.ServerResponse.requireData('查询成功', { code: 0, data: list });
 		}
@@ -182,7 +190,7 @@ class Event extends Service {
 			}) */
 			var attrInfo=[]
 			if (eventInfo == null) {
-				return this.ServerResponse.requireData('事件不存在', { code: 1 });
+				return this.ServerResponse.networkError('事件不存在');
 			} else {
 				var eventObj = {
 					eventInfo, attrInfo
@@ -310,7 +318,6 @@ class Event extends Service {
             })
             return this.ServerResponse.requireData('查询成功', arr);
         } catch (e) {
-			console.log(e,'e')
             return this.ServerResponse.networkError('网络问题');
         }
     }
@@ -322,7 +329,7 @@ class Event extends Service {
 				where: { event_id: id },
 			});
 			if (!result) {
-				return this.ServerResponse.requireData('事件不存在', { code: 1 });
+				return this.ServerResponse.networkError('事件不存在');
 			}
 			if (result.event_label) {
                 var temp=result.event_label.split(',');

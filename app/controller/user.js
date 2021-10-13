@@ -11,6 +11,11 @@ class UserController extends Controller {
 	  const response=await this.TheUser.login(ctx.request.body);
 	  ctx.body=response;
     }
+	async dataGift(){
+		const ctx=this.ctx;
+	  	const response=await this.TheUser.dataGift(ctx.request.body);
+	  	ctx.body=response;
+	}
 	async create(){
 		const rule={
 			username:{
@@ -22,8 +27,6 @@ class UserController extends Controller {
 		}
 		const ctx=this.ctx;
 		const sj=this.app.validator.validate(rule,ctx.request.body);
-		console.log(sj,'sj')
-		//var para=ctx.params();
 		if(sj){
 			ctx.body={
 				status:1,

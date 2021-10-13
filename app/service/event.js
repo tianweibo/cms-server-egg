@@ -98,6 +98,8 @@ class Event extends Service {
 		}
 		if (hasEvent == null) {
 			event.info.create_people = this.ctx.session.username;
+			event.info.product_line_id=this.ctx.session.productid;
+			event.info.product_line_name=this.ctx.session.productname;
 			const eventInfo = await this.Event.create(event.info);
 			if (event.info.event_label) {
                 var temp=event.info.event_label.split(',');
@@ -209,13 +211,23 @@ class Event extends Service {
 			arr: [],
 		}
 		var arr = [];
-		arr.push({
-			state:1
-		})
+		if(ctx.session.role==1){
+			arr.push({
+				state:1,
+				open_type:1,
+				[Op.or]: [{product_line_id: ctx.session.productid}, {product_line_id: 10}]
+			})
+		}else if(ctx.session.role==10){
+			if(obj.product_line_id){
+				arr.push({
+					product_line_id:obj.product_line_id
+				})
+			}
+			arr.push({
+				state:1
+			})
+		}
 		if (obj.event_label) {
-			/* arr.push({
-				event_label: obj.event_label,
-			}) */
 			arr.push({
                 event_label:{[Op.like]:`%${obj.event_label}%`}
             })
@@ -238,12 +250,12 @@ class Event extends Service {
 				where: objOption,
 				limit: parseInt(obj.pageSize),
 				order: [
-                    ['create_time', 'DESC'] //降序desc，升序asc
+                    ['create_time', 'DESC'], //降序desc，升序asc
                 ],
 				offset: parseInt((obj.pageNo - 1) * obj.pageSize)
 			}).then(function (result) {
 				list.count = result.count,
-					list.arr = result.rows
+				list.arr = result.rows
 			})
 			return this.ServerResponse.requireData('查询成功', list);
 		} catch (e) {

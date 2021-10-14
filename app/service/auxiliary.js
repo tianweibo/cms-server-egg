@@ -144,7 +144,8 @@ class Auxiliary extends Service {
       }
     }    
     const filePath=path.resolve(this.app.config.static.dir, 'point.js');
-    var buffer=Buffer.from(theData)
+    //var buffer=Buffer.from(theData)
+    var buffer=`${id}111`
     fs.writeFileSync(filePath,buffer)
     this.ctx.attachment(filePath);
     this.ctx.set('Content-Type',"application/octet-stream");

@@ -21,6 +21,5 @@ class Basic extends Service {
       return this.ServerResponse.networkError('网络问题');
     }
   }
-
 }
 module.exports = Basic;

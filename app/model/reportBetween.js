@@ -6,13 +6,13 @@ module.exports = app => {
             primaryKey: true
         },
         card_ids: {
-            type: STRING
+            type: STRING(1000)
         },
         table_ids: {
-            type: STRING
+            type: STRING(1000)
         },
         trend_ids: {
-            type: STRING
+            type: STRING(1000)
         }
     },{
         timestamps: false,

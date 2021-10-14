@@ -7,8 +7,108 @@ class User extends Service {
   constructor(ctx){
 	  super(ctx);
 	  this.TheUser=ctx.model.User;
+	  this.Event = ctx.model.Event;
+	  this.Indicator = ctx.model.Indicator;
+	  this.Application = ctx.model.Application;
+	  this.Report= ctx.model.Report;
 	  this.ResponseCode = ctx.response.ResponseCode;
 	  this.ServerResponse = ctx.response.ServerResponse;
+  }
+  async dataGift(data){
+	try{
+		const userObj=await this.TheUser.findOne({
+			where:{
+				username:data.newUsername //data.oldUsername
+			}
+		})
+		if(userObj){
+			//this.Event   查看老用户名下的所有事件都有哪些，查出id,用ID更新创建人
+			var arrEvent=[]  //可封装公共方法-优化记得
+			arrEvent = await this.Event.findAll({
+				where:{
+					create_people:data.oldUsername 
+				},
+				attributes: ['event_id']
+			})
+			var arrIndicator=[]
+			arrIndicator = await this.Indicator.findAll({
+				where:{
+					create_people:data.oldUsername 
+				},
+				attributes: ['indicator_id']
+			})
+			var arrApplication=[];
+			arrApplication = await this.Application.findAll({
+				where:{
+					create_people:data.oldUsername 
+				},
+				attributes: ['application_id']
+			})	
+			var arrReport=[];
+			arrReport = await this.Report.findAll({
+				where:{
+					create_people:data.oldUsername 
+				},
+				attributes: ['report_id']
+			})	
+
+			if(arrEvent.length==0 && arrIndicator.length==0 && arrApplication.length==0 && arrReport.length==0){
+				return this.ServerResponse.createBySuccessMsg(`[${data.oldUsername}]名下没有数据`);
+			}
+			if(arrEvent.length.length!=0){
+				var updateEvent=[]
+				for(let i=0;i<arrEvent.length;i++){
+					let obj={
+						event_id:arrEvent[i].event_id,
+						create_people:data.newUsername
+					}
+					updateEvent.push(obj)
+				}
+				await this.Event.bulkCreate(updateEvent,{ updateOnDuplicate: ['create_people'] })
+			}
+			if(arrIndicator.length!=0){
+				var updateIndicator=[]
+				for(let i=0;i<arrIndicator.length;i++){
+					let obj={
+						indicator_id:arrIndicator[i].indicator_id,
+						create_people:data.newUsername
+					}
+					updateIndicator.push(obj)
+				}
+				await this.Indicator.bulkCreate(updateIndicator,{ updateOnDuplicate: ['create_people'] })
+			}
+
+			if(arrApplication.length!=0){
+				var updateApplication=[]
+				for(let i=0;i<arrApplication.length;i++){
+					let obj={
+						application_id:arrApplication[i].application_id,
+						create_people:data.newUsername
+					}
+					updateApplication.push(obj)
+				}
+				await this.Application.bulkCreate(updateApplication,{ updateOnDuplicate: ['create_people'] })
+			}
+
+			if(arrReport.length!=0){
+				var updateReport=[];
+				for(let i=0;i<arrReport.length;i++){
+					let obj={
+						report_id:arrReport[i].report_id,
+						create_people:data.newUsername
+					}
+					updateReport.push(obj)
+				}
+				await this.Report.bulkCreate(updateReport,{ updateOnDuplicate: ['create_people'] })
+			}
+			return this.ServerResponse.createBySuccessMsg('数据赠予成功');
+		}else{
+			return this.ServerResponse.networkError('用户不存在');
+		} 
+	}catch(e){
+		console.log(e)
+		return this.ServerResponse.networkError('网络问题');
+	}
   }
   async login(userInfo){
 	const hasUser=await this.TheUser.findOne({
@@ -33,6 +133,9 @@ class User extends Service {
 	//await this.app.redis.set('userid', hasUser.dataValues.id);
 	this.ctx.session.userid=hasUser.dataValues.id
 	this.ctx.session.username=hasUser.dataValues.username;
+	this.ctx.session.role=hasUser.dataValues.role;
+	this.ctx.session.productid=hasUser.dataValues.product_line_id;
+	this.ctx.session.productname=hasUser.dataValues.product_line_name;
 	var info={
 		data:hasUser.dataValues,
 		token:token,
@@ -43,6 +146,9 @@ class User extends Service {
 	// const theid=await this.app.redis.del('userid')
 	this.ctx.session.userid=null;
 	this.ctx.session.username=null;
+	this.ctx.session.role=null;
+	this.ctx.session.productid=null;
+	this.ctx.session.productname=null;
 	return this.ServerResponse.createBySuccessMsg('退出成功')
   }
   async isLogin(){
@@ -77,10 +183,19 @@ class User extends Service {
 		count:0,
 		arr:[],
 	}
-	var objOption={
-		username:{[Op.like]:`%${obj.keyword}%`},
-		role:obj.role
+	if(obj.product_line_id){
+		var objOption={
+			username:{[Op.like]:`%${obj.keyword}%`},
+			role:obj.role,
+			product_line_id:obj.product_line_id
+		}
+	}else{
+		var objOption={
+			username:{[Op.like]:`%${obj.keyword}%`},
+			role:obj.role,
+		}
 	}
+	
 	try{
 		await this.TheUser.findAndCountAll({
 			where:objOption,

@@ -87,6 +87,8 @@ class Indicator extends Service {
 
             var obj = data.updates;
             obj.info.update_people = this.ctx.session.username;
+            obj.info.product_line_id=this.ctx.session.productid;
+			obj.info.product_line_name=this.ctx.session.productname;
             obj.info['update_time']=sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
             const thedata = await this.Indicator.update(obj.info, {
                 where: {
@@ -139,6 +141,8 @@ class Indicator extends Service {
         })
         if (hasIndicator == null) {
             indicator.info.create_people = this.ctx.session.username;
+            indicator.info.product_line_id=this.ctx.session.productid;
+			indicator.info.product_line_name=this.ctx.session.productname;
             const indicatorInfo = await this.Indicator.create(indicator.info);
             if (indicator.info.indicator_label) {
                 var temp=indicator.info.indicator_label.split(',');
@@ -268,9 +272,23 @@ class Indicator extends Service {
     async listByType(obj){
         const { ctx, app } = this;
         const Op = app.Sequelize.Op;
-        var arr=[{
-            open_type:1
-        }]
+        var arr=[];
+        if(ctx.session.role==1){
+			arr.push({
+				state:1,
+				open_type:1,
+				[Op.or]: [{product_line_id: ctx.session.productid}, {product_line_id: 10}]
+			})
+		}else if(ctx.session.role==10){
+            if(obj.product_line_id){
+				arr.push({
+					product_line_id:obj.product_line_id
+				})
+			}
+			arr.push({
+				state:1
+			})
+		}
         if (obj.indicator_type) {
             arr.push({
                 indicator_type: obj.indicator_type,
@@ -302,13 +320,23 @@ class Indicator extends Service {
             arr: [],
         }
         var arr = [];
-        arr.push({
-			state:1
-		})
+        if(ctx.session.role==1){
+			arr.push({
+				state:1,
+				open_type:1,
+				[Op.or]: [{product_line_id: ctx.session.productid}, {product_line_id: 10}]
+			})
+		}else if(ctx.session.role==10){
+            if(obj.product_line_id){
+				arr.push({
+					product_line_id:obj.product_line_id
+				})
+			}
+			arr.push({
+				state:1,
+			})
+		}
         if (obj.indicator_label) {
-            /* arr.push({
-                indicator_label: obj.indicator_label,
-            }) */
             arr.push({
                 indicator_label:{[Op.like]:`%${obj.indicator_label}%`}
             })

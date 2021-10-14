@@ -30,8 +30,8 @@ module.exports=app=>{
 		create_time:{
 			type:DATE,
 			get(){
-				return moment(this.getDataValue('create_time')).format(
-					'YYYY-MM-DD HH:MM:SS'
+				return sd.format(this.getDataValue('create_time'),
+					'YYYY-MM-DD HH:mm:ss'
 				);
 			},
 			defaultValue(){
@@ -42,8 +42,8 @@ module.exports=app=>{
 		update_time:{
 			type:DATE,
 			get(){
-				return moment(this.getDataValue('update_time')).format(
-					'YYYY-MM-DD HH:MM:SS'
+				return sd.format(this.getDataValue('create_time'),
+					'YYYY-MM-DD HH:mm:ss'
 				);
 			},
 			defaultValue(){
@@ -57,7 +57,9 @@ module.exports=app=>{
 		},
 		create_people:{
 			type:STRING(255),comment:'创建人'
-		},                    
+		},  
+		product_line_id:{type:INTEGER(11)},
+		product_line_name:{type:STRING},                 
 		apply_time:{
 			type:DATE,
 			get(){

@@ -33,13 +33,15 @@ module.exports=app=>{
 			type:STRING,
 		},
 		role:{defaultValue:1,type:INTEGER(11)},
+		product_line_id:{type:INTEGER(11)},
+		product_line_name:{type:STRING},
 		role_name:{defaultValue:'普通用户',type:STRING(11)},
 		status:{defaultValue:1,type:INTEGER(11)},
 		create_time:{
 			type:DATE,
 			get(){
-				return moment(this.getDataValue('create_time')).format(
-					'YYYY-MM-DD HH:MM:SS'
+				return sd.format(this.getDataValue('create_time'),
+					'YYYY-MM-DD HH:mm:ss'
 				);
 			},defaultValue(){
 				var sj = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
@@ -49,8 +51,8 @@ module.exports=app=>{
 		update_time:{
 			type:DATE,
 			get(){
-				return moment(this.getDataValue('update_time')).format(
-					'YYYY-MM-DD HH:MM:SS'
+				return sd.format(this.getDataValue('create_time'),
+					'YYYY-MM-DD HH:mm:ss'
 				);
 			},
 			defaultValue(){

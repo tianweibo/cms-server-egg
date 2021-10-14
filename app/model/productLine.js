@@ -1,15 +1,18 @@
 const  moment =require('moment');
 const sd = require('silly-datetime');
 module.exports=app=>{
-    const {STRING,INTEGER,DATE,TEXT}=app.Sequelize;
-	const theLabel=app.model.define('theLabel',{
-		fid:INTEGER(40),
-        id:{type:INTEGER,primaryKey:true,autoIncrement:true},
-        fname:STRING(20),
-		label:STRING(20),
-		state:{defaultValue:1,type:INTEGER(2)},
-		number:{defaultValue:0,type:INTEGER},
-		is_lower:{defaultValue:1,type:INTEGER(2)},
+	const {STRING,INTEGER,DATE}=app.Sequelize;
+	const productLine=app.model.define('productLine',{
+		id:{
+			type:INTEGER,
+			primaryKey:true,
+			autoIncrement:true,
+		},
+		productname:{
+			type:STRING,
+		},
+		product_use:{defaultValue:1,type:INTEGER(2),comment:'是否启用'},
+		status:{defaultValue:1,type:INTEGER(11)},
 		create_time:{
 			type:DATE,
 			get(){
@@ -40,11 +43,13 @@ module.exports=app=>{
 		create_people:{
 			type:STRING(255),comment:'创建人'
 		},
-	}, {
-		underscored: true,
-        timestamps: false,
-		freezeTableName: true,
-		tableName: 'theLabel',
-	  })
-	return theLabel;
+		remark:{
+			type:STRING
+		}
+	},{
+		freezeTableName: true, // 使用数据库里的真实表名
+		underscored: true, // 不使用下划线
+		tableName:'productLine'
+	});
+	return productLine;
 }

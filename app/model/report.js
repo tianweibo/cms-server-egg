@@ -8,8 +8,8 @@ module.exports=app=>{
 		create_time:{
 			type:DATE,
 			get(){
-				return moment(this.getDataValue('create_time')).format(
-					'YYYY-MM-DD HH:MM:SS'
+				return sd.format(this.getDataValue('create_time'),
+					'YYYY-MM-DD HH:mm:ss'
 				);
 			},defaultValue(){
 				var sj = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
@@ -19,8 +19,8 @@ module.exports=app=>{
 		update_time:{
 			type:DATE,
 			get(){
-				return moment(this.getDataValue('update_time')).format(
-					'YYYY-MM-DD HH:MM:SS'
+				return sd.format(this.getDataValue('create_time'),
+					'YYYY-MM-DD HH:mm:ss'
 				);
 			},
 			defaultValue(){
@@ -36,6 +36,8 @@ module.exports=app=>{
 			type:STRING(255),comment:'创建人'
 		},
 		state:{defaultValue:1,type:INTEGER(6)},
+		product_line_id:{type:INTEGER(11)},
+		product_line_name:{type:STRING},
 		data_state:{defaultValue:0,type:INTEGER(6),comment:'数据状态'},
 	}, {
         timestamps: false,

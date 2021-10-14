@@ -51,6 +51,8 @@ class Report extends Service {
             var obj = data.updates;
             obj.reportInfo['update_people'] = this.ctx.session.username;
             obj.reportInfo['update_time'] = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+            obj.reportInfo['product_line_id']=ctx.session.productid;
+			obj.reportInfo['product_line_name']=ctx.session.productname;
             const thedata = await this.Report.update(obj.reportInfo, {
                 where: {
                     report_id: ctx.helper.parseInt(data.id)
@@ -88,6 +90,7 @@ class Report extends Service {
             }
             return this.ServerResponse.createBySuccessMsgAndData('编辑成功', { code: 0 })
         } catch (e) {
+            console
             return this.ServerResponse.networkError('网络问题');
         }
     }
@@ -202,6 +205,8 @@ class Report extends Service {
             var obj = data.updates;
             obj.reportInfo.create_people = this.ctx.session.username;
             obj.reportInfo.application_id = ctx.helper.parseInt(data.id);
+            obj.reportInfo.product_line_id=ctx.session.productid;
+			obj.reportInfo.product_line_name=ctx.session.productname;
             const thedata = await this.Report.create(obj.reportInfo);
             var theObj = {
                 report_id: thedata.dataValues.report_id,
@@ -292,10 +297,18 @@ class Report extends Service {
         const { ctx, app } = this;
         const Op = app.Sequelize.Op;
         var arr = [];
+        if(ctx.session.role==1){
+			arr.push({
+				[Op.or]: [{product_line_id: ctx.session.productid}, {product_line_id: 10}]
+			})
+		}else if(ctx.session.role==10){
+			if(obj.product_line_id){
+				arr.push({
+					product_line_id:obj.product_line_id
+				})
+			}
+		}
         if (obj.application_label) {
-            /* arr.push({
-                application_label: obj.application_label,
-            }) */
             arr.push({
                 application_label:{[Op.like]:`%${obj.application_label}%`}
             })

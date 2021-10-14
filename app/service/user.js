@@ -183,10 +183,19 @@ class User extends Service {
 		count:0,
 		arr:[],
 	}
-	var objOption={
-		username:{[Op.like]:`%${obj.keyword}%`},
-		role:obj.role
+	if(obj.product_line_id){
+		var objOption={
+			username:{[Op.like]:`%${obj.keyword}%`},
+			role:obj.role,
+			product_line_id:obj.product_line_id
+		}
+	}else{
+		var objOption={
+			username:{[Op.like]:`%${obj.keyword}%`},
+			role:obj.role,
+		}
 	}
+	
 	try{
 		await this.TheUser.findAndCountAll({
 			where:objOption,

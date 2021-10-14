@@ -11,5 +11,10 @@ class AuxiliaryController extends Controller {
 	  const response=await this.TheAuxiliary.repairData(ctx.request.body);
 	  ctx.body=response;
     }
+	async downData(){
+	 const ctx=this.ctx;
+	  const response=await this.TheAuxiliary.downData(ctx.query.id);
+	  ctx.body=response;
+	}
 }
 module.exports = AuxiliaryController;

@@ -163,7 +163,8 @@ class Auxiliary extends Service {
       dataType:'json'
   }
   var res = await this.ctx.curl('https://test-s3.zkyai.com/jzone_enbrands/bend/file-upload',option);
-  return this.ServerResponse.requireData('查询成功', res.data.data);
+  const downUrl=res.data.data
+  return this.ServerResponse.requireData('查询成功', downUrl);
   }
 }
 module.exports = Auxiliary;

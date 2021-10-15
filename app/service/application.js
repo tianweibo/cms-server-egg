@@ -518,9 +518,9 @@ class Application extends Service {
         if(ctx.session.role==1){
 			arr.push({
 				open_type:1,
-				[Op.or]: [{product_line_id: ctx.session.productid}, {product_line_id: 10}]
+				[Op.or]: [{product_line_id: ctx.session.productid}, {product_line_id: 7}]
 			})
-		}else if(ctx.session.role==10){
+		}else if(ctx.session.role==7){
             if(obj.product_line_id){
 				arr.push({
 					product_line_id:obj.product_line_id

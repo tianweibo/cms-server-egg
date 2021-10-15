@@ -148,9 +148,22 @@ class Auxiliary extends Service {
     fs.writeFileSync(filePath,buffer)
     this.ctx.attachment(filePath);
     this.ctx.set('Content-Type',"application/octet-stream");
-    var a=fs.createReadStream(filePath)
+    //var a=fs.createReadStream(filePath)
     this.ctx.body=fs.createReadStream(filePath)
-    return this.ServerResponse.createBySuccessMsg(a);
+   var temp=null;
+    var option={
+      method:'POST',
+      //data:temp,
+      files:filePath,
+      headers:{//自定义header
+          "Accept": "*/*",
+          "Content-Type":"application/json"
+      },
+      //rejectUnauthorized: false,
+      dataType:'json'
+  }
+  var res = await this.ctx.curl('https://test-s3.zkyai.com/jzone_enbrands/bend/file-upload',option);
+  return this.ServerResponse.requireData('查询成功', res.data.data);
   }
 }
 module.exports = Auxiliary;

@@ -143,9 +143,9 @@ class Auxiliary extends Service {
         //取事件的方法
       }
     }    
-    const filePath=path.resolve(this.app.config.static.dir, 'point.js');
+    const filePath=path.resolve(this.app.config.static.dir, 'point.docx');
     var buffer=Buffer.from(theData)
-    fs.writeFileSync(filePath,buffer)
+    fs.writeFileSync(filePath,theData,{encoding: 'utf8'})
     this.ctx.attachment(filePath);
     this.ctx.set('Content-Type',"application/octet-stream");
     //var a=fs.createReadStream(filePath)

@@ -151,7 +151,7 @@ class Auxiliary extends Service {
     this.ctx.set('Content-Type',"application/octet-stream");
     var a=fs.createReadStream(filePath)
     this.ctx.body=fs.createReadStream(filePath)
-    //return this.ServerResponse.createBySuccessMsg(a);
+    return this.ServerResponse.createBySuccessMsg(a);
   }
 }
 module.exports = Auxiliary;

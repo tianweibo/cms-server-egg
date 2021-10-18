@@ -118,7 +118,10 @@ class User extends Service {
 		}
 	})
 	if(hasUser==null){
-		return this.ServerResponse.createByErrorCodeMsg('账号不存在或禁用');
+		return this.ServerResponse.createByErrorMsg('账号不存在');
+	}
+	if(hasUser.dataValues.user_use==0){
+		return this.ServerResponse.createByErrorMsg('账号禁用,联系管理员');
 	}
 	const verify = await hasUser.validPassword(userInfo.password);
 	if (!verify) {

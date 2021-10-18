@@ -3,6 +3,7 @@
 const Service = require('egg').Service;
 const fs=require('fs')
 const path=require('path')
+const sd = require('silly-datetime');
 class Auxiliary extends Service {
   constructor(ctx) {
     super(ctx);
@@ -67,7 +68,7 @@ class Auxiliary extends Service {
     //console.log(appInfo.dataValues.note,'appInfo');
     let flag = appInfo.dataValues.is_interactive == 1 ? true : false;
     var obj = `
-    // 埋点操作手册-务必先通读一遍操作手册
+    // 埋点操作手册-》首次使用务必先通读一遍操作手册
     http://fed.enbrands.com/buried-docs/sdkDocs/
     //初始化代码
     {
@@ -91,7 +92,7 @@ class Auxiliary extends Service {
         phone:'未知',
         ouid:'未知',
         provider:'未知',
-        open_type:1,          //  1正常数据也就是对接新埋点平台，2互动营销类的，3其他
+        open_type:1,          //  1对接新埋点平台，2互动营销类的，3其他
     }
     //需要埋入的事件代码
     `;
@@ -143,18 +144,30 @@ class Auxiliary extends Service {
         //取事件的方法
       }
     }    
-    const filePath=path.resolve(this.app.config.static.dir, 'point.docx');
+    const files = fs.readdirSync(this.app.config.static.dir);
+    for(let z=0;z<files.length;z++){
+      if(files[z]!='swagger'){
+        var docName=files[z]
+      }
+    }
+    var nowDate=sd.format(new Date(),'YYYY-MM-DD HH:mm:ss');
+    const filePath=path.resolve(this.app.config.static.dir, docName);
+    var newPath=path.resolve(this.app.config.static.dir, `${appInfo.dataValues.platform_app}-${nowDate}-${appInfo.dataValues.create_people}.docx`);
+    console.log(filePath,newPath)
+    
+    //return
+    fs.renameSync(filePath,newPath);
     var buffer=Buffer.from(theData)
-    fs.writeFileSync(filePath,theData,{encoding: 'utf8'})
-    this.ctx.attachment(filePath);
+    fs.writeFileSync(newPath,theData,{encoding: 'utf8'})
+    this.ctx.attachment(newPath);
     this.ctx.set('Content-Type',"application/octet-stream");
     //var a=fs.createReadStream(filePath)
-    this.ctx.body=fs.createReadStream(filePath)
+    this.ctx.body=fs.createReadStream(newPath)
    var temp=null;
     var option={
       method:'POST',
       //data:temp,
-      files:filePath,
+      files:newPath,
       headers:{//自定义header
           "Accept": "*/*",
           "Content-Type":"application/json"

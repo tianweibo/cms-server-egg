@@ -1,4 +1,3 @@
-
 module.exports = app => {
   const { router, controller} = app;
   const path = require('path');
@@ -90,7 +89,7 @@ module.exports = app => {
   router.post('/api/auxiliary/repairData',controller.auxiliary.repairData);// 数据的创建人的修改
   router.get('/api/auxiliary/downData',controller.auxiliary.downData);// 数据的下载
   // 产品线
-  router.post('/api/productLine/list',new Auth(10).check,controller.productLine.list);// 产品线列表的获取
+  router.post('/api/productLine/list',controller.productLine.list);// 产品线列表的获取
   router.get('/api/productLine/useful',new Auth(10).check,controller.productLine.useful);//产品线禁用与否
   router.post('/api/productLine/update',new Auth(10).check,controller.productLine.update);//编辑产品线数据
   router.post('/api/productLine/create',new Auth(10).check,controller.productLine.create);//创建产品线数据

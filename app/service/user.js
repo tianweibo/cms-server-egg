@@ -21,7 +21,11 @@ class User extends Service {
 				username:data.newUsername //data.oldUsername
 			}
 		})
+
 		if(userObj){
+			if(userObj.dataValues.product_line_id!=data.oldProduct){
+				return this.ServerResponse.networkError('非同一产品线不能互赠数据');
+			}
 			//this.Event   查看老用户名下的所有事件都有哪些，查出id,用ID更新创建人
 			var arrEvent=[]  //可封装公共方法-优化记得
 			arrEvent = await this.Event.findAll({
@@ -217,7 +221,6 @@ class User extends Service {
 	}
   }
   async create(user) {
-	  console.log(user,'user')
 	const hasUser=await this.TheUser.findOne({
 		where:{
 			username:user.username

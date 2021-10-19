@@ -96,6 +96,6 @@ module.exports = app => {
   router.post('/productLine/create',new Auth(10).check,controller.productLine.create);//创建产品线数据
   router.get('/productLine/delete',new Auth(10).check,controller.productLine.delete);//产品线删除
   router.get('/productLine/detail',new Auth(10).check,controller.productLine.detail);//产品线详情
-  router.get('/productLine/listAll',new Auth(10).check,controller.productLine.listAll);//产品线列表-all
+  router.get('/productLine/listAll',controller.productLine.listAll);//产品线列表-all
   router.get('/productLine/userListPro',new Auth(10).check,controller.productLine.userListPro);//产品线列表-all
 };

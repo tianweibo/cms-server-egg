@@ -274,9 +274,18 @@ class Report extends Service {
                         var objOption = {
                             [Op.or]: dataArr,
                         }
-                        var dataList = await this.enumObj1[key].findAll({
+                        var dataList1= await this.enumObj1[key].findAll({
                             where: objOption,
                         })
+                        var dataList=[]
+                        for(var z=0;z<ids.length;z++){
+                            for(var h=0;h<dataList1.length;h++){
+                                if(ids[z]==dataList1[h][this.enumObj2[key]]){
+                                    dataList.push(dataList1[h]);
+                                    break;
+                                }
+                            }
+                        }
                         temp[key] = dataList
                     } else {
                         temp[key] = []

@@ -13,7 +13,7 @@ class AuxiliaryController extends Controller {
     }
 	async downData(){
 	 const ctx=this.ctx;
-	  const response=await this.TheAuxiliary.downData(ctx.query.id);
+	  const response=await this.TheAuxiliary.downData(ctx.query.id,ctx.query.flag);
 	  ctx.body=response;
 	}
 }

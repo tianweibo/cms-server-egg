@@ -56,7 +56,7 @@ class Auxiliary extends Service {
         return this.ServerResponse.networkError('网络问题');
     }
   }
-  async downData(id){
+  async downData(id,theFlag){
     const { ctx, app } = this;
 		const Op = app.Sequelize.Op;
     //应用详情
@@ -65,17 +65,16 @@ class Auxiliary extends Service {
           application_id: id
       }
     })
-    //console.log(appInfo.dataValues.note,'appInfo');
     let flag = appInfo.dataValues.is_interactive == 1 ? true : false;
     var obj = `
-    // 埋点操作手册-》首次使用务必先通读一遍操作手册
+    // 1、埋点操作手册-》首次使用务必先通读一遍操作手册
     http://fed.enbrands.com/buried-docs/sdkDocs/
-    //初始化代码
+    //2、初始化代码
     {
         is_prod: false,      // 数据埋入测试环境还是正式环境
         runtime_env:'',      //  参见埋点api
         merchant_id:'未知',   //  店铺ID 也就是店铺号 无法获取就写未知
-        distinct_id:'未知',   //  用户ID
+        distinct_id:'未知',   //  用户ID，该字段是用来便于统计uv,一定要填写可标注用户唯一的字段
         act_id:'未知',        //  活动ID 也就是活动号
         member_id:'未知',     //  会员ID
         platform_app: "${appInfo.dataValues.platform_app}", 
@@ -94,7 +93,7 @@ class Auxiliary extends Service {
         provider:'未知',
         open_type:1,          //  1对接新埋点平台，2互动营销类的，3其他
     }
-    //需要埋入的事件代码
+    //3、需要埋入的事件代码
     `;
     //获取指标
     var arr=[]
@@ -125,7 +124,6 @@ class Auxiliary extends Service {
         var Eventarr = await this.Event.findAll({
           where: objOption,
         })
-        console.log(Eventarr[0].dataValues.event_name);
         var str=''
         for(let z=0;z<Eventarr.length;z++){
   var obj1=
@@ -143,7 +141,10 @@ class Auxiliary extends Service {
         var theData=obj+str
         //取事件的方法
       }
-    }    
+    }  
+    if(theFlag=='false'){
+      return this.ServerResponse.requireData('查询成功', theData);
+    } 
     const files = fs.readdirSync(this.app.config.static.dir);
     for(let z=0;z<files.length;z++){
       if(files[z]!='swagger'){
@@ -153,8 +154,6 @@ class Auxiliary extends Service {
     var nowDate=sd.format(new Date(),'YYYY-MM-DD HH:mm:ss');
     const filePath=path.resolve(this.app.config.static.dir, docName);
     var newPath=path.resolve(this.app.config.static.dir, `${appInfo.dataValues.platform_app}-${nowDate}-${appInfo.dataValues.create_people}.docx`);
-    console.log(filePath,newPath)
-    
     //return
     fs.renameSync(filePath,newPath);
     var buffer=Buffer.from(theData)
@@ -163,7 +162,7 @@ class Auxiliary extends Service {
     this.ctx.set('Content-Type',"application/octet-stream");
     //var a=fs.createReadStream(filePath)
     this.ctx.body=fs.createReadStream(newPath)
-   var temp=null;
+    var temp=null;
     var option={
       method:'POST',
       //data:temp,

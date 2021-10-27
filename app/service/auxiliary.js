@@ -73,9 +73,9 @@ class Auxiliary extends Service {
     {
         is_prod: false,      // 数据埋入测试环境还是正式环境
         runtime_env:'',      //  参见埋点api
-        merchant_id:'未知',   //  店铺ID 也就是店铺号 无法获取就写未知
-        distinct_id:'未知',   //  用户ID，该字段是用来便于统计uv,一定要填写可标注用户唯一的字段
-        act_id:'未知',        //  活动ID 也就是活动号
+        merchant_id:'未知',   //  店铺ID   （也就是店铺号，便于通过不同店铺筛选数据 无法获取就写未知）
+        distinct_id:'未知',   //  用户ID， （该字段是用来便于统计uv,一定要填写可标注用户唯一的字段）
+        act_id:'未知',        //  活动ID   （也就是活动号，便于通过不同活动筛选数据）
         member_id:'未知',     //  会员ID
         platform_app: "${appInfo.dataValues.platform_app}", 
         platform_app_code: "${appInfo.dataValues.platform_app_code}",
@@ -83,7 +83,7 @@ class Auxiliary extends Service {
         application_dep_platform:"${appInfo.dataValues.application_dep_platform}",
         platform_business:"${appInfo.dataValues.platform_business}",
         application_label:"${appInfo.dataValues.application_label}",
-        is_interactive:${flag}
+        is_interactive:${flag},
         nick:'未知',
         mix_nick:'未知',
         act_name:'未知',

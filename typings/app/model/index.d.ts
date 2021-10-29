@@ -3,6 +3,7 @@
 
 import 'egg';
 import ExportApplication = require('../../../app/model/application');
+import ExportApplicationEvent = require('../../../app/model/applicationEvent');
 import ExportApplicationIndicator = require('../../../app/model/applicationIndicator');
 import ExportAttribute = require('../../../app/model/attribute');
 import ExportBasicData = require('../../../app/model/basicData');
@@ -22,6 +23,7 @@ import ExportUser = require('../../../app/model/user');
 declare module 'egg' {
   interface IModel {
     Application: ReturnType<typeof ExportApplication>;
+    ApplicationEvent: ReturnType<typeof ExportApplicationEvent>;
     ApplicationIndicator: ReturnType<typeof ExportApplicationIndicator>;
     Attribute: ReturnType<typeof ExportAttribute>;
     BasicData: ReturnType<typeof ExportBasicData>;

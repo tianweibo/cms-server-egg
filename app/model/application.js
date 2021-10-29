@@ -81,6 +81,11 @@ module.exports=app=>{
             foreignKey: 'application_id',
             otherKey: 'indicator_id'
         }); 
+		app.model.Application.belongsToMany(app.model.Event, {
+            through: app.model.ApplicationEvent,
+            foreignKey: 'application_id',
+            otherKey: 'event_id'
+        }); 
 		app.model.Application.hasMany(app.model.Report, {foreignKey: 'application_id', targetKey: 'report_id'});
 	  } 
 	return application;

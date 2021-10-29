@@ -3,7 +3,7 @@ const path = require("path");
 const fs = require("fs");
 const sd = require('silly-datetime');
 const Service = require('egg').Service;
-const {indicatorObj,sourceFrom}=require('../common/foreignEnum.js')
+const {sourceFrom,eventObj}=require('../common/foreignEnum.js')
 class Application extends Service {
     constructor(ctx) {
         super(ctx);
@@ -11,6 +11,7 @@ class Application extends Service {
         this.Event = ctx.model.Event;
         this.TheLabel = ctx.model.TheLabel;
         this.Report = ctx.model.Report;
+        this.ApplicationEvent = ctx.model.ApplicationEvent;
         this.ApplicationIndicator = ctx.model.ApplicationIndicator;
         this.IndicatorEvent = ctx.model.IndicatorEvent;
         this.Indicator = ctx.model.Indicator;
@@ -85,18 +86,18 @@ class Application extends Service {
                 this.ctx.helper.calcLabelNumber(temp,Op,this.TheLabel,'add')
             } 
             if (appInfo) {
-                var indicatorArr=indicatorObj[data.belongTo];
-                if (indicatorArr.length > 0) {
+                var eventArr=eventObj[data.belongTo];
+                if (eventArr.length > 0) {
                     var data = [];
-                    for (var i = 0; i < indicatorArr.length; i++) {
+                    for (var i = 0; i < eventArr.length; i++) {
                         var obj = {
                             application_id: appInfo.dataValues.application_id,
-                            indicator_id: indicatorArr[i],
+                            event_id: eventArr[i],
                             open_type:bj
                         }
                         data.push(obj)
                     }
-                    const tempInfo = await this.ApplicationIndicator.bulkCreate(data)
+                    const tempInfo = await this.ApplicationEvent.bulkCreate(data)
                     if (!tempInfo) {
                         return this.ServerResponse.networkError('网络问题');
                     } else {
@@ -164,69 +165,68 @@ class Application extends Service {
                 //标签的使用数量的更新
                 data['update_time'] = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
                 // 指标添加的逻辑
-                const indicInfo = await this.ApplicationIndicator.findAll({
+                const eventInfo = await this.ApplicationEvent.findAll({
                     where: {
                         application_id: appInfo.application_id,
                         //open_type:sourceFrom[data.belongTo]
                     }
                 })
-                var indicOpenType1=[];
-                var indicOpenType2=[];
-                console.log(indicInfo,'indicInfo')
-                for(let i=0;i<indicInfo.length;i++){
-                    if(indicInfo[i].open_type==1){
-                        indicOpenType1.push(indicInfo[i].indicator_id)
-                    } else if(indicInfo[i].open_type==2){
-                        indicOpenType2.push(indicInfo[i].indicator_id)
+                var eventOpenType1=[];
+                var eventOpenType2=[];
+                for(let i=0;i<eventInfo.length;i++){
+                    if(eventInfo[i].open_type==1){
+                        eventOpenType1.push(eventInfo[i].event_id)
+                    } else if(eventInfo[i].open_type==2){
+                        eventOpenType2.push(eventInfo[i].event_id)
                     } 
                 }
                 //指标添加的逻辑
-                if(indicOpenType1.length!=0){ //在原有的基础上添加【互动营销分析平台的指标
-                  var indicArr=[];   //indicOpenType1   indicatorObj[data.belongTo]
-                  for (let i = 0; i < indicOpenType1.length; i++) {
+                if(eventOpenType1.length!=0){ //在原有的基础上添加【互动营销分析平台的指标
+                  var eventArr=[];   //eventOpenType1   eventObj[data.belongTo]
+                  for (let i = 0; i < eventOpenType1.length; i++) {
                     var obj = {
                         application_id: appInfo.application_id,
-                        indicator_id: indicOpenType1[i],
+                        event_id: eventOpenType1[i],
                         open_type:1
                     }
-                    indicArr.push(obj)
+                    eventArr.push(obj)
                   }
-                  for (let i = 0; i < indicatorObj[data.belongTo].length; i++) {
+                  for (let i = 0; i < eventObj[data.belongTo].length; i++) {
                     var obj = {
                         application_id: appInfo.application_id,
-                        indicator_id: indicatorObj[data.belongTo][i],
+                        event_id: eventObj[data.belongTo][i],
                         open_type:sourceFrom[data.belongTo]
                     }
-                    indicArr.push(obj)
+                    eventArr.push(obj)
                   }
-                  console.log('indicArr',indicArr)
+                  console.log('eventArr',eventArr)
                   //先删除 再添加
-                  await this.ApplicationIndicator.destroy({ where: { application_id: parseInt(appInfo.application_id) } });
-                  const eventAppInfo = await this.ApplicationIndicator.bulkCreate(indicArr)
+                  await this.ApplicationEvent.destroy({ where: { application_id: parseInt(appInfo.application_id) } });
+                  const eventAppInfo = await this.ApplicationEvent.bulkCreate(eventArr)
                     if (!eventAppInfo) {
                         return this.ServerResponse.networkError('网络问题');
                     } 
                 }
                 
-                if(indicOpenType1.length==0 && indicOpenType2.length==0){  //二者都没有，则直接加【互动营销分析平台的指标】
-                    var indicatorArr=indicatorObj[data.belongTo];
-                    if (indicatorArr.length > 0) {
+                if(eventOpenType1.length==0 && eventOpenType2.length==0){  //二者都没有，则直接加【互动营销分析平台的指标】
+                    var eventArr=eventObj[data.belongTo];
+                    if (eventArr.length > 0) {
                         var data1 = [];
-                        for (var i = 0; i < indicatorArr.length; i++) {
+                        for (var i = 0; i < eventArr.length; i++) {
                             var obj = {
                                 application_id: appInfo.dataValues.application_id,
-                                indicator_id: indicatorArr[i],
+                                event_id: eventArr[i],
                                 open_type:sourceFrom[data.belongTo]
                             }
                             data1.push(obj)
                         }
-                        const tempInfo = await this.ApplicationIndicator.bulkCreate(data1)
+                        const tempInfo = await this.ApplicationEvent.bulkCreate(data1)
                         if (!tempInfo) {
                             return this.ServerResponse.networkError('网络问题');
                         } 
                     } 
                 }
-                //if(indicOpenType2.length!=0){ //则编辑基本信息就行
+                //if(eventOpenType2.length!=0){ //则编辑基本信息就行
                     const thedata = await this.Application.update(data, {
                         where: {
                             platform_app_code: data.platform_app_code
@@ -322,15 +322,15 @@ class Application extends Service {
             })
             if (thedata) {
                 var data1 = [];
-                for (var i = 0; i < data.updates.indicatorArr.length; i++) {
+                for (var i = 0; i < data.updates.eventArr.length; i++) {
                     var obj = {
                         application_id: data.id,
-                        indicator_id: data.updates.indicatorArr[i]
+                        event_id: data.updates.eventArr[i]
                     }
                     data1.push(obj)
                 }
-                await this.ApplicationIndicator.destroy({ where: { application_id: data.id } });
-                const eventAppInfo = await this.ApplicationIndicator.bulkCreate(data1, { updateOnDuplicate: ["application_id"] })
+                await this.ApplicationEvent.destroy({ where: { application_id: data.id } });
+                const eventAppInfo = await this.ApplicationEvent.bulkCreate(data1, { updateOnDuplicate: ["application_id"] })
                 if (!eventAppInfo) {
                     return this.ServerResponse.networkError('网络问题');
                 } else {
@@ -360,16 +360,16 @@ class Application extends Service {
                 this.ctx.helper.calcLabelNumber(temp,Op,this.TheLabel,'add')
             } 
             if (appInfo) {
-                if (app.indicatorArr.length > 0) {
+                if (app.eventArr.length > 0) {
                     var data = [];
-                    for (var i = 0; i < app.indicatorArr.length; i++) {
+                    for (var i = 0; i < app.eventArr.length; i++) {
                         var obj = {
                             application_id: appInfo.dataValues.application_id,
-                            indicator_id: app.indicatorArr[i]
+                            event_id: app.eventArr[i]
                         }
                         data.push(obj)
                     }
-                    const tempInfo = await this.ApplicationIndicator.bulkCreate(data)
+                    const tempInfo = await this.ApplicationEvent.bulkCreate(data)
                     if (!tempInfo) {
                         return this.ServerResponse.networkError('网络问题');
                     } else {
@@ -389,11 +389,11 @@ class Application extends Service {
     }
     async indicatorNum(id){
         try{
-            var arr = await this.ApplicationIndicator.findAll({
+            var arr = await this.ApplicationEvent.findAll({
                 where: {
                     application_id: id
                 },
-                attributes: ['indicator_id']
+                attributes: ['event_id']
             })
             return this.ServerResponse.requireData('查询成功', arr.length);
         }catch(e){
@@ -418,19 +418,19 @@ class Application extends Service {
 			application_id: id
 		})
         var objOption = {[Op.and]: arr1}
-        const arr = await this.ApplicationIndicator.findAll({
+        const arr = await this.ApplicationEvent.findAll({
             where: objOption,
-            attributes: ['indicator_id']
+            attributes: ['event_id']
         })
-        var indicatorIds = []
+        var eventIds = []
         for (var i = 0; i < arr.length; i++) {
-            indicatorIds.push(arr[i].indicator_id);
+            eventIds.push(arr[i].event_id);
         }
         if (appInfo == null) {
             return this.ServerResponse.networkError('应用不存在');
         } else {
             var appObj = {
-                appInfo, indicatorIds
+                appInfo, eventIds
             }
             return this.ServerResponse.requireData('查询成功', appObj );
         }
@@ -467,36 +467,12 @@ class Application extends Service {
             var idArr = data.id;
             for (var i = 0; i < idArr.length; i++) {
                 data1.push({
-                    indicator_id: idArr[i]
+                    event_id: idArr[i]
                 })
             }
         }
         var objOption = {
             [Op.or]: data1,
-        }
-        const arr1 = await this.IndicatorEvent.findAll({ //事件去重（不去重也行）后按IDS获取详情
-            where: objOption,
-            attributes: ['event_id']
-        })
-
-        var eventIds = [];
-        for (var i = 0; i < arr1.length; i++) {
-            eventIds.push(arr1[i].event_id);
-        }
-        //通过事件IDs 查找事件的列表-去重
-        /* var eventIds= arr1.filter(function (item, index, arr) {
-            return arr1.indexOf(item, 0) === index;
-        }); */
-        var data2 = [];
-        if (eventIds && eventIds.length > 0) {
-            for (var i = 0; i < eventIds.length; i++) {
-                data2.push({
-                    event_id: eventIds[i]
-                })
-            }
-        }
-        var objOption = {
-            [Op.or]: data2,
         }
         try {
             var arr = await this.Event.findAll({

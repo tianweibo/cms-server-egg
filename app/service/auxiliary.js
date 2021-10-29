@@ -10,12 +10,74 @@ class Auxiliary extends Service {
     //this.BasicData = ctx.model.BasicData;
     this.Event=ctx.model.Event;
     this.IndicatorEvent=ctx.model.IndicatorEvent;
-    this.ApplicationIndicator=ctx.model.ApplicationIndicator
+    this.ApplicationIndicator=ctx.model.ApplicationIndicator;
+    this.ApplicationEvent=ctx.model.ApplicationEvent;
     this.Indicator = ctx.model.Indicator;
     this.Application = ctx.model.Application;
     this.TheUser=ctx.model.User;
     this.ResponseCode = ctx.response.ResponseCode;
     this.ServerResponse = ctx.response.ServerResponse;
+    this.ReportBetween=ctx.model.ReportBetween;
+    this.Card=ctx.model.Card;
+    this.Trend=ctx.model.Trend;
+    this.Table=ctx.model.Table;
+    this.ApplicationEvent=ctx.model.ApplicationEvent;
+  }
+  async giveDataForAppEvent(id){
+    const { ctx, app } = this;
+		const Op = app.Sequelize.Op;
+    //this.ApplicationIndicator=>应用下对应的指标
+    const arrIndins = await this.ApplicationIndicator.findAll({
+      where: {application_id: id},
+      attributes: ['indicator_id']
+    })
+    if(arrIndins && arrIndins.length>0){
+      var IndicIds = []
+      for (var i = 0; i < arrIndins.length; i++) {
+        IndicIds.push({indicator_id:arrIndins[i].indicator_id});
+      }
+      var objOption = {
+        [Op.or]: IndicIds,
+      }
+      var Eventarr = await this.IndicatorEvent.findAll({
+        where: objOption,
+        attributes: ['event_id']
+      })
+      if(Eventarr && Eventarr.length>0){
+        var eventIds = []
+        for (var i = 0; i < Eventarr.length; i++) {
+          eventIds.push({event_id:Eventarr[i].event_id});
+        }
+        var objOption1 = {
+          [Op.or]: eventIds,
+        }
+        var Eventarr = await this.Event.findAll({
+            where: objOption1,
+            attributes: ['event_id','open_type']
+        })
+        if(Eventarr && Eventarr.length>0){
+          //更新 this.ApplicationEvent
+          var updateData = []
+          for (var i = 0; i < Eventarr.length; i++) {
+            updateData.push(
+              {event_id:Eventarr[i].event_id,
+                application_id:id,
+                open_type:Eventarr[i].open_type
+            });
+          }
+          console.log(updateData,'xxx')
+          const updateDate1=await this.ApplicationEvent.bulkCreate(updateData,{ updateOnDuplicate:['application_id','event_id','open_type']})
+        }else{
+          //无事件
+        }
+      }else{
+        //指标未关联事件
+      }
+    }else{
+      //无指标
+    }
+    
+    
   }
   async repairData(data) {
     try {
@@ -55,6 +117,145 @@ class Auxiliary extends Service {
     } catch (e) {
         return this.ServerResponse.networkError('网络问题');
     }
+  }
+  async repairReportIndic(id){
+    //使用报表ID 查找ReportBetween表查找出 三种格式对应的指标IDS，
+    const indicObj=await this.ReportBetween.findOne({
+      where:{
+        report_id:id
+      },
+      attributes: ['card_ids','table_ids','trend_ids']
+    })
+    //分别循环 card_ids table_ids  trend_ids 三个数组，=》找出events 字段
+    //通过events字段，通过 Event表查找出 event_name,event_id，
+    if(indicObj.dataValues.card_ids){
+      var cardArr=indicObj.dataValues.card_ids.split(',');
+      var tempCard=[]
+      for(let i=0;i<cardArr.length;i++){
+        var obj={
+          card_id:cardArr[i],
+          event_ids:'',
+          event_names:'',
+          event_relation:1
+        }
+        const Events=await this.Card.findOne({
+          where:{
+            card_id:cardArr[i]
+          },
+          attributes:['events']
+        })
+        if(Events && Events.dataValues.events){
+          const eventCodes=Events.dataValues.events.split(',');
+          if(eventCodes.length>1){
+            obj.event_relation=2
+          }
+          for(let j=0;j<eventCodes.length;j++){ 
+            const EventData=await this.Event.findOne({
+              where:{
+                event_code:eventCodes[j]
+              },
+              attributes:['event_id','event_name']
+            })
+            if(j==eventCodes.length-1){
+              obj.event_ids+=`${EventData.dataValues.event_id}`
+              obj.event_names+=`${EventData.dataValues.event_name}`
+            }else{
+              obj.event_ids+=`${EventData.dataValues.event_id},`
+              obj.event_names+=`${EventData.dataValues.event_name},`
+            }
+            
+          }
+        }
+        tempCard.push(obj)
+      }
+      //批量更新card表
+      const updateDate1=await this.Card.bulkCreate(tempCard,{ updateOnDuplicate:['event_ids','event_names','event_relation']})
+    }
+    if(indicObj.dataValues.table_ids){
+      var tableArr=indicObj.dataValues.table_ids.split(',');
+      var tempTable=[]
+      for(let i=0;i<tableArr.length;i++){
+        var obj={
+          table_id:tableArr[i],
+          event_ids:'',
+          event_names:'',
+          event_relation:1
+        }
+        const Events=await this.Table.findOne({
+          where:{
+            table_id:tableArr[i]
+          },
+          attributes:['events']
+        })
+        if(Events && Events.dataValues.events){
+          const eventCodes=Events.dataValues.events.split(',');
+          if(eventCodes.length>1){
+            obj.event_relation=2
+          }
+          for(let j=0;j<eventCodes.length;j++){ 
+            const EventData=await this.Event.findOne({
+              where:{
+                event_code:eventCodes[j]
+              },
+              attributes:['event_id','event_name']
+            })
+            if(j==eventCodes.length-1){
+              obj.event_ids+=`${EventData.dataValues.event_id}`
+              obj.event_names+=`${EventData.dataValues.event_name}`
+            }else{
+              obj.event_ids+=`${EventData.dataValues.event_id},`
+              obj.event_names+=`${EventData.dataValues.event_name},`
+            }
+          }
+        }
+        tempTable.push(obj)
+      }
+      //批量更新card表
+      const updateDate2=await this.Table.bulkCreate(tempTable,{ updateOnDuplicate:['event_ids','event_names','event_relation']})
+    }
+    if(indicObj.dataValues.trend_ids){
+      var trendArr=indicObj.dataValues.trend_ids.split(',');
+      var tempTrend=[]
+      for(let i=0;i<trendArr.length;i++){
+        var obj={
+          trend_id:trendArr[i],
+          event_ids:'',
+          event_names:'',
+          event_relation:1
+        }
+        const Events=await this.Trend.findOne({
+          where:{
+            trend_id:trendArr[i]
+          },
+          attributes:['events']
+        })
+        if(Events && Events.dataValues.events){
+          const eventCodes=Events.dataValues.events.split(',');
+          if(eventCodes.length>1){
+            obj.event_relation=2
+          }
+          for(let j=0;j<eventCodes.length;j++){ 
+            const EventData=await this.Event.findOne({
+              where:{
+                event_code:eventCodes[j]
+              },
+              attributes:['event_id','event_name']
+            })
+            if(j==eventCodes.length-1){
+              obj.event_ids+=`${EventData.dataValues.event_id}`
+              obj.event_names+=`${EventData.dataValues.event_name}`
+            }else{
+              obj.event_ids+=`${EventData.dataValues.event_id},`
+              obj.event_names+=`${EventData.dataValues.event_name},`
+            }
+          }
+        }
+        tempTrend.push(obj)
+      }
+      //批量更新card表
+      const updateDate3=await this.Trend.bulkCreate(tempTrend,{ updateOnDuplicate:['event_ids','event_names','event_relation']})
+    }
+    return this.ServerResponse.createBySuccessMsg('数据修改成功');
   }
   async downData(id,theFlag){
     const { ctx, app } = this;
@@ -96,34 +297,23 @@ class Auxiliary extends Service {
     //3、需要埋入的事件代码
     `;
     //获取指标
-    var arr=[]
-    arr = await this.ApplicationIndicator.findAll({
+    var arr=[];
+    var theData='';
+    arr = await this.ApplicationEvent.findAll({
       where: {application_id: id},
-      attributes: ['indicator_id']
+      attributes: ['event_id']
     })
     if(arr.length>0){
-      var indicatorIds = []
+      var eventIds = []
       for (var i = 0; i < arr.length; i++) {
-        indicatorIds.push({indicator_id:arr[i].indicator_id});
+        eventIds.push({event_id:arr[i].event_id});
       }
       var objOption = {
-        [Op.or]: indicatorIds,
+        [Op.or]: eventIds,
       }
-      var arr1 = await this.IndicatorEvent.findAll({ //事件去重（不去重也行）后按IDS获取详情
+      var Eventarr = await this.Event.findAll({
         where: objOption,
-        attributes: ['event_id']
       })
-      if(arr1.length>0){
-        var eventIds = [];
-        for (var i = 0; i < arr1.length; i++) {
-          eventIds.push({ event_id:arr1[i].event_id});
-        }
-        var objOption = {
-          [Op.or]: eventIds,
-        }
-        var Eventarr = await this.Event.findAll({
-          where: objOption,
-        })
         var str=''
         for(let z=0;z<Eventarr.length;z++){
   var obj1=
@@ -138,10 +328,11 @@ class Auxiliary extends Service {
           `;
           str+=obj1
         }
-        var theData=obj+str
+         theData=obj+str
         //取事件的方法
-      }
-    }  
+    } else{
+      theData=obj
+    }
     if(theFlag=='false'){
       return this.ServerResponse.requireData('查询成功', theData);
     } 

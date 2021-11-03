@@ -124,7 +124,7 @@ class Report extends Service {
                     return this.ServerResponse.requireData('删除失败', { code: 1 });
                 }
             }else{
-                return this.ServerResponse.networkError('新增数据，不用删除');
+                return this.ServerResponse.requireData('新增数据，不用删除',{ code: 0 });
             }
         }catch(e){
             return this.ServerResponse.requireData('网络问题', { code: 1 });
@@ -232,6 +232,7 @@ class Report extends Service {
             }
             return this.ServerResponse.createBySuccessMsgAndData('创建成功', { code: 0 })
         } catch (e) {
+            console.log(e)
             return this.ServerResponse.networkError('网络问题');
         }
     }

@@ -42,7 +42,7 @@ class Application extends Service {
         try{
             var arr = await this.Application.findAll({
                 where:objOption,
-                attributes: ['platform_app_code', 'platform_app']
+                attributes: ['platform_app_code', 'platform_app','product_line_id','product_line_name']
             })
             return this.ServerResponse.requireData('查询成功', arr);
         }catch(e){

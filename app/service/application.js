@@ -118,15 +118,6 @@ class Application extends Service {
     }
     async exposeUpdate(data) {
         try{
-            var data1={
-                platform_app:'',          //小程序名称
-                platform_app_code:'',
-                application_label:'',      //标签类型-value(多值，字符串逗号分隔)
-                application_label_label:'',//标签类型-label(多值，字符串逗号分隔)
-                note:'',                 //小程序描述
-                update_people:'',         //更新人
-                belongTo:"IMA"
-            }
             const Op = this.app.Sequelize.Op;
             const appInfo = await this.Application.findOne({
                 where: {
@@ -171,12 +162,13 @@ class Application extends Service {
                         //open_type:sourceFrom[data.belongTo]
                     }
                 })
+                
                 var eventOpenType1=[];
                 var eventOpenType2=[];
                 for(let i=0;i<eventInfo.length;i++){
                     if(eventInfo[i].open_type==1){
                         eventOpenType1.push(eventInfo[i].event_id)
-                    } else if(eventInfo[i].open_type==2){
+                    } else if(eventInfo[i].open_type==2){             
                         eventOpenType2.push(eventInfo[i].event_id)
                     } 
                 }
@@ -199,7 +191,6 @@ class Application extends Service {
                     }
                     eventArr.push(obj)
                   }
-                  console.log('eventArr',eventArr)
                   //先删除 再添加
                   await this.ApplicationEvent.destroy({ where: { application_id: parseInt(appInfo.application_id) } });
                   const eventAppInfo = await this.ApplicationEvent.bulkCreate(eventArr)
@@ -493,7 +484,7 @@ class Application extends Service {
         var arr = [];
         if(ctx.session.role==1){
 			arr.push({
-				open_type:1,
+				//open_type:1,
 				[Op.or]: [{product_line_id: ctx.session.productid}, {product_line_id: 7}]
 			})
 		}else if(ctx.session.role==10){

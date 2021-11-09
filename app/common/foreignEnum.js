@@ -4,7 +4,7 @@ const indicatorObj={
 }
 const eventObj={
     //IMA:[410,413,414,415,416,417,418],   //互动营销分析平台需要添加的事件
-    IMA:[375,376,377]
+    IMA:[351,352,353]
 }
 const sourceFrom={
     IMA:2

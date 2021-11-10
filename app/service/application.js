@@ -42,7 +42,7 @@ class Application extends Service {
         try{
             var arr = await this.Application.findAll({
                 where:objOption,
-                attributes: ['platform_app_code', 'platform_app']
+                attributes: ['platform_app_code', 'platform_app','product_line_id','product_line_name']
             })
             return this.ServerResponse.requireData('查询成功', arr);
         }catch(e){
@@ -312,6 +312,8 @@ class Application extends Service {
 
             var obj = data.updates;
             obj.info.update_people = this.ctx.session.username;
+            obj.info.product_line_id=this.ctx.session.productid;
+			obj.info.product_line_name=this.ctx.session.productname;
             obj.info['update_time'] = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
             const thedata = await this.Application.update(obj.info, {
                 where: {
@@ -350,6 +352,8 @@ class Application extends Service {
         })
         if (hasApp == null) {
             app.info.create_people = this.ctx.session.username;
+            app.info.product_line_id=this.ctx.session.productid;
+			app.info.product_line_name=this.ctx.session.productname;
             const appInfo = await this.Application.create(app.info);
             if (app.info.application_label) {
                 var temp=app.info.application_label.split(',');
@@ -511,9 +515,18 @@ class Application extends Service {
             arr: [],
         }
         var arr = [];
-        arr.push({
-			state:1
-		})
+        if(ctx.session.role==1){
+			arr.push({
+				open_type:1,
+				[Op.or]: [{product_line_id: ctx.session.productid}, {product_line_id: 7}]
+			})
+		}else if(ctx.session.role==10){
+            if(obj.product_line_id){
+				arr.push({
+					product_line_id:obj.product_line_id
+				})
+			}
+        }
         if (obj.application_label) {
             /* arr.push({
                 application_label: obj.application_label,

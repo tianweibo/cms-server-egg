@@ -13,12 +13,14 @@ module.exports=app=>{
 		indicator_label:{type:STRING(255),comment:'指标标签'}, 
 		relationship_event:{defaultValue:1,type:INTEGER(2),comment:'事件关系'}, 
 		indicator_label_label:{type:STRING(255),comment:'指标标签label'},         
-		note:{type:STRING,comment:"备注"},                      
+		note:{type:STRING,comment:"备注"},  
+		product_line_id:{type:INTEGER(11)},
+		product_line_name:{type:STRING},                    
 		create_time:{
 			type:DATE,
 			get(){
-				return moment(this.getDataValue('create_time')).format(
-					'YYYY-MM-DD HH:MM:SS'
+				return sd.format(this.getDataValue('create_time'),
+					'YYYY-MM-DD HH:mm:ss'
 				);
 			},
 			defaultValue(){
@@ -29,8 +31,8 @@ module.exports=app=>{
 		update_time:{
 			type:DATE,
 			get(){
-				return moment(this.getDataValue('update_time')).format(
-					'YYYY-MM-DD HH:MM:SS'
+				return sd.format(this.getDataValue('create_time'),
+					'YYYY-MM-DD HH:mm:ss'
 				);
 			},
 			defaultValue(){

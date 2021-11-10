@@ -9,6 +9,7 @@ exports.sequelize = {
   password: 'Prodc959ed5e61ce4451803Enbrands',
   delegate: 'model',
   baseDir: 'model',
+  timezone: '+08:00', // 保存为本地时区
   define: {
     // raw: true,
     underscored: true,

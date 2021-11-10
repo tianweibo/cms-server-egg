@@ -59,7 +59,7 @@ class User extends Service {
 			if(arrEvent.length==0 && arrIndicator.length==0 && arrApplication.length==0 && arrReport.length==0){
 				return this.ServerResponse.createBySuccessMsg(`[${data.oldUsername}]名下没有数据`);
 			}
-			if(arrEvent.length.length!=0){
+			if(arrEvent.length!=0){
 				var updateEvent=[]
 				for(let i=0;i<arrEvent.length;i++){
 					let obj={

@@ -12,9 +12,19 @@ class AuxiliaryController extends Controller {
 	  ctx.body=response;
     }
 	async downData(){
-	 const ctx=this.ctx;
+	  const ctx=this.ctx;
 	  const response=await this.TheAuxiliary.downData(ctx.query.id,ctx.query.flag);
 	  ctx.body=response;
+	}
+	async repairReportIndic(){
+	  const ctx=this.ctx;
+	  const response=await this.TheAuxiliary.repairReportIndic(ctx.query.id);
+	  ctx.body=response;
+	}
+	async giveDataForAppEvent(){
+		const ctx=this.ctx;
+		const response=await this.TheAuxiliary.giveDataForAppEvent(ctx.helper.parseInt(ctx.query.id));
+		ctx.body=response;
 	}
 }
 module.exports = AuxiliaryController;

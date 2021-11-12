@@ -27,6 +27,16 @@ module.exports = appInfo => {
     password: 'prodENbsaRq1523y1b1',
     delegate: 'model',
     baseDir: 'model',
+    dialectOptions: {
+      dateStrings: true,
+      typeCast(field, next) {
+        // for reading from database
+        if (field.type === "DATETIME") {
+          return field.string();
+        }
+        return next();
+      }
+    },
     define: {
       // raw: true,
       underscored: true,

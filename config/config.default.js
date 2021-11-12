@@ -26,7 +26,6 @@ module.exports = appInfo => {
     password: 'prodENbsaRq1523y1b1',
     delegate: 'model',
     baseDir: 'model',
-    timezone: '+08:00', // 保存为本地时区
     define: {
       // raw: true,
       underscored: true,

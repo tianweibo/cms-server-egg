@@ -122,10 +122,10 @@ class User extends Service {
 		}
 	})
 	if(hasUser==null){
-		return this.ServerResponse.createByErrorMsg('账号不存在');
+		return this.ServerResponse.createByErrorMsg('账号不存在,请联系管理员(杨琛璐)');
 	}
 	if(hasUser.dataValues.user_use==0){
-		return this.ServerResponse.createByErrorMsg('账号禁用,联系管理员');
+		return this.ServerResponse.createByErrorMsg('账号禁用,请联系管理员(杨琛璐)');
 	}
 	const verify = await hasUser.validPassword(userInfo.password);
 	if (!verify) {

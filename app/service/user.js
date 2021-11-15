@@ -129,7 +129,7 @@ class User extends Service {
 	}
 	const verify = await hasUser.validPassword(userInfo.password);
 	if (!verify) {
-		return this.ServerResponse.createByErrorCodeMsg('密码错误');
+		return this.ServerResponse.createByErrorMsg('密码错误,请联系管理员(杨琛璐)');
 	}
 	const token=jwt.sign({
 		id:hasUser.dataValues.id,

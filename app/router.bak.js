@@ -88,6 +88,8 @@ module.exports = app => {
   //辅助数据更新
   router.post('/api/auxiliary/repairData',controller.auxiliary.repairData);// 数据的创建人的修改
   router.get('/api/auxiliary/downData',controller.auxiliary.downData);// 数据的下载
+  router.get('/api/auxiliary/repairReportIndic',controller.auxiliary.repairReportIndic);// 数据的下载
+  router.get('/api/auxiliary/giveDataForAppEvent',controller.auxiliary.giveDataForAppEvent)
   // 产品线
   router.post('/api/productLine/list',controller.productLine.list);// 产品线列表的获取
   router.get('/api/productLine/useful',new Auth(10).check,controller.productLine.useful);//产品线禁用与否

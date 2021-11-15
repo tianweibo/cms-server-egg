@@ -59,7 +59,7 @@ class User extends Service {
 			if(arrEvent.length==0 && arrIndicator.length==0 && arrApplication.length==0 && arrReport.length==0){
 				return this.ServerResponse.createBySuccessMsg(`[${data.oldUsername}]名下没有数据`);
 			}
-			if(arrEvent.length.length!=0){
+			if(arrEvent.length!=0){
 				var updateEvent=[]
 				for(let i=0;i<arrEvent.length;i++){
 					let obj={
@@ -122,14 +122,14 @@ class User extends Service {
 		}
 	})
 	if(hasUser==null){
-		return this.ServerResponse.createByErrorMsg('账号不存在');
+		return this.ServerResponse.createByErrorMsg('账号不存在,请联系管理员(杨琛璐)');
 	}
 	if(hasUser.dataValues.user_use==0){
-		return this.ServerResponse.createByErrorMsg('账号禁用,联系管理员');
+		return this.ServerResponse.createByErrorMsg('账号禁用,请联系管理员(杨琛璐)');
 	}
 	const verify = await hasUser.validPassword(userInfo.password);
 	if (!verify) {
-		return this.ServerResponse.createByErrorCodeMsg('密码错误');
+		return this.ServerResponse.createByErrorMsg('密码错误,请联系管理员(杨琛璐)');
 	}
 	const token=jwt.sign({
 		id:hasUser.dataValues.id,

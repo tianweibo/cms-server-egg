@@ -16,6 +16,6 @@ exports.sequelize = {
     timestamps: false,
     createdAt: "CreatedAt",  //自定义时间戳
     updatedAt: "UpdatedAt", // 自定义时间戳
-    timezone: '+16:00' // 保存为本地时区
+    timezone: '+08:00' // 保存为本地时区
   }
 };

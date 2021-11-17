@@ -450,9 +450,9 @@ class Application extends Service {
         }
     }
 
-    async detailByEvent(data) {  //指标下的事件
+    async detailByEvent(data) {  
         const { ctx, app } = this;
-        const Op = app.Sequelize.Op;                     //查找出指标下的事件，
+        const Op = app.Sequelize.Op;                    
         var data1 = [];
         if (data && data.id.length > 0) {
             var idArr = data.id;

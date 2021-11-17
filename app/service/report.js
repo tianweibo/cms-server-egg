@@ -358,7 +358,7 @@ class Report extends Service {
             ],
             limit: parseInt(obj.pageSize),
             offset: parseInt((obj.pageNo - 1) * obj.pageSize),
-            attributes: ['report_id', 'report_name', 'create_time'],
+            attributes: ['report_id', 'report_name', 'create_time','product_line_name'],
             include: [{
                 model: this.Application,
                 where: objOptionApp,
@@ -375,6 +375,7 @@ class Report extends Service {
                     report_name: temp[i].report_name,
                     create_time: sd.format(temp[i].create_time, 'YYYY-MM-DD HH:mm:ss'),
                     application_id: temp[i]['application.application_id'],
+                    product_line_name:temp[i].product_line_name,
                     platform_app_version: temp[i]['application.platform_app_version'],
                     platform_app: temp[i]['application.platform_app'],
                     application_dep_platform_label: temp[i]['application.application_dep_platform_label'],

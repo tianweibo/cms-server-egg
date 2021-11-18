@@ -223,9 +223,9 @@ class Event extends Service {
 					product_line_id:obj.product_line_id
 				})
 			}
-			arr.push({
+			/* arr.push({
 				state:1
-			})
+			}) */
 		}
 		if (obj.event_label) {
 			arr.push({
@@ -272,38 +272,23 @@ class Event extends Service {
 			if (!result) {
 				return this.ServerResponse.requireData('事件不存在', { code: 1 });
 			}
-			const indicatorArr = await this.IndicatorEvent.findAll({
-                where: {
-                    event_id: id
-                },
-                attributes: ['indicator_id']
-            })
-			var data1=[];
-            if(indicatorArr.length!=0){
-				for (var i = 0; i < indicatorArr.length; i++) {
-					data1.push({
-						indicator_id: indicatorArr[i].indicator_id
-					})
-				}
-				var objOption = {
-					[Op.or]: data1,
-				}
-				const arr1 = await this.ApplicationIndicator.findAll({ //事件去重（不去重也行）后按IDS获取详情
-					where: objOption,
-					attributes: ['application_id']
-				})
-				if(arr1.length!=0){
-					return this.ServerResponse.requireData('该事件有关联的有效应用,不支持归档事件，请解除应用关联再进行操作', { code: 1 });
-				}
+			var sj = 0;
+            var str = '';
+            if (result.state == 0) {
+                sj = 1;
+                str = '显示'
+            } else {
+                sj = 0;
+                str = '屏蔽'
             }
 			const row = await this.Event.update({
-				state: 0,
+				state: sj,
 			}, { where: { event_id: id }, individualHooks: true }); 
 
 			if (row) {
-				return this.ServerResponse.requireData('归档成功');
+				return this.ServerResponse.requireData(`${str}成功`);
 			} else {
-				return this.ServerResponse.requireData('归档失败', { code: 1 });
+				return this.ServerResponse.requireData(`${str}失败`, { code: 1 });
 			}
 		} catch (e) {
 			return this.ServerResponse.networkError('网络问题');

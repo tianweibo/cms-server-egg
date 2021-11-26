@@ -48,9 +48,9 @@ class ApplicationController extends Controller {
         const response=await this.Application.detail(ctx.query.id,ctx.query.open_type);
         ctx.body=response;
     }
-    async indicatorNum(){
+    async eventNum(){
         const ctx=this.ctx;
-        const response=await this.Application.indicatorNum(ctx.query.id);
+        const response=await this.Application.eventNum(ctx.query.id);
         ctx.body=response;
     }
     async detailByIndicator(){

@@ -3,10 +3,11 @@
 exports.sequelize = {
   dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
   database: 'buried_points_server',
-  host: '127.0.0.1',
-  port: 3306,
-  username: 'root',
-  password: 'woainia123',
+  host: '116.198.161.239',
+  timezone: '+08:00', // 保存为本地时区
+  port: 30001,
+  username: 'prod',
+  password: 'prodENbsaRq1523y1b1',
   delegate: 'model',
   baseDir: 'model',
   define: {

@@ -52,7 +52,7 @@ module.exports = app => {
   router.post('/api/application/detailByEvent',new Auth(1).check,controller.application.detailByEvent);//应用详情的查看-事件
   router.post('/api/application/list',new Auth(1).check,controller.application.list);// 应用列表的获取
   router.get('/api/application/useful',new Auth(1).check,controller.application.useful);//应用的启停与否
-  router.get('/api/application/indicatorNum',new Auth(1).check,controller.application.indicatorNum);//应用下是否有指标
+  router.get('/api/application/eventNum',new Auth(1).check,controller.application.eventNum);//应用下是否有指标
   router.delete('/api/application/delete',new Auth(1).check,controller.application.delete);//应用的删除
   //指标
   router.post('/api/indicator/listById',new Auth(1).check,controller.indicator.listById);// 通过ID获取指标的列表

@@ -362,7 +362,7 @@ class Report extends Service {
             include: [{
                 model: this.Application,
                 where: objOptionApp,
-                attributes: ['application_id', 'platform_app_version', 'platform_app', 'application_dep_platform_label', 'application_label_label', 'platform_app_code', 'application_type_label']
+                attributes: ['application_id', 'platform_app_version', 'platform_app', 'application_dep_platform','application_dep_platform_label', 'platform_business','platform_business_label','application_label_label', 'platform_app_code', 'application_type_label']
             }],
             raw: true,
         }).then(function (result) {
@@ -378,7 +378,10 @@ class Report extends Service {
                     product_line_name:temp[i].product_line_name,
                     platform_app_version: temp[i]['application.platform_app_version'],
                     platform_app: temp[i]['application.platform_app'],
+                    application_dep_platform: temp[i]['application.application_dep_platform'],
                     application_dep_platform_label: temp[i]['application.application_dep_platform_label'],
+                    platform_business_label: temp[i]['application.platform_business_label'],
+                    platform_business: temp[i]['application.platform_business'],
                     application_label_label: temp[i]['application.application_label_label'],
                     platform_app_code: temp[i]['application.platform_app_code'],
                     application_type_label: temp[i]['application.application_type_label']

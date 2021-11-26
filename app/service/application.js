@@ -378,7 +378,7 @@ class Application extends Service {
             return this.ServerResponse.networkError('应用英文代码已存在,请换个再试试')
         }
     }
-    async indicatorNum(id){
+    async eventNum(id){
         try{
             var arr = await this.ApplicationEvent.findAll({
                 where: {

@@ -10,7 +10,7 @@ class Basic extends Service {
   }
   async data(id) {
     try {
-      var arr = await this.BasicData.findAll({ where: { fid: id }, attributes: ['fid', 'label', 'value', 'is_lower'] });
+      var arr = await this.BasicData.findAll({ where: { fid: id,state:1 }, attributes: ['fid', 'label', 'value', 'is_lower'] });
       for (var i = 0; i < arr.length; i++) {
         if (arr[i].is_lower == 0) {
           arr[i].children = await this.BasicData.findAll({ where: { fid: arr[i].value }, attributes: ['fid', 'label', 'value', 'is_lower'] });

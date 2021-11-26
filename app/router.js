@@ -6,11 +6,11 @@ module.exports = app => {
   const directory = path.join(app.config.baseDir, 'app/validate');
   app.loader.loadToApp(directory, 'validate');
   const { Auth} = require('./middleware/authClass')
-  //if(app.config.env==='dev'){
+  if(app.config.env==='dev'){
     app.beforeStart(async ()=>{     //定义模型
       await app.model.sync({alter:true});
     }) 
-  //} 
+  } 
   router.get('/', controller.home.index);
   router.post('/user/login',controller.user.login);//系统登录-done
   router.post('/photo/upload',controller.photo.upload);//头像上传

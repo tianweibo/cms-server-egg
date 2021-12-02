@@ -18,6 +18,31 @@ class Application extends Service {
         this.ResponseCode = ctx.response.ResponseCode;
         this.ServerResponse = ctx.response.ServerResponse;
     }
+    async findApp(appLabel){
+        const { ctx, app } = this;
+        const Op = app.Sequelize.Op;
+        var data = [];
+        if (appLabel && appLabel.length > 0) {
+            for (var i = 0; i < appLabel.length; i++) {
+                data.push({
+                    //application_label: { [Op.like]: `%${appLabel[i]}%` }// 多选暂时有问题
+                    application_label:appLabel[i]//单选
+                })
+            }
+        }
+        var objOption = {
+            [Op.or]: data,
+        }
+        try {
+            var arr = await this.Application.findAll({
+                where: objOption,
+				attributes: ['platform_app_code','application_id','platform_app']
+            })
+            return this.ServerResponse.requireData('查询成功', arr);
+        } catch (e) {
+            return this.ServerResponse.networkError('网络问题');
+        }
+    }
     async exposeList(keyword){
         const { ctx, app } = this;
         const Op = app.Sequelize.Op;

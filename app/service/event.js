@@ -16,6 +16,31 @@ class Event extends Service {
 		this.ResponseCode = ctx.response.ResponseCode;
 		this.ServerResponse = ctx.response.ServerResponse;
 	}
+	async findEvent(eventLabel){
+		const { ctx, app } = this;
+        const Op = app.Sequelize.Op;
+        var data = [];
+        if (eventLabel && eventLabel.length > 0) {
+            for (var i = 0; i < eventLabel.length; i++) {
+                data.push({
+                   // event_label: { [Op.like]: `%${eventLabel[i]}%` } //多选暂时有问题
+				   event_label:eventLabel[i]  //单选
+                })
+            }
+        }
+        var objOption = {
+            [Op.or]: data,
+        }
+        try {
+            var arr = await this.Event.findAll({
+                where: objOption,
+				attributes: ['event_code','event_id','event_name']
+            })
+            return this.ServerResponse.requireData('查询成功', arr);
+        } catch (e) {
+            return this.ServerResponse.networkError('网络问题');
+        }
+	}
 	async update(data) {
 		const Op = this.app.Sequelize.Op;
 		const eventInfo = await this.Event.findOne({

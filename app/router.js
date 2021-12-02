@@ -9,7 +9,7 @@ module.exports = app => {
   //if(app.config.env==='dev'){
     app.beforeStart(async ()=>{     //定义模型
       await app.model.sync({alter:true});
-    }) 
+    })  
   //} 
   router.get('/', controller.home.index);
   router.post('/user/login',controller.user.login);//系统登录-done
@@ -36,6 +36,7 @@ module.exports = app => {
   router.delete('/event/delete',new Auth(1).check,controller.event.delete);//事件的删除-done
   router.post('/event/update',new Auth(1).check,controller.event.update);//事件的更新-done
   router.get('/event/indicByEventId',new Auth(1).check,controller.event.indicByEventId);//事件下的指标
+  router.post('/event/findEvent',controller.event.findEvent);//标签下的事件
   //属性
   router.post('/attribute/list',new Auth(1).check,controller.attribute.list);// 属性列表的获取
   router.post('/attribute/detail',new Auth(1).check,controller.attribute.detail);//属性详情的查看
@@ -54,6 +55,7 @@ module.exports = app => {
   router.get('/application/useful',new Auth(1).check,controller.application.useful);//应用的启停与否
   router.get('/application/eventNum',new Auth(1).check,controller.application.eventNum);//应用下是否有指标
   router.delete('/application/delete',new Auth(1).check,controller.application.delete);//应用的删除
+  router.post('/application/findApp',controller.application.findApp);//标签下的应用
   //指标
   router.post('/indicator/listById',new Auth(1).check,controller.indicator.listById);// 通过ID获取指标的列表
   router.get('/indicator/eventCodesByIndic',controller.indicator.eventCodesByIndic);// 获取指标下对应的事件code
@@ -76,6 +78,7 @@ module.exports = app => {
   router.get('/label/labelType',controller.theLabel.labelType);//标签的类别获取
   router.get('/label/exposeLabel',controller.theLabel.exposeLabel);//小程序中标签的获取
   router.get('/label/findLabelId',controller.theLabel.findLabelId);//找父级ID
+
   //报表
   router.post('/report/list',new Auth(1).check,controller.report.list);// 报表的列表的获取
   router.post('/report/create',new Auth(1).check,controller.report.create);//报表的创建

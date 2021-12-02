@@ -10,6 +10,11 @@ class EventController extends Controller {
     this.BasicData=ctx.model.BasicData;
     this.Attribute=ctx.model.Attribute;
    }
+   async findEvent(){
+    const ctx=this.ctx;
+    const response=await this.Event.findEvent(ctx.request.body);
+    ctx.body=response;
+  }
     async list(){
 	  const ctx=this.ctx;
 	  const response=await this.Event.list(ctx.request.body);

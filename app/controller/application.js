@@ -6,6 +6,11 @@ class ApplicationController extends Controller {
 	this.request=ctx.request;
 	this.Application=ctx.service.application;
    }
+   async findApp(){
+    const ctx=this.ctx;
+    const response=await this.Application.findApp(ctx.request.body);
+    ctx.body=response;
+   }
    async exposeCreate(){
     const ctx=this.ctx;
     const response=await this.Application.exposeCreate(ctx.request.body);

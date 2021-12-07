@@ -30,13 +30,17 @@ class Report extends Service {
     }
     async checkName(name){
         try{
-            const hasReport = await this.Report.findOne({
-                where: {
-                    report_name: name
+            if(!this.ctx.session.reportName || this.ctx.session.reportName!=name){
+                const hasReport = await this.Report.findOne({
+                    where: {
+                        report_name: name
+                    }
+                })
+                if(hasReport){
+                    return this.ServerResponse.requireData('该报表名称已存在，请重新输入',{ code: 1 })
+                }else{
+                    return this.ServerResponse.createBySuccessMsgAndData('不存在重名，可以使用', { code: 0 })
                 }
-            })
-            if(hasReport){
-                return this.ServerResponse.requireData('该报表名称已存在，请重新输入',{ code: 1 })
             }else{
                 return this.ServerResponse.createBySuccessMsgAndData('不存在重名，可以使用', { code: 0 })
             }
@@ -48,6 +52,7 @@ class Report extends Service {
         const { ctx, app } = this;
         const Op = app.Sequelize.Op;
         try {
+            this.ctx.session.reportName=null
             var obj = data.updates;
             obj.reportInfo['update_people'] = this.ctx.session.username;
             obj.reportInfo['update_time'] = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
@@ -255,6 +260,7 @@ class Report extends Service {
                 },
                 attributes: ['card_ids', 'table_ids', 'trend_ids']
             })
+            this.ctx.session.reportName=reportInfo.report_name;
             var temp = {
                 card_ids:[],
                 table_ids:[],
@@ -362,7 +368,7 @@ class Report extends Service {
             include: [{
                 model: this.Application,
                 where: objOptionApp,
-                attributes: ['application_id', 'platform_app_version', 'platform_app', 'application_dep_platform','application_dep_platform_label', 'platform_business','platform_business_label','application_label_label', 'platform_app_code', 'application_type_label']
+                attributes: ['platform_app_code','application_id', 'platform_app_version', 'platform_app', 'application_dep_platform','application_dep_platform_label', 'platform_business','platform_business_label','application_label_label', 'platform_app_code', 'application_type_label']
             }],
             raw: true,
         }).then(function (result) {
@@ -375,6 +381,7 @@ class Report extends Service {
                     report_name: temp[i].report_name,
                     create_time: sd.format(temp[i].create_time, 'YYYY-MM-DD HH:mm:ss'),
                     application_id: temp[i]['application.application_id'],
+                    platform_app_code: temp[i]['application.platform_app_code'],
                     product_line_name:temp[i].product_line_name,
                     platform_app_version: temp[i]['application.platform_app_version'],
                     platform_app: temp[i]['application.platform_app'],

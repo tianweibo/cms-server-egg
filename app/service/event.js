@@ -10,8 +10,8 @@ class Event extends Service {
 		this.TheLabel = ctx.model.TheLabel;
 		this.EventAttribute = ctx.model.EventAttribute;
 		this.IndicatorEvent=ctx.model.IndicatorEvent;
-		this.ApplicationIndicator=ctx.model.ApplicationIndicator
-		this.Indicator=ctx.model.Indicator
+		this.ApplicationEvent=ctx.model.ApplicationEvent;
+		this.Indicator=ctx.model.Indicator;
 		this.Attribute = ctx.model.Attribute;
 		this.ResponseCode = ctx.response.ResponseCode;
 		this.ServerResponse = ctx.response.ServerResponse;
@@ -357,14 +357,24 @@ class Event extends Service {
                 var temp=result.event_label.split(',');
                 this.ctx.helper.calcLabelNumber(temp,Op,this.TheLabel,'redu')
             } 
-			const indicatorArr = await this.IndicatorEvent.findAll({
+			//ApplicationEvent
+			const eventArr = await this.ApplicationEvent.findAll({
                 where: {
                     event_id: id
                 },
-                attributes: ['indicator_id']
+                attributes: ['application_id']
             })
-			var data1=[];
-            if(indicatorArr.length!=0){
+			if(eventArr && eventArr.length!=0){
+				return this.ServerResponse.requireData(`该事件有关联的有效应用${eventArr.length}个,不支持删除事件，请解除应用关联再进行操作`, { code: 1 });
+			}else{
+				const row = await this.Event.destroy({ where: { event_id: id } });
+				if (row) {
+					return this.ServerResponse.requireData('删除成功');
+				} else {
+					return this.ServerResponse.requireData('删除失败', { code: 1 });
+				}
+			}
+            /* if(indicatorArr.length!=0){
 				for (var i = 0; i < indicatorArr.length; i++) {
 					data1.push({
 						indicator_id: indicatorArr[i].indicator_id
@@ -380,13 +390,7 @@ class Event extends Service {
 				if(arr1.length!=0){
 					return this.ServerResponse.requireData('该事件有关联的有效应用,不支持删除事件，请解除应用关联再进行操作', { code: 1 });
 				}
-            }
-			const row = await this.Event.destroy({ where: { event_id: id } });
-			if (row) {
-				return this.ServerResponse.requireData('删除成功');
-			} else {
-				return this.ServerResponse.requireData('删除失败', { code: 1 });
-			}
+            } */
 		} catch (e) {
 			return this.ServerResponse.networkError('网络问题');
 		}

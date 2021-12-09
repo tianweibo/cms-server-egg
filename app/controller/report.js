@@ -30,7 +30,7 @@ class ReportController extends Controller {
     }
     async checkName(){
         const ctx=this.ctx;
-        const response=await this.Report.checkName(ctx.query.name);
+        const response=await this.Report.checkName(ctx.query.name,ctx.query.type);
         ctx.body=response;
     }
     async detail(){

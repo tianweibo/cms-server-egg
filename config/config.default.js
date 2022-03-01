@@ -19,14 +19,14 @@ module.exports = appInfo => {
 
   config.sequelize = {
     dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
-    database: 'baseform',
-    host: '127.0.0.1',
-    port: 3306,
-    username: 'root',
-    password: '314159',
+    database: 'buried_points_server',
+    host: '116.198.161.239',
+    timezone: '+08:00', // 保存为本地时区
+    port: 30001,
+    username: 'prod',
+    password: 'prodENbsaRq1523y1b1',
     delegate: 'model',
     baseDir: 'model',
-    timezone: '+08:00', // 保存为本地时区
     dialectOptions: {
       dateStrings: true,
       typeCast(field, next) {

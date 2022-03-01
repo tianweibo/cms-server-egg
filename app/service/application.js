@@ -149,7 +149,8 @@ class Application extends Service {
                     platform_app_code: data.platform_app_code
                 }
             })
-            data['open_type']=sourceFrom[data.belongTo];
+            //data['open_type']=sourceFrom[data.belongTo];
+            data['open_type']=1;
             if (appInfo == null) {
                 return this.ServerResponse.networkError('应用不存在')
             } else {
@@ -181,13 +182,12 @@ class Application extends Service {
                 //标签的使用数量的更新
                 data['update_time'] = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
                 // 指标添加的逻辑
-                const eventInfo = await this.ApplicationEvent.findAll({
+                /*const eventInfo = await this.ApplicationEvent.findAll({
                     where: {
                         application_id: appInfo.application_id,
                         //open_type:sourceFrom[data.belongTo]
                     }
                 })
-                
                 var eventOpenType1=[];
                 var eventOpenType2=[];
                 for(let i=0;i<eventInfo.length;i++){
@@ -241,7 +241,7 @@ class Application extends Service {
                             return this.ServerResponse.networkError('网络问题');
                         } 
                     } 
-                }
+                }*/
                 //if(eventOpenType2.length!=0){ //则编辑基本信息就行
                     const thedata = await this.Application.update(data, {
                         where: {

@@ -9,6 +9,7 @@ import ExportBasic = require('../../../app/controller/basic');
 import ExportEvent = require('../../../app/controller/event');
 import ExportHome = require('../../../app/controller/home');
 import ExportIndicator = require('../../../app/controller/indicator');
+import ExportMerchant = require('../../../app/controller/merchant');
 import ExportPhoto = require('../../../app/controller/photo');
 import ExportProductLine = require('../../../app/controller/productLine');
 import ExportProject = require('../../../app/controller/project');
@@ -25,6 +26,7 @@ declare module 'egg' {
     event: ExportEvent;
     home: ExportHome;
     indicator: ExportIndicator;
+    merchant: ExportMerchant;
     photo: ExportPhoto;
     productLine: ExportProductLine;
     project: ExportProject;

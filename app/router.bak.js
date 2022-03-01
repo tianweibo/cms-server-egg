@@ -102,4 +102,5 @@ module.exports = app => {
   router.get('/api/productLine/detail',new Auth(10).check,controller.productLine.detail);//产品线详情
   router.get('/api/productLine/listAll',controller.productLine.listAll);//产品线列表-all
   router.get('/api/productLine/userListPro',new Auth(10).check,controller.productLine.userListPro);//产品线列表-all
+  router.post('/api/merchant/merchantListOfid',controller.merchant.merchantListOfid);//通过店铺ID获取店铺名称
 };

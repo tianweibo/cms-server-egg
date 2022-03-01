@@ -12,6 +12,7 @@ import ExportEvent = require('../../../app/model/event');
 import ExportEventAttribute = require('../../../app/model/eventAttribute');
 import ExportIndicator = require('../../../app/model/indicator');
 import ExportIndicatorEvent = require('../../../app/model/indicatorEvent');
+import ExportMerchant = require('../../../app/model/merchant');
 import ExportProductLine = require('../../../app/model/productLine');
 import ExportReport = require('../../../app/model/report');
 import ExportReportBetween = require('../../../app/model/reportBetween');
@@ -32,6 +33,7 @@ declare module 'egg' {
     EventAttribute: ReturnType<typeof ExportEventAttribute>;
     Indicator: ReturnType<typeof ExportIndicator>;
     IndicatorEvent: ReturnType<typeof ExportIndicatorEvent>;
+    Merchant: ReturnType<typeof ExportMerchant>;
     ProductLine: ReturnType<typeof ExportProductLine>;
     Report: ReturnType<typeof ExportReport>;
     ReportBetween: ReturnType<typeof ExportReportBetween>;

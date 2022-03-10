@@ -56,8 +56,8 @@ class Report extends Service {
             var obj = data.updates;
             obj.reportInfo['update_people'] = this.ctx.session.username;
             obj.reportInfo['update_time'] = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
-            obj.reportInfo['product_line_id']=ctx.session.productid;
-			obj.reportInfo['product_line_name']=ctx.session.productname;
+           // obj.reportInfo['product_line_id']=ctx.session.productid;
+			//obj.reportInfo['product_line_name']=ctx.session.productname;
             const thedata = await this.Report.update(obj.reportInfo, {
                 where: {
                     report_id: ctx.helper.parseInt(data.id)
@@ -364,7 +364,7 @@ class Report extends Service {
             ],
             limit: parseInt(obj.pageSize),
             offset: parseInt((obj.pageNo - 1) * obj.pageSize),
-            attributes: ['report_id', 'report_name', 'create_time','product_line_name'],
+            attributes: ['report_id', 'report_name', 'create_time','create_people','product_line_name'],
             include: [{
                 model: this.Application,
                 where: objOptionApp,
@@ -379,6 +379,7 @@ class Report extends Service {
                 var obj = {
                     report_id: temp[i].report_id,
                     report_name: temp[i].report_name,
+                    create_people: temp[i].create_people,
                     create_time: sd.format(temp[i].create_time, 'YYYY-MM-DD HH:mm:ss'),
                     application_id: temp[i]['application.application_id'],
                     platform_app_code: temp[i]['application.platform_app_code'],

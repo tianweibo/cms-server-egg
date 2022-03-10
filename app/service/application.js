@@ -328,8 +328,8 @@ class Application extends Service {
 
             var obj = data.updates;
             obj.info.update_people = this.ctx.session.username;
-            obj.info.product_line_id=this.ctx.session.productid;
-			obj.info.product_line_name=this.ctx.session.productname;
+            //obj.info.product_line_id=this.ctx.session.productid;
+			//obj.info.product_line_name=this.ctx.session.productname;
             obj.info['update_time'] = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
             const thedata = await this.Application.update(obj.info, {
                 where: {

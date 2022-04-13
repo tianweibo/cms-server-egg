@@ -28,6 +28,7 @@ module.exports = app => {
   //数据导入
   router.post("/event/importEvent", controller.event.importEvent);//批量导入事件-done
   //事件
+  router.post('/event/eventNames',controller.event.eventNames);// 通过event_code获取event_name
   router.post('/event/listById',new Auth(1).check,controller.event.listById);// 通过ID获取事件的列表
   router.post('/event/list',new Auth(1).check,controller.event.list);// 事件列表的获取-done
   router.post('/event/create',new Auth(1).check,controller.event.create);//事件的创建-done

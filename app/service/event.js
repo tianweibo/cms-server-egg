@@ -106,6 +106,29 @@ class Event extends Service {
 			}
 		}
 	}
+	async eventNames(events){
+		const Op = this.app.Sequelize.Op;
+		var dataArr = [];
+		if (events && events.length > 0) {
+			for (var i = 0; i < events.length; i++) {
+				dataArr.push({
+					event_code: events[i]
+				})
+			}
+		}
+		var objOption = {
+			[Op.or]: dataArr,
+		}
+		var list = await this.Event.findAll({
+			where: objOption,
+			attributes: ['event_code','event_name']
+		})
+		if (list == null) {
+			return this.ServerResponse.networkError('暂无数据');
+		} else {
+			return this.ServerResponse.requireData('查询成功', { code: 0, data: list });
+		}
+	}
 	async create(event) {
 		const Op = this.app.Sequelize.Op;
 		const hasEvent = await this.Event.findOne({

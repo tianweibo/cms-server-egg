@@ -272,19 +272,13 @@ class Auxiliary extends Service {
     http://fed.enbrands.com/buried-docs/sdkDocs/
     //2、初始化代码
     {
+        cloud_id:34134,      // 不可更改
         is_prod: false,      // 数据埋入测试环境还是正式环境
         runtime_env:'',      //  参见埋点api
         merchant_id:'未知',   //  店铺ID   （也就是店铺号，便于通过不同店铺筛选数据 无法获取就写未知）
         distinct_id:'未知',   //  用户ID， （该字段是用来便于统计uv,一定要填写可标注用户唯一的字段）
         act_id:'未知',        //  活动ID   （也就是活动号，便于通过不同活动筛选数据，确认获取不到就传未知）
         member_id:'未知',     //  会员ID （确认获取不到就传未知）
-        platform_app: "${appInfo.dataValues.platform_app}", 
-        platform_app_code: "${appInfo.dataValues.platform_app_code}",
-        platform_app_version:"${appInfo.dataValues.platform_app_version}",
-        application_dep_platform:"${appInfo.dataValues.application_dep_platform}",
-        platform_business:"${appInfo.dataValues.platform_business}",
-        application_label:"${appInfo.dataValues.application_label}",
-        is_interactive:${flag},
         nick:'未知',          //  确认获取不到就传未知
         mix_nick:'未知',      //  确认获取不到就传未知
         act_name:'未知',      //  确认获取不到就传未知
@@ -293,6 +287,13 @@ class Auxiliary extends Service {
         ouid:'未知',          //  淘宝平台下请务必传入正确的ouid
         provider:'未知',      //  请传入提供者|未知
         open_type:1,         // 1对接新埋点平台，2互动营销类的，3其他
+        platform_app: "${appInfo.dataValues.platform_app}",    // 该字段不可更改
+        platform_app_code: "${appInfo.dataValues.platform_app_code}",       // 该字段不可更改
+        platform_app_version:"${appInfo.dataValues.platform_app_version}",          // 该字段不可更改
+        application_dep_platform:"${appInfo.dataValues.application_dep_platform}",  // 如果值是逗号分隔，比如'xx1,xx2',则需要注意该字段的动态取值，按部署平台的不同，动态按需传入该值，取'xx1,xx2'中的任一个
+        platform_business:"${appInfo.dataValues.platform_business}",   // // 如果值是逗号分隔，比如'xx1,xx2',则需要注意该字段的动态取值，按平台的不同，动态按需传入该值，取'xx1,xx2'中的任一个
+        application_label:"${appInfo.dataValues.application_label}",   // 该字段不可更改
+        is_interactive:${flag},     // 该字段不可更改
     }
     //3、需要埋入的事件代码
     `;

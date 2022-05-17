@@ -11,6 +11,11 @@ class ApplicationController extends Controller {
     const response=await this.Application.findApp(ctx.request.body);
     ctx.body=response;
    }
+   async eventNamesOfCode(){
+    const ctx=this.ctx;
+	  const response=await this.Application.eventNamesOfCode(ctx.query.code);
+	  ctx.body=response;
+   }
    async exposeCreate(){
     const ctx=this.ctx;
     const response=await this.Application.exposeCreate(ctx.request.body);

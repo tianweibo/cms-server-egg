@@ -75,6 +75,49 @@ class Application extends Service {
             return this.ServerResponse.networkError('网络问题');
         }
     }
+    async eventNamesOfCode(code){
+        try{
+            const Op = this.app.Sequelize.Op;
+            const appInfo = await this.Application.findOne({
+                where: {
+                    platform_app_code: code
+                },
+                attributes:['application_id']
+            })
+           if(appInfo){
+            var eventArr= await this.ApplicationEvent.findAll({
+                where: {
+                    application_id: appInfo.dataValues.application_id
+                },
+                attributes: ['event_id']
+            })
+            let eventIds=[]
+            for(let i=0;i<eventArr.length;i++){
+                eventIds.push({event_id:eventArr[i].event_id})
+            }
+            var objOption = {
+                [Op.or]: eventIds,
+            }
+            let list=[]
+            list = await this.Event.findAll({
+                where: objOption,
+                attributes: ['event_code','event_name']
+            })
+            if (list.length==0) {
+                return this.ServerResponse.networkError('该应用未关联事件');
+            } else {
+                return this.ServerResponse.requireData('查询成功', list);
+            }
+           }else{
+            return this.ServerResponse.networkError('code不存在');
+           }
+            
+        }catch(err){
+            return this.ServerResponse.networkError('接口异常');
+        }
+        
+		
+	}
     async exposeCreate(data){
         var data1={
           platform_app:'',          //小程序名称

@@ -57,6 +57,7 @@ module.exports = app => {
   router.get('/application/eventNum',new Auth(1).check,controller.application.eventNum);//应用下是否有指标
   router.delete('/application/delete',new Auth(1).check,controller.application.delete);//应用的删除
   router.post('/application/findApp',controller.application.findApp);//标签下的应用
+  router.get('/application/eventNamesOfCode',controller.application.eventNamesOfCode);// 通过application_code获取event_name的枚举
   //指标
   router.post('/indicator/listById',new Auth(1).check,controller.indicator.listById);// 通过ID获取指标的列表
   router.get('/indicator/eventCodesByIndic',controller.indicator.eventCodesByIndic);// 获取指标下对应的事件code

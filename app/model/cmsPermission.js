@@ -2,7 +2,7 @@ const  moment =require('moment');
 const sd = require('silly-datetime');
 module.exports=app=>{
     const {STRING,INTEGER,DATE,TEXT}=app.Sequelize;
-	const theLabel=app.model.define('theLabel',{
+	const cmsPermission=app.model.define('cmsPermission',{
 		fid:INTEGER(40),
         id:{type:INTEGER,primaryKey:true,autoIncrement:true},
         fname:STRING(20),
@@ -44,7 +44,7 @@ module.exports=app=>{
 		underscored: true,
         timestamps: false,
 		freezeTableName: true,
-		tableName: 'theLabel',
+		tableName: 'cmsPermission',
 	  })
-	return theLabel;
+	return cmsPermission;
 }
